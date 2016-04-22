@@ -1,5 +1,6 @@
 package com.beltranfebrer.discogsbrowser.di.modules;
 
+import com.beltranfebrer.discogsbrowser.network.CachedUserCollection;
 import com.beltranfebrer.discogsbrowser.network.DiscogsService;
 
 import javax.inject.Singleton;
@@ -33,5 +34,11 @@ public class DiscogsModule {
     @Singleton
     public DiscogsService provideDiscogsService(Retrofit retrofit) {
         return retrofit.create(DiscogsService.class);
+    }
+
+    @Provides
+    @Singleton
+    public CachedUserCollection provideDiscogsApi(DiscogsService service) {
+        return new CachedUserCollection(service);
     }
 }

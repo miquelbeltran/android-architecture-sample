@@ -1,6 +1,6 @@
 package com.beltranfebrer.discogsbrowser.di.modules;
 
-import com.beltranfebrer.discogsbrowser.network.DiscogsService;
+import com.beltranfebrer.discogsbrowser.network.CachedUserCollection;
 import com.beltranfebrer.discogsbrowser.ui.MainActivityPresenter;
 
 import dagger.Module;
@@ -13,7 +13,7 @@ import dagger.Provides;
 @Module(includes = {DiscogsModule.class})
 public class PresenterModule {
     @Provides
-    MainActivityPresenter providePresenter(DiscogsService service) {
-        return new MainActivityPresenter(service);
+    MainActivityPresenter providePresenter(CachedUserCollection api) {
+        return new MainActivityPresenter(api);
     }
 }

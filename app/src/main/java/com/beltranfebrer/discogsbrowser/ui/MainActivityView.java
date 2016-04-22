@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface MainActivityView {
     void showRecords(List<Record> records);
+
+    void addRecord(Record record);
 }
