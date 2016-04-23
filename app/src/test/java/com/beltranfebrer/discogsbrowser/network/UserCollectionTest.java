@@ -7,10 +7,6 @@ import com.beltranfebrer.discogsbrowser.network.model.RecordCollection;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import okhttp3.Cache;
 import rx.Observable;
 import rx.Observer;
 
@@ -24,8 +20,8 @@ import static org.mockito.Mockito.when;
  * Created by Miquel Beltran on 23.04.16.
  * More on http://beltranfebrer.com
  */
-public class CachedUserCollectionTest {
-    private CachedUserCollection cachedUserCollection;
+public class UserCollectionTest {
+    private UserCollection userCollection;
     private DiscogsService service;
 
     @Before
@@ -33,12 +29,12 @@ public class CachedUserCollectionTest {
         service = mock(DiscogsService.class);
         Observable<RecordCollection> mockObservable = Observable.just(new MockRecordCollection().recordCollection);
         when(service.listRecords("test")).thenReturn(mockObservable);
-        cachedUserCollection = new CachedUserCollection(service);
+        userCollection = new UserCollection(service, "test");
     }
 
     @Test
     public void testSubscribeAndNext() throws Exception {
-        cachedUserCollection.subject.subscribe(new Observer<Record>() {
+        userCollection.subject.subscribe(new Observer<Record>() {
             @Override
             public void onCompleted() {
 
@@ -54,7 +50,6 @@ public class CachedUserCollectionTest {
                 assertThat(record.instance_id).matches("1234");
             }
         });
-        cachedUserCollection.getRecordsFromService("test");
         verify(service).listRecords("test");
     }
 }

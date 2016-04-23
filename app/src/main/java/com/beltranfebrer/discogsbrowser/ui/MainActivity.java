@@ -8,14 +8,13 @@ import android.util.Log;
 
 import com.beltranfebrer.discogsbrowser.App;
 import com.beltranfebrer.discogsbrowser.R;
-import com.beltranfebrer.discogsbrowser.network.CachedUserCollection;
+import com.beltranfebrer.discogsbrowser.network.UserCollection;
 import com.beltranfebrer.discogsbrowser.network.model.Record;
 
 import javax.inject.Inject;
 
 import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import rx.Subscription;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private RecordsAdapter adapter = new RecordsAdapter();
 
     @Inject
-    public CachedUserCollection userCollection;
+    public UserCollection userCollection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        userCollection.subject
-                .subscribe(new Observer<Record>() {
+        userCollection.subject.subscribe(new Observer<Record>() {
             @Override
             public void onCompleted() {
                 Log.d(TAG, "onCompleted()");
@@ -55,8 +53,5 @@ public class MainActivity extends AppCompatActivity {
                 adapter.addRecord(record);
             }
         });
-
-        userCollection.getRecordsFromService("mike513");
-        adapter.addRecords(userCollection.recordList);
     }
 }

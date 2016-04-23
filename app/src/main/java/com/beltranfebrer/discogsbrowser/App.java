@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.beltranfebrer.discogsbrowser.di.AppComponent;
 import com.beltranfebrer.discogsbrowser.di.DaggerAppComponent;
+import com.beltranfebrer.discogsbrowser.di.modules.UserCollectionModule;
 
 /**
  * Created by Miquel Beltran on 22.04.16.
@@ -16,8 +17,10 @@ public class App extends Application {
         @Override
         public void onCreate() {
             super.onCreate();
-            Log.d(TAG, "App::onCreate()");
-            component = DaggerAppComponent.create();
+            component = DaggerAppComponent
+                    .builder()
+                    .userCollectionModule(new UserCollectionModule("mike513"))
+                    .build();
         }
 
         public static AppComponent getComponent() {
