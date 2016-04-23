@@ -1,7 +1,7 @@
 package com.beltranfebrer.discogsbrowser.di.modules;
 
 import com.beltranfebrer.discogsbrowser.network.DiscogsService;
-import com.beltranfebrer.discogsbrowser.network.UserCollection;
+import com.beltranfebrer.discogsbrowser.UserCollection;
 
 import javax.inject.Singleton;
 

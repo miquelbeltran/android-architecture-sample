@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.beltranfebrer.discogsbrowser.R;
-import com.beltranfebrer.discogsbrowser.network.model.Record;
+import com.beltranfebrer.discogsbrowser.model.Record;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordViewHolder> {
 
     @Override
     public void onBindViewHolder(RecordViewHolder holder, int position) {
-        holder.textView.setText(recordList.get(position).instance_id);
+        holder.textView.setText(recordList.get(position).getInstance_id());
     }
 
     @Override

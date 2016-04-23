@@ -8,8 +8,8 @@ import android.util.Log;
 
 import com.beltranfebrer.discogsbrowser.App;
 import com.beltranfebrer.discogsbrowser.R;
-import com.beltranfebrer.discogsbrowser.network.UserCollection;
-import com.beltranfebrer.discogsbrowser.network.model.Record;
+import com.beltranfebrer.discogsbrowser.UserCollection;
+import com.beltranfebrer.discogsbrowser.model.Record;
 
 import javax.inject.Inject;
 

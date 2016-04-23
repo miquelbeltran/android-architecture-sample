@@ -1,6 +1,6 @@
 package com.beltranfebrer.discogsbrowser.network;
 
-import com.beltranfebrer.discogsbrowser.network.model.RecordCollection;
+import com.beltranfebrer.discogsbrowser.model.RecordCollection;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;

@@ -1,12 +1,12 @@
-package com.beltranfebrer.discogsbrowser.network;
+package com.beltranfebrer.discogsbrowser;
 
 import android.util.Log;
 
-import com.beltranfebrer.discogsbrowser.network.model.Record;
-import com.beltranfebrer.discogsbrowser.network.model.RecordCollection;
+import com.beltranfebrer.discogsbrowser.network.DiscogsService;
+import com.beltranfebrer.discogsbrowser.model.Record;
+import com.beltranfebrer.discogsbrowser.model.RecordCollection;
 
 import rx.Observer;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subjects.ReplaySubject;
@@ -48,7 +48,7 @@ public class UserCollection {
                     public void onNext(RecordCollection recordCollection) {
                         Log.d(TAG, "Collection items " + recordCollection.getPagination().getItems());
                         for (Record record : recordCollection.getRecords()) {
-                            Log.d(TAG, "instance_id: " + record.instance_id);
+                            Log.d(TAG, "instance_id: " + record.getInstance_id());
                             subject.onNext(record);
                         }
                     }

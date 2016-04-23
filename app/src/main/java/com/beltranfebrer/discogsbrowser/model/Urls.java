@@ -1,4 +1,4 @@
-package com.beltranfebrer.discogsbrowser.network.model;
+package com.beltranfebrer.discogsbrowser.model;
 
 import com.google.gson.annotations.SerializedName;
 

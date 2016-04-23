@@ -1,8 +1,9 @@
 package com.beltranfebrer.discogsbrowser.network;
 
 import com.beltranfebrer.discogsbrowser.MockRecordCollection;
-import com.beltranfebrer.discogsbrowser.network.model.Record;
-import com.beltranfebrer.discogsbrowser.network.model.RecordCollection;
+import com.beltranfebrer.discogsbrowser.UserCollection;
+import com.beltranfebrer.discogsbrowser.model.Record;
+import com.beltranfebrer.discogsbrowser.model.RecordCollection;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +48,7 @@ public class UserCollectionTest {
 
             @Override
             public void onNext(Record record) {
-                assertThat(record.instance_id).matches("1234");
+                assertThat(record.getInstance_id()).matches("1234");
             }
         });
         verify(service).listRecords("test");

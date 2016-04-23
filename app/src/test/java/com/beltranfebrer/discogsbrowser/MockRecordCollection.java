@@ -1,7 +1,7 @@
 package com.beltranfebrer.discogsbrowser;
 
-import com.beltranfebrer.discogsbrowser.network.model.Record;
-import com.beltranfebrer.discogsbrowser.network.model.RecordCollection;
+import com.beltranfebrer.discogsbrowser.model.Record;
+import com.beltranfebrer.discogsbrowser.model.RecordCollection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class MockRecordCollection {
     public MockRecordCollection() {
         List<Record> records = new ArrayList<>();
         Record record = new Record();
-        record.instance_id = "1234";
+        record.setInstance_id("1234");
         records.add(record);
         recordCollection.setRecords(records);
     }
