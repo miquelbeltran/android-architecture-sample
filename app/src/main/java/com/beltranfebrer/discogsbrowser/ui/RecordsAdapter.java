@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.beltranfebrer.discogsbrowser.R;
-import com.beltranfebrer.discogsbrowser.UserCollection;
-import com.beltranfebrer.discogsbrowser.model.Record;
+import com.beltranfebrer.discogsbrowser.api.UserCollection;
+import com.beltranfebrer.discogsbrowser.api.model.Record;
 
 import java.util.ArrayList;
 import java.util.List;

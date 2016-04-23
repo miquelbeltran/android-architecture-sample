@@ -1,7 +1,4 @@
-package com.beltranfebrer.discogsbrowser.model;
-
-import com.beltranfebrer.discogsbrowser.model.Record;
-import com.beltranfebrer.discogsbrowser.model.RecordCollection;
+package com.beltranfebrer.discogsbrowser.api.model;
 
 import java.util.ArrayList;
 import java.util.List;

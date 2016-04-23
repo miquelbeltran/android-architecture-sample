@@ -2,9 +2,9 @@ package com.beltranfebrer.discogsbrowser;
 
 import android.app.Application;
 
-import com.beltranfebrer.discogsbrowser.di.AppComponent;
-import com.beltranfebrer.discogsbrowser.di.DaggerAppComponent;
-import com.beltranfebrer.discogsbrowser.di.modules.UserCollectionModule;
+import com.beltranfebrer.discogsbrowser.ui.di.AppComponent;
+import com.beltranfebrer.discogsbrowser.ui.di.DaggerAppComponent;
+import com.beltranfebrer.discogsbrowser.api.di.modules.UserCollectionModule;
 
 /**
  * Created by Miquel Beltran on 22.04.16.

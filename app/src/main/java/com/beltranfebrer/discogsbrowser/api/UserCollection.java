@@ -1,8 +1,7 @@
-package com.beltranfebrer.discogsbrowser;
+package com.beltranfebrer.discogsbrowser.api;
 
-import com.beltranfebrer.discogsbrowser.network.DiscogsService;
-import com.beltranfebrer.discogsbrowser.model.Record;
-import com.beltranfebrer.discogsbrowser.model.RecordCollection;
+import com.beltranfebrer.discogsbrowser.api.model.Record;
+import com.beltranfebrer.discogsbrowser.api.model.RecordCollection;
 
 import rx.Observer;
 import rx.Scheduler;

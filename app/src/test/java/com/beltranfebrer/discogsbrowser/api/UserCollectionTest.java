@@ -1,9 +1,10 @@
-package com.beltranfebrer.discogsbrowser;
+package com.beltranfebrer.discogsbrowser.api;
 
-import com.beltranfebrer.discogsbrowser.model.MockRecordCollection;
-import com.beltranfebrer.discogsbrowser.model.Record;
-import com.beltranfebrer.discogsbrowser.model.RecordCollection;
-import com.beltranfebrer.discogsbrowser.network.DiscogsService;
+import com.beltranfebrer.discogsbrowser.api.UserCollection;
+import com.beltranfebrer.discogsbrowser.api.model.MockRecordCollection;
+import com.beltranfebrer.discogsbrowser.api.model.Record;
+import com.beltranfebrer.discogsbrowser.api.model.RecordCollection;
+import com.beltranfebrer.discogsbrowser.api.DiscogsService;
 
 import org.junit.Before;
 import org.junit.Test;

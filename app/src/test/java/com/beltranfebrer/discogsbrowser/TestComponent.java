@@ -1,6 +1,6 @@
-package com.beltranfebrer.discogsbrowser.di;
+package com.beltranfebrer.discogsbrowser;
 
-import com.beltranfebrer.discogsbrowser.di.modules.DiscogsModule;
+import com.beltranfebrer.discogsbrowser.api.di.modules.DiscogsModule;
 
 import javax.inject.Singleton;
 

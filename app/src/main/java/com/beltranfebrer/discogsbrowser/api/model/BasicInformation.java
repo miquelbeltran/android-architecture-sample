@@ -1,4 +1,4 @@
-package com.beltranfebrer.discogsbrowser.model;
+package com.beltranfebrer.discogsbrowser.api.model;
 
 /**
  * Created by Miquel Beltran on 23.04.16.
