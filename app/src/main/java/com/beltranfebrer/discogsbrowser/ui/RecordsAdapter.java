@@ -78,6 +78,6 @@ class RecordViewHolder extends RecyclerView.ViewHolder {
 
     public RecordViewHolder(View itemView) {
         super(itemView);
-        textView = (TextView) itemView.findViewById(R.id.textView);
+        textView = (TextView) itemView.findViewById(R.id.record_artist);
     }
 }
