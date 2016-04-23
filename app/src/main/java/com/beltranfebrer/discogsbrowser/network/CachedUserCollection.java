@@ -28,35 +28,40 @@ public class CachedUserCollection {
     public CachedUserCollection(DiscogsService service) {
         this.service = service;
         this.subject = PublishSubject.create();
-        getRecordsFromService("mike513");
     }
 
-    private void getRecordsFromService(String user) {
-        service.listRecords(user)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<RecordCollection>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.d(TAG, "onCompleted()");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "onError() " + e.getMessage());
-                        e.printStackTrace();
-                        subject.onError(e);
-                    }
-
-                    @Override
-                    public void onNext(RecordCollection recordCollection) {
-                        Log.d(TAG, "Collection items " + recordCollection.getPagination().getItems());
-                        recordList.addAll(recordCollection.getRecords());
-                        for (Record record : recordCollection.getRecords()) {
-                            Log.d(TAG, "instance_id: " + record.instance_id);
-                            subject.onNext(record);
+    public void getRecordsFromService(String user) {
+        if (!user.equals(cachedUser)) {
+            cachedUser = user;
+            recordList.clear();
+            service.listRecords(user)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<RecordCollection>() {
+                        @Override
+                        public void onCompleted() {
+                            Log.d(TAG, "onCompleted()");
                         }
-                    }
-                });
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.e(TAG, "onError() " + e.getMessage());
+                            e.printStackTrace();
+                            subject.onError(e);
+                        }
+
+                        @Override
+                        public void onNext(RecordCollection recordCollection) {
+                            Log.d(TAG, "Collection items " + recordCollection.getPagination().getItems());
+                            recordList.addAll(recordCollection.getRecords());
+                            for (Record record : recordCollection.getRecords()) {
+                                Log.d(TAG, "instance_id: " + record.instance_id);
+                                subject.onNext(record);
+                            }
+                        }
+                    });
+        } else {
+            // get more records if available
+        }
     }
 }
