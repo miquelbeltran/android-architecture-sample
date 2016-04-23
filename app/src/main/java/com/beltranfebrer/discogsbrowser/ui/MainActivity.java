@@ -14,7 +14,6 @@ import com.beltranfebrer.discogsbrowser.network.model.Record;
 import javax.inject.Inject;
 
 import rx.Observer;
-import rx.Subscription;
 
 public class MainActivity extends AppCompatActivity {
 

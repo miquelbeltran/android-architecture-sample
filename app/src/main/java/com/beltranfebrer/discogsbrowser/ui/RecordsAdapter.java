@@ -20,11 +20,6 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordViewHolder> {
 
     List<Record> recordList = new ArrayList<>();
 
-    public void addRecords(List<Record> recordList) {
-        this.recordList.addAll(recordList);
-        notifyDataSetChanged();
-    }
-
     public void addRecord(Record record) {
         recordList.add(record);
         notifyDataSetChanged();
@@ -46,11 +41,6 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordViewHolder> {
     @Override
     public int getItemCount() {
         return recordList.size();
-    }
-
-    public void cleanList() {
-        recordList.clear();
-        notifyDataSetChanged();
     }
 }
 
