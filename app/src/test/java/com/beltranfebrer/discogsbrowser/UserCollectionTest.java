@@ -43,4 +43,15 @@ public class UserCollectionTest {
         Record record = subscriber.getOnNextEvents().get(0);
         assertThat(record.getInstance_id()).matches("1234");
     }
+
+    @Test
+    public void testOnError() throws Exception {
+        Throwable throwable = new Throwable();
+        Observable<RecordCollection> mockObservable = Observable.error(throwable);
+        when(service.listRecords("test")).thenReturn(mockObservable);
+        userCollection = new UserCollection(service, "test", Schedulers.immediate());
+        TestSubscriber<Record> subscriber = new TestSubscriber<>();
+        userCollection.subject.subscribe(subscriber);
+        subscriber.assertError(throwable);
+    }
 }
