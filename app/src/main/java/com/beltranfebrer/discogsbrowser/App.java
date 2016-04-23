@@ -1,7 +1,6 @@
 package com.beltranfebrer.discogsbrowser;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.beltranfebrer.discogsbrowser.di.AppComponent;
 import com.beltranfebrer.discogsbrowser.di.DaggerAppComponent;
@@ -10,6 +9,7 @@ import com.beltranfebrer.discogsbrowser.di.modules.UserCollectionModule;
 /**
  * Created by Miquel Beltran on 22.04.16.
  */
+@SuppressWarnings("ALL")
 public class App extends Application {
     private static final String TAG = App.class.getCanonicalName();
     private static AppComponent component;

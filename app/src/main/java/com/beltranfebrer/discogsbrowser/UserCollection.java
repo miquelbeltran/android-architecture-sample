@@ -6,7 +6,6 @@ import com.beltranfebrer.discogsbrowser.model.RecordCollection;
 
 import rx.Observer;
 import rx.Scheduler;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subjects.ReplaySubject;
 
