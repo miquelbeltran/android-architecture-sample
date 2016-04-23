@@ -10,6 +10,9 @@ import org.junit.Test;
 
 import rx.Observable;
 import rx.Observer;
+import rx.Scheduler;
+import rx.observers.TestSubscriber;
+import rx.schedulers.Schedulers;
 
 import static junit.framework.Assert.fail;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,27 +33,17 @@ public class UserCollectionTest {
         service = mock(DiscogsService.class);
         Observable<RecordCollection> mockObservable = Observable.just(new MockRecordCollection().recordCollection);
         when(service.listRecords("test")).thenReturn(mockObservable);
-        userCollection = new UserCollection(service, "test");
+        userCollection = new UserCollection(service, "test", Schedulers.immediate());
     }
 
     @Test
     public void testSubscribeAndNext() throws Exception {
-        userCollection.subject.subscribe(new Observer<Record>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                fail();
-            }
-
-            @Override
-            public void onNext(Record record) {
-                assertThat(record.getInstance_id()).matches("1234");
-            }
-        });
         verify(service).listRecords("test");
+        TestSubscriber<Record> subscriber = new TestSubscriber<>();
+        userCollection.subject.subscribe(subscriber);
+        subscriber.assertNoErrors();
+        subscriber.assertValueCount(1);
+        Record record = subscriber.getOnNextEvents().get(0);
+        assertThat(record.getInstance_id()).matches("1234");
     }
 }
