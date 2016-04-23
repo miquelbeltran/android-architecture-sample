@@ -1,4 +1,4 @@
-package com.beltranfebrer.discogsbrowser;
+package com.beltranfebrer.discogsbrowser.model;
 
 import com.beltranfebrer.discogsbrowser.model.Record;
 import com.beltranfebrer.discogsbrowser.model.RecordCollection;

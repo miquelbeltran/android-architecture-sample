@@ -1,16 +1,14 @@
-package com.beltranfebrer.discogsbrowser.network;
+package com.beltranfebrer.discogsbrowser;
 
-import com.beltranfebrer.discogsbrowser.MockRecordCollection;
-import com.beltranfebrer.discogsbrowser.UserCollection;
+import com.beltranfebrer.discogsbrowser.model.MockRecordCollection;
 import com.beltranfebrer.discogsbrowser.model.Record;
 import com.beltranfebrer.discogsbrowser.model.RecordCollection;
+import com.beltranfebrer.discogsbrowser.network.DiscogsService;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import rx.Observable;
-import rx.Observer;
-import rx.Scheduler;
 import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
 
