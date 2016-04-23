@@ -17,42 +17,21 @@ import rx.Observer;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getCanonicalName();
-    private RecordsAdapter adapter = new RecordsAdapter();
-
-    @Inject
-    public UserCollection userCollection;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initRecyclerView();
+    }
 
-        App.getComponent().inject(this);
-
+    private void initRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.records_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        RecordsAdapter adapter = new RecordsAdapter();
         if (recyclerView != null) {
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(adapter);
         }
-
-        userCollection.subject.subscribe(new Observer<Record>() {
-            @Override
-            public void onCompleted() {
-                Log.d(TAG, "onCompleted()");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e(TAG, "onError() " + e.getMessage());
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onNext(Record record) {
-                adapter.addRecord(record);
-            }
-        });
+        App.getComponent().inject(adapter);
     }
 }

@@ -3,6 +3,7 @@ package com.beltranfebrer.discogsbrowser.di;
 import com.beltranfebrer.discogsbrowser.di.modules.DiscogsModule;
 import com.beltranfebrer.discogsbrowser.di.modules.UserCollectionModule;
 import com.beltranfebrer.discogsbrowser.ui.MainActivity;
+import com.beltranfebrer.discogsbrowser.ui.RecordsAdapter;
 
 import javax.inject.Singleton;
 
@@ -16,4 +17,5 @@ import dagger.Component;
 @Component(modules = {UserCollectionModule.class, DiscogsModule.class})
 public interface AppComponent {
     void inject(MainActivity activity);
+    void inject(RecordsAdapter adapter);
 }
