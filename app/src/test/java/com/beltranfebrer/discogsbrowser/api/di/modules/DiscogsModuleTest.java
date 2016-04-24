@@ -32,6 +32,7 @@ public class DiscogsModuleTest {
         assertThat(collection.getRecords().size()).isEqualTo(50);
         Record record = collection.getRecords().get(0);
         assertThat(record.getBasicInformation().getYear()).matches("0");
+//        assertThat(record.getBasicInformation().getThumb()).matches("0");
         assertThat(record.getBasicInformation().getTitle()).matches("Reggatta De Blanc");
         assertThat(record.getBasicInformation().getArtists().get(0).getName()).matches("The Police");
         assertThat(record.getBasicInformation().getFormats().get(0).getName()).matches("Vinyl");

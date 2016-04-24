@@ -1,8 +1,10 @@
 package com.beltranfebrer.discogsbrowser.api;
 
+import com.beltranfebrer.discogsbrowser.BuildConfig;
 import com.beltranfebrer.discogsbrowser.api.model.RecordCollection;
 
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Path;
 
 /**

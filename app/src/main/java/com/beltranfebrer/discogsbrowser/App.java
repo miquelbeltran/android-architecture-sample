@@ -5,6 +5,7 @@ import android.app.Application;
 import com.beltranfebrer.discogsbrowser.ui.di.AppComponent;
 import com.beltranfebrer.discogsbrowser.ui.di.DaggerAppComponent;
 import com.beltranfebrer.discogsbrowser.api.di.modules.UserCollectionModule;
+import com.beltranfebrer.discogsbrowser.ui.di.modules.PicassoModule;
 
 /**
  * Created by Miquel Beltran on 22.04.16.
@@ -20,6 +21,7 @@ public class App extends Application {
             component = DaggerAppComponent
                     .builder()
                     .userCollectionModule(new UserCollectionModule("mike513"))
+                    .picassoModule(new PicassoModule(this))
                     .build();
         }
 

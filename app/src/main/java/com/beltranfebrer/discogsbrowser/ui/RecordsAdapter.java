@@ -7,12 +7,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.beltranfebrer.discogsbrowser.R;
 import com.beltranfebrer.discogsbrowser.api.UserCollection;
 import com.beltranfebrer.discogsbrowser.api.model.Record;
 import com.beltranfebrer.discogsbrowser.databinding.CardRecordBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,12 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.RecordVi
     private static final String TAG = RecordsAdapter.class.getCanonicalName();
     private UserCollection userCollection;
     private List<Record> recordList = new ArrayList<>();
+    private Picasso picasso;
+
+    @Inject
+    public void setPicasso(Picasso picasso) {
+        this.picasso = picasso;
+    }
 
     @Inject
     public void setUserCollection(UserCollection userCollection) {
@@ -45,6 +53,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.RecordVi
     @Override
     public void onBindViewHolder(RecordViewHolder holder, int position) {
         holder.binding.setRecord(recordList.get(position));
+        picasso.load(recordList.get(position).getBasicInformation().getThumb()).into(holder.binding.recordThumb);
     }
 
     @Override
