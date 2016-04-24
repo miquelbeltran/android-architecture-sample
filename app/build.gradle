@@ -29,10 +29,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-lintOptions {
-    lintConfig rootProject.file('app/lint.xml')
+    dataBinding {
+        enabled = true
+    }
+    lintOptions {
+        lintConfig rootProject.file('app/lint.xml')
 
-}
+    }
 }
 
 repositories {

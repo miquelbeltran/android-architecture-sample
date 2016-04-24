@@ -1,5 +1,7 @@
 package com.beltranfebrer.discogsbrowser.ui;
 
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import com.beltranfebrer.discogsbrowser.R;
 import com.beltranfebrer.discogsbrowser.api.UserCollection;
 import com.beltranfebrer.discogsbrowser.api.model.Record;
+import com.beltranfebrer.discogsbrowser.databinding.CardRecordBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +25,7 @@ import rx.Observer;
  * Created by Miquel Beltran on 23.04.16.
  * More on http://beltranfebrer.com
  */
-public class RecordsAdapter extends RecyclerView.Adapter<RecordViewHolder> {
+public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.RecordViewHolder> {
     private static final String TAG = RecordsAdapter.class.getCanonicalName();
     private UserCollection userCollection;
     private List<Record> recordList = new ArrayList<>();
@@ -35,15 +38,13 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordViewHolder> {
 
     @Override
     public RecordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.
-                from(parent.getContext()).
-                inflate(R.layout.card_record, parent, false);
-        return new RecordViewHolder(itemView);
+        CardRecordBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.card_record, parent, false);
+        return new RecordViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(RecordViewHolder holder, int position) {
-        holder.textView.setText(recordList.get(position).getInstance_id());
+        holder.binding.setRecord(recordList.get(position));
     }
 
     @Override
@@ -71,13 +72,13 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordViewHolder> {
             }
         });
     }
-}
 
-class RecordViewHolder extends RecyclerView.ViewHolder {
-    public final TextView textView;
+    public class RecordViewHolder extends RecyclerView.ViewHolder {
+        public final CardRecordBinding binding;
 
-    public RecordViewHolder(View itemView) {
-        super(itemView);
-        textView = (TextView) itemView.findViewById(R.id.record_artist);
+        public RecordViewHolder(CardRecordBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
     }
 }

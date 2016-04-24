@@ -1,72 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardCornerRadius="4dp"
-    card_view:contentPadding="6dp"
-    android:layout_margin="6dp">
+<layout>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content" android:layout_height="wrap_content">
+    <data>
 
-    <TextView
-        android:layout_width="wrap_content"
+        <variable
+            name="record"
+            type="com.beltranfebrer.discogsbrowser.api.model.Record" />
+    </data>
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Information Chase"
-        android:id="@+id/record_title"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="false"
-        android:layout_below="@+id/record_artist"
-        android:layout_toRightOf="@+id/record_thumb"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/textView"
-        android:paddingLeft="6dp" />
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="6dp"
+        card_view:cardCornerRadius="4dp"
+        card_view:contentPadding="6dp">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/record_thumb"
-        android:background="#fff3e0"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Bit Shifter"
-        android:id="@+id/record_artist"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/record_thumb"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:paddingLeft="6dp" />
+            <TextView
+                android:id="@+id/record_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="false"
+                android:layout_below="@+id/record_artist"
+                android:layout_toRightOf="@+id/record_thumb"
+                android:paddingLeft="6dp"
+                android:text="@{record.getBasicInformation().getTitle()}"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:singleLine="true"
+                android:ellipsize="end" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="2006"
-        android:id="@+id/record_year"
-        android:layout_toRightOf="@+id/record_thumb"
-        android:layout_toEndOf="@+id/record_thumb"
-        android:paddingLeft="6dp"
-        android:layout_alignBottom="@+id/record_thumb" />
+            <ImageView
+                android:id="@+id/record_thumb"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="#fff3e0" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="CDr"
-        android:id="@+id/record_format"
-        android:layout_alignBottom="@+id/record_thumb"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-</RelativeLayout>
-</android.support.v7.widget.CardView>
+            <TextView
+                android:id="@+id/record_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/record_thumb"
+                android:paddingLeft="6dp"
+                android:text="@{record.getBasicInformation().getArtists().get(0).getName()}"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold"
+                android:singleLine="true"
+                android:ellipsize="end" />
+
+            <TextView
+                android:id="@+id/record_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/record_thumb"
+                android:layout_toEndOf="@+id/record_thumb"
+                android:layout_toRightOf="@+id/record_thumb"
+                android:paddingLeft="6dp"
+                android:text="@{record.getBasicInformation().getYear()}"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/record_format"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/record_thumb"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="@{record.getBasicInformation().getFormats().get(0).getName()}"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</layout>
