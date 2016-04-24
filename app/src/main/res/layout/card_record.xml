@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="4dp"
-    card_view:contentPadding="16dp"
-    android:layout_margin="16dp">
+    card_view:contentPadding="6dp"
+    android:layout_margin="6dp">
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content" android:layout_height="wrap_content">
@@ -17,16 +17,21 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Information Chase"
         android:id="@+id/record_title"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
         android:layout_below="@+id/record_artist"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_toRightOf="@+id/record_thumb"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/textView"
+        android:paddingLeft="6dp" />
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/record_thumb"
         android:background="#fff3e0"
-        android:layout_below="@+id/record_title"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -36,9 +41,32 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Bit Shifter"
         android:id="@+id/record_artist"
+        android:textStyle="bold"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textStyle="bold" />
+        android:layout_toRightOf="@+id/record_thumb"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:paddingLeft="6dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="2006"
+        android:id="@+id/record_year"
+        android:layout_toRightOf="@+id/record_thumb"
+        android:layout_toEndOf="@+id/record_thumb"
+        android:paddingLeft="6dp"
+        android:layout_alignBottom="@+id/record_thumb" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="CDr"
+        android:id="@+id/record_format"
+        android:layout_alignBottom="@+id/record_thumb"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
 </android.support.v7.widget.CardView>
