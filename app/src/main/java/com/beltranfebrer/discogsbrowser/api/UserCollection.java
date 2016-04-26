@@ -18,9 +18,11 @@ public class UserCollection {
     private static final String TAG = UserCollection.class.getCanonicalName();
     private DiscogsService service;
     private Scheduler observeOnScheduler;
+    private Scheduler subscribeOnScheduler;
 
-    public UserCollection(DiscogsService service, String username, Scheduler observeOnScheduler) {
+    public UserCollection(DiscogsService service, String username, Scheduler observeOnScheduler, Scheduler subscribeOnScheduler) {
         this.service = service;
+        this.subscribeOnScheduler = subscribeOnScheduler;
         this.subject = ReplaySubject.create();
         this.observeOnScheduler = observeOnScheduler;
         getRecordsFromService(username);
@@ -28,7 +30,7 @@ public class UserCollection {
 
     private void getRecordsFromService(String user) {
         service.listRecords(user)
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(subscribeOnScheduler)
                 .observeOn(observeOnScheduler)
                 .subscribe(new Observer<RecordCollection>() {
                     @Override

@@ -1,10 +1,8 @@
 package com.beltranfebrer.discogsbrowser.api;
 
-import com.beltranfebrer.discogsbrowser.api.UserCollection;
 import com.beltranfebrer.discogsbrowser.api.model.MockRecordCollection;
 import com.beltranfebrer.discogsbrowser.api.model.Record;
 import com.beltranfebrer.discogsbrowser.api.model.RecordCollection;
-import com.beltranfebrer.discogsbrowser.api.DiscogsService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +28,12 @@ public class UserCollectionTest {
     public void setUp() throws Exception {
         service = mock(DiscogsService.class);
         Observable<RecordCollection> mockObservable = Observable.just(new MockRecordCollection().recordCollection);
+        createUserCollectionWithObservable(mockObservable);
+    }
+
+    private void createUserCollectionWithObservable(Observable<RecordCollection> mockObservable) {
         when(service.listRecords("test")).thenReturn(mockObservable);
-        userCollection = new UserCollection(service, "test", Schedulers.immediate());
+        userCollection = new UserCollection(service, "test", Schedulers.immediate(), Schedulers.immediate());
     }
 
     @Test
@@ -49,8 +51,7 @@ public class UserCollectionTest {
     public void testOnError() throws Exception {
         Throwable throwable = new Throwable();
         Observable<RecordCollection> mockObservable = Observable.error(throwable);
-        when(service.listRecords("test")).thenReturn(mockObservable);
-        userCollection = new UserCollection(service, "test", Schedulers.immediate());
+        createUserCollectionWithObservable(mockObservable);
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
         userCollection.subject.subscribe(subscriber);
         subscriber.assertError(throwable);

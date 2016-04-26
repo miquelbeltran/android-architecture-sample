@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Miquel Beltran on 23.04.16.
@@ -24,6 +25,6 @@ public class UserCollectionModule {
     @Provides
     @Singleton
     public UserCollection provideUserCollection(DiscogsService service) {
-        return new UserCollection(service, user, AndroidSchedulers.mainThread());
+        return new UserCollection(service, user, AndroidSchedulers.mainThread(), Schedulers.io());
     }
 }
