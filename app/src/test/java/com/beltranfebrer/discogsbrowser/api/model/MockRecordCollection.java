@@ -14,6 +14,24 @@ public class MockRecordCollection {
         List<Record> records = new ArrayList<>();
         Record record = new Record();
         record.setInstance_id("1234");
+        BasicInformation basicInformation = new BasicInformation();
+        basicInformation.setThumb("thumb url");
+        basicInformation.setTitle("Title");
+        basicInformation.setYear("2016");
+
+        List<Artist> artists = new ArrayList<>();
+        Artist artist = new Artist();
+        artist.setName("Artist Name");
+        artists.add(artist);
+        basicInformation.setArtists(artists);
+
+        List<Format> formats = new ArrayList<>();
+        Format format = new Format();
+        format.setName("CDr");
+        formats.add(format);
+        basicInformation.setFormats(formats);
+
+        record.setBasicInformation(basicInformation);
         records.add(record);
         recordCollection.setRecords(records);
     }
