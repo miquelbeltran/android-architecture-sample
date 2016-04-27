@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements LoadMoreOnScrollL
         adapter = new RecordsAdapter();
         App.getComponent().inject(adapter);
         if (recyclerView != null) {
-//            recyclerView.addOnScrollListener(new LoadMoreOnScrollListener(this));
+            recyclerView.addOnScrollListener(new LoadMoreOnScrollListener(this));
             recyclerView.addOnScrollListener(new PicassoOnScrollListener(adapter));
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(adapter);

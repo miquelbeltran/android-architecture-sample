@@ -19,16 +19,20 @@ public class UserCollection {
     private DiscogsService service;
     private Scheduler observeOnScheduler;
     private Scheduler subscribeOnScheduler;
+    private String user;
+    private int nextPage;
 
     public UserCollection(DiscogsService service, String username, Scheduler observeOnScheduler, Scheduler subscribeOnScheduler) {
         this.service = service;
         this.subject = ReplaySubject.create();
         this.subscribeOnScheduler = subscribeOnScheduler;
         this.observeOnScheduler = observeOnScheduler;
-        getRecordsFromService(username, 1);
+        this.user = username;
+        this.nextPage = 1;
+        getRecordsFromService(nextPage);
     }
 
-    private void getRecordsFromService(final String user, final int page) {
+    private void getRecordsFromService(int page) {
         service.listRecords(user, page)
                 .subscribeOn(subscribeOnScheduler)
                 .observeOn(observeOnScheduler)
@@ -37,9 +41,7 @@ public class UserCollection {
 
                     @Override
                     public void onCompleted() {
-                        if (lastElem.getPagination().getPage() < lastElem.getPagination().getPages()) {
-                            getRecordsFromService(user, page + 1);
-                        } else {
+                        if (lastElem.getPagination().getPage() == lastElem.getPagination().getPages()) {
                             subject.onCompleted();
                         }
                     }
@@ -61,6 +63,8 @@ public class UserCollection {
     }
 
     public void loadMore() {
-
+        if (!subject.hasCompleted()) {
+            getRecordsFromService(++this.nextPage);
+        }
     }
 }
