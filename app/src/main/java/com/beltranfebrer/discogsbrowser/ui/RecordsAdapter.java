@@ -22,6 +22,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rx.Observer;
+import rx.Subscription;
 
 /**
  * Created by Miquel Beltran on 23.04.16.
@@ -32,6 +33,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.RecordVi
     private UserCollection userCollection;
     private List<Record> recordList = new ArrayList<>();
     private Picasso picasso;
+    private Subscription subscription;
 
     @Inject
     public void setPicasso(Picasso picasso) {
@@ -62,10 +64,11 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.RecordVi
     }
 
     private void subscribe() {
-        userCollection.subject.subscribe(new Observer<Record>() {
+        subscription = userCollection.subject.subscribe(new Observer<Record>() {
             @Override
             public void onCompleted() {
                 Log.d(TAG, "onCompleted()");
+                notifyDataSetChanged();
             }
 
             @Override
@@ -76,10 +79,14 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.RecordVi
 
             @Override
             public void onNext(Record record) {
+                Log.d(TAG, "onNext(" + record.getInstance_id() + ")");
                 recordList.add(record);
-                notifyDataSetChanged();
             }
         });
+    }
+
+    public void activityOnDestroy() {
+        subscription.unsubscribe();
     }
 
     public class RecordViewHolder extends RecyclerView.ViewHolder {

@@ -9,6 +9,7 @@ import com.beltranfebrer.discogsbrowser.App;
 import com.beltranfebrer.discogsbrowser.R;
 
 public class MainActivity extends AppCompatActivity {
+    private RecordsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,11 +21,17 @@ public class MainActivity extends AppCompatActivity {
     private void initRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.records_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        RecordsAdapter adapter = new RecordsAdapter();
+        adapter = new RecordsAdapter();
         if (recyclerView != null) {
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(adapter);
         }
         App.getComponent().inject(adapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        adapter.activityOnDestroy();
     }
 }

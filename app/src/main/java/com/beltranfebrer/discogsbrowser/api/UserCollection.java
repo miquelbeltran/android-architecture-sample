@@ -22,8 +22,8 @@ public class UserCollection {
 
     public UserCollection(DiscogsService service, String username, Scheduler observeOnScheduler, Scheduler subscribeOnScheduler) {
         this.service = service;
-        this.subscribeOnScheduler = subscribeOnScheduler;
         this.subject = ReplaySubject.create();
+        this.subscribeOnScheduler = subscribeOnScheduler;
         this.observeOnScheduler = observeOnScheduler;
         getRecordsFromService(username);
     }
@@ -35,7 +35,7 @@ public class UserCollection {
                 .subscribe(new Observer<RecordCollection>() {
                     @Override
                     public void onCompleted() {
-
+                        subject.onCompleted();
                     }
 
                     @Override
