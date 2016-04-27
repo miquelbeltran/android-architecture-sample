@@ -55,7 +55,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.RecordVi
     @Override
     public void onBindViewHolder(RecordViewHolder holder, int position) {
         holder.binding.setRecord(recordList.get(position));
-        picasso.load(recordList.get(position).getBasicInformation().getThumb()).into(holder.binding.recordThumb);
+        picasso.load(recordList.get(position).getBasicInformation().getThumb()).tag(this).into(holder.binding.recordThumb);
     }
 
     @Override
@@ -68,7 +68,6 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.RecordVi
             @Override
             public void onCompleted() {
                 Log.d(TAG, "onCompleted()");
-                notifyDataSetChanged();
             }
 
             @Override
@@ -81,12 +80,18 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.RecordVi
             public void onNext(Record record) {
                 Log.d(TAG, "onNext(" + record.getInstance_id() + ")");
                 recordList.add(record);
+                notifyDataSetChanged();
             }
         });
     }
 
     public void activityOnDestroy() {
         subscription.unsubscribe();
+    }
+
+    public void loadMore() {
+        Log.d(TAG, "Load More Requested");
+        userCollection.loadMore();
     }
 
     public class RecordViewHolder extends RecyclerView.ViewHolder {

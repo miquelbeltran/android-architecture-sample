@@ -7,8 +7,10 @@ import android.support.v7.widget.RecyclerView;
 
 import com.beltranfebrer.discogsbrowser.App;
 import com.beltranfebrer.discogsbrowser.R;
+import com.eyeem.recyclerviewtools.LoadMoreOnScrollListener;
+import com.eyeem.recyclerviewtools.extras.PicassoOnScrollListener;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoadMoreOnScrollListener.Listener {
     private RecordsAdapter adapter;
 
     @Override
@@ -22,16 +24,23 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.records_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         adapter = new RecordsAdapter();
+        App.getComponent().inject(adapter);
         if (recyclerView != null) {
+//            recyclerView.addOnScrollListener(new LoadMoreOnScrollListener(this));
+            recyclerView.addOnScrollListener(new PicassoOnScrollListener(adapter));
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(adapter);
         }
-        App.getComponent().inject(adapter);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         adapter.activityOnDestroy();
+    }
+
+    @Override
+    public void onLoadMore(RecyclerView recyclerView) {
+        ((RecordsAdapter) recyclerView.getAdapter()).loadMore();
     }
 }

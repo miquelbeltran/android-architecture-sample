@@ -14,6 +14,8 @@ public class Pagination {
     private Integer perPage;
     @SerializedName("urls")
     private Urls paging;
+    @SerializedName("pages")
+    private int pages;
 
     public Integer getItems() {
         return items;
@@ -46,4 +48,13 @@ public class Pagination {
     public void setPaging(Urls paging) {
         this.paging = paging;
     }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
+    }
+
 }

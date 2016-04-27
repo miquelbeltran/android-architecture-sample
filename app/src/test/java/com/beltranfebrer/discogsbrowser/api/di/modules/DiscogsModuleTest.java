@@ -27,7 +27,7 @@ public class DiscogsModuleTest {
     @Test
     public void testService() throws Exception {
         TestSubscriber<RecordCollection> subscriber = new TestSubscriber<>();
-        service.listRecords("mike513").subscribe(subscriber);
+        service.listRecords("mike513", 1).subscribe(subscriber);
         RecordCollection collection = subscriber.getOnNextEvents().get(0);
         assertThat(collection.getRecords().size()).isEqualTo(50);
         Record record = collection.getRecords().get(0);

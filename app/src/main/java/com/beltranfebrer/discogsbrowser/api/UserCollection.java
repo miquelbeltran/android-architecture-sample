@@ -25,17 +25,23 @@ public class UserCollection {
         this.subject = ReplaySubject.create();
         this.subscribeOnScheduler = subscribeOnScheduler;
         this.observeOnScheduler = observeOnScheduler;
-        getRecordsFromService(username);
+        getRecordsFromService(username, 1);
     }
 
-    private void getRecordsFromService(String user) {
-        service.listRecords(user)
+    private void getRecordsFromService(final String user, final int page) {
+        service.listRecords(user, page)
                 .subscribeOn(subscribeOnScheduler)
                 .observeOn(observeOnScheduler)
                 .subscribe(new Observer<RecordCollection>() {
+                    RecordCollection lastElem;
+
                     @Override
                     public void onCompleted() {
-                        subject.onCompleted();
+                        if (lastElem.getPagination().getPage() < lastElem.getPagination().getPages()) {
+                            getRecordsFromService(user, page + 1);
+                        } else {
+                            subject.onCompleted();
+                        }
                     }
 
                     @Override
@@ -46,10 +52,15 @@ public class UserCollection {
 
                     @Override
                     public void onNext(RecordCollection recordCollection) {
+                        lastElem = recordCollection;
                         for (Record record : recordCollection.getRecords()) {
                             subject.onNext(record);
                         }
                     }
                 });
+    }
+
+    public void loadMore() {
+
     }
 }

@@ -32,13 +32,13 @@ public class UserCollectionTest {
     }
 
     private void createUserCollectionWithObservable(Observable<RecordCollection> mockObservable) {
-        when(service.listRecords("test")).thenReturn(mockObservable);
+        when(service.listRecords("test", 1)).thenReturn(mockObservable);
         userCollection = new UserCollection(service, "test", Schedulers.immediate(), Schedulers.immediate());
     }
 
     @Test
     public void testSubscribeAndNext() throws Exception {
-        verify(service).listRecords("test");
+        verify(service).listRecords("test", 1);
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
         userCollection.subject.subscribe(subscriber);
         subscriber.assertNoErrors();
