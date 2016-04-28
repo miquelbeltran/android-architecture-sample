@@ -1,5 +1,6 @@
 package com.beltranfebrer.discogsbrowser.api;
 
+import com.beltranfebrer.discogsbrowser.api.di.modules.UserCollectionModule;
 import com.beltranfebrer.discogsbrowser.api.model.MockRecordCollection;
 import com.beltranfebrer.discogsbrowser.api.model.Record;
 import com.beltranfebrer.discogsbrowser.api.model.RecordCollection;
@@ -23,6 +24,7 @@ import static org.mockito.Mockito.when;
 public class UserCollectionTest {
     private UserCollection userCollection;
     private DiscogsService service;
+    UserCollectionModule module = new UserCollectionModule("test", Schedulers.immediate(), Schedulers.immediate());
 
     @Before
     public void setUp() throws Exception {
@@ -33,7 +35,7 @@ public class UserCollectionTest {
 
     private void createUserCollectionWithObservable(Observable<RecordCollection> mockObservable) {
         when(service.listRecords("test", 1)).thenReturn(mockObservable);
-        userCollection = new UserCollection(service, "test", Schedulers.immediate(), Schedulers.immediate());
+        userCollection = module.provideUserCollection(service);
     }
 
     @Test

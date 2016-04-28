@@ -13,4 +13,5 @@ import dagger.Component;
 @Singleton
 @Component(modules = {DiscogsModule.class})
 public interface TestComponent {
+
 }
