@@ -22,21 +22,20 @@ import static org.mockito.Mockito.verify;
  * More on http://beltranfebrer.com
  */
 @RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, application = TestApp.class)
 public class MainActivityTest {
     MainActivity activity;
     RecordsAdapter adapter;
 
     @Before
     public void setUp() throws Exception {
-//        MainActivity activity = Robolectric.setupActivity(MainActivity.class);
-//        adapter = mock(RecordsAdapter.class);
-//        activity.setAdapter(adapter);
+        adapter = TestApp.getMockAdapter();
+        MainActivity activity = Robolectric.setupActivity(MainActivity.class);
     }
     
     @Test
     public void testAttached() throws Exception {
-//        verify(adapter).onAttachedToRecyclerView((RecyclerView) any());
+        verify(adapter).onAttachedToRecyclerView((RecyclerView) any());
     }
 
     @Test

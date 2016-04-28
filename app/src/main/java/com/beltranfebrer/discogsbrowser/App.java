@@ -16,7 +16,7 @@ import rx.schedulers.Schedulers;
 @SuppressWarnings("ALL")
 public class App extends Application {
     private static final String TAG = App.class.getCanonicalName();
-    private static AppComponent component;
+    protected static AppComponent component;
 
         @Override
         public void onCreate() {
