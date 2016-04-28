@@ -14,6 +14,12 @@ public class MockRecordCollection {
         List<Record> records = new ArrayList<>();
         Record record = new Record();
         record.setInstance_id("1234");
+
+        Pagination pagination = new Pagination();
+        pagination.setPages(1);
+        pagination.setPage(1);
+        recordCollection.setPagination(pagination);
+
         BasicInformation basicInformation = new BasicInformation();
         basicInformation.setThumb("thumb url");
         basicInformation.setTitle("Title");
