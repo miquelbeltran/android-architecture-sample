@@ -3,6 +3,7 @@ package com.beltranfebrer.discogsbrowser.ui;
 import android.support.v7.widget.RecyclerView;
 
 import com.beltranfebrer.discogsbrowser.BuildConfig;
+import com.beltranfebrer.discogsbrowser.R;
 import com.beltranfebrer.discogsbrowser.api.model.Record;
 
 import org.junit.Before;
@@ -30,7 +31,7 @@ public class MainActivityTest {
     @Before
     public void setUp() throws Exception {
         adapter = TestApp.getMockAdapter();
-        MainActivity activity = Robolectric.setupActivity(MainActivity.class);
+        activity = Robolectric.setupActivity(MainActivity.class);
     }
     
     @Test
@@ -39,8 +40,15 @@ public class MainActivityTest {
     }
 
     @Test
-    public void testName() throws Exception {
+    public void testOnDestroy() throws Exception {
+        activity.onDestroy();
+        verify(adapter).activityOnDestroy();
+    }
 
-
+    @Test
+    public void testLoadMore() throws Exception {
+        RecyclerView view = (RecyclerView) activity.findViewById(R.id.records_recycler_view);
+        activity.onLoadMore(view);
+        verify(adapter).loadMore();
     }
 }
