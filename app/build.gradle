@@ -49,6 +49,10 @@ repositories {
     }
 }
 
+ext {
+    supportLibVersion = '23.2.1'  // variable that can be referenced to keep support libs consistent
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -58,7 +62,8 @@ dependencies {
     testCompile "org.robolectric:shadows-support-v4:3.0"
     testCompile 'org.assertj:assertj-core:1.7.1'
 
-    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile "com.android.support:appcompat-v7:${supportLibVersion}"
+    compile "com.android.support:design:${supportLibVersion}"
 
     compile 'com.android.support:cardview-v7:23.3.0'
     compile 'com.android.support:recyclerview-v7:23.3.0'
