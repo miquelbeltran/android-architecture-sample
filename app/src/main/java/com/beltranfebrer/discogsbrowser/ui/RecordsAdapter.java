@@ -38,13 +38,8 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private final int VIEW_PROG = 0;
     private boolean showProgressBar = true;
 
-    @Inject
-    public void setPicasso(Picasso picasso) {
+    public RecordsAdapter(UserCollection userCollection, Picasso picasso) {
         this.picasso = picasso;
-    }
-
-    @Inject
-    public void setUserCollection(UserCollection userCollection) {
         this.userCollection = userCollection;
         subscribe();
     }

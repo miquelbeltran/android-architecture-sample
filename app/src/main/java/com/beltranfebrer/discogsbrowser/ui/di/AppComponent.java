@@ -1,8 +1,10 @@
 package com.beltranfebrer.discogsbrowser.ui.di;
 
 import com.beltranfebrer.discogsbrowser.api.di.modules.UserCollectionModule;
+import com.beltranfebrer.discogsbrowser.ui.MainActivity;
 import com.beltranfebrer.discogsbrowser.ui.RecordsAdapter;
 import com.beltranfebrer.discogsbrowser.ui.di.modules.PicassoModule;
+import com.beltranfebrer.discogsbrowser.ui.di.modules.RecordsAdapterModule;
 
 import javax.inject.Singleton;
 
@@ -13,7 +15,7 @@ import dagger.Component;
  * More on http://beltranfebrer.com
  */
 @Singleton
-@Component(modules = {UserCollectionModule.class, PicassoModule.class})
+@Component(modules = {RecordsAdapterModule.class})
 public interface AppComponent {
-    void inject(RecordsAdapter adapter);
+    void inject(MainActivity activity);
 }

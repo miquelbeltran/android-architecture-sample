@@ -10,21 +10,27 @@ import com.beltranfebrer.discogsbrowser.R;
 import com.eyeem.recyclerviewtools.LoadMoreOnScrollListener;
 import com.eyeem.recyclerviewtools.extras.PicassoOnScrollListener;
 
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity implements LoadMoreOnScrollListener.Listener {
     private RecordsAdapter adapter;
+
+    @Inject
+    public void setAdapter(RecordsAdapter adapter) {
+        this.adapter = adapter;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        App.getComponent().inject(this);
         initRecyclerView();
     }
 
     private void initRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.records_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        adapter = new RecordsAdapter();
-        App.getComponent().inject(adapter);
         if (recyclerView != null) {
             recyclerView.addOnScrollListener(new LoadMoreOnScrollListener(this));
             recyclerView.addOnScrollListener(new PicassoOnScrollListener(adapter));
