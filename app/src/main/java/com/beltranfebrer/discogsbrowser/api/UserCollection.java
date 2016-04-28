@@ -13,7 +13,6 @@ import rx.subjects.ReplaySubject;
  * More on http://beltranfebrer.com
  */
 public class UserCollection {
-    public final ReplaySubject<Record> subject;
 
     private static final String TAG = UserCollection.class.getCanonicalName();
     private DiscogsService service;
@@ -21,6 +20,7 @@ public class UserCollection {
     private Scheduler subscribeOnScheduler;
     private String user;
     private int nextPage;
+    private ReplaySubject<Record> subject;
 
     public UserCollection(DiscogsService service, String username, Scheduler observeOnScheduler, Scheduler subscribeOnScheduler) {
         this.service = service;
@@ -30,6 +30,10 @@ public class UserCollection {
         this.user = username;
         this.nextPage = 1;
         getRecordsFromService(nextPage);
+    }
+
+    public ReplaySubject<Record> getSubject() {
+        return subject;
     }
 
     private void getRecordsFromService(int page) {

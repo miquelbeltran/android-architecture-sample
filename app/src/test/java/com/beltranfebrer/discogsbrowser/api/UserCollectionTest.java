@@ -42,7 +42,7 @@ public class UserCollectionTest {
     public void testSubscribeAndNext() throws Exception {
         verify(service).listRecords("test", 1);
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
-        userCollection.subject.subscribe(subscriber);
+        userCollection.getSubject().subscribe(subscriber);
         subscriber.assertNoErrors();
         subscriber.assertValueCount(1);
         Record record = subscriber.getOnNextEvents().get(0);
@@ -56,7 +56,7 @@ public class UserCollectionTest {
         Observable<RecordCollection> mockObservable = Observable.error(throwable);
         createUserCollectionWithObservable(mockObservable);
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
-        userCollection.subject.subscribe(subscriber);
+        userCollection.getSubject().subscribe(subscriber);
         subscriber.assertError(throwable);
     }
 }

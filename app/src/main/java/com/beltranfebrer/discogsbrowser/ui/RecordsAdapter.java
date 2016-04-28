@@ -66,12 +66,12 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    public void onBindViewHolder(RecordViewHolder holder, int position) {
+    private void onBindViewHolder(RecordViewHolder holder, int position) {
         holder.binding.setRecord(recordList.get(position));
         picasso.load(recordList.get(position).getBasicInformation().getThumb()).tag(this).into(holder.binding.recordThumb);
     }
 
-    public void onBindViewHolder(ProgressBarViewHolder holder, int position) {
+    private void onBindViewHolder(ProgressBarViewHolder holder, int position) {
         //
     }
 
@@ -89,7 +89,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     private void subscribe() {
-        subscription = userCollection.subject.subscribe(new Observer<Record>() {
+        subscription = userCollection.getSubject().subscribe(new Observer<Record>() {
             @Override
             public void onCompleted() {
                 Log.d(TAG, "onCompleted()");
