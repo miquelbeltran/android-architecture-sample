@@ -8,7 +8,7 @@
 
         <variable
             name="record"
-            type="com.beltranfebrer.discogsbrowser.api.model.Record" />
+            type="work.beltran.discogsbrowser.api.model.Record" />
     </data>
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"

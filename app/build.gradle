@@ -17,7 +17,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.beltranfebrer.discogsbrowser"
+        applicationId "work.beltran.discogsbrowser"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
