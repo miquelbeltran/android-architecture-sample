@@ -1,6 +1,8 @@
 package work.beltran.discogsbrowser.ui;
 
+import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.UserCollection;
+import work.beltran.discogsbrowser.api.di.modules.DiscogsModule;
 import work.beltran.discogsbrowser.api.di.modules.RecordsAdapterMockModule;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionMockModule;
 
@@ -29,6 +31,7 @@ public class TestApp extends App {
         mockUserCollection = mock(UserCollection.class);
         component = DaggerAppComponent
                 .builder()
+                .discogsModule(new DiscogsModule(BuildConfig.API_KEY))
                 .recordsAdapterModule(new RecordsAdapterMockModule(mockAdapter))
                 .userCollectionModule(new UserCollectionMockModule(mockUserCollection))
                 .picassoModule(new PicassoModule(this))
