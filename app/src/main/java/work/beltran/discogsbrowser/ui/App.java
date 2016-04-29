@@ -4,7 +4,7 @@ import android.app.Application;
 
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.di.modules.DiscogsModule;
-import work.beltran.discogsbrowser.ui.di.DaggerAppComponent;
+import work.beltran.discogsbrowser.ui.DaggerAppComponent;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
 import work.beltran.discogsbrowser.ui.collection.modules.PicassoModule;
 
