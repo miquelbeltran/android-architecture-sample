@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui;
+package work.beltran.discogsbrowser.ui.collection;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +23,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import rx.subjects.ReplaySubject;
+import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;

@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui;
+package work.beltran.discogsbrowser.ui.collection;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;

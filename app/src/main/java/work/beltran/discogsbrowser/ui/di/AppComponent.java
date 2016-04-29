@@ -1,6 +1,6 @@
 package work.beltran.discogsbrowser.ui.di;
 
-import work.beltran.discogsbrowser.ui.MainActivity;
+import work.beltran.discogsbrowser.ui.collection.CollectionActivity;
 import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterModule;
 
 import javax.inject.Singleton;
@@ -14,5 +14,5 @@ import dagger.Component;
 @Singleton
 @Component(modules = {RecordsAdapterModule.class})
 public interface AppComponent {
-    void inject(MainActivity activity);
+    void inject(CollectionActivity activity);
 }

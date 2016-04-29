@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui;
+package work.beltran.discogsbrowser.ui.collection;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +10,10 @@ import com.eyeem.recyclerviewtools.extras.PicassoOnScrollListener;
 
 import javax.inject.Inject;
 
-import work.beltran.discogsbrowser.App;
+import work.beltran.discogsbrowser.ui.App;
 import work.beltran.discogsbrowser.R;
 
-public class MainActivity extends AppCompatActivity implements LoadMoreOnScrollListener.Listener {
+public class CollectionActivity extends AppCompatActivity implements LoadMoreOnScrollListener.Listener {
     private RecordsAdapter adapter;
 
     @Inject

@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui;
+package work.beltran.discogsbrowser.ui.collection;
 
 import android.support.v7.widget.RecyclerView;
 
@@ -11,6 +11,9 @@ import org.robolectric.annotation.Config;
 
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.R;
+import work.beltran.discogsbrowser.ui.TestApp;
+import work.beltran.discogsbrowser.ui.collection.CollectionActivity;
+import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -23,14 +26,14 @@ import static org.mockito.Mockito.verify;
  */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, application = TestApp.class)
-public class MainActivityTest {
-    MainActivity activity;
+public class CollectionActivityTest {
+    CollectionActivity activity;
     RecordsAdapter adapter;
 
     @Before
     public void setUp() throws Exception {
         adapter = TestApp.getMockAdapter();
-        activity = Robolectric.setupActivity(MainActivity.class);
+        activity = Robolectric.setupActivity(CollectionActivity.class);
     }
     
     @Test

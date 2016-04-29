@@ -1,10 +1,10 @@
 package work.beltran.discogsbrowser.ui;
 
-import work.beltran.discogsbrowser.App;
 import work.beltran.discogsbrowser.api.UserCollection;
 import work.beltran.discogsbrowser.api.di.modules.RecordsAdapterMockModule;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionMockModule;
 
+import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
 import work.beltran.discogsbrowser.ui.di.DaggerAppComponent;
 import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 
