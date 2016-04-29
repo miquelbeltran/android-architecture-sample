@@ -1,5 +1,6 @@
 package work.beltran.discogsbrowser.api.di.modules;
 
+import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.model.Record;
 import work.beltran.discogsbrowser.api.model.RecordCollection;
 import work.beltran.discogsbrowser.api.DiscogsService;
@@ -19,7 +20,7 @@ public class DiscogsModuleTest {
     DiscogsService service;
     @Before
     public void setUp() throws Exception {
-        DiscogsModule discogsModule = new DiscogsModule();
+        DiscogsModule discogsModule = new DiscogsModule(BuildConfig.API_KEY);
         service = discogsModule.provideDiscogsService(discogsModule.provideRetrofit());
     }
 

@@ -2,10 +2,11 @@ package work.beltran.discogsbrowser.ui;
 
 import android.app.Application;
 
-import work.beltran.discogsbrowser.ui.di.AppComponent;
+import work.beltran.discogsbrowser.BuildConfig;
+import work.beltran.discogsbrowser.api.di.modules.DiscogsModule;
 import work.beltran.discogsbrowser.ui.di.DaggerAppComponent;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
-import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
+import work.beltran.discogsbrowser.ui.collection.modules.PicassoModule;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -23,6 +24,7 @@ public class App extends Application {
             super.onCreate();
             component = DaggerAppComponent
                     .builder()
+                    .discogsModule(new DiscogsModule(BuildConfig.API_KEY))
                     .userCollectionModule(new UserCollectionModule("mike513", AndroidSchedulers.mainThread(), Schedulers.io()))
                     .picassoModule(new PicassoModule(this))
                     .build();

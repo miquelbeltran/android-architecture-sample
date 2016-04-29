@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.di.modules;
+package work.beltran.discogsbrowser.ui.collection.modules;
 
 import android.content.Context;
 

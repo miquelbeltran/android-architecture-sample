@@ -1,7 +1,7 @@
-package work.beltran.discogsbrowser.ui.di;
+package work.beltran.discogsbrowser.ui;
 
 import work.beltran.discogsbrowser.ui.collection.CollectionActivity;
-import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterModule;
+import work.beltran.discogsbrowser.ui.collection.modules.RecordsAdapterModule;
 
 import javax.inject.Singleton;
 

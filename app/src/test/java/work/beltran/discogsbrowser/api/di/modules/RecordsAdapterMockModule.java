@@ -2,7 +2,7 @@ package work.beltran.discogsbrowser.api.di.modules;
 
 import work.beltran.discogsbrowser.api.UserCollection;
 import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
-import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterModule;
+import work.beltran.discogsbrowser.ui.collection.modules.RecordsAdapterModule;
 import com.squareup.picasso.Picasso;
 
 import dagger.Module;

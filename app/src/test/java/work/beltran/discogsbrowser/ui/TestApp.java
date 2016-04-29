@@ -6,7 +6,7 @@ import work.beltran.discogsbrowser.api.di.modules.UserCollectionMockModule;
 
 import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
 import work.beltran.discogsbrowser.ui.di.DaggerAppComponent;
-import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
+import work.beltran.discogsbrowser.ui.collection.modules.PicassoModule;
 
 import static org.mockito.Mockito.mock;
 

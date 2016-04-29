@@ -24,6 +24,12 @@ import retrofit2.RxJavaCallAdapterFactory;
 @Module
 public class DiscogsModule {
 
+    private String apiKey;
+
+    public DiscogsModule(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
     public static final String BASE_URL = "https://api.discogs.com/";
 
     @Provides
@@ -36,7 +42,7 @@ public class DiscogsModule {
                 Request original = chain.request();
                 Request request = original.newBuilder()
                         .header("User-Agent", BuildConfig.APPLICATION_ID)
-                        .header("Authorization", "Discogs token=" + BuildConfig.API_KEY)
+                        .header("Authorization", "Discogs token=" + apiKey)
                         .method(original.method(), original.body())
                         .build();
                 return chain.proceed(request);
