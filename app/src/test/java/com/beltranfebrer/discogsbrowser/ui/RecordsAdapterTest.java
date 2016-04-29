@@ -1,14 +1,15 @@
 package com.beltranfebrer.discogsbrowser.ui;
 
+import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.beltranfebrer.discogsbrowser.BuildConfig;
+import com.beltranfebrer.discogsbrowser.R;
 import com.beltranfebrer.discogsbrowser.api.UserCollection;
 import com.beltranfebrer.discogsbrowser.api.model.MockRecordCollection;
 import com.beltranfebrer.discogsbrowser.api.model.Record;
-import com.beltranfebrer.discogsbrowser.api.model.RecordCollection;
 import com.squareup.picasso.Picasso;
 
 import org.junit.Before;
@@ -18,17 +19,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricGradleTestRunner;
-import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import rx.Observable;
 import rx.subjects.ReplaySubject;
-import rx.subjects.Subject;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.stub;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -40,6 +36,7 @@ import static org.mockito.Mockito.when;
 @Config(constants = BuildConfig.class)
 public class RecordsAdapterTest {
     RecordsAdapter adapter;
+    MockRecordCollection recordCollection = new MockRecordCollection();
 
     @Mock
     UserCollection userCollection;
@@ -94,12 +91,38 @@ public class RecordsAdapterTest {
         assertThat(adapter.getItemCount()).isEqualTo(1);
     }
 
-    @Ignore
     @Test
     public void testCreateRecordViewHolder() throws Exception {
-        ViewGroup viewGroup = mock(ViewGroup.class);
-        RecyclerView.ViewHolder holder = adapter.onCreateViewHolder(viewGroup, 1);
+        RecyclerView recyclerView = getRecyclerView();
+        RecyclerView.ViewHolder holder = adapter.onCreateViewHolder(recyclerView, 1);
         assertThat(holder).isInstanceOf(RecordsAdapter.RecordViewHolder.class);
+        assertThat(((RecordsAdapter.RecordViewHolder) holder).getBinding()).isNotNull();
+    }
 
+    @Test
+    public void testCreateProgressViewHolder() throws Exception {
+        RecyclerView recyclerView = getRecyclerView();
+        RecyclerView.ViewHolder holder = adapter.onCreateViewHolder(recyclerView, 0);
+        assertThat(holder).isInstanceOf(RecordsAdapter.ProgressBarViewHolder.class);
+    }
+
+    @NonNull
+    private RecyclerView getRecyclerView() {
+        RecyclerView recyclerView = new RecyclerView(RuntimeEnvironment.application);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RuntimeEnvironment.application);
+        recyclerView.setLayoutManager(layoutManager);
+        return recyclerView;
+    }
+
+    @Ignore
+    @Test
+    public void testBindRecordViewHolder() throws Exception {
+        subject.onNext(recordCollection.recordCollection.getRecords().get(0));
+        RecyclerView recyclerView = getRecyclerView();
+        RecyclerView.ViewHolder holder = adapter.onCreateViewHolder(recyclerView, 1);
+        adapter.onBindViewHolder(holder, 0);
+        Thread.sleep(1000);
+        TextView textView = (TextView) holder.itemView.findViewById(R.id.record_title);
+        assertThat(textView.getText()).isEqualTo("Title");
     }
 }

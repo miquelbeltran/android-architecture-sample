@@ -60,19 +60,13 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof RecordViewHolder) {
-           onBindViewHolder((RecordViewHolder) holder, position);
-        } else if (holder instanceof ProgressBarViewHolder) {
-            onBindViewHolder((ProgressBarViewHolder) holder, position);
+            onBindViewHolder((RecordViewHolder) holder, position);
         }
     }
 
     private void onBindViewHolder(RecordViewHolder holder, int position) {
-        holder.binding.setRecord(recordList.get(position));
-        picasso.load(recordList.get(position).getBasicInformation().getThumb()).tag(this).into(holder.binding.recordThumb);
-    }
-
-    private void onBindViewHolder(ProgressBarViewHolder holder, int position) {
-        //
+        holder.getBinding().setRecord(recordList.get(position));
+        picasso.load(recordList.get(position).getBasicInformation().getThumb()).tag(this).into(holder.getBinding().recordThumb);
     }
 
     @Override
@@ -121,15 +115,19 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public class RecordViewHolder extends RecyclerView.ViewHolder {
-        public final CardRecordBinding binding;
+        private CardRecordBinding binding;
 
         public RecordViewHolder(CardRecordBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
+
+        public CardRecordBinding getBinding() {
+            return binding;
+        }
     }
 
-    private class ProgressBarViewHolder extends RecyclerView.ViewHolder {
+    public class ProgressBarViewHolder extends RecyclerView.ViewHolder {
 
         public ProgressBarViewHolder(View view) {
             super(view);
