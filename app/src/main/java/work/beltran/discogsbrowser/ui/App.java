@@ -20,7 +20,7 @@ import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 @SuppressWarnings("ALL")
 public class App extends Application {
     private static final String TAG = App.class.getCanonicalName();
-    private static ApiComponent apiComponent;
+    static ApiComponent apiComponent;
     private static AppComponent appComponent;
 
     @Override
