@@ -3,10 +3,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="work.beltran.discogsbrowser.ui.login.LoginActivity">
+ <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+     card_view:cardCornerRadius="4dp"
+        card_view:contentPadding="6dp"
+     android:layout_alignParentBottom="false"
+     android:layout_margin="16dp"
+     android:layout_alignParentTop="false"
+     android:layout_centerInParent="true"
+     android:id="@+id/view">
+
+     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content">
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Authenticate using a personal access token"
+             android:id="@+id/textAuthenticate"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentStart="true"
+             android:layout_marginTop="8dp"
+             android:layout_marginLeft="8dp"
+             android:layout_marginRight="8dp"
+             android:textAppearance="?android:attr/textAppearanceLarge" />
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Generating a user token is as easy as clicking the Generate token button on the developer settings. Keep this token private."
+             android:id="@+id/textView"
+             android:layout_below="@+id/textAuthenticate"
+             android:layout_margin="8dp" />
+
+         <EditText
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:id="@+id/editText"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentStart="true"
+             android:layout_below="@+id/textView"
+             android:layout_margin="8dp" />
+
+         <Button
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Access with token"
+             android:id="@+id/button"
+             android:layout_below="@+id/editText"
+             android:layout_alignParentRight="true"
+             android:layout_marginRight="8dp"
+             android:layout_marginBottom="8dp"
+             style="@style/Widget.AppCompat.Button.Borderless.Colored" />
+
+     </RelativeLayout>
+
+     </android.support.v7.widget.CardView>
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:baselineAlignBottom="false"
+        android:contentDescription="background"
+        android:src="@android:drawable/sym_def_app_icon" />
 
 </RelativeLayout>

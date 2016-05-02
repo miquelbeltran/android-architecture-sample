@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.ui.collection.CollectionActivity;
+import work.beltran.discogsbrowser.ui.login.LoginActivity;
 
 public class LauncherActivity extends Activity {
 
@@ -20,12 +22,20 @@ public class LauncherActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate()");
 
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        String apiKey = settings.getString(API_KEY, "");
-
-
-        Intent intent = new Intent(this, CollectionActivity.class);
-        startActivity(intent);
-        finish();
+        String apiKey = BuildConfig.API_KEY;
+        if (apiKey.isEmpty()) {
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+            apiKey = settings.getString(API_KEY, "");
+        }
+        if (apiKey.isEmpty()) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            ((App) getApplication()).setApiKey(apiKey);
+            Intent intent = new Intent(this, CollectionActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

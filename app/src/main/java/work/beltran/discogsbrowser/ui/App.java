@@ -19,19 +19,17 @@ public class App extends Application {
     private static final String TAG = App.class.getCanonicalName();
     protected static AppComponent component;
 
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            component = DaggerAppComponent
-                    .builder()
-                    .discogsModule(new DiscogsModule(BuildConfig.API_KEY))
-                    .userCollectionModule(new UserCollectionModule("mike513", AndroidSchedulers.mainThread(), Schedulers.io()))
-                    .picassoModule(new PicassoModule(this))
-                    .build();
-        }
+    public void setApiKey(String apiKey) {
+        component = DaggerAppComponent
+                .builder()
+                .discogsModule(new DiscogsModule(apiKey))
+                .userCollectionModule(new UserCollectionModule("mike513", AndroidSchedulers.mainThread(), Schedulers.io()))
+                .picassoModule(new PicassoModule(this))
+                .build();
+    }
 
-        public static AppComponent getComponent() {
-            return component;
-        }
+    public static AppComponent getComponent() {
+        return component;
+    }
 }
 
