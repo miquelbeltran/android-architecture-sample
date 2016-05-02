@@ -1,7 +1,8 @@
-package work.beltran.discogsbrowser.ui.collection.modules;
+package work.beltran.discogsbrowser.ui.di.modules;
 
 import work.beltran.discogsbrowser.api.UserCollection;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
+import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
 import com.squareup.picasso.Picasso;
 

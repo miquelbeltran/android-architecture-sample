@@ -2,14 +2,17 @@ package work.beltran.discogsbrowser.ui;
 
 import android.app.Application;
 
-import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.di.modules.DiscogsModule;
-import work.beltran.discogsbrowser.ui.DaggerAppComponent;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
-import work.beltran.discogsbrowser.ui.collection.modules.PicassoModule;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import work.beltran.discogsbrowser.ui.di.ApiComponent;
+import work.beltran.discogsbrowser.ui.di.AppComponent;
+import work.beltran.discogsbrowser.ui.di.DaggerApiComponent;
+import work.beltran.discogsbrowser.ui.di.DaggerAppComponent;
+import work.beltran.discogsbrowser.ui.di.modules.ContextModule;
+import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 
 /**
  * Created by Miquel Beltran on 22.04.16.
@@ -17,19 +20,33 @@ import rx.schedulers.Schedulers;
 @SuppressWarnings("ALL")
 public class App extends Application {
     private static final String TAG = App.class.getCanonicalName();
-    protected static AppComponent component;
+    private static ApiComponent apiComponent;
+    private static AppComponent appComponent;
 
-    public void setApiKey(String apiKey) {
-        component = DaggerAppComponent
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        appComponent = DaggerAppComponent
                 .builder()
-                .discogsModule(new DiscogsModule(apiKey))
-                .userCollectionModule(new UserCollectionModule("mike513", AndroidSchedulers.mainThread(), Schedulers.io()))
-                .picassoModule(new PicassoModule(this))
+                .contextModule(new ContextModule(this))
                 .build();
     }
 
-    public static AppComponent getComponent() {
-        return component;
+    public void setApiKey(String apiKey) {
+        apiComponent = DaggerApiComponent
+                .builder()
+                .contextModule(new ContextModule(this))
+                .discogsModule(new DiscogsModule(apiKey))
+                .userCollectionModule(new UserCollectionModule("mike513", AndroidSchedulers.mainThread(), Schedulers.io()))
+                .build();
+    }
+
+    public static ApiComponent getApiComponent() {
+        return apiComponent;
+    }
+
+    public static AppComponent getAppComponent() {
+        return appComponent;
     }
 }
 

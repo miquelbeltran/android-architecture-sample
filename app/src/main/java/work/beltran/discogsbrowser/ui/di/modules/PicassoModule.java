@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.collection.modules;
+package work.beltran.discogsbrowser.ui.di.modules;
 
 import android.content.Context;
 
@@ -13,17 +13,11 @@ import dagger.Provides;
  * Created by Miquel Beltran on 24.04.16.
  * More on http://beltranfebrer.com
  */
-@Module
+@Module(includes = {ContextModule.class})
 public class PicassoModule {
-    private Context context;
-
-    public PicassoModule(Context context) {
-        this.context = context;
-    }
-
     @Provides
     @Singleton
-    public Picasso providesPicasso() {
+    public Picasso providesPicasso(Context context) {
         return Picasso.with(context);
     }
 }

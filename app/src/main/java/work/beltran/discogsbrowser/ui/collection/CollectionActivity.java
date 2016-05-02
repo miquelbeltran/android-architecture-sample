@@ -25,7 +25,7 @@ public class CollectionActivity extends AppCompatActivity implements LoadMoreOnS
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        App.getComponent().inject(this);
+        App.getApiComponent().inject(this);
         initRecyclerView();
     }
 

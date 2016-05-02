@@ -7,8 +7,7 @@ import work.beltran.discogsbrowser.api.di.modules.RecordsAdapterMockModule;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionMockModule;
 
 import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
-import work.beltran.discogsbrowser.ui.DaggerAppComponent;
-import work.beltran.discogsbrowser.ui.collection.modules.PicassoModule;
+import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 
 import static org.mockito.Mockito.mock;
 
@@ -29,12 +28,11 @@ public class TestApp extends App {
         super.onCreate();
         mockAdapter = mock(RecordsAdapter.class);
         mockUserCollection = mock(UserCollection.class);
-        component = DaggerAppComponent
-                .builder()
-                .discogsModule(new DiscogsModule(BuildConfig.API_KEY))
-                .recordsAdapterModule(new RecordsAdapterMockModule(mockAdapter))
-                .userCollectionModule(new UserCollectionMockModule(mockUserCollection))
-                .picassoModule(new PicassoModule(this))
-                .build();
+//        component = DaggerAppComponent
+//                .builder()
+//                .discogsModule(new DiscogsModule(BuildConfig.API_KEY))
+//                .recordsAdapterModule(new RecordsAdapterMockModule(mockAdapter))
+//                .userCollectionModule(new UserCollectionMockModule(mockUserCollection))
+//                .build();
     }
 }
