@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="work.beltran.discogsbrowser.ui.login.LoginActivity">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -30,7 +31,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Authenticate using a personal access token"
+                android:text="@string/authenticate_using_a_personal_access_token"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -39,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textAuthenticate"
                 android:layout_margin="8dp"
-                android:text="Generating a user token is as easy as clicking the Generate token button on the developer settings. Keep this token private." />
+                android:text="@string/generating_a_user_token_is_as_easy_as_clicking_the_generate_token_button_on_the_developer_settings_keep_this_token_private" />
 
             <EditText
                 android:id="@+id/accessToken"
@@ -48,7 +49,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView"
-                android:layout_margin="8dp" />
+                android:layout_margin="8dp"
+                android:inputType="text" />
 
             <Button
                 android:id="@+id/button"
@@ -59,7 +61,7 @@
                 android:layout_below="@+id/accessToken"
                 android:layout_marginBottom="8dp"
                 android:layout_marginRight="8dp"
-                android:text="Access with token"
+                android:text="@string/access_with_token"
                 android:onClick="onClickAccessToken" />
 
         </RelativeLayout>
@@ -69,14 +71,15 @@
 
     <ImageView
         android:id="@+id/loginBackground"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:baselineAlignBottom="false"
-        android:contentDescription="background"
+        android:contentDescription="@string/background"
         android:cropToPadding="false"
-        android:scaleType="centerCrop" />
+        android:fitsSystemWindows="true"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>
