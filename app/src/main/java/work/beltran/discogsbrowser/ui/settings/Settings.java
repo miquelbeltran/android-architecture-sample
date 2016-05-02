@@ -7,7 +7,7 @@ import work.beltran.discogsbrowser.BuildConfig;
 
 /**
  * Created by Miquel Beltran on 02.05.16.
- * More on http://beltranfebrer.com
+ * More on http://beltran.work
  */
 public class Settings {
     private static final String PREFS_NAME = "DiscogsPreferences";

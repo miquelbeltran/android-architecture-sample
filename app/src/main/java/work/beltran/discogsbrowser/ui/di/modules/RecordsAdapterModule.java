@@ -11,7 +11,7 @@ import dagger.Provides;
 
 /**
  * Created by Miquel Beltran on 28.04.16.
- * More on http://beltranfebrer.com
+ * More on http://beltran.work
  */
 @Module(includes = {UserCollectionModule.class, PicassoModule.class})
 public class RecordsAdapterModule {

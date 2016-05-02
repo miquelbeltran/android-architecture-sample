@@ -11,7 +11,7 @@ import static org.mockito.Mockito.mock;
 
 /**
  * Created by Miquel Beltran on 28.04.16.
- * More on http://beltranfebrer.com
+ * More on http://beltran.work
  */
 @Module
 public class RecordsAdapterMockModule extends RecordsAdapterModule {

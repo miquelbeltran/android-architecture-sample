@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Created by Miquel Beltran on 23.04.16.
- * More on http://beltranfebrer.com
+ * More on http://beltran.work
  */
 public class BasicInformation {
     private String title;

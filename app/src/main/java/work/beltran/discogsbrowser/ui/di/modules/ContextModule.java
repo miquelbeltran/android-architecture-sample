@@ -9,7 +9,7 @@ import dagger.Provides;
 
 /**
  * Created by Miquel Beltran on 02.05.16.
- * More on http://beltranfebrer.com
+ * More on http://beltran.work
  */
 @Module
 public class ContextModule {

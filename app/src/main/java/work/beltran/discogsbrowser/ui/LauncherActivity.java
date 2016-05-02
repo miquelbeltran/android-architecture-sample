@@ -24,7 +24,7 @@ public class LauncherActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.getAppComponent().inject(this);
+        ((App) getApplication()).getAppComponent().inject(this);
         String apiKey = settings.getApiKey();
         if (apiKey.isEmpty()) {
             Intent intent = new Intent(this, LoginActivity.class);

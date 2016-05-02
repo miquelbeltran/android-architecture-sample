@@ -11,7 +11,7 @@ import dagger.Provides;
 
 /**
  * Created by Miquel Beltran on 24.04.16.
- * More on http://beltranfebrer.com
+ * More on http://beltran.work
  */
 @Module(includes = {ContextModule.class})
 public class PicassoModule {

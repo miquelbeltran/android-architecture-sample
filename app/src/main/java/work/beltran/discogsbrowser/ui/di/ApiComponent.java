@@ -9,7 +9,7 @@ import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterModule;
 
 /**
  * Created by Miquel Beltran on 02.05.16.
- * More on http://beltranfebrer.com
+ * More on http://beltran.work
  */
 @Singleton
 @Component(modules = {RecordsAdapterModule.class})

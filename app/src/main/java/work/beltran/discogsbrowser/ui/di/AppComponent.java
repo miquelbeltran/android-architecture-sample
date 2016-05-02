@@ -15,7 +15,7 @@ import work.beltran.discogsbrowser.ui.settings.Settings;
 
 /**
  * Created by Miquel Beltran on 22.04.16.
- * More on http://beltranfebrer.com
+ * More on http://beltran.work
  */
 @Singleton
 @Component(modules = {SettingsModule.class, PicassoModule.class})

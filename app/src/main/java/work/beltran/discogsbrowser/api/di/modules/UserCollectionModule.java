@@ -11,7 +11,7 @@ import rx.Scheduler;
 
 /**
  * Created by Miquel Beltran on 23.04.16.
- * More on http://beltranfebrer.com
+ * More on http://beltran.work
  */
 @Module(includes = {DiscogsModule.class})
 public class UserCollectionModule {

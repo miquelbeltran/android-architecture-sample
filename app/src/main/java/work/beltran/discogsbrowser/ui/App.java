@@ -20,8 +20,8 @@ import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 @SuppressWarnings("ALL")
 public class App extends Application {
     private static final String TAG = App.class.getCanonicalName();
-    static ApiComponent apiComponent;
-    private static AppComponent appComponent;
+    /* package */ ApiComponent apiComponent;
+    /* package */ AppComponent appComponent;
 
     @Override
     public void onCreate() {
@@ -41,11 +41,11 @@ public class App extends Application {
                 .build();
     }
 
-    public static ApiComponent getApiComponent() {
+    public ApiComponent getApiComponent() {
         return apiComponent;
     }
 
-    public static AppComponent getAppComponent() {
+    public AppComponent getAppComponent() {
         return appComponent;
     }
 }

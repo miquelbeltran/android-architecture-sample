@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by Miquel Beltran on 23/4/16.
- * More on http://beltranfebrer.com
+ * More on http://beltran.work
  */
 public class DiscogsModuleTest {
     DiscogsService service;

@@ -2,23 +2,22 @@ package work.beltran.discogsbrowser.ui.di.modules;
 
 import android.content.Context;
 
-import javax.inject.Singleton;
-
-import dagger.Module;
-import dagger.Provides;
-import work.beltran.discogsbrowser.ui.di.modules.ContextModule;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 /**
  * Created by Miquel Beltran on 02.05.16.
  * More on http://beltran.work
  */
-@Module(includes = {ContextModule.class})
-public class SettingsModule {
+public class SettingsMockModule extends SettingsModule {
+    private Settings mockSettings;
 
-    @Provides
-    @Singleton
+    public SettingsMockModule(Settings mockSettings) {
+        super();
+        this.mockSettings = mockSettings;
+    }
+
+    @Override
     public Settings provideSettings(Context context) {
-        return new Settings(context);
+        return mockSettings;
     }
 }
