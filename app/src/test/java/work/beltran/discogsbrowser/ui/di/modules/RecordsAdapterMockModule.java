@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.api.di.modules;
+package work.beltran.discogsbrowser.ui.di.modules;
 
 import work.beltran.discogsbrowser.api.UserCollection;
 import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
