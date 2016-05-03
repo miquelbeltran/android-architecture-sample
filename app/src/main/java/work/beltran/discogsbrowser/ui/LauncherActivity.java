@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import javax.inject.Inject;
 
-import work.beltran.discogsbrowser.ui.collection.CollectionActivity;
+import work.beltran.discogsbrowser.ui.collection.MainActivity;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
@@ -28,7 +28,7 @@ public class LauncherActivity extends Activity {
             finish();
         } else {
             ((App) getApplication()).setApiKey(apiKey);
-            Intent intent = new Intent(this, CollectionActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
         }

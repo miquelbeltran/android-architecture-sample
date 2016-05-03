@@ -10,7 +10,7 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import work.beltran.discogsbrowser.BuildConfig;
-import work.beltran.discogsbrowser.ui.collection.CollectionActivity;
+import work.beltran.discogsbrowser.ui.collection.MainActivity;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
@@ -49,7 +49,7 @@ public class LauncherActivityTest {
         when(settings.getApiKey()).thenReturn("123456");
         activity = Robolectric.setupActivity(LauncherActivity.class);
         verify(settings).getApiKey();
-        Intent expected = new Intent(activity, CollectionActivity.class);
+        Intent expected = new Intent(activity, MainActivity.class);
         Intent actual = shadowOf(activity).getNextStartedActivity();
         assertThat(expected.getAction()).isEqualTo(actual.getAction());
     }

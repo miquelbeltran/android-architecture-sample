@@ -12,8 +12,6 @@ import org.robolectric.annotation.Config;
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.ui.TestApp;
-import work.beltran.discogsbrowser.ui.collection.CollectionActivity;
-import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -26,14 +24,14 @@ import static org.mockito.Mockito.verify;
  */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, application = TestApp.class)
-public class CollectionActivityTest {
-    CollectionActivity activity;
+public class MainActivityTest {
+    MainActivity activity;
     RecordsAdapter adapter;
 
     @Before
     public void setUp() throws Exception {
         adapter = TestApp.getMockAdapter();
-        activity = Robolectric.setupActivity(CollectionActivity.class);
+        activity = Robolectric.setupActivity(MainActivity.class);
     }
     
     @Test

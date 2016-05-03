@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/records_recycler_view"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:clipToPadding="false"
+        android:clipChildren="false"
         android:layout_above="@+id/bottom_navigation" />
 
     <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
