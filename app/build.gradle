@@ -24,7 +24,7 @@ android {
         versionName "1.0"
     }
     defaultConfig {
-        def apikey = project.hasProperty('xxx_apikey') ? apikey : (System.getenv('API_KEY') ?: '""')
+        def apikey = project.hasProperty('apikey') ? apikey : (System.getenv('API_KEY') ?: '""')
         buildConfigField "String", "API_KEY", apikey
     }
     buildTypes {

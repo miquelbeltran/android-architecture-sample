@@ -1,13 +1,12 @@
 package work.beltran.discogsbrowser.api.di.modules;
 
-import work.beltran.discogsbrowser.api.DiscogsService;
-import work.beltran.discogsbrowser.api.UserCollection;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import rx.Scheduler;
+import work.beltran.discogsbrowser.api.DiscogsService;
+import work.beltran.discogsbrowser.api.UserCollection;
 
 /**
  * Created by Miquel Beltran on 23.04.16.
@@ -15,12 +14,10 @@ import rx.Scheduler;
  */
 @Module(includes = {DiscogsModule.class})
 public class UserCollectionModule {
-    private String user;
     private Scheduler observeOnScheduler;
     private Scheduler subscribeOnScheduler;
 
-    public UserCollectionModule(String user,Scheduler observeOnScheduler, Scheduler subscribeOnScheduler) {
-        this.user = user;
+    public UserCollectionModule(Scheduler observeOnScheduler, Scheduler subscribeOnScheduler) {
         this.observeOnScheduler = observeOnScheduler;
         this.subscribeOnScheduler = subscribeOnScheduler;
     }
@@ -28,6 +25,6 @@ public class UserCollectionModule {
     @Provides
     @Singleton
     public UserCollection provideUserCollection(DiscogsService service) {
-        return new UserCollection(service, user, observeOnScheduler, subscribeOnScheduler);
+        return new UserCollection(service, observeOnScheduler, subscribeOnScheduler);
     }
 }

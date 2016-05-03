@@ -1,18 +1,16 @@
 package work.beltran.discogsbrowser.api;
 
-import work.beltran.discogsbrowser.api.DiscogsService;
-import work.beltran.discogsbrowser.api.UserCollection;
-import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
-import work.beltran.discogsbrowser.api.model.MockRecordCollection;
-import work.beltran.discogsbrowser.api.model.Record;
-import work.beltran.discogsbrowser.api.model.RecordCollection;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import rx.Observable;
 import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
+import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
+import work.beltran.discogsbrowser.api.model.MockRecordCollection;
+import work.beltran.discogsbrowser.api.model.Record;
+import work.beltran.discogsbrowser.api.model.RecordCollection;
+import work.beltran.discogsbrowser.api.model.UserIdentity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -26,11 +24,17 @@ import static org.mockito.Mockito.when;
 public class UserCollectionTest {
     private UserCollection userCollection;
     private DiscogsService service;
-    UserCollectionModule module = new UserCollectionModule("test", Schedulers.immediate(), Schedulers.immediate());
+    UserCollectionModule module = new UserCollectionModule(Schedulers.immediate(), Schedulers.immediate());
+    private rx.Observable<work.beltran.discogsbrowser.api.model.UserIdentity> mockObservableIdentity;
 
     @Before
     public void setUp() throws Exception {
         service = mock(DiscogsService.class);
+        UserIdentity userIdentity = new UserIdentity();
+        userIdentity.setUsername("test");
+        userIdentity.setId(1);
+        mockObservableIdentity = Observable.just(userIdentity);
+        when(service.getUserIdentity()).thenReturn(mockObservableIdentity);
         Observable<RecordCollection> mockObservable = Observable.just(new MockRecordCollection().recordCollection);
         createUserCollectionWithObservable(mockObservable);
     }

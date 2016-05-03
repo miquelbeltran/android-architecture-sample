@@ -2,17 +2,15 @@ package work.beltran.discogsbrowser.ui;
 
 import android.app.Application;
 
-import work.beltran.discogsbrowser.api.di.modules.DiscogsModule;
-import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
-
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import work.beltran.discogsbrowser.api.di.modules.DiscogsModule;
+import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
 import work.beltran.discogsbrowser.ui.di.ApiComponent;
 import work.beltran.discogsbrowser.ui.di.AppComponent;
 import work.beltran.discogsbrowser.ui.di.DaggerApiComponent;
 import work.beltran.discogsbrowser.ui.di.DaggerAppComponent;
 import work.beltran.discogsbrowser.ui.di.modules.ContextModule;
-import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 
 /**
  * Created by Miquel Beltran on 22.04.16.
@@ -37,7 +35,7 @@ public class App extends Application {
                 .builder()
                 .contextModule(new ContextModule(this))
                 .discogsModule(new DiscogsModule(apiKey))
-                .userCollectionModule(new UserCollectionModule("mike513", AndroidSchedulers.mainThread(), Schedulers.io()))
+                .userCollectionModule(new UserCollectionModule(AndroidSchedulers.mainThread(), Schedulers.io()))
                 .build();
     }
 

@@ -1,11 +1,11 @@
 package work.beltran.discogsbrowser.api;
 
-import work.beltran.discogsbrowser.api.model.Record;
-import work.beltran.discogsbrowser.api.model.RecordCollection;
-
 import rx.Observer;
 import rx.Scheduler;
 import rx.subjects.ReplaySubject;
+import work.beltran.discogsbrowser.api.model.Record;
+import work.beltran.discogsbrowser.api.model.RecordCollection;
+import work.beltran.discogsbrowser.api.model.UserIdentity;
 
 /**
  * Created by Miquel Beltran on 22.04.16.
@@ -17,25 +17,45 @@ public class UserCollection {
     private DiscogsService service;
     private Scheduler observeOnScheduler;
     private Scheduler subscribeOnScheduler;
-    private String user;
     private int nextPage;
     private ReplaySubject<Record> subject;
 
-    public UserCollection(DiscogsService service, String username, Scheduler observeOnScheduler, Scheduler subscribeOnScheduler) {
+    public UserCollection(DiscogsService service, Scheduler observeOnScheduler, Scheduler subscribeOnScheduler) {
         this.service = service;
         this.subject = ReplaySubject.create();
         this.subscribeOnScheduler = subscribeOnScheduler;
         this.observeOnScheduler = observeOnScheduler;
-        this.user = username;
         this.nextPage = 1;
         getRecordsFromService(nextPage);
+    }
+
+    private void getRecordsFromService(final int nextPage) {
+       service.getUserIdentity()
+               .subscribeOn(subscribeOnScheduler)
+               .observeOn(observeOnScheduler)
+               .subscribe(new Observer<UserIdentity>() {
+                   @Override
+                   public void onCompleted() {
+
+                   }
+
+                   @Override
+                   public void onError(Throwable e) {
+                       subject.onError(e);
+                   }
+
+                   @Override
+                   public void onNext(UserIdentity userIdentity) {
+                       getRecordsFromService(userIdentity.getUsername(), nextPage);
+                   }
+               });
     }
 
     public ReplaySubject<Record> getSubject() {
         return subject;
     }
 
-    private void getRecordsFromService(int page) {
+    private void getRecordsFromService(String user, int page) {
         service.listRecords(user, page)
                 .subscribeOn(subscribeOnScheduler)
                 .observeOn(observeOnScheduler)

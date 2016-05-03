@@ -11,7 +11,7 @@ public class UserCollectionMockModule extends UserCollectionModule {
     private UserCollection userCollection;
 
     public UserCollectionMockModule(UserCollection userCollection) {
-        super(null, null, null);
+        super(null, null);
         this.userCollection = userCollection;
     }
 
