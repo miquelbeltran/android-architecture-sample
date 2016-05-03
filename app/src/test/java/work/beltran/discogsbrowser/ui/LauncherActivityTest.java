@@ -9,15 +9,12 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
-import javax.inject.Inject;
-
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.ui.collection.CollectionActivity;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;

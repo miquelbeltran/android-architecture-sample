@@ -3,8 +3,8 @@ package work.beltran.discogsbrowser.ui.di;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
 import work.beltran.discogsbrowser.ui.collection.CollectionActivity;
+import work.beltran.discogsbrowser.ui.di.modules.ErrorModule;
 import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterModule;
 
 /**
@@ -12,7 +12,7 @@ import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterModule;
  * More on http://beltran.work
  */
 @Singleton
-@Component(modules = {RecordsAdapterModule.class})
+@Component(modules = {RecordsAdapterModule.class, ErrorModule.class})
 public interface ApiComponent {
     void inject(CollectionActivity activity);
 }

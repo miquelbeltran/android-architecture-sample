@@ -5,11 +5,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
-import work.beltran.discogsbrowser.BuildConfig;
-import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.api.UserCollection;
-import work.beltran.discogsbrowser.api.model.MockRecordCollection;
-import work.beltran.discogsbrowser.api.model.Record;
 import com.squareup.picasso.Picasso;
 
 import org.junit.Before;
@@ -23,7 +18,12 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import rx.subjects.ReplaySubject;
-import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
+import work.beltran.discogsbrowser.BuildConfig;
+import work.beltran.discogsbrowser.R;
+import work.beltran.discogsbrowser.api.UserCollection;
+import work.beltran.discogsbrowser.api.model.MockRecordCollection;
+import work.beltran.discogsbrowser.api.model.Record;
+import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -43,6 +43,9 @@ public class RecordsAdapterTest {
     UserCollection userCollection;
 
     @Mock
+    ErrorPresenter presenter;
+
+    @Mock
     Picasso picasso;
     private rx.subjects.ReplaySubject<work.beltran.discogsbrowser.api.model.Record> subject;
 
@@ -52,6 +55,7 @@ public class RecordsAdapterTest {
         subject = ReplaySubject.create();
         when(userCollection.getSubject()).thenReturn(subject);
         adapter = new RecordsAdapter(userCollection, picasso);
+        adapter.setErrorPresenter(presenter);
     }
 
     @Test
@@ -66,8 +70,10 @@ public class RecordsAdapterTest {
     @Test
     public void testOnError() throws Exception {
         assertThat(adapter.getItemCount()).isEqualTo(1);
-        subject.onError(new Throwable());
+        Throwable e = new Throwable();
+        subject.onError(e);
         assertThat(adapter.getItemCount()).isEqualTo(1);
+        verify(presenter).onError(e);
     }
 
     @Test

@@ -7,10 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.api.UserCollection;
-import work.beltran.discogsbrowser.api.model.Record;
-import work.beltran.discogsbrowser.databinding.CardRecordBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -18,6 +14,11 @@ import java.util.List;
 
 import rx.Observer;
 import rx.Subscription;
+import work.beltran.discogsbrowser.R;
+import work.beltran.discogsbrowser.api.UserCollection;
+import work.beltran.discogsbrowser.api.model.Record;
+import work.beltran.discogsbrowser.databinding.CardRecordBinding;
+import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
 
 /**
  * Created by Miquel Beltran on 23.04.16.
@@ -32,6 +33,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
     private boolean showProgressBar = true;
+    private ErrorPresenter errorPresenter;
 
     public RecordsAdapter(UserCollection userCollection, Picasso picasso) {
         this.picasso = picasso;
@@ -88,7 +90,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             @Override
             public void onError(Throwable e) {
                 Log.e(TAG, "onError() " + e.getMessage());
-                e.printStackTrace();
+                errorPresenter.onError(e);
             }
 
             @Override
@@ -107,6 +109,10 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void loadMore() {
         Log.d(TAG, "Load More Requested");
         userCollection.loadMore();
+    }
+
+    public void setErrorPresenter(ErrorPresenter errorPresenter) {
+        this.errorPresenter = errorPresenter;
     }
 
     public class RecordViewHolder extends RecyclerView.ViewHolder {
