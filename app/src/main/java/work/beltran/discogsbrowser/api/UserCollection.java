@@ -1,5 +1,6 @@
 package work.beltran.discogsbrowser.api;
 
+import rx.Observable;
 import rx.Observer;
 import rx.Scheduler;
 import rx.subjects.ReplaySubject;
@@ -19,6 +20,7 @@ public class UserCollection {
     private Scheduler subscribeOnScheduler;
     private int nextPage;
     private ReplaySubject<Record> subject;
+    private Observable<UserIdentity> userIdentityObservable;
 
     public UserCollection(DiscogsService service, Scheduler observeOnScheduler, Scheduler subscribeOnScheduler) {
         this.service = service;
@@ -26,29 +28,38 @@ public class UserCollection {
         this.subscribeOnScheduler = subscribeOnScheduler;
         this.observeOnScheduler = observeOnScheduler;
         this.nextPage = 1;
+        buildUserIndentityRequest();
         getRecordsFromService(nextPage);
     }
 
+    private void buildUserIndentityRequest() {
+        userIdentityObservable = service.getUserIdentity()
+                .subscribeOn(subscribeOnScheduler)
+                .observeOn(observeOnScheduler)
+                .cache();
+    }
+
+    public Observable<UserIdentity> getUserIdentity() {
+        return userIdentityObservable;
+    }
+
     private void getRecordsFromService(final int nextPage) {
-       service.getUserIdentity()
-               .subscribeOn(subscribeOnScheduler)
-               .observeOn(observeOnScheduler)
-               .subscribe(new Observer<UserIdentity>() {
-                   @Override
-                   public void onCompleted() {
+        userIdentityObservable.subscribe(new Observer<UserIdentity>() {
+                    @Override
+                    public void onCompleted() {
 
-                   }
+                    }
 
-                   @Override
-                   public void onError(Throwable e) {
-                       subject.onError(e);
-                   }
+                    @Override
+                    public void onError(Throwable e) {
+                        subject.onError(e);
+                    }
 
-                   @Override
-                   public void onNext(UserIdentity userIdentity) {
-                       getRecordsFromService(userIdentity.getUsername(), nextPage);
-                   }
-               });
+                    @Override
+                    public void onNext(UserIdentity userIdentity) {
+                        getRecordsFromService(userIdentity.getUsername(), nextPage);
+                    }
+                });
     }
 
     public ReplaySubject<Record> getSubject() {
