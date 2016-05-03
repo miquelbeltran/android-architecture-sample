@@ -2,14 +2,10 @@ package work.beltran.discogsbrowser.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import javax.inject.Inject;
 
-import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.ui.collection.CollectionActivity;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
 import work.beltran.discogsbrowser.ui.settings.Settings;
@@ -36,5 +32,15 @@ public class LauncherActivity extends Activity {
             startActivity(intent);
             finish();
         }
+    }
+
+    /**
+     * Workaround for:
+     * http://stackoverflow.com/questions/32169303/activity-did-not-call-finish-api-23
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setVisible(true);
     }
 }

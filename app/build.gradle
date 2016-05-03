@@ -13,13 +13,13 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'jacoco-android'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "work.beltran.discogsbrowser"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
@@ -50,7 +50,7 @@ repositories {
 }
 
 ext {
-    supportLibVersion = '22.2.1'  // variable that can be referenced to keep support libs consistent
+    supportLibVersion = '23.1.0'  // variable that can be referenced to keep support libs consistent
 }
 
 dependencies {
@@ -58,7 +58,15 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'
-    testCompile "org.robolectric:robolectric:3.1-SNAPSHOT"
+    testCompile ("org.robolectric:robolectric:3.1-SNAPSHOT")  {
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+        exclude group: 'com.android.support', module: 'cardview-v7'
+        exclude group: 'com.android.support', module: 'design'
+    }
     testCompile "org.robolectric:shadows-support-v4:3.1-SNAPSHOT"
     testCompile 'org.assertj:assertj-core:1.7.1'
 
