@@ -12,6 +12,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Observer;
 import rx.Subscription;
 import work.beltran.discogsbrowser.R;
@@ -39,6 +41,11 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.picasso = picasso;
         this.userCollection = userCollection;
         subscribe();
+    }
+
+    @Inject
+    public void setErrorPresenter(ErrorPresenter errorPresenter) {
+        this.errorPresenter = errorPresenter;
     }
 
     @Override
@@ -111,9 +118,6 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         userCollection.loadMore();
     }
 
-    public void setErrorPresenter(ErrorPresenter errorPresenter) {
-        this.errorPresenter = errorPresenter;
-    }
 
     public class RecordViewHolder extends RecyclerView.ViewHolder {
         private CardRecordBinding binding;

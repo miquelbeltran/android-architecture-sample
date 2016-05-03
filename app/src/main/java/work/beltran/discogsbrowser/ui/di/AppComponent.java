@@ -4,6 +4,9 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import work.beltran.discogsbrowser.ui.LauncherActivity;
+import work.beltran.discogsbrowser.ui.MainActivity;
+import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
+import work.beltran.discogsbrowser.ui.di.modules.ErrorModule;
 import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsModule;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
@@ -13,8 +16,10 @@ import work.beltran.discogsbrowser.ui.login.LoginActivity;
  * More on http://beltran.work
  */
 @Singleton
-@Component(modules = {SettingsModule.class, PicassoModule.class })
+@Component(modules = {SettingsModule.class, PicassoModule.class, ErrorModule.class})
 public interface AppComponent {
     void inject(LoginActivity activity);
     void inject(LauncherActivity activity);
+    void inject(MainActivity activity);
+    void inject(RecordsAdapter adapter);
 }

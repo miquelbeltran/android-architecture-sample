@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import javax.inject.Inject;
 
-import work.beltran.discogsbrowser.ui.collection.MainActivity;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 

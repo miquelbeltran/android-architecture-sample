@@ -1,8 +1,7 @@
-package work.beltran.discogsbrowser.ui.collection;
+package work.beltran.discogsbrowser.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -11,19 +10,32 @@ import android.support.v7.app.AppCompatActivity;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
+import javax.inject.Inject;
+
 import work.beltran.discogsbrowser.R;
+import work.beltran.discogsbrowser.ui.collection.CollectionFragment;
+import work.beltran.discogsbrowser.ui.errors.ErrorHandlingView;
+import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
 
-public class MainActivity extends AppCompatActivity implements CollectionFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements ErrorHandlingView {
     private static final String TAG_COLLECTION = "Collection";
     private CollectionFragment fragment;
+    private ErrorPresenter errorPresenter;
+
+    @Inject
+    public void setErrorPresenter(ErrorPresenter errorPresenter) {
+        this.errorPresenter = errorPresenter;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ((App) getApplication()).getAppComponent().inject(this);
+        errorPresenter.setView(this);
 
-        fragment = CollectionFragment.newInstance("", "");
+        fragment = CollectionFragment.newInstance();
         AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 
         // Create items
@@ -72,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements CollectionFragmen
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void showErrorInfo(String s) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.dialog_error)
                 .setMessage(R.string.dialog_error_message)

@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
@@ -14,8 +13,8 @@ import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.ui.TestApp;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
 
 
 /**
@@ -24,14 +23,15 @@ import static org.mockito.Mockito.verify;
  */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, application = TestApp.class)
-public class MainActivityTest {
-    MainActivity activity;
+public class CollectionFragmentTest {
+    CollectionFragment fragment;
     RecordsAdapter adapter;
 
     @Before
     public void setUp() throws Exception {
         adapter = TestApp.getMockAdapter();
-        activity = Robolectric.setupActivity(MainActivity.class);
+        fragment = new CollectionFragment();
+        startFragment(fragment);
     }
     
     @Test
@@ -41,14 +41,14 @@ public class MainActivityTest {
 
     @Test
     public void testOnDestroy() throws Exception {
-        activity.onDestroy();
+        fragment.onDestroy();
         verify(adapter).activityOnDestroy();
     }
 
     @Test
     public void testLoadMore() throws Exception {
-        RecyclerView view = (RecyclerView) activity.findViewById(R.id.records_recycler_view);
-        activity.onLoadMore(view);
+        RecyclerView view = (RecyclerView) fragment.getView().findViewById(R.id.records_recycler_view);
+        fragment.onLoadMore(view);
         verify(adapter).loadMore();
     }
 }

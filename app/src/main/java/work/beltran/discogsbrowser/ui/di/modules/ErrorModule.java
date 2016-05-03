@@ -1,5 +1,7 @@
 package work.beltran.discogsbrowser.ui.di.modules;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
@@ -12,6 +14,7 @@ import work.beltran.discogsbrowser.ui.settings.Settings;
 @Module(includes = {SettingsModule.class})
 public class ErrorModule {
     @Provides
+    @Singleton
     ErrorPresenter provideErrorPresenter(Settings settings) {
         return new ErrorPresenter(settings);
     }

@@ -4,7 +4,6 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import work.beltran.discogsbrowser.ui.collection.CollectionFragment;
-import work.beltran.discogsbrowser.ui.di.modules.ErrorModule;
 import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterModule;
 
 /**
@@ -12,7 +11,7 @@ import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterModule;
  * More on http://beltran.work
  */
 @Singleton
-@Component(modules = {RecordsAdapterModule.class, ErrorModule.class})
+@Component(modules = {RecordsAdapterModule.class })
 public interface ApiComponent {
     void inject(CollectionFragment fragment);
 }
