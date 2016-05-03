@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
  */
 public class UserCollectionTest {
     private UserCollection userCollection;
+    private RecordCollection collection;
     private DiscogsService service;
     UserCollectionModule module = new UserCollectionModule(Schedulers.immediate(), Schedulers.immediate());
     private rx.Observable<work.beltran.discogsbrowser.api.model.UserIdentity> mockObservableIdentity;
@@ -35,12 +36,14 @@ public class UserCollectionTest {
         userIdentity.setId(1);
         mockObservableIdentity = Observable.just(userIdentity);
         when(service.getUserIdentity()).thenReturn(mockObservableIdentity);
-        Observable<RecordCollection> mockObservable = Observable.just(new MockRecordCollection().recordCollection);
+        collection = new MockRecordCollection().recordCollection;
+        Observable<RecordCollection> mockObservable = Observable.just(collection);
         createUserCollectionWithObservable(mockObservable);
     }
 
     private void createUserCollectionWithObservable(Observable<RecordCollection> mockObservable) {
         when(service.listRecords("test", 1)).thenReturn(mockObservable);
+        when(service.listRecords("test", 2)).thenReturn(mockObservable);
         userCollection = module.provideUserCollection(service);
     }
 
@@ -61,6 +64,41 @@ public class UserCollectionTest {
         Throwable throwable = new Throwable();
         Observable<RecordCollection> mockObservable = Observable.error(throwable);
         createUserCollectionWithObservable(mockObservable);
+        TestSubscriber<Record> subscriber = new TestSubscriber<>();
+        userCollection.getSubject().subscribe(subscriber);
+        subscriber.assertError(throwable);
+    }
+
+    @Test
+    public void testLoadMore() throws Exception {
+        TestSubscriber<Record> subscriber = new TestSubscriber<>();
+        userCollection.getSubject().subscribe(subscriber);
+        assertThat(subscriber.getOnNextEvents().size()).isEqualTo(1);
+        assertThat(subscriber.getOnCompletedEvents().size()).isEqualTo(0);
+        collection.getPagination().setPage(2);
+        userCollection.loadMore();
+        subscriber.assertNoErrors();
+        assertThat(subscriber.getOnNextEvents().size()).isEqualTo(2);
+        assertThat(subscriber.getOnCompletedEvents().size()).isEqualTo(1);
+
+    }
+
+    @Test
+    public void testUserIdentity() throws Exception {
+        verify(service).getUserIdentity();
+        TestSubscriber<UserIdentity> subscriber = new TestSubscriber<>();
+        userCollection.getUserIdentity().subscribe(subscriber);
+        UserIdentity identity = subscriber.getOnNextEvents().get(0);
+        assertThat(identity.getUsername()).matches("test");
+    }
+
+    @Test
+    public void testUserOnError() throws Exception {
+        Throwable throwable = new Throwable();
+        Observable<UserIdentity> mockObservable = Observable.error(throwable);
+        when(service.getUserIdentity()).thenReturn(mockObservable);
+        Observable<RecordCollection> mockObservableRecords = Observable.just(collection);
+        createUserCollectionWithObservable(mockObservableRecords);
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
         userCollection.getSubject().subscribe(subscriber);
         subscriber.assertError(throwable);

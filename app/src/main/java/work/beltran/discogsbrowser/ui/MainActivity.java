@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements ErrorHandlingView
             @Override
             public void onNext(UserIdentity userIdentity) {
                 Log.d(TAG, "onNext " + userIdentity.getUsername());
-               getSupportActionBar().setTitle(userIdentity.getUsername());
+               getSupportActionBar().setTitle(userIdentity.getUsername() + "'s Records");
             }
         });
 

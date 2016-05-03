@@ -16,7 +16,7 @@ public class MockRecordCollection {
         record.setInstance_id("1234");
 
         Pagination pagination = new Pagination();
-        pagination.setPages(1);
+        pagination.setPages(2);
         pagination.setPage(1);
         recordCollection.setPagination(pagination);
 
