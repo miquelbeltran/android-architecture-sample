@@ -14,11 +14,11 @@
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         card_view:cardCornerRadius="4dp"
-        card_view:contentPadding="6dp">
+        card_view:contentPadding="0dp">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
@@ -35,15 +35,16 @@
                 android:layout_below="@+id/record_artist"
                 android:layout_toRightOf="@+id/record_thumb"
                 android:ellipsize="end"
-                android:paddingLeft="6dp"
+                android:paddingLeft="8dp"
                 android:singleLine="true"
                 android:text="@{record.getBasicInformation().getTitle()}"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:paddingRight="8dp" />
 
             <ImageView
                 android:id="@+id/record_thumb"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="104dp"
+                android:layout_height="104dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
@@ -58,11 +59,12 @@
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/record_thumb"
                 android:ellipsize="end"
-                android:paddingLeft="6dp"
+                android:paddingLeft="8dp"
                 android:singleLine="true"
                 android:text="@{record.getBasicInformation().getArtists().get(0).getName()}"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:paddingRight="8dp" />
 
             <TextView
                 android:id="@+id/record_year"
@@ -71,10 +73,11 @@
                 android:layout_alignBottom="@+id/record_thumb"
                 android:layout_toEndOf="@+id/record_thumb"
                 android:layout_toRightOf="@+id/record_thumb"
-                android:paddingLeft="6dp"
+                android:paddingLeft="8dp"
                 android:text="@{record.getBasicInformation().getYear()}"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="@{record.getBasicInformation().getYear().equals(`0`) ? View.GONE : View.VISIBLE }" />
+                android:visibility="@{record.getBasicInformation().getYear().equals(`0`) ? View.GONE : View.VISIBLE }"
+                android:paddingBottom="8dp" />
 
             <TextView
                 android:id="@+id/record_format"
@@ -84,7 +87,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:text="@{record.getBasicInformation().getFormats().get(0).getName()}"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:paddingRight="8dp"
+                android:paddingBottom="8dp" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </layout>
