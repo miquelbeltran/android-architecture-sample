@@ -6,17 +6,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 import javax.inject.Inject;
 
-import rx.Observer;
 import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.api.UserCollection;
-import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.ui.collection.CollectionFragment;
 import work.beltran.discogsbrowser.ui.errors.ErrorHandlingView;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
@@ -39,24 +35,6 @@ public class MainActivity extends AppCompatActivity implements ErrorHandlingView
         setContentView(R.layout.activity_main);
         ((App) getApplication()).getAppComponent().inject(this);
         errorPresenter.setView(this);
-        final UserCollection userCollection = ((App) getApplication()).getApiComponent().userCollection();
-        userCollection.getUserIdentity().subscribe(new Observer<UserIdentity>() {
-            @Override
-            public void onCompleted() {
-                Log.d(TAG, "onCompleted");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e(TAG, "onError " + e.getMessage());
-            }
-
-            @Override
-            public void onNext(UserIdentity userIdentity) {
-                Log.d(TAG, "onNext " + userIdentity.getUsername());
-               getSupportActionBar().setTitle(userIdentity.getUsername() + "'s Records");
-            }
-        });
 
         fragment = CollectionFragment.newInstance();
         AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
