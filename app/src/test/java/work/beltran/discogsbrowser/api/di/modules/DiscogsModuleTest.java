@@ -1,6 +1,7 @@
 package work.beltran.discogsbrowser.api.di.modules;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
@@ -30,6 +31,7 @@ public class DiscogsModuleTest {
         service = discogsModule.provideDiscogsService(discogsModule.provideRetrofit());
     }
 
+    @Ignore
     @Test
     public void testUserIdentity() throws Exception {
         TestSubscriber<UserIdentity> subscriber = new TestSubscriber<>();
