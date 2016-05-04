@@ -3,17 +3,18 @@ package work.beltran.discogsbrowser.ui;
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.UserCollection;
 import work.beltran.discogsbrowser.api.di.modules.DiscogsModule;
-import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterMockModule;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionMockModule;
-
+import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
 import work.beltran.discogsbrowser.ui.di.DaggerApiComponent;
 import work.beltran.discogsbrowser.ui.di.DaggerAppComponent;
 import work.beltran.discogsbrowser.ui.di.modules.ContextModule;
+import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterMockModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsMockModule;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Miquel Beltran on 28.04.16.
@@ -21,7 +22,7 @@ import static org.mockito.Mockito.mock;
  */
 public class TestApp extends App {
     private static RecordsAdapter mockAdapter;
-    private static UserCollection mockUserCollection;
+    public static UserCollection mockUserCollection;
     public static Settings mockSettings;
 
     public static RecordsAdapter getMockAdapter() {
@@ -33,6 +34,7 @@ public class TestApp extends App {
         super.onCreate();
         mockAdapter = mock(RecordsAdapter.class);
         mockUserCollection = mock(UserCollection.class);
+        when(mockUserCollection.getUserProfile()).thenReturn(rx.Observable.just(new UserProfile()));
         mockSettings = mock(Settings.class);
         appComponent = DaggerAppComponent
                 .builder()

@@ -33,7 +33,7 @@ public class CollectionFragmentTest {
         fragment = CollectionFragment.newInstance();
         startFragment(fragment);
     }
-    
+
     @Test
     public void testAttached() throws Exception {
         verify(adapter).onAttachedToRecyclerView((RecyclerView) any());
