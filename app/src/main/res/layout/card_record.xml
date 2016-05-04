@@ -48,7 +48,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:background="#fff3e0" />
+                android:background="@color/primary_light" />
 
             <TextView
                 android:id="@+id/record_artist"

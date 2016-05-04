@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.eyeem.recyclerviewtools.LoadMoreOnScrollListener;
+import com.eyeem.recyclerviewtools.adapter.WrapAdapter;
 import com.eyeem.recyclerviewtools.extras.PicassoOnScrollListener;
 
 import javax.inject.Inject;
@@ -40,27 +41,30 @@ public class CollectionFragment extends Fragment implements LoadMoreOnScrollList
         ((App) getActivity().getApplication()).getAppComponent().inject(adapter);
     }
 
-    private void initRecyclerView(View view) {
+    private void initRecyclerView(View view, LayoutInflater inflater) {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.records_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         if (recyclerView != null) {
             recyclerView.addOnScrollListener(new LoadMoreOnScrollListener(this));
             recyclerView.addOnScrollListener(new PicassoOnScrollListener(adapter));
             recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setAdapter(adapter);
+            WrapAdapter wrapAdapter = new WrapAdapter(adapter);
+            recyclerView.setAdapter(wrapAdapter);
+            wrapAdapter.addHeader(inflater.inflate(R.layout.header, recyclerView, false));
+            wrapAdapter.addFooter(inflater.inflate(R.layout.footer, recyclerView, false));
         }
     }
 
     @Override
     public void onLoadMore(RecyclerView recyclerView) {
-        ((RecordsAdapter) recyclerView.getAdapter()).loadMore();
+        ((RecordsAdapter) ((WrapAdapter) recyclerView.getAdapter()).getWrapped()).loadMore();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_collection, container, false);
-        initRecyclerView(view);
+        initRecyclerView(view, inflater);
         return view;
     }
 

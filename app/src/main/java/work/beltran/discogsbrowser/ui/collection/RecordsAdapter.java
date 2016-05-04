@@ -70,7 +70,12 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private void onBindViewHolder(RecordViewHolder holder, int position) {
         holder.getBinding().setRecord(recordList.get(position));
-        picasso.load(recordList.get(position).getBasicInformation().getThumb()).tag(this).into(holder.getBinding().recordThumb);
+        picasso.load(recordList.get(position).getBasicInformation().getThumb())
+                .tag(this)
+                .placeholder(R.drawable.music_record)
+                .fit()
+                .centerCrop()
+                .into(holder.getBinding().recordThumb);
     }
 
     @Override
