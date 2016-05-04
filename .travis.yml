@@ -6,7 +6,8 @@ android:
   - android-23
   - extra-android-m2repository
 script:
-- "./gradlew build jacocoTestReport -x test"
+- "./gradlew testDebugUnitTest"
+#- "./gradlew build jacocoTestReport -x test"
 before_install:
 - chmod +x gradlew
 branches:
