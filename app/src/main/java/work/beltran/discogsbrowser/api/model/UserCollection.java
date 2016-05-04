@@ -4,14 +4,16 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import work.beltran.discogsbrowser.api.model.pagination.Pagination;
+import work.beltran.discogsbrowser.api.model.record.Record;
+
 /**
- * Created by Miquel Beltran on 04.05.16.
- * More on http://beltran.work
+ * Created by miquel on 22.04.16.
  */
-public class WantedList  implements RecordsResult {
+public class UserCollection implements RecordsWithPagination {
     @SerializedName("pagination")
     private Pagination pagination;
-    @SerializedName("wants")
+    @SerializedName("releases")
     private List<Record> records;
 
     public Pagination getPagination() {

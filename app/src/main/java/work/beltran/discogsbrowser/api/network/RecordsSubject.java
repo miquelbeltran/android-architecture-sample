@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.api;
+package work.beltran.discogsbrowser.api.network;
 
 import java.util.List;
 
@@ -7,15 +7,15 @@ import rx.Observer;
 import rx.Scheduler;
 import rx.functions.Func1;
 import rx.subjects.ReplaySubject;
-import work.beltran.discogsbrowser.api.model.Record;
-import work.beltran.discogsbrowser.api.model.RecordsResult;
+import work.beltran.discogsbrowser.api.model.record.Record;
+import work.beltran.discogsbrowser.api.model.RecordsWithPagination;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
 
 /**
  * Created by Miquel Beltran on 04.05.16.
  * More on http://beltran.work
  */
-public abstract class RecordsList<T extends RecordsResult> {
+public abstract class RecordsSubject<T extends RecordsWithPagination> {
     private Scheduler observeOnScheduler;
     private Scheduler subscribeOnScheduler;
     private ReplaySubject<Record> subject;
@@ -25,10 +25,10 @@ public abstract class RecordsList<T extends RecordsResult> {
     private int totalPages;
     private List<Boolean> completedPages;
 
-    protected RecordsList(DiscogsService service,
-                          Observable<UserIdentity> userIdentityObservable,
-                          Scheduler subscribeOnScheduler,
-                          Scheduler observeOnScheduler) {
+    protected RecordsSubject(DiscogsService service,
+                             Observable<UserIdentity> userIdentityObservable,
+                             Scheduler subscribeOnScheduler,
+                             Scheduler observeOnScheduler) {
         this.service = service;
         this.userIdentityObservable = userIdentityObservable;
         this.subject = ReplaySubject.create();
@@ -58,7 +58,7 @@ public abstract class RecordsList<T extends RecordsResult> {
         })
                 .observeOn(observeOnScheduler)
                 .subscribe(new Observer<T>() {
-                    RecordsResult result;
+                    RecordsWithPagination result;
 
                     @Override
                     public void onCompleted() {
@@ -72,7 +72,7 @@ public abstract class RecordsList<T extends RecordsResult> {
                     }
 
                     @Override
-                    public void onNext(RecordsResult recordCollection) {
+                    public void onNext(RecordsWithPagination recordCollection) {
                         totalPages = recordCollection.getPagination().getPages();
                         if (recordCollection.getRecords() != null) {
                             for (Record record : recordCollection.getRecords()) {

@@ -18,7 +18,7 @@ import rx.Observer;
 import rx.Subscription;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.ApiFrontend;
-import work.beltran.discogsbrowser.api.model.Record;
+import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.databinding.CardRecordBinding;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
 

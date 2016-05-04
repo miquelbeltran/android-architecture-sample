@@ -1,7 +1,7 @@
 package work.beltran.discogsbrowser.api.di.modules;
 
 import work.beltran.discogsbrowser.BuildConfig;
-import work.beltran.discogsbrowser.api.DiscogsService;
+import work.beltran.discogsbrowser.api.network.DiscogsService;
 
 import java.io.IOException;
 

@@ -8,9 +8,9 @@ import org.robolectric.annotation.Config;
 
 import rx.observers.TestSubscriber;
 import work.beltran.discogsbrowser.BuildConfig;
-import work.beltran.discogsbrowser.api.DiscogsService;
-import work.beltran.discogsbrowser.api.model.Record;
-import work.beltran.discogsbrowser.api.model.RecordCollection;
+import work.beltran.discogsbrowser.api.network.DiscogsService;
+import work.beltran.discogsbrowser.api.model.record.Record;
+import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.ui.TestApp;
 
@@ -42,9 +42,9 @@ public class DiscogsModuleTest {
     // Needs network!
     @Test
     public void testService() throws Exception {
-        TestSubscriber<RecordCollection> subscriber = new TestSubscriber<>();
+        TestSubscriber<UserCollection> subscriber = new TestSubscriber<>();
         service.listRecords("mike513", 1).subscribe(subscriber);
-        RecordCollection collection = subscriber.getOnNextEvents().get(0);
+        UserCollection collection = subscriber.getOnNextEvents().get(0);
         assertThat(collection.getRecords().size()).isEqualTo(50);
         Record record = collection.getRecords().get(0);
         assertThat(record.getBasicInformation().getYear()).matches("0");

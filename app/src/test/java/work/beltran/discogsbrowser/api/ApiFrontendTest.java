@@ -8,10 +8,11 @@ import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
 import work.beltran.discogsbrowser.api.model.MockRecordCollection;
-import work.beltran.discogsbrowser.api.model.Record;
-import work.beltran.discogsbrowser.api.model.RecordCollection;
+import work.beltran.discogsbrowser.api.model.record.Record;
+import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
-import work.beltran.discogsbrowser.api.model.WantedList;
+import work.beltran.discogsbrowser.api.model.UserWanted;
+import work.beltran.discogsbrowser.api.network.DiscogsService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -24,7 +25,7 @@ import static org.mockito.Mockito.when;
  */
 public class ApiFrontendTest {
     private ApiFrontend apiFrontend;
-    private RecordCollection collection;
+    private UserCollection collection;
     private DiscogsService service;
     UserCollectionModule module = new UserCollectionModule(Schedulers.immediate(), Schedulers.immediate());
     private rx.Observable<work.beltran.discogsbrowser.api.model.UserIdentity> mockObservableIdentity;
@@ -37,13 +38,13 @@ public class ApiFrontendTest {
         userIdentity.setId(1);
         mockObservableIdentity = Observable.just(userIdentity);
         when(service.getUserIdentity()).thenReturn(mockObservableIdentity);
-        collection = new MockRecordCollection().recordCollection;
-        Observable<RecordCollection> mockObservable = Observable.just(collection);
-        Observable<WantedList> mockWanted = Observable.just(new WantedList());
+        collection = new MockRecordCollection().userCollection;
+        Observable<UserCollection> mockObservable = Observable.just(collection);
+        Observable<UserWanted> mockWanted = Observable.just(new UserWanted());
         createUserCollectionWithObservable(mockObservable, mockWanted);
     }
 
-    private void createUserCollectionWithObservable(Observable<RecordCollection> mockObservable, Observable<WantedList> mockWanted) {
+    private void createUserCollectionWithObservable(Observable<UserCollection> mockObservable, Observable<UserWanted> mockWanted) {
         when(service.listRecords("test", 1)).thenReturn(mockObservable);
         when(service.listRecords("test", 2)).thenReturn(mockObservable);
         when(service.getWantedList("test", 1)).thenReturn(mockWanted);
@@ -66,8 +67,8 @@ public class ApiFrontendTest {
     @Test
     public void testOnError() throws Exception {
         Throwable throwable = new Throwable();
-        Observable<RecordCollection> mockObservable = Observable.error(throwable);
-        createUserCollectionWithObservable(mockObservable, Observable.just(new WantedList()));
+        Observable<UserCollection> mockObservable = Observable.error(throwable);
+        createUserCollectionWithObservable(mockObservable, Observable.just(new UserWanted()));
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
         apiFrontend.getCollectionRecords().subscribe(subscriber);
         subscriber.assertError(throwable);
@@ -102,8 +103,8 @@ public class ApiFrontendTest {
         Throwable throwable = new Throwable();
         Observable<UserIdentity> mockObservable = Observable.error(throwable);
         when(service.getUserIdentity()).thenReturn(mockObservable);
-        Observable<RecordCollection> mockObservableRecords = Observable.just(collection);
-        createUserCollectionWithObservable(mockObservableRecords, Observable.just(new WantedList()));
+        Observable<UserCollection> mockObservableRecords = Observable.just(collection);
+        createUserCollectionWithObservable(mockObservableRecords, Observable.just(new UserWanted()));
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
         apiFrontend.getCollectionRecords().subscribe(subscriber);
         subscriber.assertError(throwable);

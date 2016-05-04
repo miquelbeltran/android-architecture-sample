@@ -1,17 +1,17 @@
-package work.beltran.discogsbrowser.api;
+package work.beltran.discogsbrowser.api.network;
 
 import rx.Observable;
 import rx.Scheduler;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
-import work.beltran.discogsbrowser.api.model.WantedList;
+import work.beltran.discogsbrowser.api.model.UserWanted;
 
 /**
  * Created by Miquel Beltran on 04.05.16.
  * More on http://beltran.work
  */
-public class WantRecordsList extends RecordsList<WantedList> {
+public class WantRecordsSubject extends RecordsSubject<UserWanted> {
 
-    protected WantRecordsList(DiscogsService service,
+    public WantRecordsSubject(DiscogsService service,
                               Observable<UserIdentity> userIdentityObservable,
                               Scheduler subscribeOnScheduler,
                               Scheduler observeOnScheduler) {
@@ -19,7 +19,7 @@ public class WantRecordsList extends RecordsList<WantedList> {
     }
 
     @Override
-    protected Observable<WantedList> serviceCallToGetRecords(UserIdentity userIdentity, int nextPage) {
+    protected Observable<UserWanted> serviceCallToGetRecords(UserIdentity userIdentity, int nextPage) {
         return service.getWantedList(userIdentity.getUsername(), nextPage);
     }
 }

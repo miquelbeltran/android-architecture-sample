@@ -19,7 +19,7 @@ import rx.subjects.ReplaySubject;
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.model.MockRecordCollection;
-import work.beltran.discogsbrowser.api.model.Record;
+import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,7 +44,7 @@ public class RecordsAdapterTest {
 
     @Mock
     Picasso picasso;
-    private rx.subjects.ReplaySubject<work.beltran.discogsbrowser.api.model.Record> subject;
+    private rx.subjects.ReplaySubject<Record> subject;
 
     @Before
     public void setUp() throws Exception {

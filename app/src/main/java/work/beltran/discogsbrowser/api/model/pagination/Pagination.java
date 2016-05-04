@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.api.model;
+package work.beltran.discogsbrowser.api.model.pagination;
 
 import com.google.gson.annotations.SerializedName;
 
