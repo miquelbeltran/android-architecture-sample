@@ -90,6 +90,7 @@ public class UserCollectionTest {
         userCollection.getUserIdentity().subscribe(subscriber);
         UserIdentity identity = subscriber.getOnNextEvents().get(0);
         assertThat(identity.getUsername()).matches("test");
+        assertThat(identity.getId()).isEqualTo(1);
     }
 
     @Test

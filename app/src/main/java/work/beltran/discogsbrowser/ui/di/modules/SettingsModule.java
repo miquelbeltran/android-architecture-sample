@@ -6,7 +6,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import work.beltran.discogsbrowser.ui.di.modules.ContextModule;
+import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 /**
@@ -19,6 +19,6 @@ public class SettingsModule {
     @Provides
     @Singleton
     public Settings provideSettings(Context context) {
-        return new Settings(context);
+        return new Settings(context, BuildConfig.API_KEY);
     }
 }

@@ -3,12 +3,10 @@ package work.beltran.discogsbrowser.ui.collection;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -19,7 +17,6 @@ import org.robolectric.annotation.Config;
 
 import rx.subjects.ReplaySubject;
 import work.beltran.discogsbrowser.BuildConfig;
-import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.UserCollection;
 import work.beltran.discogsbrowser.api.model.MockRecordCollection;
 import work.beltran.discogsbrowser.api.model.Record;
@@ -119,17 +116,5 @@ public class RecordsAdapterTest {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RuntimeEnvironment.application);
         recyclerView.setLayoutManager(layoutManager);
         return recyclerView;
-    }
-
-    @Ignore
-    @Test
-    public void testBindRecordViewHolder() throws Exception {
-        subject.onNext(recordCollection.recordCollection.getRecords().get(0));
-        RecyclerView recyclerView = getRecyclerView();
-        RecyclerView.ViewHolder holder = adapter.onCreateViewHolder(recyclerView, 1);
-        adapter.onBindViewHolder(holder, 0);
-        Thread.sleep(1000);
-        TextView textView = (TextView) holder.itemView.findViewById(R.id.record_title);
-        assertThat(textView.getText()).isEqualTo("Title");
     }
 }

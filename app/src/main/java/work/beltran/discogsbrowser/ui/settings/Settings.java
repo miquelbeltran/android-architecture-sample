@@ -3,8 +3,6 @@ package work.beltran.discogsbrowser.ui.settings;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import work.beltran.discogsbrowser.BuildConfig;
-
 /**
  * Created by Miquel Beltran on 02.05.16.
  * More on http://beltran.work
@@ -13,9 +11,11 @@ public class Settings {
     private static final String PREFS_NAME = "DiscogsPreferences";
     private static final String API_KEY = "ApiKey";
     private static Context context;
+    private String apiKeyFromBuildConfig;
 
-    public Settings(Context context) {
+    public Settings(Context context, String apiKey) {
         this.context = context;
+        apiKeyFromBuildConfig = apiKey;
     }
 
     public void storeApiKey(String accessToken) {
@@ -24,7 +24,7 @@ public class Settings {
     }
 
     public String getApiKey() {
-        String apiKey = BuildConfig.API_KEY;
+        String apiKey = apiKeyFromBuildConfig;
         if (!apiKey.isEmpty()) {
             return apiKey;
         }

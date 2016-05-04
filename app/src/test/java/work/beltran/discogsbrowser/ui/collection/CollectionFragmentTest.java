@@ -30,7 +30,7 @@ public class CollectionFragmentTest {
     @Before
     public void setUp() throws Exception {
         adapter = TestApp.getMockAdapter();
-        fragment = new CollectionFragment();
+        fragment = CollectionFragment.newInstance();
         startFragment(fragment);
     }
     
