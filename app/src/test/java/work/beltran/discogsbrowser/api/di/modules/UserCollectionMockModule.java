@@ -1,22 +1,22 @@
 package work.beltran.discogsbrowser.api.di.modules;
 
+import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.DiscogsService;
-import work.beltran.discogsbrowser.api.UserCollection;
 
 /**
  * Created by Miquel Beltran on 28.04.16.
  * More on http://beltran.work
  */
 public class UserCollectionMockModule extends UserCollectionModule {
-    private UserCollection userCollection;
+    private ApiFrontend apiFrontend;
 
-    public UserCollectionMockModule(UserCollection userCollection) {
+    public UserCollectionMockModule(ApiFrontend apiFrontend) {
         super(null, null);
-        this.userCollection = userCollection;
+        this.apiFrontend = apiFrontend;
     }
 
     @Override
-    public UserCollection provideUserCollection(DiscogsService service) {
-        return  userCollection;
+    public ApiFrontend provideUserCollection(DiscogsService service) {
+        return apiFrontend;
     }
 }

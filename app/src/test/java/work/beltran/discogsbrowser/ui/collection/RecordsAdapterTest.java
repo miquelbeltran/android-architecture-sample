@@ -17,7 +17,7 @@ import org.robolectric.annotation.Config;
 
 import rx.subjects.ReplaySubject;
 import work.beltran.discogsbrowser.BuildConfig;
-import work.beltran.discogsbrowser.api.UserCollection;
+import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.model.MockRecordCollection;
 import work.beltran.discogsbrowser.api.model.Record;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
@@ -37,7 +37,7 @@ public class RecordsAdapterTest {
     MockRecordCollection recordCollection = new MockRecordCollection();
 
     @Mock
-    UserCollection userCollection;
+    ApiFrontend apiFrontend;
 
     @Mock
     ErrorPresenter presenter;
@@ -50,8 +50,8 @@ public class RecordsAdapterTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         subject = ReplaySubject.create();
-        when(userCollection.getCollectionRecords()).thenReturn(subject);
-        adapter = new RecordsAdapter(userCollection, picasso);
+        when(apiFrontend.getCollectionRecords()).thenReturn(subject);
+        adapter = new RecordsAdapter(apiFrontend, picasso);
         adapter.setErrorPresenter(presenter);
     }
 
@@ -83,7 +83,7 @@ public class RecordsAdapterTest {
     @Test
     public void testLoadMore() throws Exception {
         adapter.loadMore();
-        verify(userCollection).loadMoreCollection();
+        verify(apiFrontend).loadMoreCollection();
     }
 
     @Test

@@ -12,8 +12,8 @@ import work.beltran.discogsbrowser.api.model.UserProfile;
  * Created by Miquel Beltran on 22.04.16.
  * More on http://beltran.work
  */
-public class UserCollection {
-    private static final String TAG = UserCollection.class.getCanonicalName();
+public class ApiFrontend {
+    private static final String TAG = ApiFrontend.class.getCanonicalName();
     private DiscogsService service;
     private Scheduler observeOnScheduler;
     private Scheduler subscribeOnScheduler;
@@ -21,7 +21,7 @@ public class UserCollection {
     private WantRecordsList wantRecordsList;
     private CollectionRecordsList collectionRecordsList;
 
-    public UserCollection(DiscogsService service, Scheduler observeOnScheduler, Scheduler subscribeOnScheduler) {
+    public ApiFrontend(DiscogsService service, Scheduler observeOnScheduler, Scheduler subscribeOnScheduler) {
         this.service = service;
         this.subscribeOnScheduler = subscribeOnScheduler;
         this.observeOnScheduler = observeOnScheduler;

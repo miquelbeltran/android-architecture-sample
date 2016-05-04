@@ -3,7 +3,7 @@ package work.beltran.discogsbrowser.ui.di;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import work.beltran.discogsbrowser.api.UserCollection;
+import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.ui.collection.CollectionFragment;
 import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterModule;
 
@@ -15,5 +15,5 @@ import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterModule;
 @Component(modules = {RecordsAdapterModule.class })
 public interface ApiComponent {
     void inject(CollectionFragment fragment);
-    UserCollection userCollection();
+    ApiFrontend userCollection();
 }

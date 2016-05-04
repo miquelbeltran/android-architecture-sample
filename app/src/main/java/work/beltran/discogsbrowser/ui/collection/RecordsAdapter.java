@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import rx.Observer;
 import rx.Subscription;
 import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.api.UserCollection;
+import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.model.Record;
 import work.beltran.discogsbrowser.databinding.CardRecordBinding;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
@@ -28,7 +28,7 @@ import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
  */
 public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = RecordsAdapter.class.getCanonicalName();
-    private UserCollection userCollection;
+    private ApiFrontend apiFrontend;
     private List<Record> recordList = new ArrayList<>();
     private Picasso picasso;
     private Subscription subscription;
@@ -37,9 +37,9 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private boolean showProgressBar = true;
     private ErrorPresenter errorPresenter;
 
-    public RecordsAdapter(UserCollection userCollection, Picasso picasso) {
+    public RecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
         this.picasso = picasso;
-        this.userCollection = userCollection;
+        this.apiFrontend = apiFrontend;
         subscribe();
     }
 
@@ -92,7 +92,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     private void subscribe() {
-        subscription = userCollection.getCollectionRecords().subscribe(new Observer<Record>() {
+        subscription = apiFrontend.getCollectionRecords().subscribe(new Observer<Record>() {
             @Override
             public void onCompleted() {
                 Log.d(TAG, "onCompleted()");
@@ -120,7 +120,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public void loadMore() {
         Log.d(TAG, "Load More Requested");
-        userCollection.loadMoreCollection();;
+        apiFrontend.loadMoreCollection();;
     }
 
 

@@ -1,8 +1,7 @@
 package work.beltran.discogsbrowser.ui.di.modules;
 
-import work.beltran.discogsbrowser.api.UserCollection;
+import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
-import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -16,7 +15,7 @@ import dagger.Provides;
 @Module(includes = {UserCollectionModule.class, PicassoModule.class})
 public class RecordsAdapterModule {
     @Provides
-    public RecordsAdapter providesRecordsAdapter(UserCollection userCollection, Picasso picasso) {
-        return new RecordsAdapter(userCollection, picasso);
+    public RecordsAdapter providesRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
+        return new RecordsAdapter(apiFrontend, picasso);
     }
 }

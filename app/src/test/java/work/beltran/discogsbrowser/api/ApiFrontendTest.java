@@ -22,8 +22,8 @@ import static org.mockito.Mockito.when;
  * Created by Miquel Beltran on 23.04.16.
  * More on http://beltran.work
  */
-public class UserCollectionTest {
-    private UserCollection userCollection;
+public class ApiFrontendTest {
+    private ApiFrontend apiFrontend;
     private RecordCollection collection;
     private DiscogsService service;
     UserCollectionModule module = new UserCollectionModule(Schedulers.immediate(), Schedulers.immediate());
@@ -47,15 +47,15 @@ public class UserCollectionTest {
         when(service.listRecords("test", 1)).thenReturn(mockObservable);
         when(service.listRecords("test", 2)).thenReturn(mockObservable);
         when(service.getWantedList("test", 1)).thenReturn(mockWanted);
-        userCollection = module.provideUserCollection(service);
-        userCollection.loadMoreCollection();
+        apiFrontend = module.provideUserCollection(service);
+        apiFrontend.loadMoreCollection();
     }
 
     @Test
     public void testSubscribeAndNext() throws Exception {
         verify(service).listRecords("test", 1);
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
-        userCollection.getCollectionRecords().subscribe(subscriber);
+        apiFrontend.getCollectionRecords().subscribe(subscriber);
         subscriber.assertNoErrors();
         subscriber.assertValueCount(1);
         Record record = subscriber.getOnNextEvents().get(0);
@@ -69,18 +69,18 @@ public class UserCollectionTest {
         Observable<RecordCollection> mockObservable = Observable.error(throwable);
         createUserCollectionWithObservable(mockObservable, Observable.just(new WantedList()));
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
-        userCollection.getCollectionRecords().subscribe(subscriber);
+        apiFrontend.getCollectionRecords().subscribe(subscriber);
         subscriber.assertError(throwable);
     }
 
     @Test
     public void testLoadMore() throws Exception {
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
-        userCollection.getCollectionRecords().subscribe(subscriber);
+        apiFrontend.getCollectionRecords().subscribe(subscriber);
         assertThat(subscriber.getOnNextEvents().size()).isEqualTo(1);
         assertThat(subscriber.getOnCompletedEvents().size()).isEqualTo(0);
         collection.getPagination().setPage(2);
-        userCollection.loadMoreCollection();
+        apiFrontend.loadMoreCollection();
         subscriber.assertNoErrors();
         assertThat(subscriber.getOnNextEvents().size()).isEqualTo(2);
         //assertThat(subscriber.getOnCompletedEvents().size()).isEqualTo(1);
@@ -91,7 +91,7 @@ public class UserCollectionTest {
     public void testUserIdentity() throws Exception {
         verify(service).getUserIdentity();
         TestSubscriber<UserIdentity> subscriber = new TestSubscriber<>();
-        userCollection.getUserIdentity().subscribe(subscriber);
+        apiFrontend.getUserIdentity().subscribe(subscriber);
         UserIdentity identity = subscriber.getOnNextEvents().get(0);
         assertThat(identity.getUsername()).matches("test");
         assertThat(identity.getId()).isEqualTo(1);
@@ -105,7 +105,7 @@ public class UserCollectionTest {
         Observable<RecordCollection> mockObservableRecords = Observable.just(collection);
         createUserCollectionWithObservable(mockObservableRecords, Observable.just(new WantedList()));
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
-        userCollection.getCollectionRecords().subscribe(subscriber);
+        apiFrontend.getCollectionRecords().subscribe(subscriber);
         subscriber.assertError(throwable);
     }
 }

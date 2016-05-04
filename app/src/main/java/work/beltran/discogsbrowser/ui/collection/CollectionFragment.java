@@ -19,14 +19,14 @@ import javax.inject.Inject;
 
 import rx.Observer;
 import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.api.UserCollection;
+import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.ui.App;
 import work.beltran.discogsbrowser.ui.main.CircleTransform;
 
 public class CollectionFragment extends Fragment implements LoadMoreOnScrollListener.Listener {
     private RecordsAdapter adapter;
-    private UserCollection collection;
+    private ApiFrontend collection;
     private Picasso picasso;
 
     public CollectionFragment() {
@@ -39,7 +39,7 @@ public class CollectionFragment extends Fragment implements LoadMoreOnScrollList
     }
 
     @Inject
-    public void setCollection(UserCollection collection) {
+    public void setCollection(ApiFrontend collection) {
         this.collection = collection;
     }
 

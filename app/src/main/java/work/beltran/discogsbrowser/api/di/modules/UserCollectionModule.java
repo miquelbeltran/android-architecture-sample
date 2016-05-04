@@ -5,8 +5,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import rx.Scheduler;
+import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.DiscogsService;
-import work.beltran.discogsbrowser.api.UserCollection;
 
 /**
  * Created by Miquel Beltran on 23.04.16.
@@ -24,7 +24,7 @@ public class UserCollectionModule {
 
     @Provides
     @Singleton
-    public UserCollection provideUserCollection(DiscogsService service) {
-        return new UserCollection(service, observeOnScheduler, subscribeOnScheduler);
+    public ApiFrontend provideUserCollection(DiscogsService service) {
+        return new ApiFrontend(service, observeOnScheduler, subscribeOnScheduler);
     }
 }
