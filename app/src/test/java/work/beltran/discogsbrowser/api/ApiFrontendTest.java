@@ -84,8 +84,7 @@ public class ApiFrontendTest {
         apiFrontend.loadMoreCollection();
         subscriber.assertNoErrors();
         assertThat(subscriber.getOnNextEvents().size()).isEqualTo(2);
-        //assertThat(subscriber.getOnCompletedEvents().size()).isEqualTo(1);
-
+        assertThat(subscriber.getOnCompletedEvents().size()).isEqualTo(1);
     }
 
     @Test

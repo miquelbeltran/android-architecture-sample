@@ -42,27 +42,30 @@ public abstract class RecordsSubject<T extends RecordsWithPagination> {
         return subject;
     }
 
-    public void loadMoreData() {
+    public synchronized void loadMoreData() {
         if (nextPage <= totalPages) {
             getRecordsFromService(this.nextPage++);
         }
     }
 
     private void getRecordsFromService(final int nextPage) {
-        userIdentityObservable.flatMap(new Func1<UserIdentity, Observable<T>>() {
-            @Override
-            public Observable<T> call(UserIdentity userIdentity) {
-                return serviceCallToGetRecords(userIdentity, nextPage)
-                        .subscribeOn(subscribeOnScheduler);
-            }
-        })
+        userIdentityObservable
+                .flatMap(new Func1<UserIdentity, Observable<T>>() {
+                    @Override
+                    public Observable<T> call(UserIdentity userIdentity) {
+                        return serviceCallToGetRecords(userIdentity, nextPage)
+                                .subscribeOn(subscribeOnScheduler);
+                    }
+                })
                 .observeOn(observeOnScheduler)
                 .subscribe(new Observer<T>() {
-                    RecordsWithPagination result;
+                    int totalItems;
 
                     @Override
                     public void onCompleted() {
-
+                        if (subject.size() == totalItems) {
+                            subject.onCompleted();
+                        }
                     }
 
                     @Override
@@ -74,6 +77,7 @@ public abstract class RecordsSubject<T extends RecordsWithPagination> {
                     @Override
                     public void onNext(RecordsWithPagination recordCollection) {
                         totalPages = recordCollection.getPagination().getPages();
+                        totalItems = recordCollection.getPagination().getItems();
                         if (recordCollection.getRecords() != null) {
                             for (Record record : recordCollection.getRecords()) {
                                 subject.onNext(record);

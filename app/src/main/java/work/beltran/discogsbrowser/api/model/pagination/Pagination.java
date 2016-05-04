@@ -10,6 +10,7 @@ public class Pagination {
     private Integer page;
     @SerializedName("pages")
     private int pages;
+    private int items;
 
     public Integer getPage() {
         return page;
@@ -27,4 +28,11 @@ public class Pagination {
         this.pages = pages;
     }
 
+    public int getItems() {
+        return items;
+    }
+
+    public void setItems(int items) {
+        this.items = items;
+    }
 }

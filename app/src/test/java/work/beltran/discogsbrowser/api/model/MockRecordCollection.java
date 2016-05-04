@@ -24,6 +24,7 @@ public class MockRecordCollection {
         Pagination pagination = new Pagination();
         pagination.setPages(2);
         pagination.setPage(1);
+        pagination.setItems(2);
         userCollection.setPagination(pagination);
 
         BasicInformation basicInformation = new BasicInformation();
