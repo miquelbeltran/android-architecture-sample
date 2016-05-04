@@ -21,6 +21,7 @@ import work.beltran.discogsbrowser.ui.collection.CollectionFragment;
 import work.beltran.discogsbrowser.ui.errors.ErrorHandlingView;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
+import work.beltran.discogsbrowser.ui.wantlist.WantlistFragment;
 
 public class MainActivity extends AppCompatActivity implements ErrorHandlingView, NavigationView {
     private static final String TAG = MainActivity.class.getCanonicalName();
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements ErrorHandlingView
     private void createFragments() {
         fragmentMap = new HashMap<>();
         fragmentMap.put(FragmentTag.Collection, CollectionFragment.newInstance());
-//        fragmentMap.put(FragmentTag.Wantlist, WantlistFragment.newInstance());
+        fragmentMap.put(FragmentTag.Wantlist, WantlistFragment.newInstance());
 //        fragmentMap.put(FragmentTag.Search, SearchFragment.newInstance());
     }
 

@@ -11,6 +11,7 @@ import work.beltran.discogsbrowser.ui.di.modules.NavigationBarModule;
 import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsModule;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
+import work.beltran.discogsbrowser.ui.wantlist.WantRecordsAdapter;
 
 /**
  * Created by Miquel Beltran on 22.04.16.
@@ -23,4 +24,5 @@ public interface AppComponent {
     void inject(LauncherActivity activity);
     void inject(MainActivity activity);
     void inject(RecordsAdapter adapter);
+    void inject(WantRecordsAdapter adapter);
 }
