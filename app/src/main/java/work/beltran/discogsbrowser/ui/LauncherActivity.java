@@ -7,6 +7,7 @@ import android.os.Bundle;
 import javax.inject.Inject;
 
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
+import work.beltran.discogsbrowser.ui.main.MainActivity;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 public class LauncherActivity extends Activity {

@@ -11,6 +11,7 @@ import org.robolectric.annotation.Config;
 
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
+import work.beltran.discogsbrowser.ui.main.MainActivity;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 import static org.assertj.core.api.Assertions.assertThat;

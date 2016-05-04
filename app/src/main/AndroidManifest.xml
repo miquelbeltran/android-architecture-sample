@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoBar">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.main.MainActivity"
              />
         <activity
             android:name=".ui.LauncherActivity"

@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui;
+package work.beltran.discogsbrowser.ui.main;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,23 +10,32 @@ import android.support.v7.app.AppCompatActivity;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import work.beltran.discogsbrowser.R;
+import work.beltran.discogsbrowser.ui.App;
 import work.beltran.discogsbrowser.ui.collection.CollectionFragment;
 import work.beltran.discogsbrowser.ui.errors.ErrorHandlingView;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
 
-public class MainActivity extends AppCompatActivity implements ErrorHandlingView {
-    private static final String TAG_COLLECTION = "Collection";
+public class MainActivity extends AppCompatActivity implements ErrorHandlingView, NavigationView {
     private static final String TAG = MainActivity.class.getCanonicalName();
-    private CollectionFragment fragment;
     private ErrorPresenter errorPresenter;
+    private NavigationPresenter navigationPresenter;
+    private Map<FragmentTag, Fragment> fragmentMap;
 
     @Inject
     public void setErrorPresenter(ErrorPresenter errorPresenter) {
         this.errorPresenter = errorPresenter;
+    }
+
+    @Inject
+    public void setNavigationPresenter(NavigationPresenter navigationPresenter) {
+        this.navigationPresenter = navigationPresenter;
     }
 
     @Override
@@ -35,9 +44,11 @@ public class MainActivity extends AppCompatActivity implements ErrorHandlingView
         setContentView(R.layout.activity_main);
         ((App) getApplication()).getAppComponent().inject(this);
         errorPresenter.setView(this);
+        navigationPresenter.setView(this);
 
-        fragment = CollectionFragment.newInstance();
-        AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
+        createFragments();
+
+        final AHBottomNavigation navigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 
         // Create items
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.ic_library_music_white_48px, R.color.colorPrimary);
@@ -45,30 +56,36 @@ public class MainActivity extends AppCompatActivity implements ErrorHandlingView
         AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_3, R.drawable.ic_search_white_48px, R.color.colorPrimary);
 
         // Add items
-        bottomNavigation.addItem(item1);
-        bottomNavigation.addItem(item2);
-        bottomNavigation.addItem(item3);
+        navigation.addItem(item1);
+        navigation.addItem(item2);
+        navigation.addItem(item3);
 
         // Set listener
-        bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+        navigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, boolean wasSelected) {
-                switch (position) {
-                    case 0:
-                        showFragment(fragment, TAG_COLLECTION);
-                        break;
-                    case 1:
-                        removeFragment(TAG_COLLECTION);
-                        break;
-                    case 2:
-                        removeFragment(TAG_COLLECTION);
-                        break;
-                }
-                // Do something cool here...
+                navigationPresenter.tabItem(position, wasSelected);
             }
         });
 
-        showFragment(fragment, TAG_COLLECTION);
+        showFragment(FragmentTag.Collection);
+    }
+
+    private void createFragments() {
+        fragmentMap = new HashMap<>();
+        fragmentMap.put(FragmentTag.Collection, CollectionFragment.newInstance());
+//        fragmentMap.put(FragmentTag.Wantlist, WantlistFragment.newInstance());
+//        fragmentMap.put(FragmentTag.Search, SearchFragment.newInstance());
+    }
+
+    @Override
+    public void showFragment(FragmentTag tag) {
+        showFragment(fragmentMap.get(tag), tag.name());
+    }
+
+    @Override
+    public void removeFragment(FragmentTag tag) {
+        removeFragment(tag.name());
     }
 
     private void showFragment(Fragment fragment, String tag) {
