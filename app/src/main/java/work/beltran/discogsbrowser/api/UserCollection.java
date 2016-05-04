@@ -3,10 +3,12 @@ package work.beltran.discogsbrowser.api;
 import rx.Observable;
 import rx.Observer;
 import rx.Scheduler;
+import rx.functions.Func1;
 import rx.subjects.ReplaySubject;
 import work.beltran.discogsbrowser.api.model.Record;
 import work.beltran.discogsbrowser.api.model.RecordCollection;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
+import work.beltran.discogsbrowser.api.model.UserProfile;
 
 /**
  * Created by Miquel Beltran on 22.04.16.
@@ -41,6 +43,15 @@ public class UserCollection {
 
     public Observable<UserIdentity> getUserIdentity() {
         return userIdentityObservable;
+    }
+
+    public Observable<UserProfile> getUserProfile() {
+        return userIdentityObservable.flatMap(new Func1<UserIdentity, Observable<UserProfile>>() {
+                    @Override
+                    public Observable<UserProfile> call(UserIdentity userIdentity) {
+                        return service.getUserProfile(userIdentity.getUsername()).subscribeOn(subscribeOnScheduler).observeOn(observeOnScheduler);
+                    }
+                });
     }
 
     private void getRecordsFromService(final int nextPage) {

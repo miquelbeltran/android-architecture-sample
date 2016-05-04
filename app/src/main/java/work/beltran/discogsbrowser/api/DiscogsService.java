@@ -6,6 +6,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
+import work.beltran.discogsbrowser.api.model.UserProfile;
 
 /**
  * Created by miquel on 22.04.16.
@@ -17,4 +18,7 @@ public interface DiscogsService {
 
     @GET("oauth/identity")
     rx.Observable<UserIdentity> getUserIdentity();
+
+    @GET("users/{username}")
+    rx.Observable<UserProfile> getUserProfile(@Path("username") String username);
 }
