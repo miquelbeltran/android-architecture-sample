@@ -109,7 +109,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             public void onNext(Record record) {
                 Log.d(TAG, "onNext(" + record.getInstance_id() + ")");
                 recordList.add(record);
-                notifyDataSetChanged();
+                notifyItemChanged(recordList.size() - 1);
             }
         });
     }

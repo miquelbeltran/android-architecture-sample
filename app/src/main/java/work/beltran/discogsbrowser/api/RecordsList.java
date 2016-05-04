@@ -53,7 +53,7 @@ public abstract class RecordsList<T extends RecordsResult> {
             @Override
             public Observable<T> call(UserIdentity userIdentity) {
                 return serviceCallToGetRecords(userIdentity, nextPage)
-                .subscribeOn(subscribeOnScheduler);
+                        .subscribeOn(subscribeOnScheduler);
             }
         })
                 .observeOn(observeOnScheduler)
@@ -68,7 +68,7 @@ public abstract class RecordsList<T extends RecordsResult> {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-//                        subject.onError(e);
+                        subject.onError(e);
                     }
 
                     @Override
