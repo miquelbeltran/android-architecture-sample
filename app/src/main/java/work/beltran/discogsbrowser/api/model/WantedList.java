@@ -5,12 +5,13 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by miquel on 22.04.16.
+ * Created by Miquel Beltran on 04.05.16.
+ * More on http://beltran.work
  */
-public class RecordCollection implements RecordsResult {
+public class WantedList  implements RecordsResult {
     @SerializedName("pagination")
     private Pagination pagination;
-    @SerializedName("releases")
+    @SerializedName("wants")
     private List<Record> records;
 
     public Pagination getPagination() {

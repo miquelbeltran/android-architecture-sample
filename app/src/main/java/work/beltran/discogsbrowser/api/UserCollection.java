@@ -1,12 +1,10 @@
 package work.beltran.discogsbrowser.api;
 
 import rx.Observable;
-import rx.Observer;
 import rx.Scheduler;
 import rx.functions.Func1;
 import rx.subjects.ReplaySubject;
 import work.beltran.discogsbrowser.api.model.Record;
-import work.beltran.discogsbrowser.api.model.RecordCollection;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 
@@ -15,23 +13,21 @@ import work.beltran.discogsbrowser.api.model.UserProfile;
  * More on http://beltran.work
  */
 public class UserCollection {
-
     private static final String TAG = UserCollection.class.getCanonicalName();
     private DiscogsService service;
     private Scheduler observeOnScheduler;
     private Scheduler subscribeOnScheduler;
-    private int nextPage;
-    private ReplaySubject<Record> subject;
     private Observable<UserIdentity> userIdentityObservable;
+    private WantRecordsList wantRecordsList;
+    private CollectionRecordsList collectionRecordsList;
 
     public UserCollection(DiscogsService service, Scheduler observeOnScheduler, Scheduler subscribeOnScheduler) {
         this.service = service;
-        this.subject = ReplaySubject.create();
         this.subscribeOnScheduler = subscribeOnScheduler;
         this.observeOnScheduler = observeOnScheduler;
-        this.nextPage = 1;
         buildUserIndentityRequest();
-        getRecordsFromService(nextPage);
+        wantRecordsList = new WantRecordsList(service, userIdentityObservable, subscribeOnScheduler, observeOnScheduler);
+        collectionRecordsList = new CollectionRecordsList(service, userIdentityObservable, subscribeOnScheduler, observeOnScheduler);
     }
 
     private void buildUserIndentityRequest() {
@@ -47,69 +43,26 @@ public class UserCollection {
 
     public Observable<UserProfile> getUserProfile() {
         return userIdentityObservable.flatMap(new Func1<UserIdentity, Observable<UserProfile>>() {
-                    @Override
-                    public Observable<UserProfile> call(UserIdentity userIdentity) {
-                        return service.getUserProfile(userIdentity.getUsername()).subscribeOn(subscribeOnScheduler).observeOn(observeOnScheduler);
-                    }
-                });
+            @Override
+            public Observable<UserProfile> call(UserIdentity userIdentity) {
+                return service.getUserProfile(userIdentity.getUsername()).subscribeOn(subscribeOnScheduler).observeOn(observeOnScheduler);
+            }
+        });
     }
 
-    private void getRecordsFromService(final int nextPage) {
-        userIdentityObservable.subscribe(new Observer<UserIdentity>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        subject.onError(e);
-                    }
-
-                    @Override
-                    public void onNext(UserIdentity userIdentity) {
-                        getRecordsFromService(userIdentity.getUsername(), nextPage);
-                    }
-                });
+    public ReplaySubject<Record> getWantedRecords() {
+        return wantRecordsList.getSubject();
     }
 
-    public ReplaySubject<Record> getSubject() {
-        return subject;
+    public ReplaySubject<Record> getCollectionRecords() {
+        return collectionRecordsList.getSubject();
     }
 
-    private void getRecordsFromService(String user, int page) {
-        service.listRecords(user, page)
-                .subscribeOn(subscribeOnScheduler)
-                .observeOn(observeOnScheduler)
-                .subscribe(new Observer<RecordCollection>() {
-                    RecordCollection lastElem;
-
-                    @Override
-                    public void onCompleted() {
-                        if (lastElem.getPagination().getPage() == lastElem.getPagination().getPages()) {
-                            subject.onCompleted();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        subject.onError(e);
-                    }
-
-                    @Override
-                    public void onNext(RecordCollection recordCollection) {
-                        lastElem = recordCollection;
-                        for (Record record : recordCollection.getRecords()) {
-                            subject.onNext(record);
-                        }
-                    }
-                });
+    public void loadMoreCollection() {
+        collectionRecordsList.loadMoreData();
     }
 
-    public void loadMore() {
-        if (!subject.hasCompleted()) {
-            getRecordsFromService(++this.nextPage);
-        }
+    public void loadMoreWanted() {
+        wantRecordsList.loadMoreData();
     }
 }

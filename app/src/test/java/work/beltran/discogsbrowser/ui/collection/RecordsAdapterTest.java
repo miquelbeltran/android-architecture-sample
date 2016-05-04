@@ -50,7 +50,7 @@ public class RecordsAdapterTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         subject = ReplaySubject.create();
-        when(userCollection.getSubject()).thenReturn(subject);
+        when(userCollection.getCollectionRecords()).thenReturn(subject);
         adapter = new RecordsAdapter(userCollection, picasso);
         adapter.setErrorPresenter(presenter);
     }
@@ -83,7 +83,7 @@ public class RecordsAdapterTest {
     @Test
     public void testLoadMore() throws Exception {
         adapter.loadMore();
-        verify(userCollection).loadMore();
+        verify(userCollection).loadMoreCollection();
     }
 
     @Test

@@ -11,6 +11,7 @@ import work.beltran.discogsbrowser.api.model.MockRecordCollection;
 import work.beltran.discogsbrowser.api.model.Record;
 import work.beltran.discogsbrowser.api.model.RecordCollection;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
+import work.beltran.discogsbrowser.api.model.WantedList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -38,12 +39,14 @@ public class UserCollectionTest {
         when(service.getUserIdentity()).thenReturn(mockObservableIdentity);
         collection = new MockRecordCollection().recordCollection;
         Observable<RecordCollection> mockObservable = Observable.just(collection);
-        createUserCollectionWithObservable(mockObservable);
+        Observable<WantedList> mockWanted = Observable.just(new WantedList());
+        createUserCollectionWithObservable(mockObservable, mockWanted);
     }
 
-    private void createUserCollectionWithObservable(Observable<RecordCollection> mockObservable) {
+    private void createUserCollectionWithObservable(Observable<RecordCollection> mockObservable, Observable<WantedList> mockWanted) {
         when(service.listRecords("test", 1)).thenReturn(mockObservable);
         when(service.listRecords("test", 2)).thenReturn(mockObservable);
+        when(service.getWantedList("test", 1)).thenReturn(mockWanted);
         userCollection = module.provideUserCollection(service);
     }
 
@@ -51,7 +54,7 @@ public class UserCollectionTest {
     public void testSubscribeAndNext() throws Exception {
         verify(service).listRecords("test", 1);
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
-        userCollection.getSubject().subscribe(subscriber);
+        userCollection.getCollectionRecords().subscribe(subscriber);
         subscriber.assertNoErrors();
         subscriber.assertValueCount(1);
         Record record = subscriber.getOnNextEvents().get(0);
@@ -63,20 +66,20 @@ public class UserCollectionTest {
     public void testOnError() throws Exception {
         Throwable throwable = new Throwable();
         Observable<RecordCollection> mockObservable = Observable.error(throwable);
-        createUserCollectionWithObservable(mockObservable);
+        createUserCollectionWithObservable(mockObservable, Observable.just(new WantedList()));
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
-        userCollection.getSubject().subscribe(subscriber);
+        userCollection.getCollectionRecords().subscribe(subscriber);
         subscriber.assertError(throwable);
     }
 
     @Test
     public void testLoadMore() throws Exception {
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
-        userCollection.getSubject().subscribe(subscriber);
+        userCollection.getCollectionRecords().subscribe(subscriber);
         assertThat(subscriber.getOnNextEvents().size()).isEqualTo(1);
         assertThat(subscriber.getOnCompletedEvents().size()).isEqualTo(0);
         collection.getPagination().setPage(2);
-        userCollection.loadMore();
+        userCollection.loadMoreCollection();
         subscriber.assertNoErrors();
         assertThat(subscriber.getOnNextEvents().size()).isEqualTo(2);
         assertThat(subscriber.getOnCompletedEvents().size()).isEqualTo(1);
@@ -99,9 +102,9 @@ public class UserCollectionTest {
         Observable<UserIdentity> mockObservable = Observable.error(throwable);
         when(service.getUserIdentity()).thenReturn(mockObservable);
         Observable<RecordCollection> mockObservableRecords = Observable.just(collection);
-        createUserCollectionWithObservable(mockObservableRecords);
+        createUserCollectionWithObservable(mockObservableRecords, Observable.just(new WantedList()));
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
-        userCollection.getSubject().subscribe(subscriber);
+        userCollection.getCollectionRecords().subscribe(subscriber);
         subscriber.assertError(throwable);
     }
 }

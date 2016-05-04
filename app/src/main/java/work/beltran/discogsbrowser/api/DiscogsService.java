@@ -7,6 +7,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.api.model.UserProfile;
+import work.beltran.discogsbrowser.api.model.WantedList;
 
 /**
  * Created by miquel on 22.04.16.
@@ -21,4 +22,7 @@ public interface DiscogsService {
 
     @GET("users/{username}")
     rx.Observable<UserProfile> getUserProfile(@Path("username") String username);
+
+    @GET("/users/{username}/wants")
+    rx.Observable<WantedList> getWantedList(@Path("username") String username, @Query("page") int page);
 }

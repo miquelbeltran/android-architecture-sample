@@ -92,7 +92,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     private void subscribe() {
-        subscription = userCollection.getSubject().subscribe(new Observer<Record>() {
+        subscription = userCollection.getCollectionRecords().subscribe(new Observer<Record>() {
             @Override
             public void onCompleted() {
                 Log.d(TAG, "onCompleted()");
@@ -120,7 +120,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public void loadMore() {
         Log.d(TAG, "Load More Requested");
-        userCollection.loadMore();
+        userCollection.loadMoreCollection();;
     }
 
 
