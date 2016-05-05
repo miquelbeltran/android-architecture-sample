@@ -1,7 +1,12 @@
 package work.beltran.discogsbrowser.api;
 
+import android.support.annotation.NonNull;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import rx.Observable;
 import rx.observers.TestSubscriber;
@@ -24,19 +29,33 @@ public class AveragePriceTest {
     AveragePrice averagePrice;
     DiscogsService service;
     Record record;
+    List<MarketResult> marketResultList;
 
     @Before
     public void setUp() throws Exception {
         record = new Record();
         record.setInstance_id(84825);
         service = mock(DiscogsService.class);
-        MarketResult marketResult = new MarketResult();
-        marketResult.setCurrency("GBP");
-        marketResult.setPrice("\u00a385.00");
-        Observable<MarketResult> result = Observable.just(marketResult);
+        marketResultList = new ArrayList<>();
+        addMarketResult("GBP","\u00a385.00");
+        addMarketResult("EUR","\u20ac389.00");
+        addMarketResult("GBP","\u00a3120.00");
+        addMarketResult("GBP","\u00a3160.00");
+        addMarketResult("GBP","\u00a3160.00");
+        addMarketResult("EUR","\u20ac175.00");
+        addMarketResult("USD","$249.99");
+        Observable<MarketResult> result = Observable.from(marketResultList);
         when(service.getMarketResults(anyInt())).thenReturn(result);
         averagePrice = new AveragePrice(service, Schedulers.immediate(), Schedulers.immediate());
 
+    }
+
+    @NonNull
+    private void addMarketResult(String currency, String price) {
+        MarketResult marketResult = new MarketResult();
+        marketResult.setCurrency(currency);
+        marketResult.setPrice(price);
+        marketResultList.add(marketResult);
     }
 
 
