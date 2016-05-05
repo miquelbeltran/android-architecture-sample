@@ -34,7 +34,6 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Subscription subscription;
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
-    private boolean showProgressBar = true;
     private ErrorPresenter errorPresenter;
 
     public RecordsAdapter(RecordsSubject subject, Picasso picasso) {
@@ -80,7 +79,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemViewType(int position) {
-        if (showProgressBar && position >= recordList.size())
+        if (!subject.getSubject().hasCompleted() && position == recordList.size())
             return VIEW_PROG;
         else
             return VIEW_ITEM;
@@ -88,30 +87,32 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return recordList.size() + (showProgressBar ? 1 : 0);
+        return recordList.size() + (!subject.getSubject().hasCompleted() ? 1 : 0);
     }
 
     private void subscribe() {
-        subscription = subject.getSubject().subscribe(new Observer<Record>() {
-            @Override
-            public void onCompleted() {
-                Log.d(TAG, "onCompleted()");
-                showProgressBar = false;
-            }
+        subscription = subject
+                .getSubject()
+                .subscribe(new Observer<Record>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.d(TAG, "onCompleted()");
+                        notifyItemRemoved(recordList.size());
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-                Log.e(TAG, "onError() " + e.getMessage());
-                errorPresenter.onError(e);
-            }
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError() " + e.getMessage());
+                        errorPresenter.onError(e);
+                    }
 
-            @Override
-            public void onNext(Record record) {
-                Log.d(TAG, "onNext(" + record.getInstance_id() + ")");
-                recordList.add(record);
-                notifyItemChanged(recordList.size() - 1);
-            }
-        });
+                    @Override
+                    public void onNext(Record record) {
+                        Log.d(TAG, "onNext(" + record.getInstance_id() + ")");
+                        recordList.add(record);
+                        notifyItemInserted(recordList.size() - 1);
+                    }
+                });
     }
 
     public void activityOnDestroy() {

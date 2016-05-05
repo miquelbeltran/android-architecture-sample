@@ -17,4 +17,5 @@
     <string name="username">Loading user profile</string>
     <string name="user_wantlist">%s\'s Wantlist</string>
     <string name="in_wantlist">%s in Wantlist</string>
+    <string name="loading_wantlist">Loading Wantlist</string>
 </resources>

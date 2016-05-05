@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by miquel on 22.04.16.
  */
 public class Record {
-    @SerializedName("instance_id")
+    @SerializedName("id")
     private String instance_id;
 
     @SerializedName("basic_information")

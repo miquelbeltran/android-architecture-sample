@@ -89,7 +89,6 @@ public class WantlistFragment extends Fragment implements LoadMoreOnScrollListen
             public void onNext(UserProfile userProfile) {
                 TextView userWantlist = (TextView) header.findViewById(R.id.textWantlist);
                 userWantlist.setText(getResources().getString(R.string.user_wantlist, userProfile.getUsername()));
-                ((TextView)header.findViewById(R.id.textWantlist)).setText(userProfile.getUsername());
                 TextView inWantList = (TextView) header.findViewById(R.id.textInWantlist);
                 inWantList.setText(getResources().getString(R.string.in_wantlist, userProfile.getNum_wantlist()));
 
