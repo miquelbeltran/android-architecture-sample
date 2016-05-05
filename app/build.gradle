@@ -85,6 +85,7 @@ dependencies {
     compile 'com.eyeem.recyclerviewtools:library-extras:0.0.3-SNAPSHOT@aar'
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.2'
+    compile 'io.reactivex:rxjava-math:1.0.0'
     compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'

@@ -1,5 +1,6 @@
 package work.beltran.discogsbrowser.api.network;
 
+import work.beltran.discogsbrowser.api.model.MarketResult;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 
 import retrofit2.http.GET;
@@ -25,4 +26,7 @@ public interface DiscogsService {
 
     @GET("/users/{username}/wants")
     rx.Observable<UserWanted> getWantedList(@Path("username") String username, @Query("page") int page);
+
+    @GET("marketplace/search")
+    rx.Observable<MarketResult> getMarketResults(@Query("release_id") int releaseId);
 }
