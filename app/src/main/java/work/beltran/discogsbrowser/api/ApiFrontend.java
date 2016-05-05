@@ -3,8 +3,6 @@ package work.beltran.discogsbrowser.api;
 import rx.Observable;
 import rx.Scheduler;
 import rx.functions.Func1;
-import rx.subjects.ReplaySubject;
-import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.network.CollectionRecordsSubject;
@@ -67,12 +65,12 @@ public class ApiFrontend {
         return userProfileObservable;
     }
 
-    public ReplaySubject<Record> getWantedRecords() {
-        return wantRecordsSubject.getSubject();
+    public WantRecordsSubject getWantedRecords() {
+        return wantRecordsSubject;
     }
 
-    public ReplaySubject<Record> getCollectionRecords() {
-        return collectionRecordsSubject.getSubject();
+    public CollectionRecordsSubject getCollectionRecords() {
+        return collectionRecordsSubject;
     }
 
     public void loadMoreCollection() {

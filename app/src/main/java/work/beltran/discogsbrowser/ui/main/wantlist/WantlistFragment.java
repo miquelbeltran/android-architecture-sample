@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.wantlist;
+package work.beltran.discogsbrowser.ui.main.wantlist;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eyeem.recyclerviewtools.LoadMoreOnScrollListener;
@@ -22,7 +21,6 @@ import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.ui.App;
-import work.beltran.discogsbrowser.ui.main.CircleTransform;
 
 public class WantlistFragment extends Fragment implements LoadMoreOnScrollListener.Listener {
     private WantRecordsAdapter adapter;
@@ -74,7 +72,7 @@ public class WantlistFragment extends Fragment implements LoadMoreOnScrollListen
     }
 
     private void initHeaderFooter(LayoutInflater inflater, RecyclerView recyclerView, WrapAdapter wrapAdapter) {
-        final View header = inflater.inflate(R.layout.header, recyclerView, false);
+        final View header = inflater.inflate(R.layout.header_wantlist, recyclerView, false);
         wrapAdapter.addHeader(header);
         collection.getUserProfile().subscribe(new Observer<UserProfile>() {
             @Override
@@ -89,16 +87,11 @@ public class WantlistFragment extends Fragment implements LoadMoreOnScrollListen
 
             @Override
             public void onNext(UserProfile userProfile) {
-                ((TextView)header.findViewById(R.id.textUsername)).setText(userProfile.getUsername());
-                ImageView imageView = (ImageView) header.findViewById(R.id.imageAvatar);
-                picasso.load(userProfile.getAvatar_url())
-                        .placeholder(R.drawable.ic_account_circle_black_48px)
-                        .fit()
-                        .centerCrop()
-                        .transform(new CircleTransform())
-                        .into(imageView);
-                TextView inCollection = (TextView) header.findViewById(R.id.textInCollection);
-                inCollection.setText(getResources().getString(R.string.in_collection, userProfile.getNum_collection()));
+                TextView userWantlist = (TextView) header.findViewById(R.id.textWantlist);
+                userWantlist.setText(getResources().getString(R.string.user_wantlist, userProfile.getUsername()));
+                ((TextView)header.findViewById(R.id.textWantlist)).setText(userProfile.getUsername());
+                TextView inWantList = (TextView) header.findViewById(R.id.textInWantlist);
+                inWantList.setText(getResources().getString(R.string.in_wantlist, userProfile.getNum_wantlist()));
 
             }
         });

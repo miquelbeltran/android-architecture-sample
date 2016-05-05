@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.collection;
+package work.beltran.discogsbrowser.ui.main.collection;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,10 +17,11 @@ import org.robolectric.annotation.Config;
 
 import rx.subjects.ReplaySubject;
 import work.beltran.discogsbrowser.BuildConfig;
-import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.model.MockRecordCollection;
 import work.beltran.discogsbrowser.api.model.record.Record;
+import work.beltran.discogsbrowser.api.network.RecordsSubject;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
+import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -37,7 +38,7 @@ public class RecordsAdapterTest {
     MockRecordCollection recordCollection = new MockRecordCollection();
 
     @Mock
-    ApiFrontend apiFrontend;
+    RecordsSubject recordsSubject;
 
     @Mock
     ErrorPresenter presenter;
@@ -50,8 +51,8 @@ public class RecordsAdapterTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         subject = ReplaySubject.create();
-        when(apiFrontend.getCollectionRecords()).thenReturn(subject);
-        adapter = new RecordsAdapter(apiFrontend, picasso);
+        when(recordsSubject.getSubject()).thenReturn(subject);
+        adapter = new RecordsAdapter(recordsSubject, picasso);
         adapter.setErrorPresenter(presenter);
     }
 
@@ -83,7 +84,7 @@ public class RecordsAdapterTest {
     @Test
     public void testLoadMore() throws Exception {
         adapter.loadMore();
-        verify(apiFrontend).loadMoreCollection();
+        verify(recordsSubject).loadMoreData();
     }
 
     @Test

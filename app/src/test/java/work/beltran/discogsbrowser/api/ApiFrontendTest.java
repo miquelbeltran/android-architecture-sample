@@ -56,7 +56,7 @@ public class ApiFrontendTest {
     public void testSubscribeAndNext() throws Exception {
         verify(service).listRecords("test", 1);
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
-        apiFrontend.getCollectionRecords().subscribe(subscriber);
+        apiFrontend.getCollectionRecords().getSubject().subscribe(subscriber);
         subscriber.assertNoErrors();
         subscriber.assertValueCount(1);
         Record record = subscriber.getOnNextEvents().get(0);
@@ -70,14 +70,14 @@ public class ApiFrontendTest {
         Observable<UserCollection> mockObservable = Observable.error(throwable);
         createUserCollectionWithObservable(mockObservable, Observable.just(new UserWanted()));
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
-        apiFrontend.getCollectionRecords().subscribe(subscriber);
+        apiFrontend.getCollectionRecords().getSubject().subscribe(subscriber);
         subscriber.assertError(throwable);
     }
 
     @Test
     public void testLoadMore() throws Exception {
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
-        apiFrontend.getCollectionRecords().subscribe(subscriber);
+        apiFrontend.getCollectionRecords().getSubject().subscribe(subscriber);
         assertThat(subscriber.getOnNextEvents().size()).isEqualTo(1);
         assertThat(subscriber.getOnCompletedEvents().size()).isEqualTo(0);
         collection.getPagination().setPage(2);
@@ -105,7 +105,7 @@ public class ApiFrontendTest {
         Observable<UserCollection> mockObservableRecords = Observable.just(collection);
         createUserCollectionWithObservable(mockObservableRecords, Observable.just(new UserWanted()));
         TestSubscriber<Record> subscriber = new TestSubscriber<>();
-        apiFrontend.getCollectionRecords().subscribe(subscriber);
+        apiFrontend.getCollectionRecords().getSubject().subscribe(subscriber);
         subscriber.assertError(throwable);
     }
 }

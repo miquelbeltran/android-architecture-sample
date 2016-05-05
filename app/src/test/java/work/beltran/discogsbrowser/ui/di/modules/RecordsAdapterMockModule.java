@@ -1,13 +1,10 @@
 package work.beltran.discogsbrowser.ui.di.modules;
 
-import work.beltran.discogsbrowser.api.ApiFrontend;
-import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
-
 import com.squareup.picasso.Picasso;
 
 import dagger.Module;
-
-import static org.mockito.Mockito.mock;
+import work.beltran.discogsbrowser.api.ApiFrontend;
+import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
 
 /**
  * Created by Miquel Beltran on 28.04.16.
@@ -15,14 +12,14 @@ import static org.mockito.Mockito.mock;
  */
 @Module
 public class RecordsAdapterMockModule extends RecordsAdapterModule {
-    private RecordsAdapter mockAdapter;
+    private CollectionRecordsAdapter mockAdapter;
 
-    public RecordsAdapterMockModule(RecordsAdapter mockAdapter) {
+    public RecordsAdapterMockModule(CollectionRecordsAdapter mockAdapter) {
         this.mockAdapter = mockAdapter;
     }
 
     @Override
-    public RecordsAdapter providesRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
+    public CollectionRecordsAdapter providesCollectionRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
         return mockAdapter;
     }
 }

@@ -15,4 +15,6 @@
     <string name="loading_collection">Loading collection</string>
     <string name="avatar">avatar</string>
     <string name="username">Loading user profile</string>
+    <string name="user_wantlist">%s\'s Wantlist</string>
+    <string name="in_wantlist">%s in Wantlist</string>
 </resources>

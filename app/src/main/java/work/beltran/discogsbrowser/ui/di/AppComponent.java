@@ -5,13 +5,13 @@ import javax.inject.Singleton;
 import dagger.Component;
 import work.beltran.discogsbrowser.ui.LauncherActivity;
 import work.beltran.discogsbrowser.ui.main.MainActivity;
-import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
 import work.beltran.discogsbrowser.ui.di.modules.ErrorModule;
 import work.beltran.discogsbrowser.ui.di.modules.NavigationBarModule;
 import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsModule;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
-import work.beltran.discogsbrowser.ui.wantlist.WantRecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapter;
 
 /**
  * Created by Miquel Beltran on 22.04.16.

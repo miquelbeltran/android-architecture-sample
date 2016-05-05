@@ -17,11 +17,11 @@ import javax.inject.Inject;
 
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.ui.App;
-import work.beltran.discogsbrowser.ui.collection.CollectionFragment;
+import work.beltran.discogsbrowser.ui.main.collection.CollectionFragment;
 import work.beltran.discogsbrowser.ui.errors.ErrorHandlingView;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
-import work.beltran.discogsbrowser.ui.wantlist.WantlistFragment;
+import work.beltran.discogsbrowser.ui.main.wantlist.WantlistFragment;
 
 public class MainActivity extends AppCompatActivity implements ErrorHandlingView, NavigationView {
     private static final String TAG = MainActivity.class.getCanonicalName();

@@ -6,7 +6,7 @@
         android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/username"
+        android:text="@string/user_wantlist"
         android:id="@+id/textWantlist"
         android:layout_alignTop="@+id/imageAvatar"
         android:layout_toRightOf="@+id/imageAvatar"
@@ -19,18 +19,19 @@
         android:id="@+id/imageAvatar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@drawable/ic_account_circle_black_48px"
+        android:src="@drawable/ic_favorite_white_48px"
         android:layout_margin="16dp"
         android:layout_alignParentTop="true"
         android:cropToPadding="false"
-        android:contentDescription="@string/avatar" />
+        android:contentDescription="@string/avatar"
+        android:tint="@color/colorAccent" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/loading_collection"
-        android:id="@+id/textInCollection"
+        android:text="@string/in_wantlist"
+        android:id="@+id/textInWantlist"
         android:layout_below="@+id/textWantlist"
         android:layout_alignLeft="@+id/textWantlist"
         android:layout_alignStart="@+id/textWantlist"

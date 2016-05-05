@@ -8,6 +8,7 @@ public class UserProfile {
     String username;
     int num_collection;
     String avatar_url;
+    private int num_wantlist;
 
     public String getUsername() {
         return username;
@@ -31,5 +32,13 @@ public class UserProfile {
 
     public void setAvatar_url(String avatar_url) {
         this.avatar_url = avatar_url;
+    }
+
+    public int getNum_wantlist() {
+        return num_wantlist;
+    }
+
+    public void setNum_wantlist(int num_wantlist) {
+        this.num_wantlist = num_wantlist;
     }
 }

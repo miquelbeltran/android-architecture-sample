@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.collection;
+package work.beltran.discogsbrowser.ui.main.collection;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,10 +22,11 @@ import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.ui.App;
-import work.beltran.discogsbrowser.ui.main.CircleTransform;
+import work.beltran.discogsbrowser.ui.main.common.CircleTransform;
+import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
 
 public class CollectionFragment extends Fragment implements LoadMoreOnScrollListener.Listener {
-    private RecordsAdapter adapter;
+    private CollectionRecordsAdapter adapter;
     private ApiFrontend collection;
     private Picasso picasso;
 
@@ -34,7 +35,7 @@ public class CollectionFragment extends Fragment implements LoadMoreOnScrollList
     }
 
     @Inject
-    public void setAdapter(RecordsAdapter adapter) {
+    public void setAdapter(CollectionRecordsAdapter adapter) {
         this.adapter = adapter;
     }
 
@@ -89,7 +90,7 @@ public class CollectionFragment extends Fragment implements LoadMoreOnScrollList
 
             @Override
             public void onNext(UserProfile userProfile) {
-                ((TextView)header.findViewById(R.id.textUsername)).setText(userProfile.getUsername());
+                ((TextView)header.findViewById(R.id.textWantlist)).setText(userProfile.getUsername());
                 ImageView imageView = (ImageView) header.findViewById(R.id.imageAvatar);
                 picasso.load(userProfile.getAvatar_url())
                         .placeholder(R.drawable.ic_account_circle_black_48px)

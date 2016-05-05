@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.wantlist;
+package work.beltran.discogsbrowser.ui.main.common;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
@@ -17,8 +17,8 @@ import javax.inject.Inject;
 import rx.Observer;
 import rx.Subscription;
 import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.model.record.Record;
+import work.beltran.discogsbrowser.api.network.RecordsSubject;
 import work.beltran.discogsbrowser.databinding.CardRecordBinding;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
 
@@ -26,9 +26,9 @@ import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
  * Created by Miquel Beltran on 23.04.16.
  * More on http://beltran.work
  */
-public class WantRecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final String TAG = WantRecordsAdapter.class.getCanonicalName();
-    private ApiFrontend apiFrontend;
+public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final String TAG = RecordsAdapter.class.getCanonicalName();
+    private RecordsSubject subject;
     private List<Record> recordList = new ArrayList<>();
     private Picasso picasso;
     private Subscription subscription;
@@ -37,9 +37,9 @@ public class WantRecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private boolean showProgressBar = true;
     private ErrorPresenter errorPresenter;
 
-    public WantRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
+    public RecordsAdapter(RecordsSubject subject, Picasso picasso) {
         this.picasso = picasso;
-        this.apiFrontend = apiFrontend;
+        this.subject = subject;
         subscribe();
     }
 
@@ -92,7 +92,7 @@ public class WantRecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     private void subscribe() {
-        subscription = apiFrontend.getCollectionRecords().subscribe(new Observer<Record>() {
+        subscription = subject.getSubject().subscribe(new Observer<Record>() {
             @Override
             public void onCompleted() {
                 Log.d(TAG, "onCompleted()");
@@ -120,7 +120,7 @@ public class WantRecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public void loadMore() {
         Log.d(TAG, "Load More Requested");
-        apiFrontend.loadMoreCollection();
+        subject.loadMoreData();
     }
 
 

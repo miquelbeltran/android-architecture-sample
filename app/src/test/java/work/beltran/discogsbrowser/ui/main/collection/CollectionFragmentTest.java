@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.collection;
+package work.beltran.discogsbrowser.ui.main.collection;
 
 import android.support.v7.widget.RecyclerView;
 
@@ -11,6 +11,7 @@ import org.robolectric.annotation.Config;
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.ui.TestApp;
+import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;

@@ -1,12 +1,13 @@
 package work.beltran.discogsbrowser.ui.di.modules;
 
-import work.beltran.discogsbrowser.api.ApiFrontend;
-import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
-import work.beltran.discogsbrowser.ui.collection.RecordsAdapter;
 import com.squareup.picasso.Picasso;
 
 import dagger.Module;
 import dagger.Provides;
+import work.beltran.discogsbrowser.api.ApiFrontend;
+import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
+import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapter;
 
 /**
  * Created by Miquel Beltran on 28.04.16.
@@ -15,7 +16,12 @@ import dagger.Provides;
 @Module(includes = {UserCollectionModule.class, PicassoModule.class})
 public class RecordsAdapterModule {
     @Provides
-    public RecordsAdapter providesRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
-        return new RecordsAdapter(apiFrontend, picasso);
+    public CollectionRecordsAdapter providesCollectionRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
+        return new CollectionRecordsAdapter(apiFrontend.getCollectionRecords(), picasso);
+    }
+
+    @Provides
+    public WantRecordsAdapter providesWantRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
+        return new WantRecordsAdapter(apiFrontend.getWantedRecords(), picasso);
     }
 }
