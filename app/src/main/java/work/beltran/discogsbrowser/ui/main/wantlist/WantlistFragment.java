@@ -55,7 +55,7 @@ public class WantlistFragment extends Fragment implements LoadMoreOnScrollListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((App) getActivity().getApplication()).getApiComponent().inject(this);
-        ((App) getActivity().getApplication()).getAppComponent().inject(adapter);
+        ((App) getActivity().getApplication()).getApiComponent().inject(adapter);
     }
 
     private void initRecyclerView(View view, LayoutInflater inflater) {

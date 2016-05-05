@@ -44,7 +44,7 @@ public class AveragePriceTest {
         addMarketResult("GBP","\u00a3160.00");
         addMarketResult("EUR","\u20ac175.00");
         addMarketResult("USD","$249.99");
-        Observable<MarketResult> result = Observable.from(marketResultList);
+        Observable<List<MarketResult>> result = Observable.just(marketResultList);
         when(service.getMarketResults(anyInt())).thenReturn(result);
         averagePrice = new AveragePrice(service, Schedulers.immediate(), Schedulers.immediate());
 

@@ -29,7 +29,7 @@ import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
 public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = RecordsAdapter.class.getCanonicalName();
     private RecordsSubject subject;
-    private List<Record> recordList = new ArrayList<>();
+    protected List<Record> recordList = new ArrayList<>();
     private Picasso picasso;
     private Subscription subscription;
     private final int VIEW_ITEM = 1;
@@ -67,7 +67,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    private void onBindViewHolder(RecordViewHolder holder, int position) {
+    protected void onBindViewHolder(RecordViewHolder holder, int position) {
         holder.getBinding().setRecord(recordList.get(position));
         picasso.load(recordList.get(position).getBasicInformation().getThumb())
                 .tag(this)

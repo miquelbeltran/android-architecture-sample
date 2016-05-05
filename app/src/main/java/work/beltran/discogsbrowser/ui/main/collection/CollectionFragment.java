@@ -58,7 +58,7 @@ public class CollectionFragment extends Fragment implements LoadMoreOnScrollList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((App) getActivity().getApplication()).getApiComponent().inject(this);
-        ((App) getActivity().getApplication()).getAppComponent().inject(adapter);
+        ((App) getActivity().getApplication()).getApiComponent().inject(adapter);
     }
 
     private void initRecyclerView(View view, LayoutInflater inflater) {

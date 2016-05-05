@@ -1,17 +1,20 @@
 package work.beltran.discogsbrowser.ui;
 
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.ApiFrontend;
+import work.beltran.discogsbrowser.api.di.modules.AveragePriceModule;
 import work.beltran.discogsbrowser.api.di.modules.DiscogsModule;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionMockModule;
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
-import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
 import work.beltran.discogsbrowser.ui.di.DaggerApiComponent;
 import work.beltran.discogsbrowser.ui.di.DaggerAppComponent;
 import work.beltran.discogsbrowser.ui.di.modules.ContextModule;
 import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterMockModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsMockModule;
+import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 import static org.mockito.Mockito.mock;
@@ -48,6 +51,7 @@ public class TestApp extends App {
                 .discogsModule(new DiscogsModule(BuildConfig.API_KEY))
                 .recordsAdapterModule(new RecordsAdapterMockModule(mockAdapter))
                 .userCollectionModule(new UserCollectionMockModule(mockApiFrontend))
+                .averagePriceModule(new AveragePriceModule(Schedulers.io(), AndroidSchedulers.mainThread()))
                 .build();
     }
 }

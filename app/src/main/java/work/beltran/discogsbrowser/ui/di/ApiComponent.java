@@ -3,9 +3,14 @@ package work.beltran.discogsbrowser.ui.di;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import work.beltran.discogsbrowser.api.ApiFrontend;
-import work.beltran.discogsbrowser.ui.main.collection.CollectionFragment;
+import work.beltran.discogsbrowser.api.di.modules.AveragePriceModule;
+import work.beltran.discogsbrowser.ui.di.modules.ErrorModule;
+import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterModule;
+import work.beltran.discogsbrowser.ui.di.modules.SettingsModule;
+import work.beltran.discogsbrowser.ui.main.collection.CollectionFragment;
+import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapter;
 import work.beltran.discogsbrowser.ui.main.wantlist.WantlistFragment;
 
 /**
@@ -13,9 +18,16 @@ import work.beltran.discogsbrowser.ui.main.wantlist.WantlistFragment;
  * More on http://beltran.work
  */
 @Singleton
-@Component(modules = {RecordsAdapterModule.class})
+@Component(modules = {
+        SettingsModule.class,
+        PicassoModule.class,
+        ErrorModule.class,
+        RecordsAdapterModule.class,
+        AveragePriceModule.class
+})
 public interface ApiComponent {
     void inject(CollectionFragment fragment);
     void inject(WantlistFragment fragment);
-    ApiFrontend userCollection();
+    void inject(RecordsAdapter adapter);
+    void inject(WantRecordsAdapter adapter);
 }

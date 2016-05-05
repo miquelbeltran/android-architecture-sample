@@ -1,5 +1,7 @@
 package work.beltran.discogsbrowser.api.network;
 
+import java.util.List;
+
 import rx.Observable;
 import rx.Scheduler;
 import rx.functions.Func1;
@@ -26,10 +28,16 @@ public class AveragePrice {
        return MathObservable.averageDouble(service.getMarketResults(record.getInstance_id())
                .subscribeOn(subscribeOnScheduler)
                .observeOn(observeOnScheduler)
+               .flatMap(new Func1<List<MarketResult>, Observable<MarketResult>>() {
+                   @Override
+                   public Observable<MarketResult> call(List<MarketResult> marketResults) {
+                       return Observable.from(marketResults);
+                   }
+               })
                .flatMap(new Func1<MarketResult, Observable<Double>>() {
                    @Override
                    public Observable<Double> call(MarketResult marketResult) {
-                       return Observable.just(3.50);
+                       return Observable.just(resultToDouble(marketResult));
                    }
                })
                .filter(new Func1<Double, Boolean>() {
@@ -38,5 +46,14 @@ public class AveragePrice {
                        return aDouble > 0;
                    }
                }));
+    }
+
+    private Double resultToDouble(MarketResult marketResult) {
+        double price = 3.50;
+
+        if (marketResult.getCurrency().equals("EUR")) {
+
+        }
+        return price;
     }
 }

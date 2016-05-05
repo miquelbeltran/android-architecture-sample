@@ -4,6 +4,7 @@ import android.app.Application;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import work.beltran.discogsbrowser.api.di.modules.AveragePriceModule;
 import work.beltran.discogsbrowser.api.di.modules.DiscogsModule;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
 import work.beltran.discogsbrowser.ui.di.ApiComponent;
@@ -35,7 +36,8 @@ public class App extends Application {
                 .builder()
                 .contextModule(new ContextModule(this))
                 .discogsModule(new DiscogsModule(apiKey))
-                .userCollectionModule(new UserCollectionModule(AndroidSchedulers.mainThread(), Schedulers.io()))
+                .userCollectionModule(new UserCollectionModule(Schedulers.io(), AndroidSchedulers.mainThread()))
+                .averagePriceModule(new AveragePriceModule(Schedulers.io(), AndroidSchedulers.mainThread()))
                 .build();
     }
 
