@@ -17,22 +17,16 @@ public class NavigationPresenter {
                 if (!wasSelected) {
                     view.showFragment(NavigationView.FragmentTag.Collection);
                 }
-                view.removeFragment(NavigationView.FragmentTag.Wantlist);
-                view.removeFragment(NavigationView.FragmentTag.Search);
                 break;
             case 1:
                 if (!wasSelected) {
                     view.showFragment(NavigationView.FragmentTag.Wantlist);
                 }
-                view.removeFragment(NavigationView.FragmentTag.Search);
-                view.removeFragment(NavigationView.FragmentTag.Collection);
                 break;
             case 2:
                 if (!wasSelected) {
                     view.showFragment(NavigationView.FragmentTag.Search);
                 }
-                view.removeFragment(NavigationView.FragmentTag.Wantlist);
-                view.removeFragment(NavigationView.FragmentTag.Collection);
                 break;
         }
     }

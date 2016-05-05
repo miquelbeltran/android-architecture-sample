@@ -69,7 +69,10 @@ public class MainActivity extends AppCompatActivity implements ErrorHandlingView
             }
         });
 
-        showFragment(FragmentTag.Collection);
+
+        if (savedInstanceState == null) {
+            showFragment(FragmentTag.Collection);
+        }
     }
 
     private void createFragments() {
@@ -84,22 +87,11 @@ public class MainActivity extends AppCompatActivity implements ErrorHandlingView
         showFragment(fragmentMap.get(tag), tag.name());
     }
 
-    @Override
-    public void removeFragment(FragmentTag tag) {
-        removeFragment(tag.name());
-    }
-
     private void showFragment(Fragment fragment, String tag) {
         android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_container, fragment, tag);
         //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-        ft.add(R.id.fragment_container, fragment, tag);
         ft.commit();
-    }
-
-    private void removeFragment(String tagToRemove) {
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(tagToRemove);
-        if (fragment != null)
-            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
     }
 
     @Override

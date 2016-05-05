@@ -12,5 +12,4 @@ public interface NavigationView {
     };
 
     void showFragment(FragmentTag tagCollection);
-    void removeFragment(FragmentTag collection);
 }
