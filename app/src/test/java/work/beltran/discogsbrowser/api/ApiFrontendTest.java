@@ -60,7 +60,7 @@ public class ApiFrontendTest {
         subscriber.assertNoErrors();
         subscriber.assertValueCount(1);
         Record record = subscriber.getOnNextEvents().get(0);
-        assertThat(record.getInstance_id()).matches("1234");
+        assertThat(record.getInstance_id()).isEqualTo(1234);
         assertThat(record.getBasicInformation().getThumb()).matches("thumb url");
     }
 

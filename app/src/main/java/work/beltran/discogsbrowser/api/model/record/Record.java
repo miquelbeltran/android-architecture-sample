@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Record {
     @SerializedName("id")
-    private String instance_id;
+    private int instance_id;
 
     @SerializedName("basic_information")
     private BasicInformation basicInformation;
@@ -20,11 +20,11 @@ public class Record {
         this.basicInformation = basicInformation;
     }
 
-    public String getInstance_id() {
+    public int getInstance_id() {
         return instance_id;
     }
 
-    public void setInstance_id(String instance_id) {
+    public void setInstance_id(int instance_id) {
         this.instance_id = instance_id;
     }
 }

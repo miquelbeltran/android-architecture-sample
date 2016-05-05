@@ -19,7 +19,7 @@ public class MockRecordCollection {
     public MockRecordCollection() {
         List<Record> records = new ArrayList<>();
         Record record = new Record();
-        record.setInstance_id("1234");
+        record.setInstance_id(1234);
 
         Pagination pagination = new Pagination();
         pagination.setPages(2);
