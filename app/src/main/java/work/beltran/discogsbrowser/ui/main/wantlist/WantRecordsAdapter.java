@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
+
 import javax.inject.Inject;
 
 import rx.Observer;
@@ -31,7 +33,7 @@ public class WantRecordsAdapter extends RecordsAdapter {
     @Override
     protected void onBindViewHolder(final RecordViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
-        averagePrice.getAveragePrice(recordList.get(position))
+        averagePrice.getAveragePrice(recordList.get(position), "EUR")
                 .subscribe(new Observer<Double>() {
                     @Override
                     public void onCompleted() {
@@ -46,7 +48,8 @@ public class WantRecordsAdapter extends RecordsAdapter {
 
                     @Override
                     public void onNext(Double aDouble) {
-                        holder.getBinding().textPrice.setText("$3.50");
+                        NumberFormat format = NumberFormat.getCurrencyInstance();
+                        holder.getBinding().textPrice.setText(format.format(aDouble));
                     }
                 });
     }

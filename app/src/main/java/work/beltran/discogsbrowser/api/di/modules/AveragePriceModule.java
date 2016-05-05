@@ -7,12 +7,14 @@ import dagger.Provides;
 import rx.Scheduler;
 import work.beltran.discogsbrowser.api.network.AveragePrice;
 import work.beltran.discogsbrowser.api.network.DiscogsService;
+import work.beltran.discogsbrowser.currency.FixerModule;
+import work.beltran.discogsbrowser.currency.FixerService;
 
 /**
  * Created by Miquel Beltran on 05.05.16.
  * More on http://beltran.work
  */
-@Module(includes = {DiscogsModule.class})
+@Module(includes = {DiscogsModule.class, FixerModule.class})
 public class AveragePriceModule {
     private Scheduler observeOnScheduler;
     private Scheduler subscribeOnScheduler;
@@ -24,7 +26,7 @@ public class AveragePriceModule {
 
     @Provides
     @Singleton
-    public AveragePrice providesAveragePrice(DiscogsService service) {
-        return new AveragePrice(service, subscribeOnScheduler, observeOnScheduler);
+    public AveragePrice providesAveragePrice(DiscogsService service, FixerService fixerService) {
+        return new AveragePrice(service, fixerService, subscribeOnScheduler, observeOnScheduler);
     }
 }
