@@ -23,12 +23,14 @@ public class ApiFrontend {
     private Observable<UserIdentity> userIdentityObservable;
     private WantRecordsSubject wantRecordsSubject;
     private CollectionRecordsSubject collectionRecordsSubject;
+    private Observable<UserProfile> userProfileObservable;
 
     public ApiFrontend(DiscogsService service, Scheduler observeOnScheduler, Scheduler subscribeOnScheduler) {
         this.service = service;
         this.subscribeOnScheduler = subscribeOnScheduler;
         this.observeOnScheduler = observeOnScheduler;
         buildUserIndentityRequest();
+        buildUserProfileRequest();
         wantRecordsSubject = new WantRecordsSubject(service,
                 userIdentityObservable,
                 subscribeOnScheduler,
@@ -37,6 +39,17 @@ public class ApiFrontend {
                 userIdentityObservable,
                 subscribeOnScheduler,
                 observeOnScheduler);
+    }
+
+    private void buildUserProfileRequest() {
+        userProfileObservable = userIdentityObservable.flatMap(new Func1<UserIdentity, Observable<UserProfile>>() {
+            @Override
+            public Observable<UserProfile> call(UserIdentity userIdentity) {
+                return service.getUserProfile(userIdentity.getUsername())
+                        .subscribeOn(subscribeOnScheduler)
+                        .observeOn(observeOnScheduler);
+            }
+        }).cache();
     }
 
     private void buildUserIndentityRequest() {
@@ -51,14 +64,7 @@ public class ApiFrontend {
     }
 
     public Observable<UserProfile> getUserProfile() {
-        return userIdentityObservable.flatMap(new Func1<UserIdentity, Observable<UserProfile>>() {
-            @Override
-            public Observable<UserProfile> call(UserIdentity userIdentity) {
-                return service.getUserProfile(userIdentity.getUsername())
-                        .subscribeOn(subscribeOnScheduler)
-                        .observeOn(observeOnScheduler);
-            }
-        });
+        return userProfileObservable;
     }
 
     public ReplaySubject<Record> getWantedRecords() {
