@@ -11,6 +11,11 @@ import android.preference.PreferenceManager;
 public class Settings {
     private static final String PREFS_NAME = "DiscogsPreferences";
     private static final String API_KEY = "ApiKey";
+    public static final String COLLECTION_PRICES = "collection_prices";
+    public static final String COLLECTION_PRICES_TYPE = "collection_prices_type";
+    public static final String WANTLIST_PRICES = "wantlist_prices";
+    public static final String WANTLIST_PRICES_TYPE = "wantlist_prices_type";
+    public static final String PRICE_TYPE_LOWEST = "0";
     private static Context context;
     private String apiKeyFromBuildConfig;
 

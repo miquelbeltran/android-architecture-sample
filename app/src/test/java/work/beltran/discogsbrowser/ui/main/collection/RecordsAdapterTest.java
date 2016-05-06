@@ -52,7 +52,7 @@ public class RecordsAdapterTest {
         MockitoAnnotations.initMocks(this);
         subject = ReplaySubject.create();
         when(recordsSubject.getSubject()).thenReturn(subject);
-        adapter = new RecordsAdapter(recordsSubject, picasso);
+        adapter = new CollectionRecordsAdapter(recordsSubject, picasso);
         adapter.setErrorPresenter(presenter);
     }
 

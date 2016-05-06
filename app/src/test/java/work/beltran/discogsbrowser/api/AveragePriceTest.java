@@ -20,6 +20,7 @@ import work.beltran.discogsbrowser.api.network.AveragePrice;
 import work.beltran.discogsbrowser.api.network.DiscogsService;
 import work.beltran.discogsbrowser.currency.FixerService;
 import work.beltran.discogsbrowser.currency.Rates;
+import work.beltran.discogsbrowser.ui.settings.Settings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyInt;
@@ -72,7 +73,7 @@ public class AveragePriceTest {
     @Test
     public void testAveragePrice() throws Exception {
         TestSubscriber<Double> subscriber = new TestSubscriber<>();
-        averagePrice.getAveragePrice(record, NumberFormat.getCurrencyInstance().getCurrency().getCurrencyCode(), 0).subscribe(subscriber);
+        averagePrice.getAveragePrice(record, NumberFormat.getCurrencyInstance().getCurrency().getCurrencyCode(), Settings.PRICE_TYPE_LOWEST).subscribe(subscriber);
         subscriber.assertNoErrors();
         Double price = subscriber.getOnNextEvents().get(0);
         assertThat(price).isEqualTo(85.0);

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,15 +19,17 @@ import rx.Observer;
 import rx.Subscription;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.model.record.Record;
+import work.beltran.discogsbrowser.api.network.AveragePrice;
 import work.beltran.discogsbrowser.api.network.RecordsSubject;
 import work.beltran.discogsbrowser.databinding.CardRecordBinding;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
+import work.beltran.discogsbrowser.ui.settings.Settings;
 
 /**
  * Created by Miquel Beltran on 23.04.16.
  * More on http://beltran.work
  */
-public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = RecordsAdapter.class.getCanonicalName();
     private RecordsSubject subject;
     protected List<Record> recordList = new ArrayList<>();
@@ -35,6 +38,8 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
     private ErrorPresenter errorPresenter;
+    private AveragePrice averagePrice;
+    private Settings settings;
 
     public RecordsAdapter(RecordsSubject subject, Picasso picasso) {
         this.picasso = picasso;
@@ -67,7 +72,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    protected void onBindViewHolder(RecordViewHolder holder, int position) {
+    protected void onBindViewHolder(final RecordViewHolder holder, int position) {
         holder.getBinding().setRecord(recordList.get(position));
         picasso.load(recordList.get(position).getBasicInformation().getThumb())
                 .tag(this)
@@ -75,7 +80,36 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 .fit()
                 .centerCrop()
                 .into(holder.getBinding().recordThumb);
+        boolean showPrices = settings.getSharedPreferences().getBoolean(getPreferencePrices(), getPreferencePricesDefault());
+        if (showPrices) {
+            String type = settings.getSharedPreferences().getString(getPreferencePricesType(), "0");
+            averagePrice.getAveragePrice(recordList.get(position), "EUR", type)
+                    .subscribe(new Observer<Double>() {
+                        @Override
+                        public void onCompleted() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.d(TAG, "onError: " + e.getMessage());
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onNext(Double aDouble) {
+                            NumberFormat format = NumberFormat.getCurrencyInstance();
+                            holder.getBinding().textPrice.setText(format.format(aDouble));
+                        }
+                    });
+        }
     }
+
+    protected abstract boolean getPreferencePricesDefault();
+
+    protected abstract String getPreferencePricesType();
+
+    protected abstract String getPreferencePrices();
 
     @Override
     public int getItemViewType(int position) {
@@ -124,6 +158,15 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         subject.loadMoreData();
     }
 
+    @Inject
+    public void setAveragePrice(AveragePrice averagePrice) {
+        this.averagePrice = averagePrice;
+    }
+
+    @Inject
+    public void setSettings(Settings settings) {
+        this.settings = settings;
+    }
 
     public class RecordViewHolder extends RecyclerView.ViewHolder {
         private CardRecordBinding binding;
