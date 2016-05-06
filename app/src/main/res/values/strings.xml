@@ -18,4 +18,12 @@
     <string name="user_wantlist">%s\'s Wantlist</string>
     <string name="in_wantlist">%s in Wantlist</string>
     <string name="loading_wantlist">Loading Wantlist</string>
+    <string-array name="price_type">
+        <item>lowest</item>
+        <item>average</item>
+    </string-array>
+    <string-array name="price_value">
+        <item>"0"</item>
+        <item>"1"</item>
+    </string-array>
 </resources>
