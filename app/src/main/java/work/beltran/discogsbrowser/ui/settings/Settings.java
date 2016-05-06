@@ -2,6 +2,7 @@ package work.beltran.discogsbrowser.ui.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 /**
  * Created by Miquel Beltran on 02.05.16.
@@ -30,5 +31,9 @@ public class Settings {
         }
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         return settings.getString(API_KEY, "");
+    }
+
+    public SharedPreferences getSharedPreferences() {
+        return PreferenceManager.getDefaultSharedPreferences(context);
     }
 }

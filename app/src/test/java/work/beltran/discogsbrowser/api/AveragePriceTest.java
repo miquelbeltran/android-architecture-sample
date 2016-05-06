@@ -72,7 +72,7 @@ public class AveragePriceTest {
     @Test
     public void testAveragePrice() throws Exception {
         TestSubscriber<Double> subscriber = new TestSubscriber<>();
-        averagePrice.getAveragePrice(record, NumberFormat.getCurrencyInstance().getCurrency().getCurrencyCode()).subscribe(subscriber);
+        averagePrice.getAveragePrice(record, NumberFormat.getCurrencyInstance().getCurrency().getCurrencyCode(), 0).subscribe(subscriber);
         subscriber.assertNoErrors();
         Double price = subscriber.getOnNextEvents().get(0);
         assertThat(price).isEqualTo(85.0);

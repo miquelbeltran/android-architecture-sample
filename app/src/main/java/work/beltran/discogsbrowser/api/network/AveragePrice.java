@@ -40,10 +40,11 @@ public class AveragePrice {
      *
      * @param record
      * @param currency
+     * @param type
      * @return
      */
-    public Observable<Double> getAveragePrice(Record record, final String currency) {
-       return MathObservable.averageDouble(service.getMarketResults(record.getInstance_id())
+    public Observable<Double> getAveragePrice(Record record, final String currency, String type) {
+        Observable<MarketResult> marketResultObservable = service.getMarketResults(record.getInstance_id())
                .subscribeOn(subscribeOnScheduler)
                .observeOn(observeOnScheduler)
                .flatMap(new Func1<List<MarketResult>, Observable<MarketResult>>() {
@@ -52,8 +53,14 @@ public class AveragePrice {
                        Log.d(TAG, "Market Results: " + marketResults.size());
                        return Observable.from(marketResults);
                    }
-               })
-               .first() // Only show the first price, not the average of all.
+               });
+
+        if (type.equals("0")) {
+            marketResultObservable = marketResultObservable.first();
+        }
+
+       return MathObservable.averageDouble(
+               marketResultObservable
                .flatMap(new Func1<MarketResult, Observable<Double>>() {
                    @Override
                    public Observable<Double> call(final MarketResult marketResult) {
