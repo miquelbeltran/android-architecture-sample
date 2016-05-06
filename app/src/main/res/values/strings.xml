@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DiscogsBrowser</string>
+    <string name="app_name">My Vinyl</string>
     <string name="background">background</string>
     <string name="authenticate_using_a_personal_access_token">Authenticate using a personal access token</string>
     <string name="generating_a_user_token_is_as_easy_as_clicking_the_generate_token_button_on_the_developer_settings_keep_this_token_private">Generating a user token is as easy as clicking the Generate token button on the developer settings. Keep this token private.</string>
