@@ -3,6 +3,8 @@ package work.beltran.discogsbrowser.api.network;
 import android.util.Log;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import rx.Observable;
 import rx.Scheduler;
@@ -72,7 +74,9 @@ public class AveragePrice {
                            @Override
                            public Observable<Double> call(Rates rates) {
                                String sPrice = marketResult.getPrice();
-                               double price = Double.valueOf(sPrice.substring(1));
+                               Matcher matcher = Pattern.compile("\\d+\\.\\d+").matcher(sPrice);
+                               matcher.find();
+                               double price = Double.valueOf(matcher.group());
                                if (rates.rates != null) {
                                    if (rates.rates.containsKey(marketResult.getCurrency())) {
                                        price /= rates.rates.get(marketResult.getCurrency());

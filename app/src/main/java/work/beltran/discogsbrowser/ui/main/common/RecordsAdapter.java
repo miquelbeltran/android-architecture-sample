@@ -83,7 +83,7 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
         boolean showPrices = settings.getSharedPreferences().getBoolean(getPreferencePrices(), getPreferencePricesDefault());
         if (showPrices) {
             String type = settings.getSharedPreferences().getString(getPreferencePricesType(), "0");
-            averagePrice.getAveragePrice(recordList.get(position), "EUR", type)
+            Subscription subscription = averagePrice.getAveragePrice(recordList.get(position), "EUR", type)
                     .subscribe(new Observer<Double>() {
                         @Override
                         public void onCompleted() {
@@ -102,6 +102,23 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
                             holder.getBinding().textPrice.setText(format.format(aDouble));
                         }
                     });
+            holder.setPriceSubscription(subscription);
+        }
+    }
+
+    @Override
+    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        super.onViewRecycled(holder);
+        if (holder instanceof RecordViewHolder) {
+            onViewRecycled((RecordViewHolder) holder);
+        }
+    }
+
+    private void onViewRecycled(RecordViewHolder holder) {
+        holder.getBinding().textPrice.setText("");
+        Subscription subscription = holder.getPriceSubscription();
+        if (subscription != null) {
+            subscription.unsubscribe();
         }
     }
 
@@ -170,6 +187,7 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public class RecordViewHolder extends RecyclerView.ViewHolder {
         private CardRecordBinding binding;
+        private Subscription priceSubscription;
 
         public RecordViewHolder(CardRecordBinding binding) {
             super(binding.getRoot());
@@ -178,6 +196,14 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         public CardRecordBinding getBinding() {
             return binding;
+        }
+
+        public void setPriceSubscription(Subscription priceSubscription) {
+            this.priceSubscription = priceSubscription;
+        }
+
+        public Subscription getPriceSubscription() {
+            return priceSubscription;
         }
     }
 
