@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/miquelbeltran/android-discogsbrowser.svg?branch=master)](https://travis-ci.org/miquelbeltran/android-discogsbrowser)
 [![codecov](https://codecov.io/gh/miquelbeltran/android-discogsbrowser/branch/master/graph/badge.svg)](https://codecov.io/gh/miquelbeltran/android-discogsbrowser)
 
-[![logo](https://raw.githubusercontent.com/miquelbeltran/android-discogsbrowser/master/art/icon2.png)]
+![logo](https://raw.githubusercontent.com/miquelbeltran/android-discogsbrowser/master/art/icon2.png)
 
 Source code of the Android app, using Retrofit, RxJava, Dagger and more
 
