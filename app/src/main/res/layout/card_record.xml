@@ -97,10 +97,10 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/textPrice"
                 android:layout_alignBaseline="@+id/record_format"
-                android:layout_toRightOf="@+id/record_year"
-                android:layout_toLeftOf="@+id/record_format"
+                android:layout_toRightOf="@+id/record_thumb"
                 android:gravity="center"
-                android:textColor="@color/colorAccent" />
+                android:textColor="@color/colorAccent"
+                android:layout_alignParentRight="true" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </layout>
