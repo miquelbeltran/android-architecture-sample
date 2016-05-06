@@ -10,6 +10,8 @@ import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsModule;
 import work.beltran.discogsbrowser.ui.main.collection.CollectionFragment;
 import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.search.SearchFragment;
+import work.beltran.discogsbrowser.ui.main.search.SearchRecordsAdapter;
 import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapter;
 import work.beltran.discogsbrowser.ui.main.wantlist.WantlistFragment;
 
@@ -28,6 +30,8 @@ import work.beltran.discogsbrowser.ui.main.wantlist.WantlistFragment;
 public interface ApiComponent {
     void inject(CollectionFragment fragment);
     void inject(WantlistFragment fragment);
+    void inject(SearchFragment fragment);
     void inject(CollectionRecordsAdapter adapter);
     void inject(WantRecordsAdapter adapter);
+    void inject(SearchRecordsAdapter adapter);
 }

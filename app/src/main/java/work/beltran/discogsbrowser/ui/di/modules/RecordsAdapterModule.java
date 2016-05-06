@@ -7,6 +7,7 @@ import dagger.Provides;
 import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
 import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.search.SearchRecordsAdapter;
 import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapter;
 
 /**
@@ -18,6 +19,11 @@ public class RecordsAdapterModule {
     @Provides
     public CollectionRecordsAdapter providesCollectionRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
         return new CollectionRecordsAdapter(apiFrontend.getCollectionRecords(), picasso);
+    }
+
+    @Provides
+    public SearchRecordsAdapter providesSearchRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
+        return new SearchRecordsAdapter(apiFrontend.getWantedRecords(), picasso);
     }
 
     @Provides

@@ -17,6 +17,7 @@ import com.eyeem.recyclerviewtools.extras.PicassoOnScrollListener;
 import javax.inject.Inject;
 
 import work.beltran.discogsbrowser.R;
+import work.beltran.discogsbrowser.ui.App;
 import work.beltran.discogsbrowser.ui.settings.SettingsActivity;
 
 /**
@@ -35,6 +36,8 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((App) getActivity().getApplication()).getApiComponent().inject(this);
+        ((App) getActivity().getApplication()).getApiComponent().inject(adapter);
     }
 
     private void initRecyclerView(View view, LayoutInflater inflater) {
@@ -50,7 +53,7 @@ public class SearchFragment extends Fragment {
     }
 
     private void initHeaderFooter(LayoutInflater inflater, RecyclerView recyclerView, WrapAdapter wrapAdapter) {
-        final View header = inflater.inflate(R.layout.header, recyclerView, false);
+        final View header = inflater.inflate(R.layout.header_search, recyclerView, false);
         wrapAdapter.addHeader(header);
 
         Toolbar toolbar = (Toolbar)header.findViewById(R.id.toolbar);
