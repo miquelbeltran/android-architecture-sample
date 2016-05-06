@@ -1,11 +1,20 @@
-# android-discogsbrowser
+# My Vinyl Discogs Browser for Android
 
 [![Build Status](https://travis-ci.org/miquelbeltran/android-discogsbrowser.svg?branch=master)](https://travis-ci.org/miquelbeltran/android-discogsbrowser)
 [![codecov](https://codecov.io/gh/miquelbeltran/android-discogsbrowser/branch/master/graph/badge.svg)](https://codecov.io/gh/miquelbeltran/android-discogsbrowser)
 
-Sample app using Retrofit, RxJava, Dagger and more
+[![logo](https://raw.githubusercontent.com/miquelbeltran/android-discogsbrowser/master/art/icon2.png)]
 
-## Features
+Source code of the Android app, using Retrofit, RxJava, Dagger and more
+
+## App Features
+
+- Browse your Discogs collection.
+- Check your wishlist (wantlist).
+- Search the database.
+- Get market prices.
+
+## Code Features
 
 - Clean app architecture: UI and API separated.
 - Use of RecyclerView.
@@ -13,5 +22,6 @@ Sample app using Retrofit, RxJava, Dagger and more
 - Retrofit + GSON + RxJava.
 - Picasso for image loading.
 - Robolectric + Mockito for Unit Testing. 
+- Beatiful material design.
 
 Public Trello board: https://trello.com/b/cpMFH9K8
