@@ -83,7 +83,9 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
         boolean showPrices = settings.getSharedPreferences().getBoolean(getPreferencePrices(), getPreferencePricesDefault());
         if (showPrices) {
             String type = settings.getSharedPreferences().getString(getPreferencePricesType(), "0");
-            Subscription subscription = averagePrice.getAveragePrice(recordList.get(position), "EUR", type)
+            Subscription subscription = averagePrice.getAveragePrice(recordList.get(position),
+                    NumberFormat.getCurrencyInstance().getCurrency().getCurrencyCode(),
+                    type)
                     .subscribe(new Observer<Double>() {
                         @Override
                         public void onCompleted() {
