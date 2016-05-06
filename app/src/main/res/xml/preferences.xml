@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Collection">
+
+        <CheckBoxPreference
+            android:key="checkbox_preference"
+            android:title="Show prices"
+            android:summary="Display the market prices for the records in the collection list." />
+
+    </PreferenceCategory>
+</PreferenceScreen>

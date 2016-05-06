@@ -1,11 +1,13 @@
 package work.beltran.discogsbrowser.ui.main.collection;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,6 +27,7 @@ import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.ui.App;
 import work.beltran.discogsbrowser.ui.main.common.CircleTransform;
 import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
+import work.beltran.discogsbrowser.ui.settings.SettingsActivity;
 
 public class CollectionFragment extends Fragment implements LoadMoreOnScrollListener.Listener {
     private CollectionRecordsAdapter adapter;
@@ -107,6 +110,18 @@ public class CollectionFragment extends Fragment implements LoadMoreOnScrollList
 
         Toolbar toolbar = (Toolbar)header.findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.toolbar_menu);
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.action_settings) {
+                    Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         View footer = inflater.inflate(R.layout.footer, recyclerView, false);
         wrapAdapter.addFooter(footer);
