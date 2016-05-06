@@ -11,5 +11,5 @@ public interface NavigationView {
         Search
     };
 
-    void showFragment(FragmentTag tagCollection);
+    void showFragment(FragmentTag tagCollection, boolean toRight);
 }

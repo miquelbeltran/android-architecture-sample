@@ -17,10 +17,11 @@ import javax.inject.Inject;
 
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.ui.App;
-import work.beltran.discogsbrowser.ui.main.collection.CollectionFragment;
 import work.beltran.discogsbrowser.ui.errors.ErrorHandlingView;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
+import work.beltran.discogsbrowser.ui.main.collection.CollectionFragment;
+import work.beltran.discogsbrowser.ui.main.search.SearchFragment;
 import work.beltran.discogsbrowser.ui.main.wantlist.WantlistFragment;
 
 public class MainActivity extends AppCompatActivity implements ErrorHandlingView, NavigationView {
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements ErrorHandlingView
 
 
         if (savedInstanceState == null) {
-            showFragment(FragmentTag.Collection);
+            showFragment(FragmentTag.Collection, true);
         }
     }
 
@@ -79,18 +80,18 @@ public class MainActivity extends AppCompatActivity implements ErrorHandlingView
         fragmentMap = new HashMap<>();
         fragmentMap.put(FragmentTag.Collection, CollectionFragment.newInstance());
         fragmentMap.put(FragmentTag.Wantlist, WantlistFragment.newInstance());
-//        fragmentMap.put(FragmentTag.Search, SearchFragment.newInstance());
+        fragmentMap.put(FragmentTag.Search, new SearchFragment());
     }
 
     @Override
-    public void showFragment(FragmentTag tag) {
-        showFragment(fragmentMap.get(tag), tag.name());
-    }
-
-    private void showFragment(Fragment fragment, String tag) {
+    public void showFragment(FragmentTag tag, boolean toRight) {
+        Fragment fragment = fragmentMap.get(tag);
         android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment_container, fragment, tag);
-        //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+        if (toRight)
+            ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+        else
+            ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+        ft.replace(R.id.fragment_container, fragment, tag.name());
         ft.commit();
     }
 
