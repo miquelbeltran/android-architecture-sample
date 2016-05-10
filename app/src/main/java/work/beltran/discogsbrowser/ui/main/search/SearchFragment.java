@@ -18,6 +18,7 @@ import javax.inject.Inject;
 
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.ui.App;
+import work.beltran.discogsbrowser.ui.main.CustomToolbar;
 import work.beltran.discogsbrowser.ui.settings.SettingsActivity;
 
 /**
@@ -70,7 +71,7 @@ public class SearchFragment extends Fragment {
                 return false;
             }
         });
-
+        CustomToolbar.setToolbar(this, header);
         View footer = inflater.inflate(R.layout.footer, recyclerView, false);
         wrapAdapter.addFooter(footer);
     }

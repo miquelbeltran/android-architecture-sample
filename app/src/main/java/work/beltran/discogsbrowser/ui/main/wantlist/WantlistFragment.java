@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,7 @@ import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.ui.App;
+import work.beltran.discogsbrowser.ui.main.CustomToolbar;
 
 public class WantlistFragment extends Fragment implements LoadMoreOnScrollListener.Listener {
     private WantRecordsAdapter adapter;
@@ -95,10 +95,7 @@ public class WantlistFragment extends Fragment implements LoadMoreOnScrollListen
 
             }
         });
-
-        Toolbar toolbar = (Toolbar)header.findViewById(R.id.toolbar);
-        toolbar.inflateMenu(R.menu.toolbar_menu);
-
+        CustomToolbar.setToolbar(this, header);
         View footer = inflater.inflate(R.layout.footer, recyclerView, false);
         wrapAdapter.addFooter(footer);
     }
