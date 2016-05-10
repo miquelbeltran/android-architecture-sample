@@ -25,9 +25,11 @@
             android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".ui.settings.SettingsActivity"
-            android:theme="@style/AppTheme"
-            />
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.about.AboutActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

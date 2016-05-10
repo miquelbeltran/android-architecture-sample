@@ -25,6 +25,7 @@ import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.ui.App;
+import work.beltran.discogsbrowser.ui.about.AboutActivity;
 import work.beltran.discogsbrowser.ui.main.common.CircleTransform;
 import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
 import work.beltran.discogsbrowser.ui.settings.SettingsActivity;
@@ -116,6 +117,11 @@ public class CollectionFragment extends Fragment implements LoadMoreOnScrollList
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.action_settings) {
                     Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                if (item.getItemId() == R.id.action_about) {
+                    Intent intent = new Intent(getActivity(), AboutActivity.class);
                     startActivity(intent);
                     return true;
                 }

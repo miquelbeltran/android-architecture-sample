@@ -18,6 +18,11 @@
     <string name="user_wantlist">%s\'s Wantlist</string>
     <string name="in_wantlist">%s in Wantlist</string>
     <string name="loading_wantlist">Loading Wantlist</string>
+    <string name="thanks_for_downloading_my_app">Thanks for downloading my App!</string>
+    <string name="thank_you_letter">Thank you for downloading my application,
+        I hope you are enjoying it, if you have any suggestions I would love to hear them.
+        You can contact me on this email address or my website.\n~ Miquel Beltran</string>
+    <string name="open_source_libraries">Open Source Libraries</string>
     <string-array name="price_type">
         <item>lowest</item>
         <item>average</item>
