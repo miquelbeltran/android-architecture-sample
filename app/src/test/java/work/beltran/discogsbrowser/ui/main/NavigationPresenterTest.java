@@ -29,7 +29,7 @@ public class NavigationPresenterTest {
     @Test
     public void testSelectCollection() throws Exception {
         presenter.tabItem(0, false);
-        verify(view).showFragment(NavigationView.FragmentTag.Collection, true);
+        verify(view).showFragment(NavigationView.FragmentTag.Collection, false);
     }
 
     @Test
