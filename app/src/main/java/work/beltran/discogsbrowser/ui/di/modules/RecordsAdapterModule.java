@@ -23,7 +23,7 @@ public class RecordsAdapterModule {
 
     @Provides
     public SearchRecordsAdapter providesSearchRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
-        return new SearchRecordsAdapter(apiFrontend.getWantedRecords(), picasso);
+        return new SearchRecordsAdapter(apiFrontend.getSearchSubject(), picasso);
     }
 
     @Provides

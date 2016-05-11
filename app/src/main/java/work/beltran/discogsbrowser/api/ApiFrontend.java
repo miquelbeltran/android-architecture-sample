@@ -7,6 +7,7 @@ import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.network.CollectionRecordsSubject;
 import work.beltran.discogsbrowser.api.network.DiscogsService;
+import work.beltran.discogsbrowser.api.network.SearchSubject;
 import work.beltran.discogsbrowser.api.network.WantRecordsSubject;
 
 /**
@@ -79,5 +80,9 @@ public class ApiFrontend {
 
     public void loadMoreWanted() {
         wantRecordsSubject.loadMoreData();
+    }
+
+    public SearchSubject getSearchSubject() {
+        return new SearchSubject(service, userIdentityObservable, subscribeOnScheduler, observeOnScheduler);
     }
 }

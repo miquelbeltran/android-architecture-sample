@@ -2,7 +2,7 @@ package work.beltran.discogsbrowser.ui.main.search;
 
 import com.squareup.picasso.Picasso;
 
-import work.beltran.discogsbrowser.api.network.RecordsSubject;
+import work.beltran.discogsbrowser.api.network.SearchSubject;
 import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
@@ -11,8 +11,9 @@ import work.beltran.discogsbrowser.ui.settings.Settings;
  * More on http://beltran.work
  */
 public class SearchRecordsAdapter extends RecordsAdapter {
-    public SearchRecordsAdapter(RecordsSubject subject, Picasso picasso) {
+    public SearchRecordsAdapter(SearchSubject subject, Picasso picasso) {
         super(subject, picasso);
+        subscription.unsubscribe();
     }
 
     @Override
@@ -28,5 +29,17 @@ public class SearchRecordsAdapter extends RecordsAdapter {
     @Override
     protected String getPreferencePrices() {
         return Settings.COLLECTION_PRICES;
+    }
+
+    public void search(String query) {
+        // remove all content
+        recordList.clear();
+        notifyDataSetChanged();
+        // recreate subscription
+        subscription.unsubscribe();
+        subscribe();
+        // show progressbar
+        notifyDataSetChanged();
+        ((SearchSubject) subject).search(query);
     }
 }

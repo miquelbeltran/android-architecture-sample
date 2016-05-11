@@ -31,10 +31,10 @@ import work.beltran.discogsbrowser.ui.settings.Settings;
  */
 public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = RecordsAdapter.class.getCanonicalName();
-    private RecordsSubject subject;
+    protected RecordsSubject subject;
     protected List<Record> recordList = new ArrayList<>();
     private Picasso picasso;
-    private Subscription subscription;
+    protected Subscription subscription;
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
     private ErrorPresenter errorPresenter;
@@ -74,12 +74,14 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     protected void onBindViewHolder(final RecordViewHolder holder, int position) {
         holder.getBinding().setRecord(recordList.get(position));
-        picasso.load(recordList.get(position).getBasicInformation().getThumb())
-                .tag(this)
-                .placeholder(R.drawable.music_record)
-                .fit()
-                .centerCrop()
-                .into(holder.getBinding().recordThumb);
+        if (!recordList.get(position).getBasicInformation().getThumb().isEmpty()) {
+            picasso.load(recordList.get(position).getBasicInformation().getThumb())
+                    .tag(this)
+                    .placeholder(R.drawable.music_record)
+                    .fit()
+                    .centerCrop()
+                    .into(holder.getBinding().recordThumb);
+        }
         boolean showPrices = settings.getSharedPreferences().getBoolean(getPreferencePrices(), getPreferencePricesDefault());
         if (showPrices) {
             String type = settings.getSharedPreferences().getString(getPreferencePricesType(), "0");
@@ -132,18 +134,22 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemViewType(int position) {
-        if (!subject.getSubject().hasCompleted() && position == recordList.size())
+        if (showProgressbar() && position == recordList.size())
             return VIEW_PROG;
         else
             return VIEW_ITEM;
     }
 
-    @Override
-    public int getItemCount() {
-        return recordList.size() + (!subject.getSubject().hasCompleted() ? 1 : 0);
+    private boolean showProgressbar() {
+        return !subscription.isUnsubscribed() && !subject.getSubject().hasCompleted();
     }
 
-    private void subscribe() {
+    @Override
+    public int getItemCount() {
+        return recordList.size() + (showProgressbar() ? 1 : 0);
+    }
+
+    protected void subscribe() {
         subscription = subject
                 .getSubject()
                 .subscribe(new Observer<Record>() {

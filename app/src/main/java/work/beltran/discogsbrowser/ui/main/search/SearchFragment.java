@@ -1,15 +1,13 @@
 package work.beltran.discogsbrowser.ui.main.search;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.eyeem.recyclerviewtools.adapter.WrapAdapter;
 import com.eyeem.recyclerviewtools.extras.PicassoOnScrollListener;
@@ -19,7 +17,6 @@ import javax.inject.Inject;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.ui.App;
 import work.beltran.discogsbrowser.ui.main.CustomToolbar;
-import work.beltran.discogsbrowser.ui.settings.SettingsActivity;
 
 /**
  * Created by Miquel Beltran on 06.05.16.
@@ -56,18 +53,16 @@ public class SearchFragment extends Fragment {
     private void initHeaderFooter(LayoutInflater inflater, RecyclerView recyclerView, WrapAdapter wrapAdapter) {
         final View header = inflater.inflate(R.layout.header_search, recyclerView, false);
         wrapAdapter.addHeader(header);
-
-        Toolbar toolbar = (Toolbar)header.findViewById(R.id.toolbar);
-        toolbar.inflateMenu(R.menu.toolbar_menu);
-
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+        SearchView searchView = (SearchView) header.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.action_settings) {
-                    Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
+            public boolean onQueryTextSubmit(String query) {
+                adapter.search(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
                 return false;
             }
         });

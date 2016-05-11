@@ -7,9 +7,9 @@ import rx.Observer;
 import rx.Scheduler;
 import rx.functions.Func1;
 import rx.subjects.ReplaySubject;
-import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.api.model.RecordsWithPagination;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
+import work.beltran.discogsbrowser.api.model.record.Record;
 
 /**
  * Created by Miquel Beltran on 04.05.16.
@@ -17,12 +17,12 @@ import work.beltran.discogsbrowser.api.model.UserIdentity;
  */
 public abstract class RecordsSubject<T extends RecordsWithPagination> {
     private Scheduler observeOnScheduler;
-    private Scheduler subscribeOnScheduler;
-    private ReplaySubject<Record> subject;
+    protected Scheduler subscribeOnScheduler;
+    protected ReplaySubject<Record> subject;
     protected DiscogsService service;
     private Observable<UserIdentity> userIdentityObservable;
-    private int nextPage;
-    private int totalPages;
+    protected int nextPage;
+    protected int totalPages;
     private List<Boolean> completedPages;
 
     protected RecordsSubject(DiscogsService service,
@@ -48,7 +48,7 @@ public abstract class RecordsSubject<T extends RecordsWithPagination> {
         }
     }
 
-    private void getRecordsFromService(final int nextPage) {
+    protected void getRecordsFromService(final int nextPage) {
         userIdentityObservable
                 .flatMap(new Func1<UserIdentity, Observable<T>>() {
                     @Override
