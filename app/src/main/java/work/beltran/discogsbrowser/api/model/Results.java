@@ -1,11 +1,14 @@
 package work.beltran.discogsbrowser.api.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
 import rx.functions.Func1;
 import work.beltran.discogsbrowser.api.model.pagination.Pagination;
+import work.beltran.discogsbrowser.api.model.record.Artist;
 import work.beltran.discogsbrowser.api.model.record.BasicInformation;
+import work.beltran.discogsbrowser.api.model.record.Format;
 import work.beltran.discogsbrowser.api.model.record.Record;
 
 /**
@@ -28,7 +31,30 @@ public class Results implements RecordsWithPagination {
                 Record record = new Record();
                 record.setInstance_id(result.getId());
                 BasicInformation basicInformation = new BasicInformation();
-                basicInformation.setTitle(result.title);
+                String artist = result.title;
+                String title = "";
+
+                int index = result.title.indexOf(" - ");
+                if (index > 0) {
+                    title = result.title.substring(index + 3);
+                    artist = result.title.substring(0, index);
+                }
+
+                Artist artistObject = new Artist();
+                artistObject.setName(artist);
+                List<Artist> artists = new ArrayList<>();
+                artists.add(artistObject);
+                basicInformation.setArtists(artists);
+
+                List<Format> formats = new ArrayList<Format>();
+                for(String formatString : result.format) {
+                    Format format = new Format();
+                    format.setName(formatString);
+                    formats.add(format);
+                }
+                basicInformation.setFormats(formats);
+
+                basicInformation.setTitle(title);
                 basicInformation.setThumb(result.thumb);
                 record.setBasicInformation(basicInformation);
                 return Observable.just(record);

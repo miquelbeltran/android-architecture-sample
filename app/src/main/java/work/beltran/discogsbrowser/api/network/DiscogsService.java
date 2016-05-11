@@ -33,5 +33,8 @@ public interface DiscogsService {
     rx.Observable<List<MarketResult>> getMarketResults(@Query("release_id") int releaseId);
 
     @GET("database/search")
-    rx.Observable<Results> search(@Query("q") String query);
+    rx.Observable<Results> search(@Query("q") String query,
+                                  @Query("type") String type,
+                                  @Query("format") String format,
+                                  @Query("barcode") String barcode);
 }

@@ -32,7 +32,7 @@ public class SearchSubject {
                 .flatMap(new Func1<UserIdentity, Observable<Results>>() {
                     @Override
                     public Observable<Results> call(UserIdentity userIdentity) {
-                        return service.search(query).subscribeOn(subscribeOnScheduler);
+                        return service.search(query, "release", null, null).subscribeOn(subscribeOnScheduler);
                     }
                 })
                 .observeOn(observeOnScheduler)
