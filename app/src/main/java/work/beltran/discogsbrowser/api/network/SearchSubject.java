@@ -3,38 +3,43 @@ package work.beltran.discogsbrowser.api.network;
 import rx.Observable;
 import rx.Scheduler;
 import rx.functions.Func1;
-import rx.subjects.BehaviorSubject;
 import work.beltran.discogsbrowser.api.model.Results;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
+import work.beltran.discogsbrowser.api.model.record.Record;
 
 /**
  * Created by Miquel Beltran on 10.05.16.
  * More on http://beltran.work
  */
-public class SearchSubject extends RecordsSubject<Results> {
-    private BehaviorSubject<String> searchQueries;
+public class SearchSubject {
+    private final DiscogsService service;
+    private final Scheduler subscribeOnScheduler;
+    private final Scheduler observeOnScheduler;
+    private final Observable<UserIdentity> userIdentityObservable;
 
     public SearchSubject(DiscogsService service,
                          Observable<UserIdentity> userIdentityObservable,
                          Scheduler subscribeOnScheduler,
                          Scheduler observeOnScheduler) {
-        super(service, userIdentityObservable, subscribeOnScheduler, observeOnScheduler);
-        searchQueries = BehaviorSubject.create();
+        this.service = service;
+        this.subscribeOnScheduler = subscribeOnScheduler;
+        this.observeOnScheduler = observeOnScheduler;
+        this.userIdentityObservable = userIdentityObservable;
     }
 
-    public void search(String query) {
-        loadMoreData();
-        searchQueries.onNext(query);
-    }
-
-    @Override
-    protected Observable<Results> serviceCallToGetRecords(UserIdentity userIdentity, int nextPage) {
-        return searchQueries
-                .asObservable()
-                .flatMap(new Func1<String, Observable<Results>>() {
+    public Observable<Record> search(final String query, final int nextPage) {
+        return userIdentityObservable
+                .flatMap(new Func1<UserIdentity, Observable<Results>>() {
                     @Override
-                    public Observable<Results> call(String s) {
-                        return service.search(s).subscribeOn(subscribeOnScheduler);
+                    public Observable<Results> call(UserIdentity userIdentity) {
+                        return service.search(query).subscribeOn(subscribeOnScheduler);
+                    }
+                })
+                .observeOn(observeOnScheduler)
+                .flatMap(new Func1<Results, Observable<Record>>() {
+                    @Override
+                    public Observable<Record> call(Results results) {
+                        return Observable.from(results.getRecords());
                     }
                 });
     }
