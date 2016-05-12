@@ -1,7 +1,5 @@
 package work.beltran.discogsbrowser.ui.main.wantlist;
 
-import com.squareup.picasso.Picasso;
-
 import work.beltran.discogsbrowser.api.network.RecordsApi;
 import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
@@ -13,8 +11,8 @@ import work.beltran.discogsbrowser.ui.settings.Settings;
 public class WantRecordsAdapter extends UserRecordsAdapter {
     private static final String TAG = WantRecordsAdapter.class.getCanonicalName();
 
-    public WantRecordsAdapter(RecordsApi subject, Picasso picasso) {
-        super(subject, picasso);
+    public WantRecordsAdapter(RecordsApi subject) {
+        super(subject);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package work.beltran.discogsbrowser.ui.di.modules;
 
-import com.squareup.picasso.Picasso;
-
 import dagger.Module;
 import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
@@ -19,7 +17,7 @@ public class RecordsAdapterMockModule extends RecordsAdapterModule {
     }
 
     @Override
-    public CollectionRecordsAdapter providesCollectionRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
+    public CollectionRecordsAdapter providesCollectionRecordsAdapter(ApiFrontend apiFrontend) {
         return mockAdapter;
     }
 }

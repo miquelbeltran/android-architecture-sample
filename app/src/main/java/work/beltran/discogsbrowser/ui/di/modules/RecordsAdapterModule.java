@@ -14,20 +14,20 @@ import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapter;
  * Created by Miquel Beltran on 28.04.16.
  * More on http://beltran.work
  */
-@Module(includes = {UserCollectionModule.class, PicassoModule.class})
+@Module(includes = {UserCollectionModule.class})
 public class RecordsAdapterModule {
     @Provides
-    public CollectionRecordsAdapter providesCollectionRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
-        return new CollectionRecordsAdapter(apiFrontend.getCollectionRecords(), picasso);
+    public CollectionRecordsAdapter providesCollectionRecordsAdapter(ApiFrontend apiFrontend) {
+        return new CollectionRecordsAdapter(apiFrontend.getCollectionRecords());
     }
 
     @Provides
-    public SearchRecordsAdapter providesSearchRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
-        return new SearchRecordsAdapter(apiFrontend.getSearchSubject(), picasso);
+    public SearchRecordsAdapter providesSearchRecordsAdapter(ApiFrontend apiFrontend) {
+        return new SearchRecordsAdapter(apiFrontend.getSearchSubject());
     }
 
     @Provides
     public WantRecordsAdapter providesWantRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
-        return new WantRecordsAdapter(apiFrontend.getWantedRecords(), picasso);
+        return new WantRecordsAdapter(apiFrontend.getWantedRecords());
     }
 }

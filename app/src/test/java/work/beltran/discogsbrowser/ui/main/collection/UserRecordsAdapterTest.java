@@ -58,8 +58,9 @@ public class UserRecordsAdapterTest {
         scheduler = Schedulers.test();
         subject =  TestSubject.create(scheduler);
         when(recordsApi.getRecordsFromService(1)).thenReturn(subject);
-        adapter = new CollectionRecordsAdapter(recordsApi, picasso);
+        adapter = new CollectionRecordsAdapter(recordsApi);
         adapter.setErrorPresenter(presenter);
+        adapter.setPicasso(picasso);
     }
 
     @Test
