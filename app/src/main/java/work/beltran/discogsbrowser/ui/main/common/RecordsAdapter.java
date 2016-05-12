@@ -1,6 +1,8 @@
 package work.beltran.discogsbrowser.ui.main.common;
 
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -195,6 +197,24 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Inject
     public void setSettings(Settings settings) {
         this.settings = settings;
+    }
+
+    public Bundle getBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("records", (ArrayList<? extends Parcelable>) recordList);
+        return bundle;
+    }
+
+    public void loadBundle(Bundle bundle) {
+        if (bundle != null) {
+            subscription.unsubscribe();
+            recordList.clear();
+            List<Record> records = bundle.getParcelableArrayList("records");
+            for(Record record : records) {
+                recordList.add(record);
+            }
+            notifyDataSetChanged();
+        }
     }
 
     public class RecordViewHolder extends RecyclerView.ViewHolder {

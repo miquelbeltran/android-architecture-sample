@@ -1,6 +1,7 @@
 package work.beltran.discogsbrowser.ui.main.collection;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -62,6 +63,20 @@ public class CollectionFragment extends Fragment implements LoadMoreOnScrollList
         ((App) getActivity().getApplication()).getApiComponent().inject(adapter);
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBundle(getTag(), adapter.getBundle());
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            adapter.loadBundle(savedInstanceState.getBundle(getTag()));
+        }
+    }
+
     private void initRecyclerView(View view, LayoutInflater inflater) {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.records_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -119,6 +134,9 @@ public class CollectionFragment extends Fragment implements LoadMoreOnScrollList
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_collection, container, false);
         initRecyclerView(view, inflater);
+        if (savedInstanceState != null) {
+            adapter.loadBundle(savedInstanceState.getBundle(getTag()));
+        }
         return view;
     }
 

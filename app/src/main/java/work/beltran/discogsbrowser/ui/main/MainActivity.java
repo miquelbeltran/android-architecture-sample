@@ -11,6 +11,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -70,10 +71,36 @@ public class MainActivity extends AppCompatActivity implements ErrorHandlingView
             }
         });
 
-
         if (savedInstanceState == null) {
             showFragment(FragmentTag.Collection, true);
+        } else {
+            FragmentTag savedTag = (FragmentTag) savedInstanceState.getSerializable("TAG");
+            showFragment(savedTag, true);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        for (Fragment fragment : fragments) {
+            if (fragment.isVisible()) {
+                outState.putSerializable("TAG", FragmentTag.valueOf(fragment.getTag()));
+                break;
+            }
+        }
+    }
+
+    private void hideAllFragments() {
+        List<Fragment> fragmentsToHide = getSupportFragmentManager().getFragments();
+        android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (fragmentsToHide != null) {
+            for (Fragment fr : fragmentsToHide) {
+                ft.hide(fr);
+            }
+        }
+        ft.commit();
+        getSupportFragmentManager().executePendingTransactions();
     }
 
     private void createFragments() {
@@ -85,14 +112,26 @@ public class MainActivity extends AppCompatActivity implements ErrorHandlingView
 
     @Override
     public void showFragment(FragmentTag tag, boolean toRight) {
-        Fragment fragment = fragmentMap.get(tag);
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag.name());
+        List<Fragment> fragmentsToHide = getSupportFragmentManager().getFragments();
         android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (toRight)
             ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
         else
             ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-        ft.replace(R.id.fragment_container, fragment, tag.name());
+        if (fragmentsToHide != null) {
+            for (Fragment fr : fragmentsToHide) {
+                ft.hide(fr);
+            }
+        }
+        if (fragment == null) {
+            fragment = fragmentMap.get(tag);
+            ft.add(R.id.fragment_container, fragment, tag.name());
+        } else {
+            ft.show(fragment);
+        }
         ft.commit();
+        getSupportFragmentManager().executePendingTransactions();
     }
 
     @Override
