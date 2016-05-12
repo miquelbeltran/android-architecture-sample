@@ -12,6 +12,7 @@ import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.ui.TestApp;
 import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.common.RecordsFragment;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
@@ -25,7 +26,7 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, application = TestApp.class)
 public class CollectionFragmentTest {
-    CollectionFragment fragment;
+    RecordsFragment fragment;
     RecordsAdapter adapter;
 
     @Before
