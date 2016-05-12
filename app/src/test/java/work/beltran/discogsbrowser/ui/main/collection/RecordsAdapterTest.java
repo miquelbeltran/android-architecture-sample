@@ -67,10 +67,12 @@ public class RecordsAdapterTest {
 
     @Test
     public void testOnError() throws Exception {
+        // We show the progressbar
         assertThat(adapter.getItemCount()).isEqualTo(1);
         Throwable e = new Throwable();
         subject.onError(e);
-        assertThat(adapter.getItemCount()).isEqualTo(1);
+        // No progressbar after errors
+        assertThat(adapter.getItemCount()).isEqualTo(0);
         verify(presenter).onError(e);
     }
 
@@ -89,11 +91,13 @@ public class RecordsAdapterTest {
 
     @Test
     public void testOnDestroy() throws Exception {
+        // Only one item, the progressbar
         assertThat(adapter.getItemCount()).isEqualTo(1);
         adapter.activityOnDestroy();
         // we are unsubscribed, so no more records added
         subject.onNext(new Record());
-        assertThat(adapter.getItemCount()).isEqualTo(1);
+        // Also the progressbar is gone
+        assertThat(adapter.getItemCount()).isEqualTo(0);
     }
 
     @Test
