@@ -14,7 +14,7 @@ import work.beltran.discogsbrowser.ui.di.modules.ContextModule;
 import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterMockModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsMockModule;
 import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
-import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 import static org.mockito.Mockito.mock;
@@ -29,7 +29,7 @@ public class TestApp extends App {
     public static ApiFrontend mockApiFrontend;
     public static Settings mockSettings;
 
-    public static RecordsAdapter getMockAdapter() {
+    public static UserRecordsAdapter getMockAdapter() {
         return mockAdapter;
     }
 

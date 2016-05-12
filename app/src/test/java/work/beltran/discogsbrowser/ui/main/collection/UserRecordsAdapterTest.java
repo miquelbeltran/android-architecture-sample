@@ -24,7 +24,7 @@ import work.beltran.discogsbrowser.api.model.MockRecordCollection;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.network.RecordsApi;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
-import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -36,8 +36,8 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class)
-public class RecordsAdapterTest {
-    RecordsAdapter adapter;
+public class UserRecordsAdapterTest {
+    UserRecordsAdapter adapter;
     MockRecordCollection recordCollection = new MockRecordCollection();
 
     @Mock
@@ -116,15 +116,15 @@ public class RecordsAdapterTest {
     public void testCreateRecordViewHolder() throws Exception {
         RecyclerView recyclerView = getRecyclerView();
         RecyclerView.ViewHolder holder = adapter.onCreateViewHolder(recyclerView, 1);
-        assertThat(holder).isInstanceOf(RecordsAdapter.RecordViewHolder.class);
-        assertThat(((RecordsAdapter.RecordViewHolder) holder).getBinding()).isNotNull();
+        assertThat(holder).isInstanceOf(UserRecordsAdapter.RecordViewHolder.class);
+        assertThat(((UserRecordsAdapter.RecordViewHolder) holder).getBinding()).isNotNull();
     }
 
     @Test
     public void testCreateProgressViewHolder() throws Exception {
         RecyclerView recyclerView = getRecyclerView();
         RecyclerView.ViewHolder holder = adapter.onCreateViewHolder(recyclerView, 0);
-        assertThat(holder).isInstanceOf(RecordsAdapter.ProgressBarViewHolder.class);
+        assertThat(holder).isInstanceOf(UserRecordsAdapter.ProgressBarViewHolder.class);
     }
 
     @NonNull

@@ -32,8 +32,8 @@ import work.beltran.discogsbrowser.ui.settings.Settings;
  * Created by Miquel Beltran on 23.04.16.
  * More on http://beltran.work
  */
-public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final String TAG = RecordsAdapter.class.getCanonicalName();
+public abstract class UserRecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final String TAG = UserRecordsAdapter.class.getCanonicalName();
     protected RecordsApi subject;
     protected List<Record> recordList = new ArrayList<>();
     private Picasso picasso;
@@ -44,7 +44,7 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
     private AveragePrice averagePrice;
     private Settings settings;
 
-    public RecordsAdapter(RecordsApi subject, Picasso picasso) {
+    public UserRecordsAdapter(RecordsApi subject, Picasso picasso) {
         this.picasso = picasso;
         this.subject = subject;
         subscribe();

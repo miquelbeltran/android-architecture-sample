@@ -11,7 +11,7 @@ import org.robolectric.annotation.Config;
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.ui.TestApp;
-import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapter;
 import work.beltran.discogsbrowser.ui.main.common.RecordsFragment;
 
 import static org.mockito.Matchers.any;
@@ -27,7 +27,7 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFr
 @Config(constants = BuildConfig.class, application = TestApp.class)
 public class CollectionFragmentTest {
     RecordsFragment fragment;
-    RecordsAdapter adapter;
+    UserRecordsAdapter adapter;
 
     @Before
     public void setUp() throws Exception {

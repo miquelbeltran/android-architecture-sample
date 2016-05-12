@@ -3,14 +3,14 @@ package work.beltran.discogsbrowser.ui.main.collection;
 import com.squareup.picasso.Picasso;
 
 import work.beltran.discogsbrowser.api.network.RecordsApi;
-import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 /**
  * Created by Miquel Beltran on 05.05.16.
  * More on http://beltran.work
  */
-public class CollectionRecordsAdapter extends RecordsAdapter {
+public class CollectionRecordsAdapter extends UserRecordsAdapter {
     private static final String TAG = CollectionRecordsAdapter.class.getCanonicalName();
 
     public CollectionRecordsAdapter(RecordsApi subject, Picasso picasso) {
