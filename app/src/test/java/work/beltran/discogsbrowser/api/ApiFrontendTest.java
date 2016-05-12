@@ -8,6 +8,7 @@ import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
 import work.beltran.discogsbrowser.api.model.MockRecordCollection;
+import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
@@ -36,11 +37,21 @@ public class ApiFrontendTest {
         UserIdentity userIdentity = new UserIdentity();
         userIdentity.setUsername("test");
         userIdentity.setId(1);
+        UserProfile userProfile = new UserProfile();
+        userProfile.setUsername("test");
+        userProfile.setAvatar_url("url");
+        userProfile.setNum_collection(2);
+        userProfile.setNum_wantlist(3);
+
         mockObservableIdentity = Observable.just(userIdentity);
         when(service.getUserIdentity()).thenReturn(mockObservableIdentity);
+        when(service.getUserProfile("test")).thenReturn(Observable.just(userProfile));
         collection = new MockRecordCollection().userCollection;
         Observable<UserCollection> mockObservable = Observable.just(collection);
-        Observable<UserWanted> mockWanted = Observable.just(new UserWanted());
+        UserWanted wanted = new UserWanted();
+        wanted.setRecords(new MockRecordCollection().userCollection.getRecords());
+        wanted.setPagination(new MockRecordCollection().userCollection.getPagination());
+        Observable<UserWanted> mockWanted = Observable.just(wanted);
         createUserCollectionWithObservable(mockObservable, mockWanted);
     }
 
@@ -50,6 +61,19 @@ public class ApiFrontendTest {
         when(service.getWantedList("test", 1)).thenReturn(mockWanted);
         apiFrontend = module.provideUserCollection(service);
 //        apiFrontend.loadMoreCollection();
+    }
+
+    @Test
+    public void testWantList() throws Exception {
+        TestSubscriber<UserWanted> subscriber = new TestSubscriber<>();
+        apiFrontend.getWantedRecords().getRecordsFromService(1).subscribe(subscriber);
+        verify(service).getWantedList("test", 1);
+        subscriber.assertNoErrors();
+        subscriber.assertValueCount(1);
+        UserWanted collection = subscriber.getOnNextEvents().get(0);
+        Record record = collection.getRecords().get(0);
+        assertThat(record.getInstance_id()).isEqualTo(1234);
+        assertThat(record.getBasicInformation().getThumb()).matches("thumb url");
     }
 
     @Test
@@ -97,6 +121,17 @@ public class ApiFrontendTest {
         UserIdentity identity = subscriber.getOnNextEvents().get(0);
         assertThat(identity.getUsername()).matches("test");
         assertThat(identity.getId()).isEqualTo(1);
+    }
+
+    @Test
+    public void testUserProfile() throws Exception {
+        TestSubscriber<UserProfile> subscriber = new TestSubscriber<>();
+        apiFrontend.getUserProfile().subscribe(subscriber);
+        UserProfile identity = subscriber.getOnNextEvents().get(0);
+        assertThat(identity.getUsername()).matches("test");
+        assertThat(identity.getAvatar_url()).matches("url");
+        assertThat(identity.getNum_wantlist()).isEqualTo(3);
+        assertThat(identity.getNum_collection()).isEqualTo(2);
     }
 
     @Test
