@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Miquel Beltran on 10.05.16.
  * More on http://beltran.work
  */
-public class Result {
+public class SearchRecord {
     int id;
     String thumb;
     String title;

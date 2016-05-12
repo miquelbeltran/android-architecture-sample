@@ -3,16 +3,21 @@ package work.beltran.discogsbrowser.api;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import rx.Observable;
 import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
 import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
 import work.beltran.discogsbrowser.api.model.MockRecordCollection;
-import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.api.model.record.Record;
+import work.beltran.discogsbrowser.api.model.SearchRecord;
+import work.beltran.discogsbrowser.api.model.SearchResults;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
+import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.model.UserWanted;
+import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.api.network.DiscogsService;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,6 +51,15 @@ public class ApiFrontendTest {
         mockObservableIdentity = Observable.just(userIdentity);
         when(service.getUserIdentity()).thenReturn(mockObservableIdentity);
         when(service.getUserProfile("test")).thenReturn(Observable.just(userProfile));
+        SearchResults results = new SearchResults();
+        results.setPagination(new MockRecordCollection().userCollection.getPagination());
+        SearchRecord searchRecord = new SearchRecord();
+        searchRecord.setTitle("name - title");
+        searchRecord.setThumb("url");
+        searchRecord.setFormat(new ArrayList<String>(Arrays.asList("CD")));
+        searchRecord.setId(2);
+        results.setSearchRecords(new ArrayList<SearchRecord>(Arrays.asList(searchRecord)));
+        when(service.search("test", "release", null, null)).thenReturn(Observable.just(results));
         collection = new MockRecordCollection().userCollection;
         Observable<UserCollection> mockObservable = Observable.just(collection);
         UserWanted wanted = new UserWanted();
@@ -61,6 +75,19 @@ public class ApiFrontendTest {
         when(service.getWantedList("test", 1)).thenReturn(mockWanted);
         apiFrontend = module.provideUserCollection(service);
 //        apiFrontend.loadMoreCollection();
+    }
+
+    @Test
+    public void testSearch() throws Exception {
+        TestSubscriber<Record> subscriber = new TestSubscriber<>();
+        apiFrontend.getSearchSubject().search("test", 1).subscribe(subscriber);
+        verify(service).search("test", "release", null, null);
+        Record record = subscriber.getOnNextEvents().get(0);
+        assertThat(record.getBasicInformation().getArtists().get(0).getName()).matches("name");
+        assertThat(record.getBasicInformation().getTitle()).matches("title");
+        assertThat(record.getBasicInformation().getFormats().get(0).getName()).matches("CD");
+        assertThat(record.getBasicInformation().getThumb()).matches("url");
+        assertThat(record.getInstance_id()).isEqualTo(2);
     }
 
     @Test

@@ -3,7 +3,7 @@ package work.beltran.discogsbrowser.api.network;
 import rx.Observable;
 import rx.Scheduler;
 import rx.functions.Func1;
-import work.beltran.discogsbrowser.api.model.Results;
+import work.beltran.discogsbrowser.api.model.SearchResults;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.api.model.record.Record;
 
@@ -29,17 +29,17 @@ public class SearchSubject {
 
     public Observable<Record> search(final String query, final int nextPage) {
         return userIdentityObservable
-                .flatMap(new Func1<UserIdentity, Observable<Results>>() {
+                .flatMap(new Func1<UserIdentity, Observable<SearchResults>>() {
                     @Override
-                    public Observable<Results> call(UserIdentity userIdentity) {
+                    public Observable<SearchResults> call(UserIdentity userIdentity) {
                         return service.search(query, "release", null, null).subscribeOn(subscribeOnScheduler);
                     }
                 })
                 .observeOn(observeOnScheduler)
-                .flatMap(new Func1<Results, Observable<Record>>() {
+                .flatMap(new Func1<SearchResults, Observable<Record>>() {
                     @Override
-                    public Observable<Record> call(Results results) {
-                        return Observable.from(results.getRecords());
+                    public Observable<Record> call(SearchResults searchResults) {
+                        return Observable.from(searchResults.getRecords());
                     }
                 });
     }

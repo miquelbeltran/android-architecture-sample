@@ -1,5 +1,7 @@
 package work.beltran.discogsbrowser.api.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +17,10 @@ import work.beltran.discogsbrowser.api.model.record.Record;
  * Created by Miquel Beltran on 10.05.16.
  * More on http://beltran.work
  */
-public class Results implements RecordsWithPagination {
+public class SearchResults implements RecordsWithPagination {
     Pagination pagination;
-    List<Result> results;
+    @SerializedName("results")
+    List<SearchRecord> searchRecords;
 
     public Pagination getPagination() {
         return pagination;
@@ -25,19 +28,19 @@ public class Results implements RecordsWithPagination {
 
     @Override
     public List<Record> getRecords() {
-        return rx.Observable.from(results).flatMap(new Func1<Result, rx.Observable<Record>>() {
+        return rx.Observable.from(searchRecords).flatMap(new Func1<SearchRecord, rx.Observable<Record>>() {
             @Override
-            public rx.Observable<Record> call(Result result) {
+            public rx.Observable<Record> call(SearchRecord searchRecord) {
                 Record record = new Record();
-                record.setInstance_id(result.getId());
+                record.setInstance_id(searchRecord.getId());
                 BasicInformation basicInformation = new BasicInformation();
-                String artist = result.title;
+                String artist = searchRecord.title;
                 String title = "";
 
-                int index = result.title.indexOf(" - ");
+                int index = searchRecord.title.indexOf(" - ");
                 if (index > 0) {
-                    title = result.title.substring(index + 3);
-                    artist = result.title.substring(0, index);
+                    title = searchRecord.title.substring(index + 3);
+                    artist = searchRecord.title.substring(0, index);
                 }
 
                 Artist artistObject = new Artist();
@@ -47,7 +50,7 @@ public class Results implements RecordsWithPagination {
                 basicInformation.setArtists(artists);
 
                 List<Format> formats = new ArrayList<Format>();
-                for(String formatString : result.format) {
+                for(String formatString : searchRecord.format) {
                     Format format = new Format();
                     format.setName(formatString);
                     formats.add(format);
@@ -55,7 +58,7 @@ public class Results implements RecordsWithPagination {
                 basicInformation.setFormats(formats);
 
                 basicInformation.setTitle(title);
-                basicInformation.setThumb(result.thumb);
+                basicInformation.setThumb(searchRecord.thumb);
                 record.setBasicInformation(basicInformation);
                 return Observable.just(record);
             }
@@ -66,11 +69,11 @@ public class Results implements RecordsWithPagination {
         this.pagination = pagination;
     }
 
-    public List<Result> getResults() {
-        return results;
+    public List<SearchRecord> getSearchRecords() {
+        return searchRecords;
     }
 
-    public void setResults(List<Result> results) {
-        this.results = results;
+    public void setSearchRecords(List<SearchRecord> searchRecords) {
+        this.searchRecords = searchRecords;
     }
 }

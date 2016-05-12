@@ -52,7 +52,7 @@ public class AveragePrice {
                .flatMap(new Func1<List<MarketResult>, Observable<MarketResult>>() {
                    @Override
                    public Observable<MarketResult> call(List<MarketResult> marketResults) {
-                       Log.d(TAG, "Market Results: " + marketResults.size());
+                       Log.d(TAG, "Market SearchResults: " + marketResults.size());
                        return Observable.from(marketResults);
                    }
                });

@@ -6,7 +6,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import work.beltran.discogsbrowser.api.model.MarketResult;
-import work.beltran.discogsbrowser.api.model.Results;
+import work.beltran.discogsbrowser.api.model.SearchResults;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.api.model.UserProfile;
@@ -33,8 +33,8 @@ public interface DiscogsService {
     rx.Observable<List<MarketResult>> getMarketResults(@Query("release_id") int releaseId);
 
     @GET("database/search")
-    rx.Observable<Results> search(@Query("q") String query,
-                                  @Query("type") String type,
-                                  @Query("format") String format,
-                                  @Query("barcode") String barcode);
+    rx.Observable<SearchResults> search(@Query("q") String query,
+                                        @Query("type") String type,
+                                        @Query("format") String format,
+                                        @Query("barcode") String barcode);
 }
