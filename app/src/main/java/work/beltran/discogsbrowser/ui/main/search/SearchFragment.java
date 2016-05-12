@@ -1,6 +1,7 @@
 package work.beltran.discogsbrowser.ui.main.search;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,7 @@ import work.beltran.discogsbrowser.ui.main.CustomToolbar;
 public class SearchFragment extends Fragment {
 
     private SearchRecordsAdapter adapter;
+    private String searchTerm = "";
 
     @Inject
     public void setAdapter(SearchRecordsAdapter adapter) {
@@ -38,7 +40,30 @@ public class SearchFragment extends Fragment {
         ((App) getActivity().getApplication()).getApiComponent().inject(adapter);
     }
 
-    private void initRecyclerView(View view, LayoutInflater inflater) {
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBundle(getTag(), adapter.getBundle());
+        outState.putString("SEARCH", searchTerm);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            adapter.loadBundle(savedInstanceState.getBundle(getTag()));
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+        initRecyclerView(view, inflater, savedInstanceState);
+        return view;
+    }
+
+    private void initRecyclerView(View view, LayoutInflater inflater, Bundle savedInstanceState) {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.records_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         if (recyclerView != null) {
@@ -46,17 +71,22 @@ public class SearchFragment extends Fragment {
             recyclerView.setLayoutManager(layoutManager);
             WrapAdapter wrapAdapter = new WrapAdapter(adapter);
             recyclerView.setAdapter(wrapAdapter);
-            initHeaderFooter(inflater, recyclerView, wrapAdapter);
+            initHeaderFooter(inflater, recyclerView, wrapAdapter, savedInstanceState);
         }
     }
 
-    private void initHeaderFooter(LayoutInflater inflater, RecyclerView recyclerView, WrapAdapter wrapAdapter) {
+    private void initHeaderFooter(LayoutInflater inflater, RecyclerView recyclerView, WrapAdapter wrapAdapter, Bundle savedInstanceState) {
         final View header = inflater.inflate(R.layout.header_search, recyclerView, false);
         wrapAdapter.addHeader(header);
-        SearchView searchView = (SearchView) header.findViewById(R.id.searchView);
+        final SearchView searchView = (SearchView) header.findViewById(R.id.searchView);
+        if (savedInstanceState != null) {
+            searchTerm = savedInstanceState.getString("SEARCH");
+            searchView.setQuery(searchTerm, false);
+        }
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                searchTerm = query;
                 adapter.search(query);
                 return true;
             }
@@ -69,13 +99,5 @@ public class SearchFragment extends Fragment {
         CustomToolbar.setToolbar(this, header);
         View footer = inflater.inflate(R.layout.footer, recyclerView, false);
         wrapAdapter.addFooter(footer);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
-        initRecyclerView(view, inflater);
-        return view;
     }
 }

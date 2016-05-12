@@ -143,7 +143,8 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public void loadBundle(Bundle bundle) {
         if (bundle != null) {
-            subscription.unsubscribe();
+            if (subscription != null)
+                subscription.unsubscribe();
             recordList.clear();
             List<Record> records = bundle.getParcelableArrayList("records");
             for(Record record : records) {
