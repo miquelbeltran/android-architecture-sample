@@ -173,7 +173,7 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
                             Log.d(TAG, "onNext(" + record.getInstance_id() + ")");
                             recordList.add(record);
                         }
-                        notifyItemRangeInserted(range, recordList.size() - 1);
+                        notifyItemRangeInserted(range, recordsWithPagination.getRecords().size());
                     }
                 });
     }
