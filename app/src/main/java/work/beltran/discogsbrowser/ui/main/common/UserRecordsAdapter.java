@@ -1,9 +1,11 @@
 package work.beltran.discogsbrowser.ui.main.common;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import rx.Observer;
 import work.beltran.discogsbrowser.api.model.RecordsWithPagination;
+import work.beltran.discogsbrowser.api.model.pagination.Pagination;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.api.network.RecordsApi;
 
@@ -13,17 +15,32 @@ import work.beltran.discogsbrowser.api.network.RecordsApi;
  */
 public abstract class UserRecordsAdapter extends RecordsAdapter {
     private static final String TAG = UserRecordsAdapter.class.getCanonicalName();
+    private static final String PAGINATION = "PAGINATION";
     protected RecordsApi subject;
+    private Pagination pagination;
 
     public UserRecordsAdapter(RecordsApi subject) {
         this.subject = subject;
         subscribe();
     }
 
+    @Override
+    public Bundle getBundle() {
+        Bundle bundle = super.getBundle();
+        bundle.putParcelable(PAGINATION, pagination);
+        return bundle;
+    }
+
+    @Override
+    public void loadBundle(Bundle bundle) {
+        super.loadBundle(bundle);
+        pagination = bundle.getParcelable(PAGINATION);
+    }
 
     protected void subscribe() {
+        int page = pagination != null ? pagination.getPage() + 1: 1;
         subscription = subject
-                .getRecordsFromService(1)
+                .getRecordsFromService(page)
                 .subscribe(new Observer<RecordsWithPagination>() {
                     @Override
                     public void onCompleted() {
@@ -40,6 +57,7 @@ public abstract class UserRecordsAdapter extends RecordsAdapter {
                     @Override
                     public void onNext(RecordsWithPagination recordsWithPagination) {
                         int range = recordList.size();
+                        pagination = recordsWithPagination.getPagination();
                         for(Record record : recordsWithPagination.getRecords()) {
                             Log.d(TAG, "onNext(" + record.getInstance_id() + ")");
                             recordList.add(record);
@@ -50,11 +68,12 @@ public abstract class UserRecordsAdapter extends RecordsAdapter {
     }
 
     public void loadMore() {
-        Log.d(TAG, "Load More Requested");
-//        subject.loadMoreData();
+        if (pagination == null) {
+            return;
+        }
+        if (pagination.getPage() < pagination.getPages()) {
+            Log.d(TAG, "Load More Requested");
+            subscribe();
+        }
     }
-
-
-
-
 }
