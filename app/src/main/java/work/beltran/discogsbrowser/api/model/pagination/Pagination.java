@@ -15,10 +15,14 @@ public class Pagination implements Parcelable {
     private int pages;
     private int items;
 
-    protected Pagination(Parcel in) {
+    public Pagination(Parcel in) {
         page = in.readInt();
         pages = in.readInt();
         items = in.readInt();
+    }
+
+    public Pagination() {
+
     }
 
     @Override
