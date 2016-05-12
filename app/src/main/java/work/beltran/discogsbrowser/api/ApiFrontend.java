@@ -5,10 +5,10 @@ import rx.Scheduler;
 import rx.functions.Func1;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.api.network.CollectionRecordsSubject;
+import work.beltran.discogsbrowser.api.network.CollectionRecordsApi;
 import work.beltran.discogsbrowser.api.network.DiscogsService;
 import work.beltran.discogsbrowser.api.network.SearchSubject;
-import work.beltran.discogsbrowser.api.network.WantRecordsSubject;
+import work.beltran.discogsbrowser.api.network.WantRecordsApi;
 
 /**
  * Created by Miquel Beltran on 22.04.16.
@@ -20,8 +20,8 @@ public class ApiFrontend {
     private Scheduler observeOnScheduler;
     private Scheduler subscribeOnScheduler;
     private Observable<UserIdentity> userIdentityObservable;
-    private WantRecordsSubject wantRecordsSubject;
-    private CollectionRecordsSubject collectionRecordsSubject;
+    private WantRecordsApi wantRecordsSubject;
+    private CollectionRecordsApi collectionRecordsSubject;
     private Observable<UserProfile> userProfileObservable;
 
     public ApiFrontend(DiscogsService service, Scheduler observeOnScheduler, Scheduler subscribeOnScheduler) {
@@ -30,11 +30,11 @@ public class ApiFrontend {
         this.observeOnScheduler = observeOnScheduler;
         buildUserIndentityRequest();
         buildUserProfileRequest();
-        wantRecordsSubject = new WantRecordsSubject(service,
+        wantRecordsSubject = new WantRecordsApi(service,
                 userIdentityObservable,
                 subscribeOnScheduler,
                 observeOnScheduler);
-        collectionRecordsSubject = new CollectionRecordsSubject(service,
+        collectionRecordsSubject = new CollectionRecordsApi(service,
                 userIdentityObservable,
                 subscribeOnScheduler,
                 observeOnScheduler);
@@ -66,20 +66,12 @@ public class ApiFrontend {
         return userProfileObservable;
     }
 
-    public WantRecordsSubject getWantedRecords() {
+    public WantRecordsApi getWantedRecords() {
         return wantRecordsSubject;
     }
 
-    public CollectionRecordsSubject getCollectionRecords() {
+    public CollectionRecordsApi getCollectionRecords() {
         return collectionRecordsSubject;
-    }
-
-    public void loadMoreCollection() {
-        collectionRecordsSubject.loadMoreData();
-    }
-
-    public void loadMoreWanted() {
-        wantRecordsSubject.loadMoreData();
     }
 
     public SearchSubject getSearchSubject() {

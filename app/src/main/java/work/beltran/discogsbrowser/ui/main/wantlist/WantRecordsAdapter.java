@@ -2,7 +2,7 @@ package work.beltran.discogsbrowser.ui.main.wantlist;
 
 import com.squareup.picasso.Picasso;
 
-import work.beltran.discogsbrowser.api.network.RecordsSubject;
+import work.beltran.discogsbrowser.api.network.RecordsApi;
 import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
@@ -13,7 +13,7 @@ import work.beltran.discogsbrowser.ui.settings.Settings;
 public class WantRecordsAdapter extends RecordsAdapter {
     private static final String TAG = WantRecordsAdapter.class.getCanonicalName();
 
-    public WantRecordsAdapter(RecordsSubject subject, Picasso picasso) {
+    public WantRecordsAdapter(RecordsApi subject, Picasso picasso) {
         super(subject, picasso);
     }
 

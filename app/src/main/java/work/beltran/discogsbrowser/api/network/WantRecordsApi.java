@@ -9,12 +9,12 @@ import work.beltran.discogsbrowser.api.model.UserWanted;
  * Created by Miquel Beltran on 04.05.16.
  * More on http://beltran.work
  */
-public class WantRecordsSubject extends RecordsSubject<UserWanted> {
+public class WantRecordsApi extends RecordsApi<UserWanted> {
 
-    public WantRecordsSubject(DiscogsService service,
-                              Observable<UserIdentity> userIdentityObservable,
-                              Scheduler subscribeOnScheduler,
-                              Scheduler observeOnScheduler) {
+    public WantRecordsApi(DiscogsService service,
+                          Observable<UserIdentity> userIdentityObservable,
+                          Scheduler subscribeOnScheduler,
+                          Scheduler observeOnScheduler) {
         super(service, userIdentityObservable, subscribeOnScheduler, observeOnScheduler);
     }
 

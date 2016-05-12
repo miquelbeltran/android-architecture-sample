@@ -18,9 +18,10 @@ import javax.inject.Inject;
 import rx.Observer;
 import rx.Subscription;
 import work.beltran.discogsbrowser.R;
+import work.beltran.discogsbrowser.api.model.RecordsWithPagination;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.api.network.AveragePrice;
-import work.beltran.discogsbrowser.api.network.RecordsSubject;
+import work.beltran.discogsbrowser.api.network.RecordsApi;
 import work.beltran.discogsbrowser.databinding.CardRecordBinding;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
@@ -31,7 +32,7 @@ import work.beltran.discogsbrowser.ui.settings.Settings;
  */
 public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = RecordsAdapter.class.getCanonicalName();
-    protected RecordsSubject subject;
+    protected RecordsApi subject;
     protected List<Record> recordList = new ArrayList<>();
     private Picasso picasso;
     protected Subscription subscription;
@@ -41,7 +42,7 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
     private AveragePrice averagePrice;
     private Settings settings;
 
-    public RecordsAdapter(RecordsSubject subject, Picasso picasso) {
+    public RecordsAdapter(RecordsApi subject, Picasso picasso) {
         this.picasso = picasso;
         this.subject = subject;
         subscribe();
@@ -141,7 +142,7 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private boolean showProgressbar() {
-        return !subscription.isUnsubscribed() && !subject.getSubject().hasCompleted();
+        return !subscription.isUnsubscribed();
     }
 
     @Override
@@ -151,8 +152,8 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     protected void subscribe() {
         subscription = subject
-                .getSubject()
-                .subscribe(new Observer<Record>() {
+                .getRecordsFromService(1)
+                .subscribe(new Observer<RecordsWithPagination>() {
                     @Override
                     public void onCompleted() {
                         Log.d(TAG, "onCompleted()");
@@ -166,10 +167,13 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
                     }
 
                     @Override
-                    public void onNext(Record record) {
-                        Log.d(TAG, "onNext(" + record.getInstance_id() + ")");
-                        recordList.add(record);
-                        notifyItemInserted(recordList.size() - 1);
+                    public void onNext(RecordsWithPagination recordsWithPagination) {
+                        int range = recordList.size();
+                        for(Record record : recordsWithPagination.getRecords()) {
+                            Log.d(TAG, "onNext(" + record.getInstance_id() + ")");
+                            recordList.add(record);
+                        }
+                        notifyItemRangeInserted(range, recordList.size() - 1);
                     }
                 });
     }
@@ -180,7 +184,7 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public void loadMore() {
         Log.d(TAG, "Load More Requested");
-        subject.loadMoreData();
+//        subject.loadMoreData();
     }
 
     @Inject
