@@ -73,8 +73,14 @@ public class MainActivity extends AppCompatActivity implements ErrorHandlingView
 
         if (savedInstanceState == null) {
             showFragment(FragmentTag.Collection, true);
-        } else {
-            FragmentTag savedTag = (FragmentTag) savedInstanceState.getSerializable("TAG");
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null ) {
+            FragmentTag savedTag = FragmentTag.valueOf(savedInstanceState.getString("TAG"));
             showFragment(savedTag, true);
         }
     }
@@ -85,22 +91,10 @@ public class MainActivity extends AppCompatActivity implements ErrorHandlingView
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
         for (Fragment fragment : fragments) {
             if (fragment.isVisible()) {
-                outState.putSerializable("TAG", FragmentTag.valueOf(fragment.getTag()));
+                outState.putString("TAG", fragment.getTag());
                 break;
             }
         }
-    }
-
-    private void hideAllFragments() {
-        List<Fragment> fragmentsToHide = getSupportFragmentManager().getFragments();
-        android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        if (fragmentsToHide != null) {
-            for (Fragment fr : fragmentsToHide) {
-                ft.hide(fr);
-            }
-        }
-        ft.commit();
-        getSupportFragmentManager().executePendingTransactions();
     }
 
     private void createFragments() {

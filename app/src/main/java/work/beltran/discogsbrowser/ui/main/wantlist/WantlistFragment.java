@@ -11,7 +11,7 @@ import rx.Observer;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.ui.App;
-import work.beltran.discogsbrowser.ui.main.CustomToolbar;
+import work.beltran.discogsbrowser.ui.main.common.CustomToolbar;
 
 public class WantlistFragment extends work.beltran.discogsbrowser.ui.main.common.RecordsFragment<WantRecordsAdapter> {
 

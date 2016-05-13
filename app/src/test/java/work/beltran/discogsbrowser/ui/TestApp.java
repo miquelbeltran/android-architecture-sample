@@ -15,6 +15,7 @@ import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterMockModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsMockModule;
 import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
 import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 import static org.mockito.Mockito.mock;
@@ -28,6 +29,7 @@ public class TestApp extends App {
     private static CollectionRecordsAdapter mockAdapter;
     public static ApiFrontend mockApiFrontend;
     public static Settings mockSettings;
+    public static WantRecordsAdapter mockWant;
 
     public static UserRecordsAdapter getMockAdapter() {
         return mockAdapter;
@@ -37,6 +39,7 @@ public class TestApp extends App {
     public void onCreate() {
         super.onCreate();
         mockAdapter = mock(CollectionRecordsAdapter.class);
+        mockWant = mock(WantRecordsAdapter.class);
         mockApiFrontend = mock(ApiFrontend.class);
         when(mockApiFrontend.getUserProfile()).thenReturn(rx.Observable.just(new UserProfile()));
         mockSettings = mock(Settings.class);
@@ -49,7 +52,7 @@ public class TestApp extends App {
                 .builder()
                 .contextModule(new ContextModule(this))
                 .discogsModule(new DiscogsModule(BuildConfig.API_KEY))
-                .recordsAdapterModule(new RecordsAdapterMockModule(mockAdapter))
+                .recordsAdapterModule(new RecordsAdapterMockModule(mockAdapter, mockWant))
                 .userCollectionModule(new UserCollectionMockModule(mockApiFrontend))
                 .averagePriceModule(new AveragePriceModule(Schedulers.io(), AndroidSchedulers.mainThread()))
                 .build();

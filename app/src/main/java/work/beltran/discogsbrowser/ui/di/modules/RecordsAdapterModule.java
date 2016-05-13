@@ -1,7 +1,5 @@
 package work.beltran.discogsbrowser.ui.di.modules;
 
-import com.squareup.picasso.Picasso;
-
 import dagger.Module;
 import dagger.Provides;
 import work.beltran.discogsbrowser.api.ApiFrontend;
@@ -27,7 +25,7 @@ public class RecordsAdapterModule {
     }
 
     @Provides
-    public WantRecordsAdapter providesWantRecordsAdapter(ApiFrontend apiFrontend, Picasso picasso) {
+    public WantRecordsAdapter providesWantRecordsAdapter(ApiFrontend apiFrontend) {
         return new WantRecordsAdapter(apiFrontend.getWantedRecords());
     }
 }

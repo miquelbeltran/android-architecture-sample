@@ -12,7 +12,7 @@ import rx.Observer;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.ui.App;
-import work.beltran.discogsbrowser.ui.main.CustomToolbar;
+import work.beltran.discogsbrowser.ui.main.common.CustomToolbar;
 import work.beltran.discogsbrowser.ui.main.common.CircleTransform;
 
 public class CollectionFragment extends work.beltran.discogsbrowser.ui.main.common.RecordsFragment<CollectionRecordsAdapter> {
