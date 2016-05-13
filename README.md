@@ -25,3 +25,12 @@ Source code of the Android app, using Retrofit, RxJava, Dagger and more
 - Beatiful material design.
 
 Public Trello board: https://trello.com/b/cpMFH9K8
+
+## Screenshots
+
+
+![Collection](https://raw.githubusercontent.com/miquelbeltran/android-discogsbrowser/master/art/screenshots/collection_640.png)
+
+![Wantlist](https://raw.githubusercontent.com/miquelbeltran/android-discogsbrowser/master/art/screenshots/wantlist_640.png)
+
+![Search](https://raw.githubusercontent.com/miquelbeltran/android-discogsbrowser/master/art/screenshots/search_640.png)
