@@ -32,4 +32,10 @@ public class SettingsTest {
         settings.storeApiKey(API_KEY_TEST);
         assertThat(settings.getApiKey()).matches(API_KEY_BUILD);
     }
+
+    @Test
+    public void testGetDefaultSettings() throws Exception {
+        settings = new Settings(RuntimeEnvironment.application, "");
+        assertThat(settings.getSharedPreferences()).isNotNull();
+    }
 }
