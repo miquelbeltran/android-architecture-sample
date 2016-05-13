@@ -34,3 +34,5 @@ Public Trello board: https://trello.com/b/cpMFH9K8
 ![Wantlist](https://raw.githubusercontent.com/miquelbeltran/android-discogsbrowser/master/art/screenshots/wantlist_640.png)
 
 ![Search](https://raw.githubusercontent.com/miquelbeltran/android-discogsbrowser/master/art/screenshots/search_640.png)
+
+![Wantlist gif](https://raw.githubusercontent.com/miquelbeltran/android-discogsbrowser/master/art/screenshots/wantlist.gif)
