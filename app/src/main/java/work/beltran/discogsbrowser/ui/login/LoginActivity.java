@@ -18,14 +18,19 @@ import okhttp3.ResponseBody;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.network.DiscogsService;
+import work.beltran.discogsbrowser.api.network.login.AccessHeader;
+import work.beltran.discogsbrowser.api.network.login.RequestHeader;
 import work.beltran.discogsbrowser.ui.App;
+import work.beltran.discogsbrowser.ui.LauncherActivity;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 public class LoginActivity extends AppCompatActivity {
 
     private static String OAUTH_PAGE = "https://discogs.com/oauth/authorize";
+    private static String REDIRECT_URI = "discogs://callback";
 
     @Inject
     public Settings settings;
@@ -48,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    service.requestToken()
+                    service.requestToken(new RequestHeader(BuildConfig.API_CONSUMER_KEY, BuildConfig.API_CONSUMER_SECRET).getHeader())
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Observer<ResponseBody>() {
@@ -65,9 +70,14 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onNext(ResponseBody responseBody) {
                                     try {
+                                        Uri uri = Uri.parse(OAUTH_PAGE + "?" + responseBody.string());
+                                        String userToken = uri.getQueryParameter("oauth_token");
+                                        String userSecret = uri.getQueryParameter("oauth_token_secret");
+                                        settings.storeUserToken(userToken);
+                                        settings.storeUserSecret(userSecret);
                                         Intent intent = new Intent(
                                                 Intent.ACTION_VIEW,
-                                                Uri.parse(OAUTH_PAGE + "?" + responseBody.string()));
+                                                uri);
                                         startActivity(intent);
                                     } catch (IOException e) {
                                         e.printStackTrace();
@@ -77,7 +87,50 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Uri uri = getIntent().getData();
+        if (uri != null && uri.toString().startsWith(REDIRECT_URI)) {
+            final String token = uri.getQueryParameter("oauth_token");
+            String verifier = uri.getQueryParameter("oauth_verifier");
 
+            if (token != null && verifier != null) {
+                service.accessToken(
+                        new AccessHeader(
+                                BuildConfig.API_CONSUMER_KEY,
+                                BuildConfig.API_CONSUMER_SECRET + "&" + settings.getUserSecret(),
+                                settings.getUserToken(),
+                                verifier).getHeader())
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<ResponseBody>() {
+                            @Override
+                            public void onCompleted() {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                e.printStackTrace();
+
+                            }
+
+                            @Override
+                            public void onNext(ResponseBody responseBody) {
+                                settings.storeApiKey(token);
+                                Intent intent = new Intent(LoginActivity.this, LauncherActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                // get access token
+                // we'll do that in a minute
+            } else if (uri.getQueryParameter("error") != null) {
+                // show an error message here
+            }
+        }
     }
 }

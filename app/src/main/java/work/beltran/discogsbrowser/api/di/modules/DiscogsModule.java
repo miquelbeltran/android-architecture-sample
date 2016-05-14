@@ -57,8 +57,7 @@ public class DiscogsModule {
                                         "oauth_token=\"" + userToken + "\", " +
                                         "oauth_signature=\"" + consumerSecret + "&\", " +
                                         "oauth_signature_method=\"PLAINTEXT\", " +
-                                        "oauth_timestamp=\"" + new Date().getTime() + "\", " +
-                                        "oauth_callback=\"" + CALLBACK +"\"")
+                                        "oauth_timestamp=\"" + new Date().getTime() + "\"")
                         .method(original.method(), original.body())
                         .build();
                 return chain.proceed(request);

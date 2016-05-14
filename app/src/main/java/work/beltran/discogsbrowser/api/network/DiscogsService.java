@@ -4,6 +4,8 @@ import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import work.beltran.discogsbrowser.api.model.MarketResult;
@@ -40,5 +42,8 @@ public interface DiscogsService {
                                         @Query("barcode") String barcode);
 
     @GET("oauth/request_token")
-    rx.Observable<ResponseBody> requestToken();
+    rx.Observable<ResponseBody> requestToken(@Header("Authorization") String authHeader);
+
+    @POST("oauth/access_token")
+    rx.Observable<ResponseBody> accessToken(@Header("Authorization") String authHeader);
 }

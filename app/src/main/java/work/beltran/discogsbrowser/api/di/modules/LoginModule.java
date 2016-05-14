@@ -3,7 +3,6 @@ package work.beltran.discogsbrowser.api.di.modules;
 import android.util.Log;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.inject.Singleton;
 
@@ -24,16 +23,7 @@ import work.beltran.discogsbrowser.api.network.DiscogsService;
  */
 @Module
 public class LoginModule {
-
     public static final String BASE_URL = "https://api.discogs.com/";
-    private static final String CALLBACK = "discogs://callback";
-    private String consumerKey;
-    private String consumerSecret;
-
-    public LoginModule(String consumerKey, String consumerSecret) {
-        this.consumerKey = consumerKey;
-        this.consumerSecret = consumerSecret;
-    }
 
     @Provides
     @Singleton
@@ -46,13 +36,6 @@ public class LoginModule {
                 Request request = original.newBuilder()
                         .header("User-Agent", BuildConfig.APPLICATION_ID)
                         .header("Content-Type", "application/x-www-form-urlencoded")
-                        .header("Authorization",
-                                "OAuth oauth_consumer_key=\"" + consumerKey + "\", " +
-                                        "oauth_nonce=\"" + new Date().getTime() + "\", " +
-                                        "oauth_signature=\"" + consumerSecret + "&\", " +
-                                        "oauth_signature_method=\"PLAINTEXT\", " +
-                                        "oauth_timestamp=\"" + new Date().getTime() + "\", " +
-                                        "oauth_callback=\"" + CALLBACK +"\"")
                         .method(original.method(), original.body())
                         .build();
                 return chain.proceed(request);

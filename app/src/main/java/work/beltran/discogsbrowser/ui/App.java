@@ -8,7 +8,6 @@ import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.di.modules.ApiFrontendModule;
 import work.beltran.discogsbrowser.api.di.modules.AveragePriceModule;
 import work.beltran.discogsbrowser.api.di.modules.DiscogsModule;
-import work.beltran.discogsbrowser.api.di.modules.LoginModule;
 import work.beltran.discogsbrowser.ui.di.ApiComponent;
 import work.beltran.discogsbrowser.ui.di.AppComponent;
 import work.beltran.discogsbrowser.ui.di.DaggerApiComponent;
@@ -36,7 +35,6 @@ public class App extends Application {
                 .build();
         loginComponent = DaggerLoginComponent
                 .builder()
-                .loginModule(new LoginModule(BuildConfig.API_CONSUMER_KEY, BuildConfig.API_CONSUMER_SECRET))
                 .contextModule(new ContextModule(this))
                 .build();
     }
