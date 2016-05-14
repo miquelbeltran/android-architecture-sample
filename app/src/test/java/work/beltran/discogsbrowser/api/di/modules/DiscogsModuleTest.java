@@ -26,7 +26,7 @@ public class DiscogsModuleTest {
     DiscogsService service;
     @Before
     public void setUp() throws Exception {
-        DiscogsModule discogsModule = new DiscogsModule(BuildConfig.API_KEY);
+        DiscogsModule discogsModule = new DiscogsModule(consumerKey, consumerSecret, BuildConfig.API_KEY);
         service = discogsModule.provideDiscogsService(discogsModule.provideRetrofit());
     }
 

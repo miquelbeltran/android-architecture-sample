@@ -24,9 +24,19 @@ android {
         versionName "1.0"
     }
     defaultConfig {
-        def apikey = project.hasProperty('apikey') ? apikey : (System.getenv('API_KEY') ?: '""')
-        buildConfigField "String", "API_KEY", apikey
+        // For OAuth
+        def consumerSecret = project.hasProperty('discogsConsumerSecret') ? discogsConsumerSecret : '""'
+        buildConfigField "String", "API_CONSUMER_SECRET", consumerSecret
+        def consumerKey = project.hasProperty('discogsConsumerKey') ? discogsConsumerKey : '""'
+        buildConfigField "String", "API_CONSUMER_KEY", consumerKey
+        buildConfigField "String", "API_KEY", '""'
     }
+
+//    testOptions {
+//        def apikey = project.hasProperty('apikey') ? apikey : (System.getenv('API_KEY') ?: '""')
+//        buildConfigField "String", "API_KEY", apikey
+//    }
+
     buildTypes {
         release {
             minifyEnabled false

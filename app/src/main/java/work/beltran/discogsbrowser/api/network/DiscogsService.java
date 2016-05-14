@@ -2,6 +2,7 @@ package work.beltran.discogsbrowser.api.network;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -37,4 +38,7 @@ public interface DiscogsService {
                                         @Query("type") String type,
                                         @Query("format") String format,
                                         @Query("barcode") String barcode);
+
+    @GET("oauth/request_token")
+    rx.Observable<ResponseBody> requestToken();
 }

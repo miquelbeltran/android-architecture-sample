@@ -9,7 +9,7 @@ import java.util.Arrays;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
-import work.beltran.discogsbrowser.api.di.modules.UserCollectionModule;
+import work.beltran.discogsbrowser.api.di.modules.ApiFrontendModule;
 import work.beltran.discogsbrowser.api.model.MockRecordCollection;
 import work.beltran.discogsbrowser.api.model.SearchRecord;
 import work.beltran.discogsbrowser.api.model.SearchResults;
@@ -33,7 +33,7 @@ public class ApiFrontendTest {
     private ApiFrontend apiFrontend;
     private UserCollection collection;
     private DiscogsService service;
-    UserCollectionModule module = new UserCollectionModule(Schedulers.immediate(), Schedulers.immediate());
+    ApiFrontendModule module = new ApiFrontendModule(Schedulers.immediate(), Schedulers.immediate());
     private rx.Observable<work.beltran.discogsbrowser.api.model.UserIdentity> mockObservableIdentity;
 
     @Before
@@ -73,7 +73,7 @@ public class ApiFrontendTest {
         when(service.listRecords("test", 1)).thenReturn(mockObservable);
         when(service.listRecords("test", 2)).thenReturn(mockObservable);
         when(service.getWantedList("test", 1)).thenReturn(mockWanted);
-        apiFrontend = module.provideUserCollection(service);
+        apiFrontend = module.provideApiFrontend(service);
 //        apiFrontend.loadMoreCollection();
     }
 

@@ -13,18 +13,18 @@ import work.beltran.discogsbrowser.api.network.DiscogsService;
  * More on http://beltran.work
  */
 @Module(includes = {DiscogsModule.class})
-public class UserCollectionModule {
+public class ApiFrontendModule {
     private Scheduler subscribeOnScheduler;
     private Scheduler observeOnScheduler;
 
-    public UserCollectionModule(Scheduler subscribeOnScheduler, Scheduler observeOnScheduler) {
+    public ApiFrontendModule(Scheduler subscribeOnScheduler, Scheduler observeOnScheduler) {
         this.subscribeOnScheduler = subscribeOnScheduler;
         this.observeOnScheduler = observeOnScheduler;
     }
 
     @Provides
     @Singleton
-    public ApiFrontend provideUserCollection(DiscogsService service) {
+    public ApiFrontend provideApiFrontend(DiscogsService service) {
         return new ApiFrontend(service, observeOnScheduler, subscribeOnScheduler);
     }
 }

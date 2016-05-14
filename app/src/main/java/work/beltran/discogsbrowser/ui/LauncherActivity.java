@@ -27,7 +27,7 @@ public class LauncherActivity extends Activity {
             startActivity(intent);
             finish();
         } else {
-            ((App) getApplication()).setApiKey(apiKey);
+            ((App) getApplication()).setUserToken(apiKey);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();

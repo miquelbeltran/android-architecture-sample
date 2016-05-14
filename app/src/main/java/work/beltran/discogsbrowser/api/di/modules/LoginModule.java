@@ -13,7 +13,6 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
 import retrofit2.RxJavaCallAdapterFactory;
 import work.beltran.discogsbrowser.BuildConfig;
@@ -24,19 +23,16 @@ import work.beltran.discogsbrowser.api.network.DiscogsService;
  * More on http://beltran.work
  */
 @Module
-public class DiscogsModule {
+public class LoginModule {
 
     public static final String BASE_URL = "https://api.discogs.com/";
     private static final String CALLBACK = "discogs://callback";
-    private String apiKey;
     private String consumerKey;
     private String consumerSecret;
-    private String userToken;
 
-    public DiscogsModule(String consumerKey, String consumerSecret, String userToken) {
+    public LoginModule(String consumerKey, String consumerSecret) {
         this.consumerKey = consumerKey;
         this.consumerSecret = consumerSecret;
-        this.userToken = userToken;
     }
 
     @Provides
@@ -45,16 +41,14 @@ public class DiscogsModule {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {
             @Override
-            public Response intercept(Interceptor.Chain chain) throws IOException {
+            public Response intercept(Chain chain) throws IOException {
                 Request original = chain.request();
                 Request request = original.newBuilder()
                         .header("User-Agent", BuildConfig.APPLICATION_ID)
-//                        .header("Authorization", "Discogs token=" + apiKey)
                         .header("Content-Type", "application/x-www-form-urlencoded")
                         .header("Authorization",
                                 "OAuth oauth_consumer_key=\"" + consumerKey + "\", " +
                                         "oauth_nonce=\"" + new Date().getTime() + "\", " +
-                                        "oauth_token=\"" + userToken + "\", " +
                                         "oauth_signature=\"" + consumerSecret + "&\", " +
                                         "oauth_signature_method=\"PLAINTEXT\", " +
                                         "oauth_timestamp=\"" + new Date().getTime() + "\", " +
@@ -88,7 +82,6 @@ public class DiscogsModule {
 
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(client)
                 .build();

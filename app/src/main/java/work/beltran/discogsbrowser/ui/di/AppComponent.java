@@ -8,7 +8,6 @@ import work.beltran.discogsbrowser.ui.di.modules.ErrorModule;
 import work.beltran.discogsbrowser.ui.di.modules.NavigationBarModule;
 import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsModule;
-import work.beltran.discogsbrowser.ui.login.LoginActivity;
 import work.beltran.discogsbrowser.ui.main.MainActivity;
 
 /**
@@ -23,7 +22,6 @@ import work.beltran.discogsbrowser.ui.main.MainActivity;
         NavigationBarModule.class
 })
 public interface AppComponent {
-    void inject(LoginActivity activity);
 
     void inject(LauncherActivity activity);
 
