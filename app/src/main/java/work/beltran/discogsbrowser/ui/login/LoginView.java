@@ -9,4 +9,6 @@ import android.content.Intent;
 public interface LoginView {
 
     void startActivity(Intent intent);
+
+    void startLauncher();
 }

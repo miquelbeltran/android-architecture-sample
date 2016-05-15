@@ -10,7 +10,9 @@ import javax.inject.Inject;
 import okhttp3.ResponseBody;
 import rx.Observer;
 import work.beltran.discogsbrowser.BuildConfig;
+import work.beltran.discogsbrowser.api.RxJavaSchedulers;
 import work.beltran.discogsbrowser.api.network.DiscogsService;
+import work.beltran.discogsbrowser.api.network.login.AccessHeader;
 import work.beltran.discogsbrowser.api.network.login.RequestHeader;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
@@ -21,6 +23,7 @@ import work.beltran.discogsbrowser.ui.settings.Settings;
 public class LoginPresenter {
 
     private static String OAUTH_PAGE = "https://discogs.com/oauth/authorize";
+    private static String REDIRECT_URI = "discogs://callback";
     private LoginView view;
 
     @Inject
@@ -29,11 +32,13 @@ public class LoginPresenter {
     @Inject
     public Settings settings;
 
+    @Inject
+    public RxJavaSchedulers schedulers;
 
     public void loginOnClick() {
         service.requestToken(new RequestHeader(BuildConfig.API_CONSUMER_KEY, BuildConfig.API_CONSUMER_SECRET).getHeader())
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(schedulers.io())
+                .observeOn(schedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
                     @Override
                     public void onCompleted() {
@@ -66,5 +71,45 @@ public class LoginPresenter {
 
     public void setView(LoginView view) {
         this.view = view;
+    }
+
+    public void registerAccessToken(Uri uri) {
+        if (uri != null && uri.toString().startsWith(REDIRECT_URI)) {
+            final String token = uri.getQueryParameter("oauth_token");
+            String verifier = uri.getQueryParameter("oauth_verifier");
+
+            if (token != null && verifier != null) {
+                service.accessToken(
+                        new AccessHeader(
+                                BuildConfig.API_CONSUMER_KEY,
+                                BuildConfig.API_CONSUMER_SECRET + "&" + settings.getUserSecret(),
+                                settings.getUserToken(),
+                                verifier).getHeader())
+                        .subscribeOn(schedulers.io())
+                        .observeOn(schedulers.mainThread())
+                        .subscribe(new Observer<ResponseBody>() {
+                            @Override
+                            public void onCompleted() {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                e.printStackTrace();
+                                // TODO: remove stored keys for user!
+                            }
+
+                            @Override
+                            public void onNext(ResponseBody responseBody) {
+                                // all good
+                                view.startLauncher();
+                            }
+                        });
+                // get access token
+                // we'll do that in a minute
+            } else if (uri.getQueryParameter("error") != null) {
+                // show an error message here
+            }
+        }
     }
 }

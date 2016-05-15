@@ -12,6 +12,7 @@ import org.robolectric.RobolectricTestRunner;
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 import rx.Observable;
+import work.beltran.discogsbrowser.api.RxJavaTestSchedulers;
 import work.beltran.discogsbrowser.api.network.DiscogsService;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
@@ -35,6 +36,7 @@ public class LoginPresenterTest {
         presenter = new LoginPresenter();
         presenter.service = mock(DiscogsService.class);
         presenter.settings = mock(Settings.class);
+        presenter.schedulers = new RxJavaTestSchedulers();
         view = mock(LoginView.class);
         presenter.setView(view);
     }
@@ -54,5 +56,14 @@ public class LoginPresenterTest {
         assertThat(actualIntent.getValue().getData()).isEqualTo(uri);
         verify(presenter.settings).storeUserToken("\"1234\"");
         verify(presenter.settings).storeUserSecret("\"5678\"");
+    }
+
+    @Test
+    public void testRegisterAccessToken() throws Exception {
+        Uri uri = Uri.parse("discogs://callback?oauth_token=\"1234\"&oauth_verifier=\"5678\"");
+        ResponseBody response = ResponseBody.create(MediaType.parse("application/type"), "test");
+        when(presenter.service.accessToken(anyString())).thenReturn(Observable.<ResponseBody>just((ResponseBody) response));
+        presenter.registerAccessToken(uri);
+        verify(view).startLauncher();
     }
 }
