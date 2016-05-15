@@ -6,7 +6,6 @@ import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.di.modules.AveragePriceModule;
 import work.beltran.discogsbrowser.api.di.modules.DiscogsModule;
-import work.beltran.discogsbrowser.api.di.modules.ApiFrontendMockModule;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.ui.di.DaggerApiComponent;
 import work.beltran.discogsbrowser.ui.di.DaggerAppComponent;
@@ -51,9 +50,9 @@ public class TestApp extends App {
         apiComponent = DaggerApiComponent
                 .builder()
                 .contextModule(new ContextModule(this))
-                .discogsModule(new DiscogsModule(consumerKey, consumerSecret, BuildConfig.API_KEY))
+                .discogsModule(new DiscogsModule(BuildConfig.API_CONSUMER_KEY, BuildConfig.API_CONSUMER_SECRET, BuildConfig.API_KEY))
                 .recordsAdapterModule(new RecordsAdapterMockModule(mockAdapter, mockWant))
-                .userCollectionModule(new ApiFrontendMockModule(mockApiFrontend))
+//                .userCollectionModule(new ApiFrontendMockModule(mockApiFrontend))
                 .averagePriceModule(new AveragePriceModule(Schedulers.io(), AndroidSchedulers.mainThread()))
                 .build();
     }
