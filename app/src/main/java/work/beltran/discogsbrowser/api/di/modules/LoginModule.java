@@ -15,7 +15,10 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.RxJavaCallAdapterFactory;
 import work.beltran.discogsbrowser.BuildConfig;
+import work.beltran.discogsbrowser.api.RxJavaSchedulers;
 import work.beltran.discogsbrowser.api.network.DiscogsService;
+import work.beltran.discogsbrowser.ui.login.LoginPresenter;
+import work.beltran.discogsbrowser.ui.settings.Settings;
 
 /**
  * Created by Miquel Beltran on 22.04.16.
@@ -74,5 +77,10 @@ public class LoginModule {
     @Singleton
     public DiscogsService provideDiscogsService(Retrofit retrofit) {
         return retrofit.create(DiscogsService.class);
+    }
+
+    @Provides
+    public LoginPresenter provideLoginPresenter(DiscogsService service, Settings settings, RxJavaSchedulers schedulers) {
+        return new LoginPresenter(service, settings, schedulers);
     }
 }

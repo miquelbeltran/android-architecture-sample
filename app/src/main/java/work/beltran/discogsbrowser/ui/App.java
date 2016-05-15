@@ -39,16 +39,6 @@ public class App extends Application {
                 .build();
     }
 
-    public void setUserToken(String userToken) {
-        apiComponent = DaggerApiComponent
-                .builder()
-                .contextModule(new ContextModule(this))
-                .discogsModule(new DiscogsModule(BuildConfig.API_CONSUMER_KEY, BuildConfig.API_CONSUMER_SECRET, userToken))
-                .apiFrontendModule(new ApiFrontendModule(Schedulers.io(), AndroidSchedulers.mainThread()))
-                .averagePriceModule(new AveragePriceModule(Schedulers.io(), AndroidSchedulers.mainThread()))
-                .build();
-    }
-
     public ApiComponent getApiComponent() {
         return apiComponent;
     }
@@ -59,6 +49,16 @@ public class App extends Application {
 
     public LoginComponent getLoginComponent() {
         return loginComponent;
+    }
+
+    public void initApiComponent(String userToken, String userSecret) {
+        apiComponent = DaggerApiComponent
+                .builder()
+                .contextModule(new ContextModule(this))
+                .discogsModule(new DiscogsModule(BuildConfig.API_CONSUMER_KEY, BuildConfig.API_CONSUMER_SECRET, userToken, userSecret))
+                .apiFrontendModule(new ApiFrontendModule(Schedulers.io(), AndroidSchedulers.mainThread()))
+                .averagePriceModule(new AveragePriceModule(Schedulers.io(), AndroidSchedulers.mainThread()))
+                .build();
     }
 }
 

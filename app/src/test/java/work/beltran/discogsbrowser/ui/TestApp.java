@@ -50,7 +50,7 @@ public class TestApp extends App {
         apiComponent = DaggerApiComponent
                 .builder()
                 .contextModule(new ContextModule(this))
-                .discogsModule(new DiscogsModule(BuildConfig.API_CONSUMER_KEY, BuildConfig.API_CONSUMER_SECRET, BuildConfig.API_KEY))
+                .discogsModule(new DiscogsModule(BuildConfig.API_CONSUMER_KEY, BuildConfig.API_CONSUMER_SECRET, BuildConfig.API_KEY, userSecret))
                 .recordsAdapterModule(new RecordsAdapterMockModule(mockAdapter, mockWant))
 //                .userCollectionModule(new ApiFrontendMockModule(mockApiFrontend))
                 .averagePriceModule(new AveragePriceModule(Schedulers.io(), AndroidSchedulers.mainThread()))

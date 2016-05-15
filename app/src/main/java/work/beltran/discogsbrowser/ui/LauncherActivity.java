@@ -21,13 +21,12 @@ public class LauncherActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((App) getApplication()).getAppComponent().inject(this);
-        String apiKey = settings.getApiKey();
-        if (apiKey.isEmpty()) {
+        if (settings.getUserToken().isEmpty() || settings.getUserSecret().isEmpty()) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
         } else {
-            ((App) getApplication()).setUserToken(apiKey);
+            ((App) getApplication()).initApiComponent(settings.getUserToken(), settings.getUserSecret());
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();

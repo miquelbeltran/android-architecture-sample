@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Inject
     public Picasso picasso;
 
-    //    @Inject
+    @Inject
     public LoginPresenter presenter;
 
     @Override
@@ -30,7 +30,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ((App) getApplication()).getLoginComponent().inject(this);
-        picasso.load(R.drawable.login_background).fit().centerCrop().into((ImageView) findViewById(R.id.loginBackground));
+        ((App) getApplication()).getLoginComponent().inject(presenter);
+        presenter.setView(this);
 
         Button loginButton = (Button) findViewById(R.id.loginbutton);
         if (loginButton != null) {
@@ -41,6 +42,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                 }
             });
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        picasso.load(R.drawable.login_background).fit().centerCrop().into((ImageView) findViewById(R.id.loginBackground));
     }
 
     @Override

@@ -5,8 +5,6 @@ import android.net.Uri;
 
 import java.io.IOException;
 
-import javax.inject.Inject;
-
 import okhttp3.ResponseBody;
 import rx.Observer;
 import work.beltran.discogsbrowser.BuildConfig;
@@ -25,15 +23,15 @@ public class LoginPresenter {
     private static String OAUTH_PAGE = "https://discogs.com/oauth/authorize";
     private static String REDIRECT_URI = "discogs://callback";
     private LoginView view;
+    private DiscogsService service;
+    private Settings settings;
+    private RxJavaSchedulers schedulers;
 
-    @Inject
-    public DiscogsService service;
-
-    @Inject
-    public Settings settings;
-
-    @Inject
-    public RxJavaSchedulers schedulers;
+    public LoginPresenter(DiscogsService service, Settings settings, RxJavaSchedulers schedulers) {
+        this.service = service;
+        this.settings = settings;
+        this.schedulers = schedulers;
+    }
 
     public void loginOnClick() {
         service.requestToken(new RequestHeader(BuildConfig.API_CONSUMER_KEY, BuildConfig.API_CONSUMER_SECRET).getHeader())

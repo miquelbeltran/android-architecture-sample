@@ -30,13 +30,16 @@ import static org.mockito.Mockito.when;
 public class LoginPresenterTest {
     LoginPresenter presenter;
     LoginView view;
+    private DiscogsService service;
+    private Settings settings;
+    private RxJavaTestSchedulers schedulers;
 
     @Before
     public void setUp() throws Exception {
-        presenter = new LoginPresenter();
-        presenter.service = mock(DiscogsService.class);
-        presenter.settings = mock(Settings.class);
-        presenter.schedulers = new RxJavaTestSchedulers();
+        service = mock(DiscogsService.class);
+        settings = mock(Settings.class);
+        schedulers = new RxJavaTestSchedulers();
+        presenter = new LoginPresenter(service, settings, schedulers);
         view = mock(LoginView.class);
         presenter.setView(view);
     }
@@ -45,7 +48,7 @@ public class LoginPresenterTest {
     public void testOnClickLogin() throws Exception {
         final String body = "oauth_token=\"1234\"&oauth_token_secret=\"5678\"";
         ResponseBody response = ResponseBody.create(MediaType.parse("application/type"), body);
-        when(presenter.service.requestToken(anyString())).thenReturn(Observable.<ResponseBody>just((ResponseBody) response));
+        when(service.requestToken(anyString())).thenReturn(Observable.<ResponseBody>just((ResponseBody) response));
 
         presenter.loginOnClick();
 
@@ -54,15 +57,15 @@ public class LoginPresenterTest {
         verify(view).startActivity(actualIntent.capture());
         assertThat(actualIntent.getValue().getAction()).matches(Intent.ACTION_VIEW);
         assertThat(actualIntent.getValue().getData()).isEqualTo(uri);
-        verify(presenter.settings).storeUserToken("\"1234\"");
-        verify(presenter.settings).storeUserSecret("\"5678\"");
+        verify(settings).storeUserToken("\"1234\"");
+        verify(settings).storeUserSecret("\"5678\"");
     }
 
     @Test
     public void testRegisterAccessToken() throws Exception {
         Uri uri = Uri.parse("discogs://callback?oauth_token=\"1234\"&oauth_verifier=\"5678\"");
         ResponseBody response = ResponseBody.create(MediaType.parse("application/type"), "test");
-        when(presenter.service.accessToken(anyString())).thenReturn(Observable.<ResponseBody>just((ResponseBody) response));
+        when(service.accessToken(anyString())).thenReturn(Observable.<ResponseBody>just((ResponseBody) response));
         presenter.registerAccessToken(uri);
         verify(view).startLauncher();
     }

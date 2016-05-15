@@ -32,11 +32,13 @@ public class DiscogsModule {
     private String consumerKey;
     private String consumerSecret;
     private String userToken;
+    private String userSecret;
 
-    public DiscogsModule(String consumerKey, String consumerSecret, String userToken) {
+    public DiscogsModule(String consumerKey, String consumerSecret, String userToken, String userSecret) {
         this.consumerKey = consumerKey;
         this.consumerSecret = consumerSecret;
         this.userToken = userToken;
+        this.userSecret = userSecret;
     }
 
     @Provides
@@ -55,7 +57,7 @@ public class DiscogsModule {
                                 "OAuth oauth_consumer_key=\"" + consumerKey + "\", " +
                                         "oauth_nonce=\"" + new Date().getTime() + "\", " +
                                         "oauth_token=\"" + userToken + "\", " +
-                                        "oauth_signature=\"" + consumerSecret + "&\", " +
+                                        "oauth_signature=\"" + consumerSecret + "&" + userSecret + "\", " +
                                         "oauth_signature_method=\"PLAINTEXT\", " +
                                         "oauth_timestamp=\"" + new Date().getTime() + "\"")
                         .method(original.method(), original.body())
