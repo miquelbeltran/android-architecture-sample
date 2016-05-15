@@ -99,8 +99,17 @@ public class LoginPresenter {
 
                             @Override
                             public void onNext(ResponseBody responseBody) {
-                                // all good
-                                view.startLauncher();
+                                try {
+                                    Uri uri = Uri.parse(OAUTH_PAGE + "?" + responseBody.string());
+                                    String userToken = uri.getQueryParameter("oauth_token");
+                                    String userSecret = uri.getQueryParameter("oauth_token_secret");
+                                    settings.storeUserToken(userToken);
+                                    settings.storeUserSecret(userSecret);
+                                    // all good
+                                    view.startLauncher();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                 // get access token
