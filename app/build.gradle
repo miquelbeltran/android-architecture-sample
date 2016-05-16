@@ -35,8 +35,16 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            // Common release options
+            zipAlignEnabled true
+            debuggable false
+            jniDebuggable false
+
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFile 'proguard-square-retrofit2.pro'
+            proguardFile 'proguard-square-picasso.pro'
+            proguardFile 'proguard-rx-java.pro'
         }
     }
     dataBinding {
