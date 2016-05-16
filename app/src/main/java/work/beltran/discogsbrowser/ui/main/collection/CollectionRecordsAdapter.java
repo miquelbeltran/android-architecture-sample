@@ -17,7 +17,7 @@ public class CollectionRecordsAdapter extends UserRecordsAdapter {
 
     @Override
     protected boolean getPreferencePricesDefault() {
-        return false;
+        return true;
     }
 
     @Override

@@ -47,15 +47,15 @@ public class SearchRecordsAdapter extends RecordsAdapter {
 
 
     protected boolean getPreferencePricesDefault() {
-        return false;
+        return true;
     }
 
     protected String getPreferencePricesType() {
-        return Settings.COLLECTION_PRICES_TYPE;
+        return Settings.SEARCH_PRICES_TYPE;
     }
 
     protected String getPreferencePrices() {
-        return Settings.COLLECTION_PRICES;
+        return Settings.SEARCH_PRICES;
     }
 
     public void search(String query) {

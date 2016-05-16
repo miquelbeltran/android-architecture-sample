@@ -17,6 +17,8 @@ public class Settings {
     public static final String COLLECTION_PRICES_TYPE = "collection_prices_type";
     public static final String WANTLIST_PRICES = "wantlist_prices";
     public static final String WANTLIST_PRICES_TYPE = "wantlist_prices_type";
+    public static final String SEARCH_PRICES = "search_prices";
+    public static final String SEARCH_PRICES_TYPE = "search_prices_type";
     public static final String PRICE_TYPE_LOWEST = "0";
     private static Context context;
     private String apiKeyFromBuildConfig;
