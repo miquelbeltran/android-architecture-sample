@@ -13,10 +13,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/loading_wantlist"
         android:id="@+id/textWantlist"
-        android:layout_alignTop="@+id/imageAvatar"
-        android:layout_toRightOf="@+id/imageAvatar"
-        android:layout_toEndOf="@+id/imageAvatar"
-        android:gravity="center" />
+        android:layout_alignTop="@+id/imageFav"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/imageFav" />
 
     <ImageView
         android:layout_width="56dp"
