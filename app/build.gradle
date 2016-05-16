@@ -40,11 +40,11 @@ android {
             debuggable false
             jniDebuggable false
 
-            minifyEnabled true
+            minifyEnabled false // Disabled by the moment
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            proguardFile 'proguard-square-retrofit2.pro'
-            proguardFile 'proguard-square-picasso.pro'
-            proguardFile 'proguard-rx-java.pro'
+//            proguardFile 'proguard-square-retrofit2.pro'
+//            proguardFile 'proguard-square-picasso.pro'
+//            proguardFile 'proguard-square-okio.pro'
         }
     }
     dataBinding {
@@ -101,6 +101,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.2'
     compile 'io.reactivex:rxjava-math:1.0.0'
+//    compile 'com.artemzin.rxjava:proguard-rules:1.1.5.0'
     compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
