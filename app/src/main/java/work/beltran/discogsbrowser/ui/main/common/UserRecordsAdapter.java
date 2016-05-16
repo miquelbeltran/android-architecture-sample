@@ -38,33 +38,35 @@ public abstract class UserRecordsAdapter extends RecordsAdapter {
     }
 
     protected void subscribe() {
-        int page = pagination != null ? pagination.getPage() + 1: 1;
-        subscription = subject
-                .getRecordsFromService(page)
-                .subscribe(new Observer<RecordsWithPagination>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.d(TAG, "onCompleted()");
-                        notifyItemRemoved(recordList.size());
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "onError() " + e.getMessage());
-                        errorPresenter.onError(e);
-                    }
-
-                    @Override
-                    public void onNext(RecordsWithPagination recordsWithPagination) {
-                        int range = recordList.size();
-                        pagination = recordsWithPagination.getPagination();
-                        for(Record record : recordsWithPagination.getRecords()) {
-                            Log.d(TAG, "onNext(" + record.getInstance_id() + ")");
-                            recordList.add(record);
+        if (subscription == null || subscription.isUnsubscribed()) {
+            int page = pagination != null ? pagination.getPage() + 1 : 1;
+            subscription = subject
+                    .getRecordsFromService(page)
+                    .subscribe(new Observer<RecordsWithPagination>() {
+                        @Override
+                        public void onCompleted() {
+                            Log.d(TAG, "onCompleted()");
+                            notifyItemRemoved(recordList.size());
                         }
-                        notifyItemRangeInserted(range, recordsWithPagination.getRecords().size());
-                    }
-                });
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.e(TAG, "onError() " + e.getMessage());
+                            errorPresenter.onError(e);
+                        }
+
+                        @Override
+                        public void onNext(RecordsWithPagination recordsWithPagination) {
+                            int range = recordList.size();
+                            pagination = recordsWithPagination.getPagination();
+                            for (Record record : recordsWithPagination.getRecords()) {
+                                Log.d(TAG, "onNext(" + record.getInstance_id() + ")");
+                                recordList.add(record);
+                            }
+                            notifyItemRangeInserted(range, recordsWithPagination.getRecords().size());
+                        }
+                    });
+        }
     }
 
     public void loadMore() {
