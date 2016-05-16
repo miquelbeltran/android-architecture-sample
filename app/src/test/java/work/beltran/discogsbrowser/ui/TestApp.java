@@ -4,12 +4,16 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.ApiFrontend;
+import work.beltran.discogsbrowser.api.di.modules.ApiFrontendMockModule;
 import work.beltran.discogsbrowser.api.di.modules.AveragePriceModule;
-import work.beltran.discogsbrowser.api.di.modules.DiscogsModule;
+import work.beltran.discogsbrowser.api.di.modules.DiscogsModuleWithApiKey;
+import work.beltran.discogsbrowser.api.di.modules.LoginModule;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.ui.di.DaggerApiComponent;
 import work.beltran.discogsbrowser.ui.di.DaggerAppComponent;
+import work.beltran.discogsbrowser.ui.di.DaggerLoginComponent;
 import work.beltran.discogsbrowser.ui.di.modules.ContextModule;
+import work.beltran.discogsbrowser.ui.di.modules.LoginMockModule;
 import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterMockModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsMockModule;
 import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
@@ -47,12 +51,17 @@ public class TestApp extends App {
                 .settingsModule(new SettingsMockModule(mockSettings))
                 .contextModule(new ContextModule(this))
                 .build();
+        loginComponent = DaggerLoginComponent
+                .builder()
+                .loginModule(new LoginMockModule())
+                .contextModule(new ContextModule(this))
+                .build();
         apiComponent = DaggerApiComponent
                 .builder()
                 .contextModule(new ContextModule(this))
-                .discogsModule(new DiscogsModule(BuildConfig.API_CONSUMER_KEY, BuildConfig.API_CONSUMER_SECRET, BuildConfig.API_KEY, userSecret))
+                .discogsModule(new DiscogsModuleWithApiKey(BuildConfig.API_KEY))
                 .recordsAdapterModule(new RecordsAdapterMockModule(mockAdapter, mockWant))
-//                .userCollectionModule(new ApiFrontendMockModule(mockApiFrontend))
+                .apiFrontendModule(new ApiFrontendMockModule(mockApiFrontend))
                 .averagePriceModule(new AveragePriceModule(Schedulers.io(), AndroidSchedulers.mainThread()))
                 .build();
     }

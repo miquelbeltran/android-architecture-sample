@@ -51,7 +51,6 @@ public class DiscogsModule {
                 Request original = chain.request();
                 Request request = original.newBuilder()
                         .header("User-Agent", BuildConfig.APPLICATION_ID)
-//                        .header("Authorization", "Discogs token=" + apiKey)
                         .header("Content-Type", "application/x-www-form-urlencoded")
                         .header("Authorization",
                                 "OAuth oauth_consumer_key=\"" + consumerKey + "\", " +
@@ -67,7 +66,7 @@ public class DiscogsModule {
         });
 
 
-        class LoggingInterceptor implements Interceptor {
+        httpClient.addInterceptor(new Interceptor() {
             @Override public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
 
@@ -83,9 +82,9 @@ public class DiscogsModule {
 
                 return response;
             }
-        }
+        });
 
-        OkHttpClient client = httpClient.addInterceptor(new LoggingInterceptor()).build();
+        OkHttpClient client = httpClient.build();
 
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)

@@ -29,13 +29,9 @@ android {
         buildConfigField "String", "API_CONSUMER_SECRET", consumerSecret
         def consumerKey = project.hasProperty('discogsConsumerKey') ? discogsConsumerKey : '""'
         buildConfigField "String", "API_CONSUMER_KEY", consumerKey
-        buildConfigField "String", "API_KEY", '""'
+        def apikey = project.hasProperty('apikey') ? apikey : (System.getenv('API_KEY') ?: '""')
+        buildConfigField "String", "API_KEY", apikey
     }
-
-//    testOptions {
-//        def apikey = project.hasProperty('apikey') ? apikey : (System.getenv('API_KEY') ?: '""')
-//        buildConfigField "String", "API_KEY", apikey
-//    }
 
     buildTypes {
         release {
@@ -68,7 +64,7 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'
-    testCompile("org.robolectric:robolectric:3.1-SNAPSHOT") {
+    testCompile("org.robolectric:robolectric:3.1-rc1") {
         exclude group: 'commons-logging', module: 'commons-logging'
         exclude group: 'org.apache.httpcomponents', module: 'httpclient'
         exclude group: 'com.android.support', module: 'appcompat'
@@ -77,7 +73,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'cardview-v7'
         exclude group: 'com.android.support', module: 'design'
     }
-    testCompile "org.robolectric:shadows-support-v4:3.1-SNAPSHOT"
+    testCompile "org.robolectric:shadows-support-v4:3.1-rc1"
     testCompile 'org.assertj:assertj-core:1.7.1'
     testCompile 'com.squareup.okhttp3:mockwebserver:3.0.0-RC1'
 

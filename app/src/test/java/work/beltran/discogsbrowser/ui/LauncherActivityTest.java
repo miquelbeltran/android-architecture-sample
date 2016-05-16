@@ -15,6 +15,7 @@ import work.beltran.discogsbrowser.ui.main.MainActivity;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
@@ -36,9 +37,9 @@ public class LauncherActivityTest {
 
     @Test
     public void testNoApiKey() throws Exception {
-        when(settings.getApiKey()).thenReturn("");
+        when(settings.getUserToken()).thenReturn("");
         activity = Robolectric.setupActivity(LauncherActivity.class);
-        verify(settings).getApiKey();
+        verify(settings).getUserToken();
         Intent expected = new Intent(activity, LoginActivity.class);
         Intent actual = shadowOf(activity).getNextStartedActivity();
         assertThat(expected.getAction()).isEqualTo(actual.getAction());
@@ -46,9 +47,11 @@ public class LauncherActivityTest {
 
     @Test
     public void testApiKey() throws Exception {
-        when(settings.getApiKey()).thenReturn("123456");
+        when(settings.getUserToken()).thenReturn("123456");
+        when(settings.getUserSecret()).thenReturn("123456");
         activity = Robolectric.setupActivity(LauncherActivity.class);
-        verify(settings).getApiKey();
+        verify(settings, times(2)).getUserToken();
+        verify(settings, times(2)).getUserSecret();
         Intent expected = new Intent(activity, MainActivity.class);
         Intent actual = shadowOf(activity).getNextStartedActivity();
         assertThat(expected.getAction()).isEqualTo(actual.getAction());

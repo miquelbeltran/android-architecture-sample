@@ -1,6 +1,7 @@
 package work.beltran.discogsbrowser.ui.login;
 
 import android.content.Intent;
+import android.widget.Button;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import work.beltran.discogsbrowser.BuildConfig;
+import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.ui.LauncherActivity;
 import work.beltran.discogsbrowser.ui.TestApp;
 import work.beltran.discogsbrowser.ui.settings.Settings;
@@ -31,18 +33,27 @@ public class LoginActivityTest {
     @Before
     public void setUp() throws Exception {
         settings = TestApp.mockSettings;
+        activity = Robolectric.setupActivity(LoginActivity.class);
     }
 
     @Test
     public void testStoreKey() throws Exception {
-        activity = Robolectric.setupActivity(LoginActivity.class);
-//        TextView textView = (TextView) activity.findViewById(R.id.accessToken);
-//        textView.setText("test");
-//        activity.onClickAccessToken(null);
-        verify(settings).storeApiKey("test");
+        assertThat(activity.picasso).isNotNull();
+        verify(activity.presenter).setView(activity);
+    }
+
+    @Test
+    public void testButtonClick() throws Exception {
+        Button button = (Button) activity.findViewById(R.id.loginbutton);
+        button.performClick();
+        verify(activity.presenter).loginOnClick();
+    }
+
+    @Test
+    public void testStartLauncher() throws Exception {
+        activity.startLauncher();
         Intent expected = new Intent(activity, LauncherActivity.class);
         Intent actual = shadowOf(activity).getNextStartedActivity();
         assertThat(expected.getAction()).isEqualTo(actual.getAction());
     }
-
 }
