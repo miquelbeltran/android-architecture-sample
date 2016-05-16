@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.R;
 
 public class AboutActivity extends AppCompatActivity {
@@ -58,6 +59,8 @@ public class AboutActivity extends AppCompatActivity {
             listView.addView(view);
         }
 
+        TextView textView = (TextView) findViewById(R.id.textAppVersion);
+        textView.setText(getString(R.string.version) + BuildConfig.VERSION_NAME);
     }
 
     @Override

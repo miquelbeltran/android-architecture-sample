@@ -23,6 +23,7 @@
         I hope you are enjoying it, if you have any suggestions I would love to hear them.
         You can contact me on this email address or my website.\n~ Miquel Beltran</string>
     <string name="open_source_libraries">Open Source Libraries</string>
+    <string name="version">Version: </string>
     <string-array name="price_type">
         <item>lowest</item>
         <item>average</item>
