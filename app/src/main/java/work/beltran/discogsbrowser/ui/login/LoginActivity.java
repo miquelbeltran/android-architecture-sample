@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ((App) getApplication()).getLoginComponent().inject(this);
-        ((App) getApplication()).getLoginComponent().inject(presenter);
         presenter.setView(this);
 
         Button loginButton = (Button) findViewById(R.id.loginbutton);
