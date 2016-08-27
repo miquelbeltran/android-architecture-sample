@@ -11,11 +11,14 @@ import android.widget.FrameLayout;
 import com.eyeem.recyclerviewtools.LoadMoreOnScrollListener;
 import com.eyeem.recyclerviewtools.adapter.WrapAdapter;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
+import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.ui.common.RecordsAdapter;
 
 /**
@@ -28,6 +31,7 @@ public class CollectionView extends FrameLayout implements ICollectionView, Load
 
     @BindView(R.id.recycler_records)
     RecyclerView recyclerView;
+    private RecordsAdapter adapter;
 
     @Inject
     public void setCollectionPresenter(CollectionPresenter presenter) {
@@ -37,6 +41,7 @@ public class CollectionView extends FrameLayout implements ICollectionView, Load
 
     @Inject
     public void setAdapter(RecordsAdapter adapter) {
+        this.adapter = adapter;
         WrapAdapter wrapAdapter = new WrapAdapter(adapter);
         recyclerView.setAdapter(wrapAdapter);
     }
@@ -79,5 +84,10 @@ public class CollectionView extends FrameLayout implements ICollectionView, Load
     @Override
     public void onLoadMore(RecyclerView recyclerView) {
 
+    }
+
+    @Override
+    public void addRecords(List<Record> records) {
+        adapter.addItems(records);
     }
 }

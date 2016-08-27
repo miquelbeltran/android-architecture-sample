@@ -1,5 +1,8 @@
 package work.beltran.discogsbrowser.ui.collection;
 
+import java.util.List;
+
+import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.ui.base.BaseView;
 
 /**
@@ -7,4 +10,5 @@ import work.beltran.discogsbrowser.ui.base.BaseView;
  * More on http://beltran.work
  */
 public interface ICollectionView extends BaseView {
+    void addRecords(List<Record> records);
 }

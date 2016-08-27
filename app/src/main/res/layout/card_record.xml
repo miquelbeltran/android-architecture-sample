@@ -1,48 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
-
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="record"
-            type="work.beltran.discogsbrowser.api.model.record.Record" />
-    </data>
-
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        card_view:cardCornerRadius="4dp"
-        card_view:contentPadding="0dp">
+<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    card_view:cardCornerRadius="4dp"
+    card_view:contentPadding="0dp">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/record_title"
+                android:id="@+id/text_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="false"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentStart="false"
-                android:layout_below="@+id/record_artist"
-                android:layout_toRightOf="@+id/record_thumb"
+                android:layout_below="@+id/text_artist"
+                android:layout_toRightOf="@+id/image_thumb"
                 android:ellipsize="end"
                 android:paddingLeft="8dp"
                 android:singleLine="true"
-                android:text="@{record.getBasicInformation().getTitle(), default=PLACEHOLDER}"
+                tools:text="PLACEHOLDER"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:paddingRight="8dp" />
 
             <ImageView
-                android:id="@+id/record_thumb"
+                android:id="@+id/image_thumb"
                 android:layout_width="104dp"
                 android:layout_height="104dp"
                 android:layout_alignParentLeft="true"
@@ -51,42 +41,41 @@
                 android:background="@color/primary_light" />
 
             <TextView
-                android:id="@+id/record_artist"
+                android:id="@+id/text_artist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/record_thumb"
+                android:layout_toRightOf="@+id/image_thumb"
                 android:ellipsize="end"
                 android:paddingLeft="8dp"
                 android:singleLine="true"
-                android:text="@{record.getBasicInformation().getArtists().get(0).getName(), default=PLACEHOLDER}"
+                tools:text="PLACEHOLDER"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textStyle="bold"
                 android:paddingRight="8dp" />
 
             <TextView
-                android:id="@+id/record_year"
+                android:id="@+id/text_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/record_thumb"
-                android:layout_toEndOf="@+id/record_thumb"
-                android:layout_toRightOf="@+id/record_thumb"
+                android:layout_alignBottom="@+id/image_thumb"
+                android:layout_toEndOf="@+id/image_thumb"
+                android:layout_toRightOf="@+id/image_thumb"
                 android:paddingLeft="8dp"
-                android:text="@{record.getBasicInformation().getYear(), default=2016}"
+                tools:text="2016"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:visibility="@{record.getBasicInformation().getYear().equals(`0`) ? View.GONE : View.VISIBLE }"
                 android:paddingBottom="8dp" />
 
             <TextView
-                android:id="@+id/record_format"
+                android:id="@+id/text_format"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/record_thumb"
+                android:layout_alignBottom="@+id/image_thumb"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="@{record.getBasicInformation().getFormats().get(0).getName(), default=Vinyl}"
+                tools:text="Vinyl"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:paddingRight="8dp"
                 android:paddingBottom="8dp" />
@@ -96,11 +85,10 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/textPrice"
-                android:layout_alignBaseline="@+id/record_format"
-                android:layout_toRightOf="@+id/record_thumb"
+                android:layout_alignBaseline="@+id/text_format"
+                android:layout_toRightOf="@+id/image_thumb"
                 android:gravity="center"
                 android:textColor="@color/colorAccent"
                 android:layout_alignParentRight="true" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
-</layout>

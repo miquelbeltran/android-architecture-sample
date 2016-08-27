@@ -39,6 +39,9 @@ public class CollectionPresenter extends BasePresenter<ICollectionView> {
                     @Override
                     public void onNext(UserCollection userCollection) {
                         Log.d(TAG, "Got: " + userCollection.getRecords().size() + " records.");
+                        if (getView() != null) {
+                            getView().addRecords(userCollection.getRecords());
+                        }
                     }
                 }));
     }
