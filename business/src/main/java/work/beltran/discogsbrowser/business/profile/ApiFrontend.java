@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.business;
+package work.beltran.discogsbrowser.business.profile;
 
 import rx.Observable;
 import rx.Scheduler;
@@ -6,6 +6,9 @@ import rx.functions.Func1;
 import work.beltran.discogsbrowser.api.DiscogsService;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.api.model.UserProfile;
+import work.beltran.discogsbrowser.business.search.SearchSubject;
+import work.beltran.discogsbrowser.business.collection.CollectionRecordsApi;
+import work.beltran.discogsbrowser.business.wanted.WantRecordsApi;
 
 /**
  * Created by Miquel Beltran on 22.04.16.

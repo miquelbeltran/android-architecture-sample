@@ -1,6 +1,6 @@
 package work.beltran.discogsbrowser.ui.main.wantlist;
 
-import work.beltran.discogsbrowser.business.RecordsApi;
+import work.beltran.discogsbrowser.business.base.RecordsApi;
 import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 

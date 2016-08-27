@@ -6,7 +6,7 @@ import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.DiscogsService;
 import work.beltran.discogsbrowser.api.DiscogsServiceBuilderWithKey;
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.business.ApiFrontend;
+import work.beltran.discogsbrowser.business.profile.ApiFrontend;
 import work.beltran.discogsbrowser.di.modules.ApiFrontendMockModule;
 import work.beltran.discogsbrowser.di.modules.AveragePriceModule;
 import work.beltran.discogsbrowser.di.modules.DiscogsModule;

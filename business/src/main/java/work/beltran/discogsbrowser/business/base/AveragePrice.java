@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.business;
+package work.beltran.discogsbrowser.business.base;
 
 import android.util.Log;
 

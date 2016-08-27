@@ -2,7 +2,7 @@ package work.beltran.discogsbrowser.ui.di.modules;
 
 import dagger.Module;
 import dagger.Provides;
-import work.beltran.discogsbrowser.business.ApiFrontend;
+import work.beltran.discogsbrowser.business.profile.ApiFrontend;
 import work.beltran.discogsbrowser.di.modules.ApiFrontendModule;
 import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
 import work.beltran.discogsbrowser.ui.main.search.SearchRecordsAdapter;

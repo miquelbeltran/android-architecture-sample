@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
 
 import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.business.ApiFrontend;
+import work.beltran.discogsbrowser.business.profile.ApiFrontend;
 
 /**
  * Created by Miquel Beltran on 12.05.16.

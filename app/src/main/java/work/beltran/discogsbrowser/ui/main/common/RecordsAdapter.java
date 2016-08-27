@@ -19,7 +19,7 @@ import rx.Observer;
 import rx.Subscription;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.model.record.Record;
-import work.beltran.discogsbrowser.business.AveragePrice;
+import work.beltran.discogsbrowser.business.base.AveragePrice;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
