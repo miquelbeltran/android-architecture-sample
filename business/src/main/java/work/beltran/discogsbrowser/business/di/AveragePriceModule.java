@@ -6,7 +6,6 @@ import dagger.Module;
 import dagger.Provides;
 import rx.Scheduler;
 import work.beltran.discogsbrowser.api.DiscogsService;
-import work.beltran.discogsbrowser.api.di.DiscogsModule;
 import work.beltran.discogsbrowser.business.AveragePrice;
 import work.beltran.discogsbrowser.currency.FixerService;
 import work.beltran.discogsbrowser.currency.di.FixerModule;

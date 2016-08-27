@@ -3,12 +3,9 @@ package work.beltran.discogsbrowser.ui.di;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import work.beltran.discogsbrowser.di.modules.LoginModule;
+import work.beltran.discogsbrowser.di.modules.LoginPresenterModule;
 import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
-import work.beltran.discogsbrowser.business.di.RxJavaSchedulersModule;
-import work.beltran.discogsbrowser.ui.di.modules.SettingsModule;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
-import work.beltran.discogsbrowser.ui.login.LoginPresenter;
 
 /**
  * Created by Miquel Beltran on 14.05.16.
@@ -16,13 +13,9 @@ import work.beltran.discogsbrowser.ui.login.LoginPresenter;
  */
 @Singleton
 @Component(modules = {
-        SettingsModule.class,
         PicassoModule.class,
-        LoginModule.class,
-        RxJavaSchedulersModule.class
+        LoginPresenterModule.class
 })
 public interface LoginComponent {
     void inject(LoginActivity activity);
-
-    void inject(LoginPresenter presenter);
 }

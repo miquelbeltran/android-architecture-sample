@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.api.di;
+package work.beltran.discogsbrowser.api;
 
 import java.io.IOException;
 
@@ -11,21 +11,27 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by Miquel Beltran on 16.05.16.
+ * Created by Miquel Beltran on 8/27/16
  * More on http://beltran.work
  */
-public class DiscogsModuleWithApiKey extends DiscogsModule {
-    private String apiKey;
-    private String applicationId;
+public class DiscogsServiceBuilderWithKey  {
+    public static final String BASE_URL = "https://api.discogs.com/";
 
-    public DiscogsModuleWithApiKey(String apiKey, String applicationId) {
-        super(null, null, null, null, applicationId);
+    private final String apiKey;
+    private final String applicationId;
+
+    public DiscogsServiceBuilderWithKey(String apiKey,
+                                        String applicationId) {
         this.apiKey = apiKey;
         this.applicationId = applicationId;
     }
 
-    @Override
-    public Retrofit provideRetrofit() {
+
+    public DiscogsService provideDiscogsService() {
+        return provideRetrofit().create(DiscogsService.class);
+    }
+
+    private Retrofit provideRetrofit() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {
             @Override
@@ -50,5 +56,4 @@ public class DiscogsModuleWithApiKey extends DiscogsModule {
                 .client(client)
                 .build();
     }
-
 }

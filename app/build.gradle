@@ -64,7 +64,7 @@ repositories {
 }
 
 ext {
-    supportLibVersion = '23.1.0'
+    supportLibVersion = '24.2.0'
     daggerlv = '2.0'
 }
 
@@ -84,22 +84,14 @@ dependencies {
     }
     testCompile "org.robolectric:shadows-support-v4:3.1-rc1"
     testCompile 'org.assertj:assertj-core:1.7.1'
-
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
     compile "com.android.support:design:${supportLibVersion}"
     compile "com.android.support:cardview-v7:${supportLibVersion}"
     compile "com.android.support:recyclerview-v7:${supportLibVersion}"
-    compile 'com.android.support:support-v4:23.3.0'
-
-
-
-    apt "com.google.dagger:dagger-compiler:${daggerlv}"
-    provided 'org.glassfish:javax.annotation:10.0-b28'
-
-
+    compile "com.android.support:support-v4:${supportLibVersion}"
+    compile "com.google.dagger:dagger:2.4"
+    apt 'com.google.dagger:dagger-compiler:2.4'
     compile 'com.eyeem.recyclerviewtools:library:0.4.0'
-
-    compile 'com.google.dagger:dagger:2.4'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.aurelhubert:ahbottomnavigation:1.1.8'
     compile project(path: ':api')

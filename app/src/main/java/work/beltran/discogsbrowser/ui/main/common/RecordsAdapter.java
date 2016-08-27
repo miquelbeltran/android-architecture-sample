@@ -22,7 +22,6 @@ import rx.Subscription;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.business.AveragePrice;
-import work.beltran.discogsbrowser.databinding.CardRecordBinding;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
@@ -66,8 +65,8 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
         switch (viewType) {
             case VIEW_ITEM:
             default:
-                CardRecordBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.card_record, parent, false);
-                return new RecordViewHolder(binding);
+//                CardRecordBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.card_record, parent, false);
+//                return new RecordViewHolder(binding);
             case VIEW_PROG:
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.progress_item, parent, false);
                 return new ProgressBarViewHolder(view);
@@ -82,14 +81,14 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     protected void onBindViewHolder(final RecordViewHolder holder, int position) {
-        holder.getBinding().setRecord(recordList.get(position));
+//        holder.getBinding().setRecord(recordList.get(position));
         if (!recordList.get(position).getBasicInformation().getThumb().isEmpty()) {
-            picasso.load(recordList.get(position).getBasicInformation().getThumb())
-                    .tag(this)
-                    .placeholder(R.drawable.music_record)
-                    .fit()
-                    .centerCrop()
-                    .into(holder.getBinding().recordThumb);
+//            picasso.load(recordList.get(position).getBasicInformation().getThumb())
+//                    .tag(this)
+//                    .placeholder(R.drawable.music_record)
+//                    .fit()
+//                    .centerCrop()
+//                    .into(holder.getBinding().recordThumb);
         }
         boolean showPrices = settings.getSharedPreferences().getBoolean(getPreferencePrices(), getPreferencePricesDefault());
         if (showPrices) {
@@ -112,7 +111,7 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
                         @Override
                         public void onNext(Double aDouble) {
                             NumberFormat format = NumberFormat.getCurrencyInstance();
-                            holder.getBinding().textPrice.setText(format.format(aDouble));
+//                            holder.getBinding().textPrice.setText(format.format(aDouble));
                         }
                     });
             holder.setPriceSubscription(subscription);
@@ -128,7 +127,7 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private void onViewRecycled(RecordViewHolder holder) {
-        holder.getBinding().textPrice.setText("");
+//        holder.getBinding().textPrice.setText("");
         Subscription subscription = holder.getPriceSubscription();
         if (subscription != null) {
             subscription.unsubscribe();
@@ -146,10 +145,10 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
             if (subscription != null)
                 subscription.unsubscribe();
             recordList.clear();
-            List<Record> records = bundle.getParcelableArrayList("records");
-            for(Record record : records) {
-                recordList.add(record);
-            }
+//            List<Record> records = bundle.getParcelableArrayList("records");
+//            for(Record record : records) {
+//                recordList.add(record);
+//            }
             notifyDataSetChanged();
         }
     }
@@ -182,16 +181,10 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     public class RecordViewHolder extends RecyclerView.ViewHolder {
-        private CardRecordBinding binding;
         private Subscription priceSubscription;
 
-        public RecordViewHolder(CardRecordBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
-
-        public CardRecordBinding getBinding() {
-            return binding;
+        public RecordViewHolder(View view) {
+            super(view);
         }
 
         public void setPriceSubscription(Subscription priceSubscription) {
