@@ -61,7 +61,7 @@ public class CollectionView extends FrameLayout implements ICollectionView, Load
 
     @Override
     public void displayError(@StringRes int messageId) {
-
+        
     }
 
     @Override
