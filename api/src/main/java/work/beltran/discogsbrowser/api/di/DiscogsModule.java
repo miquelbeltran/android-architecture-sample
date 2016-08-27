@@ -1,6 +1,7 @@
-package work.beltran.discogsbrowser.di.modules;
+package work.beltran.discogsbrowser.api.di;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.inject.Singleton;
 
@@ -11,20 +12,37 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
-import retrofit2.RxJavaCallAdapterFactory;
-import work.beltran.discogsbrowser.BuildConfig;
-import work.beltran.discogsbrowser.api.RxJavaSchedulers;
-import work.beltran.discogsbrowser.api.network.DiscogsService;
-import work.beltran.discogsbrowser.ui.login.LoginPresenter;
-import work.beltran.discogsbrowser.ui.settings.Settings;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import work.beltran.discogsbrowser.api.DiscogsService;
 
 /**
  * Created by Miquel Beltran on 22.04.16.
  * More on http://beltran.work
  */
 @Module
-public class LoginModule {
+public class DiscogsModule {
+
     public static final String BASE_URL = "https://api.discogs.com/";
+    private static final String CALLBACK = "discogs://callback";
+    private String apiKey;
+    private String consumerKey;
+    private String consumerSecret;
+    private String userToken;
+    private String userSecret;
+    private String applicationId;
+
+    public DiscogsModule(String consumerKey,
+                         String consumerSecret,
+                         String userToken,
+                         String userSecret,
+                         String applicationId) {
+        this.consumerKey = consumerKey;
+        this.consumerSecret = consumerSecret;
+        this.userToken = userToken;
+        this.userSecret = userSecret;
+        this.applicationId = applicationId;
+    }
 
     @Provides
     @Singleton
@@ -32,11 +50,18 @@ public class LoginModule {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {
             @Override
-            public Response intercept(Chain chain) throws IOException {
+            public Response intercept(Interceptor.Chain chain) throws IOException {
                 Request original = chain.request();
                 Request request = original.newBuilder()
-                        .header("User-Agent", BuildConfig.APPLICATION_ID)
+                        .header("User-Agent", applicationId)
                         .header("Content-Type", "application/x-www-form-urlencoded")
+                        .header("Authorization",
+                                "OAuth oauth_consumer_key=\"" + consumerKey + "\", " +
+                                        "oauth_nonce=\"" + new Date().getTime() + "\", " +
+                                        "oauth_token=\"" + userToken + "\", " +
+                                        "oauth_signature=\"" + consumerSecret + "&" + userSecret + "\", " +
+                                        "oauth_signature_method=\"PLAINTEXT\", " +
+                                        "oauth_timestamp=\"" + new Date().getTime() + "\"")
                         .method(original.method(), original.body())
                         .build();
                 return chain.proceed(request);
@@ -66,6 +91,7 @@ public class LoginModule {
 
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(client)
                 .build();
@@ -75,10 +101,5 @@ public class LoginModule {
     @Singleton
     public DiscogsService provideDiscogsService(Retrofit retrofit) {
         return retrofit.create(DiscogsService.class);
-    }
-
-    @Provides
-    public LoginPresenter provideLoginPresenter(DiscogsService service, Settings settings, RxJavaSchedulers schedulers) {
-        return new LoginPresenter(service, settings, schedulers);
     }
 }

@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.di.modules;
+package work.beltran.discogsbrowser.api.di;
 
 import java.io.IOException;
 
@@ -6,10 +6,9 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
-import retrofit2.RxJavaCallAdapterFactory;
-import work.beltran.discogsbrowser.BuildConfig;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Miquel Beltran on 16.05.16.
@@ -17,10 +16,12 @@ import work.beltran.discogsbrowser.BuildConfig;
  */
 public class DiscogsModuleWithApiKey extends DiscogsModule {
     private String apiKey;
+    private String applicationId;
 
-    public DiscogsModuleWithApiKey(String apiKey) {
-        super(null, null, null, null);
+    public DiscogsModuleWithApiKey(String apiKey, String applicationId) {
+        super(null, null, null, null, applicationId);
         this.apiKey = apiKey;
+        this.applicationId = applicationId;
     }
 
     @Override
@@ -31,7 +32,7 @@ public class DiscogsModuleWithApiKey extends DiscogsModule {
             public Response intercept(Interceptor.Chain chain) throws IOException {
                 Request original = chain.request();
                 Request request = original.newBuilder()
-                        .header("User-Agent", BuildConfig.APPLICATION_ID)
+                        .header("User-Agent", applicationId)
                         .header("Content-Type", "application/x-www-form-urlencoded")
                         .header("Authorization", "Discogs token=" + apiKey)
                         .method(original.method(), original.body())
