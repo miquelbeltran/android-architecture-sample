@@ -64,7 +64,8 @@ repositories {
 }
 
 ext {
-    supportLibVersion = '23.1.0'  // variable that can be referenced to keep support libs consistent
+    supportLibVersion = '23.1.0'
+    daggerlv = '2.0'
 }
 
 dependencies {
@@ -92,7 +93,7 @@ dependencies {
 
 
 
-    apt 'com.google.dagger:dagger-compiler:2.0'
+    apt "com.google.dagger:dagger-compiler:${daggerlv}"
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
 
