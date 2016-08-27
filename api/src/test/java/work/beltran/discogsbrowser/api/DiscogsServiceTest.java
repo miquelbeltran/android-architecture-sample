@@ -11,7 +11,8 @@ public class DiscogsServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        DiscogsServiceBuilderWithKey builder = new DiscogsServiceBuilderWithKey("api key", "Unit Test");
+        String apiKey = System.getenv("DISCOGS_API_KEY");
+        DiscogsServiceBuilderWithKey builder = new DiscogsServiceBuilderWithKey(apiKey, "Unit Test");
         service = builder.provideDiscogsService();
     }
 }
