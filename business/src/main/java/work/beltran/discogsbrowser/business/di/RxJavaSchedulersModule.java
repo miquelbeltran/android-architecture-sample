@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.di.modules;
+package work.beltran.discogsbrowser.business.di;
 
 import javax.inject.Singleton;
 
@@ -7,7 +7,7 @@ import dagger.Provides;
 import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import work.beltran.discogsbrowser.api.RxJavaSchedulers;
+import work.beltran.discogsbrowser.business.RxJavaSchedulers;
 
 /**
  * Created by Miquel Beltran on 15.05.16.

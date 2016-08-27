@@ -5,7 +5,7 @@ import android.util.Log;
 import rx.Observable;
 import rx.Observer;
 import work.beltran.discogsbrowser.api.model.record.Record;
-import work.beltran.discogsbrowser.api.network.SearchSubject;
+import work.beltran.discogsbrowser.business.SearchSubject;
 import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 

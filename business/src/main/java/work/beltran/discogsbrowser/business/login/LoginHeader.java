@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.api.network.login;
+package work.beltran.discogsbrowser.business.login;
 
 import java.util.Date;
 

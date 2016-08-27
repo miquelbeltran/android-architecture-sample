@@ -5,7 +5,7 @@ import rx.schedulers.Schedulers;
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.di.modules.ApiFrontendMockModule;
-import work.beltran.discogsbrowser.di.modules.AveragePriceModule;
+import work.beltran.discogsbrowser.business.di.AveragePriceModule;
 import work.beltran.discogsbrowser.di.modules.DiscogsModuleWithApiKey;
 import work.beltran.discogsbrowser.di.modules.LoginModule;
 import work.beltran.discogsbrowser.api.model.UserProfile;

@@ -5,7 +5,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import work.beltran.discogsbrowser.di.modules.LoginModule;
 import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
-import work.beltran.discogsbrowser.ui.di.modules.RxJavaSchedulersModule;
+import work.beltran.discogsbrowser.business.di.RxJavaSchedulersModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsModule;
 import work.beltran.discogsbrowser.ui.login.LoginActivity;
 import work.beltran.discogsbrowser.ui.login.LoginPresenter;

@@ -1,6 +1,6 @@
 package work.beltran.discogsbrowser.ui.main.collection;
 
-import work.beltran.discogsbrowser.api.network.RecordsApi;
+import work.beltran.discogsbrowser.business.RecordsApi;
 import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 

@@ -8,10 +8,10 @@ import java.io.IOException;
 import okhttp3.ResponseBody;
 import rx.Observer;
 import work.beltran.discogsbrowser.BuildConfig;
-import work.beltran.discogsbrowser.api.RxJavaSchedulers;
-import work.beltran.discogsbrowser.api.network.DiscogsService;
-import work.beltran.discogsbrowser.api.network.login.AccessHeader;
-import work.beltran.discogsbrowser.api.network.login.RequestHeader;
+import work.beltran.discogsbrowser.api.DiscogsService;
+import work.beltran.discogsbrowser.business.RxJavaSchedulers;
+import work.beltran.discogsbrowser.business.login.AccessHeader;
+import work.beltran.discogsbrowser.business.login.RequestHeader;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 /**

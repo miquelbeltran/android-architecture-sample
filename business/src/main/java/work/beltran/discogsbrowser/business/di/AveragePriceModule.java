@@ -1,14 +1,15 @@
-package work.beltran.discogsbrowser.di.modules;
+package work.beltran.discogsbrowser.business.di;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import rx.Scheduler;
-import work.beltran.discogsbrowser.api.network.AveragePrice;
-import work.beltran.discogsbrowser.api.network.DiscogsService;
-import work.beltran.discogsbrowser.currency.FixerModule;
+import work.beltran.discogsbrowser.api.DiscogsService;
+import work.beltran.discogsbrowser.api.di.DiscogsModule;
+import work.beltran.discogsbrowser.business.AveragePrice;
 import work.beltran.discogsbrowser.currency.FixerService;
+import work.beltran.discogsbrowser.currency.di.FixerModule;
 
 /**
  * Created by Miquel Beltran on 05.05.16.

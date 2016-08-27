@@ -11,13 +11,12 @@ import android.view.ViewGroup;
 
 import com.eyeem.recyclerviewtools.LoadMoreOnScrollListener;
 import com.eyeem.recyclerviewtools.adapter.WrapAdapter;
-import com.eyeem.recyclerviewtools.extras.PicassoOnScrollListener;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
 import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.api.ApiFrontend;
+import work.beltran.discogsbrowser.business.ApiFrontend;
 
 /**
  * Created by Miquel Beltran on 12.05.16.
@@ -68,7 +67,6 @@ public abstract class RecordsFragment<T extends UserRecordsAdapter> extends Frag
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         if (recyclerView != null) {
             recyclerView.addOnScrollListener(new LoadMoreOnScrollListener(this));
-            recyclerView.addOnScrollListener(new PicassoOnScrollListener(adapter));
             recyclerView.setLayoutManager(layoutManager);
             WrapAdapter wrapAdapter = new WrapAdapter(adapter);
             recyclerView.setAdapter(wrapAdapter);

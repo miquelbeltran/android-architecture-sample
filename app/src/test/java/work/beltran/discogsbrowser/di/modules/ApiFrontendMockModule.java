@@ -2,6 +2,7 @@ package work.beltran.discogsbrowser.di.modules;
 
 import work.beltran.discogsbrowser.api.ApiFrontend;
 import work.beltran.discogsbrowser.api.network.DiscogsService;
+import work.beltran.discogsbrowser.business.di.ApiFrontendModule;
 
 /**
  * Created by Miquel Beltran on 28.04.16.

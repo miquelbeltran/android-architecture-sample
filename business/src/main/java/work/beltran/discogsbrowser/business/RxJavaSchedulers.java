@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.api.network;
+package work.beltran.discogsbrowser.business;
 
 import rx.Scheduler;
 

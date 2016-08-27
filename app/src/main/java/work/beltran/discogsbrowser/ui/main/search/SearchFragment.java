@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import com.eyeem.recyclerviewtools.adapter.WrapAdapter;
-import com.eyeem.recyclerviewtools.extras.PicassoOnScrollListener;
 
 import javax.inject.Inject;
 
@@ -67,7 +66,6 @@ public class SearchFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.records_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         if (recyclerView != null) {
-            recyclerView.addOnScrollListener(new PicassoOnScrollListener(adapter));
             recyclerView.setLayoutManager(layoutManager);
             WrapAdapter wrapAdapter = new WrapAdapter(adapter);
             recyclerView.setAdapter(wrapAdapter);

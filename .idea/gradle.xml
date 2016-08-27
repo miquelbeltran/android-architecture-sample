@@ -11,8 +11,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/api" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/business" />
             <option value="$PROJECT_DIR$/currency" />
-            <option value="$PROJECT_DIR$/model" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

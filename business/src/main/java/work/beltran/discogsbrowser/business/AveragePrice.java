@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.api.network;
+package work.beltran.discogsbrowser.business;
 
 import android.util.Log;
 
@@ -14,7 +14,7 @@ import work.beltran.discogsbrowser.api.DiscogsService;
 import work.beltran.discogsbrowser.api.model.MarketResult;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.currency.FixerService;
-import work.beltran.discogsbrowser.currency.Rates;
+import work.beltran.discogsbrowser.currency.model.Rates;
 
 /**
  * Created by Miquel Beltran on 05.05.16.

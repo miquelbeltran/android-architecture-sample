@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.api.network;
+package work.beltran.discogsbrowser.business;
 
 /**
  * Created by Miquel Beltran on 14.05.16.

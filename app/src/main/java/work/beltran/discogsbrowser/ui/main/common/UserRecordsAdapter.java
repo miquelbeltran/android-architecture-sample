@@ -7,7 +7,7 @@ import rx.Observer;
 import work.beltran.discogsbrowser.api.model.RecordsWithPagination;
 import work.beltran.discogsbrowser.api.model.pagination.Pagination;
 import work.beltran.discogsbrowser.api.model.record.Record;
-import work.beltran.discogsbrowser.api.network.RecordsApi;
+import work.beltran.discogsbrowser.business.RecordsApi;
 
 /**
  * Created by Miquel Beltran on 23.04.16.
@@ -27,14 +27,14 @@ public abstract class UserRecordsAdapter extends RecordsAdapter {
     @Override
     public Bundle getBundle() {
         Bundle bundle = super.getBundle();
-        bundle.putParcelable(PAGINATION, pagination);
+        //bundle.putParcelable(PAGINATION, pagination);
         return bundle;
     }
 
     @Override
     public void loadBundle(Bundle bundle) {
         super.loadBundle(bundle);
-        pagination = bundle.getParcelable(PAGINATION);
+        //pagination = bundle.getParcelable(PAGINATION);
     }
 
     protected void subscribe() {
