@@ -2,6 +2,7 @@ package work.beltran.discogsbrowser.currency;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import work.beltran.discogsbrowser.currency.model.Rates;
 
 /**
  * Created by Miquel Beltran on 05.05.16.

@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.currency;
+package work.beltran.discogsbrowser.currency.model;
 
 import java.util.Map;
 
