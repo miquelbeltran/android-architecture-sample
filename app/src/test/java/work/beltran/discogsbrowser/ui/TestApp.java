@@ -15,10 +15,7 @@ import work.beltran.discogsbrowser.ui.di.DaggerAppComponent;
 import work.beltran.discogsbrowser.ui.di.DaggerLoginComponent;
 import work.beltran.discogsbrowser.ui.di.modules.ContextModule;
 import work.beltran.discogsbrowser.ui.di.modules.LoginMockModule;
-import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterMockModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsMockModule;
-import work.beltran.discogsbrowser.ui.collection.CollectionRecordsAdapterOld;
-import work.beltran.discogsbrowser.ui.common.UserRecordsAdapterOld;
 import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapterOld;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
@@ -30,19 +27,13 @@ import static org.mockito.Mockito.when;
  * More on http://beltran.work
  */
 public class TestApp extends App {
-    private static CollectionRecordsAdapterOld mockAdapter;
     public static ApiFrontend mockApiFrontend;
     public static Settings mockSettings;
     public static WantRecordsAdapterOld mockWant;
 
-    public static UserRecordsAdapterOld getMockAdapter() {
-        return mockAdapter;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
-        mockAdapter = mock(CollectionRecordsAdapterOld.class);
         mockWant = mock(WantRecordsAdapterOld.class);
         mockApiFrontend = mock(ApiFrontend.class);
         when(mockApiFrontend.getUserProfile()).thenReturn(rx.Observable.just(new UserProfile()));
@@ -61,7 +52,6 @@ public class TestApp extends App {
                 .builder()
                 .contextModule(new ContextModule(this))
                 .discogsModule(new DiscogsModuleWithKey())
-                .recordsAdapterModule(new RecordsAdapterMockModule(mockAdapter, mockWant))
                 .apiFrontendModule(new ApiFrontendMockModule(mockApiFrontend))
                 .averagePriceModule(new AveragePriceModule(Schedulers.io(), AndroidSchedulers.mainThread()))
                 .build();

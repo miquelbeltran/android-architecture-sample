@@ -9,8 +9,6 @@ import work.beltran.discogsbrowser.ui.di.modules.ErrorModule;
 import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsModule;
-import work.beltran.discogsbrowser.ui.collection.CollectionFragment;
-import work.beltran.discogsbrowser.ui.collection.CollectionRecordsAdapterOld;
 import work.beltran.discogsbrowser.ui.collection.CollectionView;
 import work.beltran.discogsbrowser.ui.main.search.SearchFragment;
 import work.beltran.discogsbrowser.ui.main.search.SearchRecordsAdapterOld;
@@ -31,10 +29,8 @@ import work.beltran.discogsbrowser.ui.main.wantlist.WantlistFragment;
         CollectionModule.class
 })
 public interface ApiComponent {
-    void inject(CollectionFragment fragment);
     void inject(WantlistFragment fragment);
     void inject(SearchFragment fragment);
-    void inject(CollectionRecordsAdapterOld adapter);
     void inject(WantRecordsAdapterOld adapter);
     void inject(SearchRecordsAdapterOld adapter);
     void inject(CollectionView view);
