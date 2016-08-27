@@ -33,7 +33,8 @@ public class CollectionModule {
 
     @Singleton
     @Provides
-    public CollectionPresenter providesPresenter(CollectionInteractor interactor) {
-        return new CollectionPresenter(interactor);
+    public CollectionPresenter providesPresenter(CollectionInteractor interactor,
+                                                 ProfileInteractor profileInteractor) {
+        return new CollectionPresenter(interactor, profileInteractor);
     }
 }

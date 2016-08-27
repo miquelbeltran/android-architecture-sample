@@ -49,16 +49,7 @@ public class CollectionFragment extends work.beltran.discogsbrowser.ui.common.Re
 
             @Override
             public void onNext(UserProfile userProfile) {
-                ((TextView)header.findViewById(R.id.textWantlist)).setText(userProfile.getUsername());
-                ImageView imageView = (ImageView) header.findViewById(R.id.imageAvatar);
-                picasso.load(userProfile.getAvatar_url())
-                        .placeholder(R.drawable.ic_account_circle_black_48px)
-                        .fit()
-                        .centerCrop()
-                        .transform(new CircleTransform())
-                        .into(imageView);
-                TextView inCollection = (TextView) header.findViewById(R.id.textInCollection);
-                inCollection.setText(getResources().getString(R.string.in_collection, userProfile.getNum_collection()));
+
 
             }
         });

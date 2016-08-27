@@ -2,6 +2,7 @@ package work.beltran.discogsbrowser.ui.collection;
 
 import java.util.List;
 
+import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.ui.base.BaseView;
 
@@ -11,4 +12,6 @@ import work.beltran.discogsbrowser.ui.base.BaseView;
  */
 public interface ICollectionView extends BaseView {
     void addRecords(List<Record> records);
+
+    void display(UserProfile userProfile);
 }

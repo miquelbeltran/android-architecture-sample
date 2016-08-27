@@ -31,13 +31,13 @@ public class ProfileInteractorImpl implements ProfileInteractor {
     @Override
     public Observable<UserProfile> getProfile() {
         return service.getUserIdentity()
+                .subscribeOn(schedulers.io())
                 .concatMap(new Func1<UserIdentity, Observable<UserProfile>>() {
                     @Override
                     public Observable<UserProfile> call(UserIdentity userIdentity) {
-                        return service.getUserProfile(userIdentity.getUsername())
-                                .subscribeOn(schedulers.io())
-                                .observeOn(schedulers.mainThread());
+                        return service.getUserProfile(userIdentity.getUsername());
                     }
-                });
+                })
+                .observeOn(schedulers.mainThread());
     }
 }

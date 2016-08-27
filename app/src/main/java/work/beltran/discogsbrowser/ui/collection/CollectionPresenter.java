@@ -4,7 +4,9 @@ import android.util.Log;
 
 import rx.Observer;
 import work.beltran.discogsbrowser.api.model.UserCollection;
+import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.business.CollectionInteractor;
+import work.beltran.discogsbrowser.business.ProfileInteractor;
 import work.beltran.discogsbrowser.ui.base.BasePresenter;
 
 
@@ -15,10 +17,13 @@ import work.beltran.discogsbrowser.ui.base.BasePresenter;
 public class CollectionPresenter extends BasePresenter<ICollectionView> {
     public static final String TAG = CollectionPresenter.class.getName();
 
-    CollectionInteractor interactor;
+    private CollectionInteractor interactor;
+    private ProfileInteractor profileInteractor;
 
-    public CollectionPresenter(CollectionInteractor interactor) {
+    public CollectionPresenter(CollectionInteractor interactor,
+                               ProfileInteractor profileInteractor) {
         this.interactor = interactor;
+        this.profileInteractor = profileInteractor;
     }
 
     @Override
@@ -33,7 +38,7 @@ public class CollectionPresenter extends BasePresenter<ICollectionView> {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        e.printStackTrace();
                     }
 
                     @Override
@@ -41,6 +46,26 @@ public class CollectionPresenter extends BasePresenter<ICollectionView> {
                         Log.d(TAG, "Got: " + userCollection.getRecords().size() + " records.");
                         if (getView() != null) {
                             getView().addRecords(userCollection.getRecords());
+                        }
+                    }
+                }));
+        addSubscription(profileInteractor
+                .getProfile()
+                .subscribe(new Observer<UserProfile>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(UserProfile userProfile) {
+                        if (getView() != null) {
+                            getView().display(userProfile);
                         }
                     }
                 }));
