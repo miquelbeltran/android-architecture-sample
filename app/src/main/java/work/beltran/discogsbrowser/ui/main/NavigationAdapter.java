@@ -1,36 +1,42 @@
 package work.beltran.discogsbrowser.ui.main;
 
+import android.support.v4.view.PagerAdapter;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Miquel Beltran on 04.05.16.
  * More on http://beltran.work
  */
-public class NavigationAdapter {
-    NavigationView view;
-    int previous;
+public class NavigationAdapter extends PagerAdapter {
+    List<View> views = new ArrayList<>();
 
-    public void setView(NavigationView view) {
-        this.view = view;
+    public void setViews(List<View> views) {
+        this.views = views;
+        notifyDataSetChanged();
     }
 
-    public void tabItem(int position, boolean wasSelected) {
-        boolean toRight = position > previous;
-        switch (position) {
-            case 0:
-                if (!wasSelected) {
-                    view.showFragment(NavigationView.FragmentTag.Collection, toRight);
-                }
-                break;
-            case 1:
-                if (!wasSelected) {
-                    view.showFragment(NavigationView.FragmentTag.Wantlist, toRight);
-                }
-                break;
-            case 2:
-                if (!wasSelected) {
-                    view.showFragment(NavigationView.FragmentTag.Search, toRight);
-                }
-                break;
-        }
-        previous = position;
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        container.addView(views.get(position));
+        return views.get(position);
+    }
+
+    @Override
+    public void destroyItem(ViewGroup collection, int position, Object view) {
+        collection.removeView((View) view);
+    }
+
+    @Override
+    public int getCount() {
+        return views.size();
+    }
+
+    @Override
+    public boolean isViewFromObject(View view, Object object) {
+        return view == object;
     }
 }

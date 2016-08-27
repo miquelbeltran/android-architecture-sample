@@ -49,7 +49,7 @@ public class CollectionFragmentTest {
 
     @Test
     public void testLoadMore() throws Exception {
-        RecyclerView view = (RecyclerView) fragment.getView().findViewById(R.id.records_recycler_view);
+        RecyclerView view = (RecyclerView) fragment.getView().findViewById(R.id.recycler_records);
         fragment.onLoadMore(view);
         verify(adapter).loadMore();
     }

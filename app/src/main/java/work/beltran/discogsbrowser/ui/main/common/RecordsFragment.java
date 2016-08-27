@@ -63,7 +63,7 @@ public abstract class RecordsFragment<T extends UserRecordsAdapter> extends Frag
     }
 
     private void initRecyclerView(View view, LayoutInflater inflater) {
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.records_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_records);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         if (recyclerView != null) {
             recyclerView.addOnScrollListener(new LoadMoreOnScrollListener(this));
@@ -86,7 +86,7 @@ public abstract class RecordsFragment<T extends UserRecordsAdapter> extends Frag
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_collection, container, false);
+        View view = inflater.inflate(R.layout.view_collection, container, false);
         initRecyclerView(view, inflater);
         if (savedInstanceState != null) {
             adapter.loadBundle(savedInstanceState.getBundle(getTag()));

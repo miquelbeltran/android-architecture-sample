@@ -94,6 +94,10 @@ dependencies {
     compile 'com.eyeem.recyclerviewtools:library:0.4.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.aurelhubert:ahbottomnavigation:1.1.8'
+
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+
     compile project(path: ':api')
     compile project(path: ':business')
 }

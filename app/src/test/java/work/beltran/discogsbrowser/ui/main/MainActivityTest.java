@@ -47,7 +47,7 @@ public class MainActivityTest {
     @Test
     public void testSwitchFragments() throws Exception {
         navigation.setCurrentItem(0);
-        View view = activity.findViewById(R.id.records_recycler_view);
+        View view = activity.findViewById(R.id.recycler_records);
         assertThat(view).isNotNull();
         assertThat(view.getVisibility()).isEqualTo(View.VISIBLE);
     }

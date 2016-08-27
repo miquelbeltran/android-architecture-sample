@@ -63,7 +63,7 @@ public class SearchFragment extends Fragment {
     }
 
     private void initRecyclerView(View view, LayoutInflater inflater, Bundle savedInstanceState) {
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.records_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_records);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         if (recyclerView != null) {
             recyclerView.setLayoutManager(layoutManager);
