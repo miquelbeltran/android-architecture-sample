@@ -9,7 +9,7 @@ import java.util.Arrays;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
-import work.beltran.discogsbrowser.api.di.modules.ApiFrontendModule;
+import work.beltran.discogsbrowser.di.modules.ApiFrontendModule;
 import work.beltran.discogsbrowser.api.model.MockRecordCollection;
 import work.beltran.discogsbrowser.api.model.SearchRecord;
 import work.beltran.discogsbrowser.api.model.SearchResults;

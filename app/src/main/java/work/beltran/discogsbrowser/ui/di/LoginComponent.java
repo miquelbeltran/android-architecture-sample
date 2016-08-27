@@ -3,7 +3,7 @@ package work.beltran.discogsbrowser.ui.di;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import work.beltran.discogsbrowser.api.di.modules.LoginModule;
+import work.beltran.discogsbrowser.di.modules.LoginModule;
 import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 import work.beltran.discogsbrowser.ui.di.modules.RxJavaSchedulersModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsModule;

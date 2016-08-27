@@ -1,7 +1,7 @@
 package work.beltran.discogsbrowser.ui.di.modules;
 
 import work.beltran.discogsbrowser.api.RxJavaSchedulers;
-import work.beltran.discogsbrowser.api.di.modules.LoginModule;
+import work.beltran.discogsbrowser.di.modules.LoginModule;
 import work.beltran.discogsbrowser.api.network.DiscogsService;
 import work.beltran.discogsbrowser.ui.login.LoginPresenter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
