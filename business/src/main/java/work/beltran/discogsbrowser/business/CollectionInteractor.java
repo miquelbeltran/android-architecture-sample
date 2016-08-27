@@ -8,5 +8,5 @@ import work.beltran.discogsbrowser.api.model.UserCollection;
  * More on http://beltran.work
  */
 public interface CollectionInteractor {
-    Observable<UserCollection> getCollection();
+    Observable<UserCollection> getCollection(int page);
 }
