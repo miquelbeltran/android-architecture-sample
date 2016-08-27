@@ -12,8 +12,8 @@ import static org.mockito.Mockito.verify;
  * Created by Miquel Beltran on 04.05.16.
  * More on http://beltran.work
  */
-public class NavigationPresenterTest {
-    NavigationPresenter presenter;
+public class NavigationAdapterTest {
+    NavigationAdapter presenter;
 
     @Mock
     NavigationView view;
@@ -22,7 +22,7 @@ public class NavigationPresenterTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        presenter = new NavigationPresenter();
+        presenter = new NavigationAdapter();
         presenter.setView(view);
     }
 

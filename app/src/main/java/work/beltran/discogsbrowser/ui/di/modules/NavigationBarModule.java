@@ -2,7 +2,7 @@ package work.beltran.discogsbrowser.ui.di.modules;
 
 import dagger.Module;
 import dagger.Provides;
-import work.beltran.discogsbrowser.ui.main.NavigationPresenter;
+import work.beltran.discogsbrowser.ui.main.NavigationAdapter;
 
 /**
  * Created by Miquel Beltran on 04.05.16.
@@ -11,7 +11,7 @@ import work.beltran.discogsbrowser.ui.main.NavigationPresenter;
 @Module
 public class NavigationBarModule {
     @Provides
-    public NavigationPresenter providesNavigationBarPresenter() {
-         return new NavigationPresenter();
+    public NavigationAdapter providesNavigationBarPresenter() {
+         return new NavigationAdapter();
     }
 }
