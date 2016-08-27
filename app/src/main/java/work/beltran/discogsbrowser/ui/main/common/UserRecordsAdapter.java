@@ -7,7 +7,7 @@ import rx.Observer;
 import work.beltran.discogsbrowser.api.model.RecordsWithPagination;
 import work.beltran.discogsbrowser.api.model.pagination.Pagination;
 import work.beltran.discogsbrowser.api.model.record.Record;
-import work.beltran.discogsbrowser.business.base.RecordsApi;
+import work.beltran.discogsbrowser.business.old.RecordsApi;
 
 /**
  * Created by Miquel Beltran on 23.04.16.

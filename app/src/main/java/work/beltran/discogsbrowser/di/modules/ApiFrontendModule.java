@@ -6,7 +6,7 @@ import dagger.Module;
 import dagger.Provides;
 import rx.Scheduler;
 import work.beltran.discogsbrowser.api.DiscogsService;
-import work.beltran.discogsbrowser.business.profile.ApiFrontend;
+import work.beltran.discogsbrowser.business.old.ApiFrontend;
 
 /**
  * Created by Miquel Beltran on 23.04.16.

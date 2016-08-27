@@ -16,7 +16,7 @@ import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
 import work.beltran.discogsbrowser.api.model.MarketResult;
 import work.beltran.discogsbrowser.api.model.record.Record;
-import work.beltran.discogsbrowser.business.base.AveragePrice;
+import work.beltran.discogsbrowser.business.old.AveragePrice;
 import work.beltran.discogsbrowser.currency.FixerService;
 import work.beltran.discogsbrowser.currency.model.Rates;
 import work.beltran.discogsbrowser.ui.settings.Settings;

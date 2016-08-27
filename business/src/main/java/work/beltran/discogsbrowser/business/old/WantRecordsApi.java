@@ -1,11 +1,10 @@
-package work.beltran.discogsbrowser.business.wanted;
+package work.beltran.discogsbrowser.business.old;
 
 import rx.Observable;
 import rx.Scheduler;
 import work.beltran.discogsbrowser.api.DiscogsService;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.api.model.UserWanted;
-import work.beltran.discogsbrowser.business.base.RecordsApi;
 
 /**
  * Created by Miquel Beltran on 04.05.16.

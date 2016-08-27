@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.business.search;
+package work.beltran.discogsbrowser.business.old;
 
 import rx.Observable;
 import rx.Scheduler;

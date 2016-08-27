@@ -19,20 +19,17 @@ public class DiscogsServiceBuilder {
 
     public static final String BASE_URL = "https://api.discogs.com/";
     private static final String CALLBACK = "discogs://callback";
-    private String apiKey;
     private String consumerKey;
     private String consumerSecret;
     private String userToken;
     private String userSecret;
     private String applicationId;
 
-    public DiscogsServiceBuilder(String apiKey,
-                                 String consumerKey,
+    public DiscogsServiceBuilder(String consumerKey,
                                  String consumerSecret,
                                  String userToken,
                                  String userSecret,
                                  String applicationId) {
-        this.apiKey = apiKey;
         this.consumerKey = consumerKey;
         this.consumerSecret = consumerSecret;
         this.userToken = userToken;

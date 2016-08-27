@@ -17,7 +17,7 @@ import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.model.UserWanted;
 import work.beltran.discogsbrowser.api.model.record.Record;
-import work.beltran.discogsbrowser.business.profile.ApiFrontend;
+import work.beltran.discogsbrowser.business.old.ApiFrontend;
 import work.beltran.discogsbrowser.di.modules.ApiFrontendModule;
 
 import static org.assertj.core.api.Assertions.assertThat;
