@@ -6,18 +6,18 @@ import rx.Observable;
 import rx.Observer;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.business.old.SearchSubject;
-import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.common.RecordsAdapterOld;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 /**
  * Created by Miquel Beltran on 06.05.16.
  * More on http://beltran.work
  */
-public class SearchRecordsAdapter extends RecordsAdapter {
-    private static final String TAG = SearchRecordsAdapter.class.getCanonicalName();
+public class SearchRecordsAdapterOld extends RecordsAdapterOld {
+    private static final String TAG = SearchRecordsAdapterOld.class.getCanonicalName();
     private final SearchSubject subject;
 
-    public SearchRecordsAdapter(SearchSubject subject)  {
+    public SearchRecordsAdapterOld(SearchSubject subject)  {
         this.subject = subject;
     }
 

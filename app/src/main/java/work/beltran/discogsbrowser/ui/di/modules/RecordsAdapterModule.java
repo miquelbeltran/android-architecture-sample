@@ -4,9 +4,10 @@ import dagger.Module;
 import dagger.Provides;
 import work.beltran.discogsbrowser.business.old.ApiFrontend;
 import work.beltran.discogsbrowser.di.modules.ApiFrontendModule;
-import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
-import work.beltran.discogsbrowser.ui.main.search.SearchRecordsAdapter;
-import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapterOld;
+import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.search.SearchRecordsAdapterOld;
+import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapterOld;
 
 /**
  * Created by Miquel Beltran on 28.04.16.
@@ -15,17 +16,22 @@ import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapter;
 @Module(includes = {ApiFrontendModule.class})
 public class RecordsAdapterModule {
     @Provides
-    public CollectionRecordsAdapter providesCollectionRecordsAdapter(ApiFrontend apiFrontend) {
-        return new CollectionRecordsAdapter(apiFrontend.getCollectionRecords());
+    public RecordsAdapter provideAdapter() {
+        return new RecordsAdapter();
     }
 
     @Provides
-    public SearchRecordsAdapter providesSearchRecordsAdapter(ApiFrontend apiFrontend) {
-        return new SearchRecordsAdapter(apiFrontend.getSearchSubject());
+    public CollectionRecordsAdapterOld providesCollectionRecordsAdapter(ApiFrontend apiFrontend) {
+        return new CollectionRecordsAdapterOld(apiFrontend.getCollectionRecords());
     }
 
     @Provides
-    public WantRecordsAdapter providesWantRecordsAdapter(ApiFrontend apiFrontend) {
-        return new WantRecordsAdapter(apiFrontend.getWantedRecords());
+    public SearchRecordsAdapterOld providesSearchRecordsAdapter(ApiFrontend apiFrontend) {
+        return new SearchRecordsAdapterOld(apiFrontend.getSearchSubject());
+    }
+
+    @Provides
+    public WantRecordsAdapterOld providesWantRecordsAdapter(ApiFrontend apiFrontend) {
+        return new WantRecordsAdapterOld(apiFrontend.getWantedRecords());
     }
 }

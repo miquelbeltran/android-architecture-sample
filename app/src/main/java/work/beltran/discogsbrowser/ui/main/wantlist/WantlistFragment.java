@@ -13,7 +13,7 @@ import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.ui.App;
 import work.beltran.discogsbrowser.ui.main.common.CustomToolbar;
 
-public class WantlistFragment extends work.beltran.discogsbrowser.ui.main.common.RecordsFragment<WantRecordsAdapter> {
+public class WantlistFragment extends work.beltran.discogsbrowser.ui.main.common.RecordsFragment<WantRecordsAdapterOld> {
 
     public static WantlistFragment newInstance() {
         WantlistFragment fragment = new WantlistFragment();

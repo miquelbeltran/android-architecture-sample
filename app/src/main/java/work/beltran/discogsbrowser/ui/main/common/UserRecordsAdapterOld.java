@@ -13,13 +13,13 @@ import work.beltran.discogsbrowser.business.old.RecordsApi;
  * Created by Miquel Beltran on 23.04.16.
  * More on http://beltran.work
  */
-public abstract class UserRecordsAdapter extends RecordsAdapter {
-    private static final String TAG = UserRecordsAdapter.class.getCanonicalName();
+public abstract class UserRecordsAdapterOld extends RecordsAdapterOld {
+    private static final String TAG = UserRecordsAdapterOld.class.getCanonicalName();
     private static final String PAGINATION = "PAGINATION";
     protected RecordsApi subject;
     private Pagination pagination;
 
-    public UserRecordsAdapter(RecordsApi subject) {
+    public UserRecordsAdapterOld(RecordsApi subject) {
         this.subject = subject;
         subscribe();
     }

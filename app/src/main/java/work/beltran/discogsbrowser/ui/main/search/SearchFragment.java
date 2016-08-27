@@ -24,11 +24,11 @@ import work.beltran.discogsbrowser.ui.main.common.CustomToolbar;
  */
 public class SearchFragment extends Fragment {
 
-    private SearchRecordsAdapter adapter;
+    private SearchRecordsAdapterOld adapter;
     private String searchTerm = "";
 
     @Inject
-    public void setAdapter(SearchRecordsAdapter adapter) {
+    public void setAdapter(SearchRecordsAdapterOld adapter) {
         this.adapter = adapter;
     }
 

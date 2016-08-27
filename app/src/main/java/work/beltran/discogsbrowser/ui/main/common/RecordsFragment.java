@@ -22,7 +22,7 @@ import work.beltran.discogsbrowser.business.old.ApiFrontend;
  * Created by Miquel Beltran on 12.05.16.
  * More on http://beltran.work
  */
-public abstract class RecordsFragment<T extends UserRecordsAdapter> extends Fragment implements LoadMoreOnScrollListener.Listener {
+public abstract class RecordsFragment<T extends UserRecordsAdapterOld> extends Fragment implements LoadMoreOnScrollListener.Listener {
     protected T adapter;
     protected ApiFrontend collection;
     protected Picasso picasso;
@@ -80,7 +80,7 @@ public abstract class RecordsFragment<T extends UserRecordsAdapter> extends Frag
 
     @Override
     public void onLoadMore(RecyclerView recyclerView) {
-        ((UserRecordsAdapter) ((WrapAdapter) recyclerView.getAdapter()).getWrapped()).loadMore();
+        ((UserRecordsAdapterOld) ((WrapAdapter) recyclerView.getAdapter()).getWrapped()).loadMore();
     }
 
     @Override

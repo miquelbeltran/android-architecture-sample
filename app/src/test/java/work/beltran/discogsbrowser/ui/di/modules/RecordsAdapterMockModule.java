@@ -2,8 +2,8 @@ package work.beltran.discogsbrowser.ui.di.modules;
 
 import dagger.Module;
 import work.beltran.discogsbrowser.business.old.ApiFrontend;
-import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
-import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapterOld;
+import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapterOld;
 
 /**
  * Created by Miquel Beltran on 28.04.16.
@@ -11,21 +11,21 @@ import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapter;
  */
 @Module
 public class RecordsAdapterMockModule extends RecordsAdapterModule {
-    private CollectionRecordsAdapter mockAdapter;
-    private WantRecordsAdapter mockWant;
+    private CollectionRecordsAdapterOld mockAdapter;
+    private WantRecordsAdapterOld mockWant;
 
-    public RecordsAdapterMockModule(CollectionRecordsAdapter mockAdapter, WantRecordsAdapter mockWant) {
+    public RecordsAdapterMockModule(CollectionRecordsAdapterOld mockAdapter, WantRecordsAdapterOld mockWant) {
         this.mockAdapter = mockAdapter;
         this.mockWant = mockWant;
     }
 
     @Override
-    public CollectionRecordsAdapter providesCollectionRecordsAdapter(ApiFrontend apiFrontend) {
+    public CollectionRecordsAdapterOld providesCollectionRecordsAdapter(ApiFrontend apiFrontend) {
         return mockAdapter;
     }
 
     @Override
-    public WantRecordsAdapter providesWantRecordsAdapter(ApiFrontend apiFrontend) {
+    public WantRecordsAdapterOld providesWantRecordsAdapter(ApiFrontend apiFrontend) {
         return mockWant;
     }
 }

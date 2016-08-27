@@ -1,17 +1,17 @@
 package work.beltran.discogsbrowser.ui.main.collection;
 
 import work.beltran.discogsbrowser.business.old.RecordsApi;
-import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapterOld;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 /**
  * Created by Miquel Beltran on 05.05.16.
  * More on http://beltran.work
  */
-public class CollectionRecordsAdapter extends UserRecordsAdapter {
-    private static final String TAG = CollectionRecordsAdapter.class.getCanonicalName();
+public class CollectionRecordsAdapterOld extends UserRecordsAdapterOld {
+    private static final String TAG = CollectionRecordsAdapterOld.class.getCanonicalName();
 
-    public CollectionRecordsAdapter(RecordsApi subject) {
+    public CollectionRecordsAdapterOld(RecordsApi subject) {
         super(subject);
     }
 

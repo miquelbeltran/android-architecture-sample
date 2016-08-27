@@ -23,7 +23,7 @@ import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.model.MockRecordCollection;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
-import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapterOld;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -34,8 +34,8 @@ import static org.mockito.Mockito.verify;
  */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class)
-public class UserRecordsAdapterTest {
-    UserRecordsAdapter adapter;
+public class UserRecordsAdapterOldTest {
+    UserRecordsAdapterOld adapter;
     MockRecordCollection recordCollection = new MockRecordCollection();
 
 //    @Mock
@@ -56,7 +56,7 @@ public class UserRecordsAdapterTest {
         scheduler = Schedulers.test();
         subject =  TestSubject.create(scheduler);
 //        when(recordsApi.getRecordsFromService(1)).thenReturn(subject);
-//        adapter = new CollectionRecordsAdapter(recordsApi);
+//        adapter = new CollectionRecordsAdapterOld(recordsApi);
         adapter.setErrorPresenter(presenter);
         adapter.setPicasso(picasso);
     }
@@ -115,15 +115,15 @@ public class UserRecordsAdapterTest {
     public void testCreateRecordViewHolder() throws Exception {
         RecyclerView recyclerView = getRecyclerView();
         RecyclerView.ViewHolder holder = adapter.onCreateViewHolder(recyclerView, 1);
-        assertThat(holder).isInstanceOf(UserRecordsAdapter.RecordViewHolder.class);
-//        assertThat(((UserRecordsAdapter.RecordViewHolder) holder).getBinding()).isNotNull();
+        assertThat(holder).isInstanceOf(UserRecordsAdapterOld.RecordViewHolder.class);
+//        assertThat(((UserRecordsAdapterOld.RecordViewHolder) holder).getBinding()).isNotNull();
     }
 
     @Test
     public void testCreateProgressViewHolder() throws Exception {
         RecyclerView recyclerView = getRecyclerView();
         RecyclerView.ViewHolder holder = adapter.onCreateViewHolder(recyclerView, 0);
-        assertThat(holder).isInstanceOf(UserRecordsAdapter.ProgressBarViewHolder.class);
+        assertThat(holder).isInstanceOf(UserRecordsAdapterOld.ProgressBarViewHolder.class);
     }
 
     @NonNull

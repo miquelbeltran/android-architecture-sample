@@ -15,7 +15,7 @@ import work.beltran.discogsbrowser.ui.App;
 import work.beltran.discogsbrowser.ui.main.common.CustomToolbar;
 import work.beltran.discogsbrowser.ui.main.common.CircleTransform;
 
-public class CollectionFragment extends work.beltran.discogsbrowser.ui.main.common.RecordsFragment<CollectionRecordsAdapter> {
+public class CollectionFragment extends work.beltran.discogsbrowser.ui.main.common.RecordsFragment<CollectionRecordsAdapterOld> {
 
     public CollectionFragment() {
         // Required empty public constructor

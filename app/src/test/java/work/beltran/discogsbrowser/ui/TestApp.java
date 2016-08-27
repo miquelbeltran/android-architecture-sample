@@ -17,9 +17,9 @@ import work.beltran.discogsbrowser.ui.di.modules.ContextModule;
 import work.beltran.discogsbrowser.ui.di.modules.LoginMockModule;
 import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterMockModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsMockModule;
-import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
-import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapter;
-import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapterOld;
+import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapterOld;
+import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapterOld;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 import static org.mockito.Mockito.mock;
@@ -30,20 +30,20 @@ import static org.mockito.Mockito.when;
  * More on http://beltran.work
  */
 public class TestApp extends App {
-    private static CollectionRecordsAdapter mockAdapter;
+    private static CollectionRecordsAdapterOld mockAdapter;
     public static ApiFrontend mockApiFrontend;
     public static Settings mockSettings;
-    public static WantRecordsAdapter mockWant;
+    public static WantRecordsAdapterOld mockWant;
 
-    public static UserRecordsAdapter getMockAdapter() {
+    public static UserRecordsAdapterOld getMockAdapter() {
         return mockAdapter;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mockAdapter = mock(CollectionRecordsAdapter.class);
-        mockWant = mock(WantRecordsAdapter.class);
+        mockAdapter = mock(CollectionRecordsAdapterOld.class);
+        mockWant = mock(WantRecordsAdapterOld.class);
         mockApiFrontend = mock(ApiFrontend.class);
         when(mockApiFrontend.getUserProfile()).thenReturn(rx.Observable.just(new UserProfile()));
         mockSettings = mock(Settings.class);

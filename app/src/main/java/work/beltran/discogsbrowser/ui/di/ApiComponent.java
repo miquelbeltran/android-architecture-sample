@@ -4,16 +4,17 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import work.beltran.discogsbrowser.di.modules.AveragePriceModule;
+import work.beltran.discogsbrowser.ui.di.modules.CollectionModule;
 import work.beltran.discogsbrowser.ui.di.modules.ErrorModule;
 import work.beltran.discogsbrowser.ui.di.modules.PicassoModule;
 import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsModule;
 import work.beltran.discogsbrowser.ui.main.collection.CollectionFragment;
-import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapterOld;
 import work.beltran.discogsbrowser.ui.main.collection.CollectionView;
 import work.beltran.discogsbrowser.ui.main.search.SearchFragment;
-import work.beltran.discogsbrowser.ui.main.search.SearchRecordsAdapter;
-import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapter;
+import work.beltran.discogsbrowser.ui.main.search.SearchRecordsAdapterOld;
+import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapterOld;
 import work.beltran.discogsbrowser.ui.main.wantlist.WantlistFragment;
 
 /**
@@ -26,14 +27,15 @@ import work.beltran.discogsbrowser.ui.main.wantlist.WantlistFragment;
         PicassoModule.class,
         ErrorModule.class,
         RecordsAdapterModule.class,
-        AveragePriceModule.class
+        AveragePriceModule.class,
+        CollectionModule.class
 })
 public interface ApiComponent {
     void inject(CollectionFragment fragment);
     void inject(WantlistFragment fragment);
     void inject(SearchFragment fragment);
-    void inject(CollectionRecordsAdapter adapter);
-    void inject(WantRecordsAdapter adapter);
-    void inject(SearchRecordsAdapter adapter);
+    void inject(CollectionRecordsAdapterOld adapter);
+    void inject(WantRecordsAdapterOld adapter);
+    void inject(SearchRecordsAdapterOld adapter);
     void inject(CollectionView view);
 }
