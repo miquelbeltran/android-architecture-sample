@@ -17,8 +17,8 @@ import work.beltran.discogsbrowser.ui.di.modules.ContextModule;
 import work.beltran.discogsbrowser.ui.di.modules.LoginMockModule;
 import work.beltran.discogsbrowser.ui.di.modules.RecordsAdapterMockModule;
 import work.beltran.discogsbrowser.ui.di.modules.SettingsMockModule;
-import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapterOld;
-import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapterOld;
+import work.beltran.discogsbrowser.ui.collection.CollectionRecordsAdapterOld;
+import work.beltran.discogsbrowser.ui.common.UserRecordsAdapterOld;
 import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapterOld;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 

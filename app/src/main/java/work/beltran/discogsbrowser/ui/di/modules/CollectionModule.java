@@ -11,7 +11,7 @@ import work.beltran.discogsbrowser.business.RxJavaSchedulers;
 import work.beltran.discogsbrowser.business.collection.CollectionInteractorImpl;
 import work.beltran.discogsbrowser.di.modules.DiscogsModule;
 import work.beltran.discogsbrowser.di.modules.RxJavaSchedulersModule;
-import work.beltran.discogsbrowser.ui.main.collection.CollectionPresenter;
+import work.beltran.discogsbrowser.ui.collection.CollectionPresenter;
 
 /**
  * Created by Miquel Beltran on 8/27/16

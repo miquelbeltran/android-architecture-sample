@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.main.common;
+package work.beltran.discogsbrowser.ui.common;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;

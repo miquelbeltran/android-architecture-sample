@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.main.common;
+package work.beltran.discogsbrowser.ui.common;
 
 /**
  * Created by Miquel Beltran on 04.05.16.

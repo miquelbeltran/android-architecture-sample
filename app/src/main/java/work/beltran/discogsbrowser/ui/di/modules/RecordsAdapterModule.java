@@ -4,8 +4,8 @@ import dagger.Module;
 import dagger.Provides;
 import work.beltran.discogsbrowser.business.old.ApiFrontend;
 import work.beltran.discogsbrowser.di.modules.ApiFrontendModule;
-import work.beltran.discogsbrowser.ui.main.collection.CollectionRecordsAdapterOld;
-import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
+import work.beltran.discogsbrowser.ui.collection.CollectionRecordsAdapterOld;
+import work.beltran.discogsbrowser.ui.common.RecordsAdapter;
 import work.beltran.discogsbrowser.ui.main.search.SearchRecordsAdapterOld;
 import work.beltran.discogsbrowser.ui.main.wantlist.WantRecordsAdapterOld;
 

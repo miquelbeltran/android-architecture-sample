@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.main.common;
+package work.beltran.discogsbrowser.ui.common;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;

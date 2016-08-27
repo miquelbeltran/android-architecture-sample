@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.main.collection;
+package work.beltran.discogsbrowser.ui.collection;
 
 import android.content.Context;
 import android.support.annotation.StringRes;
@@ -16,7 +16,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.ui.main.common.RecordsAdapter;
+import work.beltran.discogsbrowser.ui.common.RecordsAdapter;
 
 /**
  * Created by Miquel Beltran on 8/27/16
@@ -61,7 +61,7 @@ public class CollectionView extends FrameLayout implements ICollectionView, Load
 
     @Override
     public void displayError(@StringRes int messageId) {
-        
+
     }
 
     @Override

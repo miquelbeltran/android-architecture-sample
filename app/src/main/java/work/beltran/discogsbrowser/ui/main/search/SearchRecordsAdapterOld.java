@@ -6,7 +6,7 @@ import rx.Observable;
 import rx.Observer;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.business.old.SearchSubject;
-import work.beltran.discogsbrowser.ui.main.common.RecordsAdapterOld;
+import work.beltran.discogsbrowser.ui.common.RecordsAdapterOld;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 /**

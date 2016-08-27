@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.ui.App;
-import work.beltran.discogsbrowser.ui.main.common.CustomToolbar;
+import work.beltran.discogsbrowser.ui.common.CustomToolbar;
 
 /**
  * Created by Miquel Beltran on 06.05.16.

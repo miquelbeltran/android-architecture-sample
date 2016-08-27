@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.main.collection;
+package work.beltran.discogsbrowser.ui.collection;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +23,7 @@ import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.model.MockRecordCollection;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.ui.errors.ErrorPresenter;
-import work.beltran.discogsbrowser.ui.main.common.UserRecordsAdapterOld;
+import work.beltran.discogsbrowser.ui.common.UserRecordsAdapterOld;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;

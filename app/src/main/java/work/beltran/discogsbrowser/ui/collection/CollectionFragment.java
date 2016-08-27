@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.main.collection;
+package work.beltran.discogsbrowser.ui.collection;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,10 +12,10 @@ import rx.Observer;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.ui.App;
-import work.beltran.discogsbrowser.ui.main.common.CustomToolbar;
-import work.beltran.discogsbrowser.ui.main.common.CircleTransform;
+import work.beltran.discogsbrowser.ui.common.CustomToolbar;
+import work.beltran.discogsbrowser.ui.common.CircleTransform;
 
-public class CollectionFragment extends work.beltran.discogsbrowser.ui.main.common.RecordsFragment<CollectionRecordsAdapterOld> {
+public class CollectionFragment extends work.beltran.discogsbrowser.ui.common.RecordsFragment<CollectionRecordsAdapterOld> {
 
     public CollectionFragment() {
         // Required empty public constructor

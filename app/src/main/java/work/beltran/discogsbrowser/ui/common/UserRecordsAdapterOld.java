@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.ui.main.common;
+package work.beltran.discogsbrowser.ui.common;
 
 import android.os.Bundle;
 import android.util.Log;
