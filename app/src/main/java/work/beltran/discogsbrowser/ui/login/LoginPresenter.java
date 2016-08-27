@@ -8,7 +8,7 @@ import java.io.IOException;
 import okhttp3.ResponseBody;
 import rx.Observer;
 import work.beltran.discogsbrowser.BuildConfig;
-import work.beltran.discogsbrowser.api.DiscogsService;
+import work.beltran.discogsbrowser.api.LoginService;
 import work.beltran.discogsbrowser.business.RxJavaSchedulers;
 import work.beltran.discogsbrowser.business.login.AccessHeader;
 import work.beltran.discogsbrowser.business.login.RequestHeader;
@@ -23,11 +23,11 @@ public class LoginPresenter {
     private static String OAUTH_PAGE = "https://discogs.com/oauth/authorize";
     private static String REDIRECT_URI = "discogs://callback";
     private LoginView view;
-    private DiscogsService service;
+    private LoginService service;
     private Settings settings;
     private RxJavaSchedulers schedulers;
 
-    public LoginPresenter(DiscogsService service, Settings settings, RxJavaSchedulers schedulers) {
+    public LoginPresenter(LoginService service, Settings settings, RxJavaSchedulers schedulers) {
         this.service = service;
         this.settings = settings;
         this.schedulers = schedulers;

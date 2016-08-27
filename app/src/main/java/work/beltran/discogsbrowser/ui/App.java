@@ -2,15 +2,9 @@ package work.beltran.discogsbrowser.ui;
 
 import android.app.Application;
 
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import work.beltran.discogsbrowser.BuildConfig;
-import work.beltran.discogsbrowser.business.di.ApiFrontendModule;
-import work.beltran.discogsbrowser.business.di.AveragePriceModule;
 import work.beltran.discogsbrowser.ui.di.ApiComponent;
 import work.beltran.discogsbrowser.ui.di.AppComponent;
 import work.beltran.discogsbrowser.ui.di.LoginComponent;
-import work.beltran.discogsbrowser.ui.di.modules.ContextModule;
 
 /**
  * Created by Miquel Beltran on 22.04.16.

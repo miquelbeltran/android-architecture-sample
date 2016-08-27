@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.business.di;
+package work.beltran.discogsbrowser.di.modules;
 
 import javax.inject.Singleton;
 

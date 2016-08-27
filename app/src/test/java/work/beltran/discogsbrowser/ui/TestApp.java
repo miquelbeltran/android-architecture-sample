@@ -3,12 +3,13 @@ package work.beltran.discogsbrowser.ui;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import work.beltran.discogsbrowser.BuildConfig;
-import work.beltran.discogsbrowser.api.ApiFrontend;
-import work.beltran.discogsbrowser.di.modules.ApiFrontendMockModule;
-import work.beltran.discogsbrowser.business.di.AveragePriceModule;
-import work.beltran.discogsbrowser.di.modules.DiscogsModuleWithApiKey;
-import work.beltran.discogsbrowser.di.modules.LoginModule;
+import work.beltran.discogsbrowser.api.DiscogsService;
+import work.beltran.discogsbrowser.api.DiscogsServiceBuilderWithKey;
 import work.beltran.discogsbrowser.api.model.UserProfile;
+import work.beltran.discogsbrowser.business.ApiFrontend;
+import work.beltran.discogsbrowser.di.modules.ApiFrontendMockModule;
+import work.beltran.discogsbrowser.di.modules.AveragePriceModule;
+import work.beltran.discogsbrowser.di.modules.DiscogsModule;
 import work.beltran.discogsbrowser.ui.di.DaggerApiComponent;
 import work.beltran.discogsbrowser.ui.di.DaggerAppComponent;
 import work.beltran.discogsbrowser.ui.di.DaggerLoginComponent;
@@ -53,16 +54,29 @@ public class TestApp extends App {
                 .build();
         loginComponent = DaggerLoginComponent
                 .builder()
-                .loginModule(new LoginMockModule())
+                .loginPresenterModule(new LoginMockModule())
                 .contextModule(new ContextModule(this))
                 .build();
         apiComponent = DaggerApiComponent
                 .builder()
                 .contextModule(new ContextModule(this))
-                .discogsModule(new DiscogsModuleWithApiKey(BuildConfig.API_KEY))
+                .discogsModule(new DiscogsModuleWithKey())
                 .recordsAdapterModule(new RecordsAdapterMockModule(mockAdapter, mockWant))
                 .apiFrontendModule(new ApiFrontendMockModule(mockApiFrontend))
                 .averagePriceModule(new AveragePriceModule(Schedulers.io(), AndroidSchedulers.mainThread()))
                 .build();
+    }
+
+    private class DiscogsModuleWithKey extends DiscogsModule {
+        public DiscogsModuleWithKey() {
+            super(null);
+        }
+
+        DiscogsServiceBuilderWithKey builderWithKey = new DiscogsServiceBuilderWithKey(BuildConfig.API_KEY, "Unit Tests");
+
+        @Override
+        public DiscogsService provideDiscogsService() {
+            return builderWithKey.provideDiscogsService();
+        }
     }
 }

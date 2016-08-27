@@ -2,15 +2,13 @@ package work.beltran.discogsbrowser.api;
 
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import work.beltran.discogsbrowser.api.model.MarketResult;
 import work.beltran.discogsbrowser.api.model.SearchResults;
 import work.beltran.discogsbrowser.api.model.UserCollection;
+import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.model.UserWanted;
 
@@ -38,4 +36,6 @@ public interface DiscogsService {
                                         @Query("format") String format,
                                         @Query("barcode") String barcode);
 
+    @GET("oauth/identity")
+    rx.Observable<UserIdentity> getUserIdentity();
 }

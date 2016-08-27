@@ -12,8 +12,8 @@ import org.robolectric.RobolectricTestRunner;
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 import rx.Observable;
+import work.beltran.discogsbrowser.api.LoginService;
 import work.beltran.discogsbrowser.api.RxJavaTestSchedulers;
-import work.beltran.discogsbrowser.api.network.DiscogsService;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,13 +30,13 @@ import static org.mockito.Mockito.when;
 public class LoginPresenterTest {
     LoginPresenter presenter;
     LoginView view;
-    private DiscogsService service;
+    private LoginService service;
     private Settings settings;
     private RxJavaTestSchedulers schedulers;
 
     @Before
     public void setUp() throws Exception {
-        service = mock(DiscogsService.class);
+        service = mock(LoginService.class);
         settings = mock(Settings.class);
         schedulers = new RxJavaTestSchedulers();
         presenter = new LoginPresenter(service, settings, schedulers);

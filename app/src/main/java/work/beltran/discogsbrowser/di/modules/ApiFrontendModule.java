@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.business.di;
+package work.beltran.discogsbrowser.di.modules;
 
 import javax.inject.Singleton;
 
@@ -6,7 +6,6 @@ import dagger.Module;
 import dagger.Provides;
 import rx.Scheduler;
 import work.beltran.discogsbrowser.api.DiscogsService;
-import work.beltran.discogsbrowser.api.di.DiscogsModule;
 import work.beltran.discogsbrowser.business.ApiFrontend;
 
 /**

@@ -16,10 +16,9 @@ import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
 import work.beltran.discogsbrowser.api.model.MarketResult;
 import work.beltran.discogsbrowser.api.model.record.Record;
-import work.beltran.discogsbrowser.api.network.AveragePrice;
-import work.beltran.discogsbrowser.api.network.DiscogsService;
+import work.beltran.discogsbrowser.business.AveragePrice;
 import work.beltran.discogsbrowser.currency.FixerService;
-import work.beltran.discogsbrowser.currency.Rates;
+import work.beltran.discogsbrowser.currency.model.Rates;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
 import static org.assertj.core.api.Assertions.assertThat;

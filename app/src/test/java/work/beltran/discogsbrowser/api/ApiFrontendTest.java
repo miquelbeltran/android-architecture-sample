@@ -9,7 +9,6 @@ import java.util.Arrays;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
-import work.beltran.discogsbrowser.business.di.ApiFrontendModule;
 import work.beltran.discogsbrowser.api.model.MockRecordCollection;
 import work.beltran.discogsbrowser.api.model.SearchRecord;
 import work.beltran.discogsbrowser.api.model.SearchResults;
@@ -18,7 +17,8 @@ import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.model.UserWanted;
 import work.beltran.discogsbrowser.api.model.record.Record;
-import work.beltran.discogsbrowser.api.network.DiscogsService;
+import work.beltran.discogsbrowser.business.ApiFrontend;
+import work.beltran.discogsbrowser.di.modules.ApiFrontendModule;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

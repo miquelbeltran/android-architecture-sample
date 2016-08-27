@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Miquel Beltran on 8/27/16
  * More on http://beltran.work
  */
-public class DiscogsServiceBuilderWithKey  {
+public class DiscogsServiceBuilderWithKey {
     public static final String BASE_URL = "https://api.discogs.com/";
 
     private final String apiKey;

@@ -2,6 +2,7 @@ package work.beltran.discogsbrowser.api;
 
 import rx.Scheduler;
 import rx.schedulers.Schedulers;
+import work.beltran.discogsbrowser.business.RxJavaSchedulers;
 
 /**
  * Created by Miquel Beltran on 15.05.16.

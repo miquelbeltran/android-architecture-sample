@@ -1,8 +1,6 @@
 package work.beltran.discogsbrowser.ui.main.common;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -136,7 +134,7 @@ public abstract class RecordsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public Bundle getBundle() {
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("records", (ArrayList<? extends Parcelable>) recordList);
+//        bundle.putParcelableArrayList("records", (ArrayList<? extends Parcelable>) recordList);
         return bundle;
     }
 

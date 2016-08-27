@@ -11,8 +11,6 @@ import work.beltran.discogsbrowser.api.model.UserIdentity;
  * More on http://beltran.work
  */
 public interface LoginService {
-    @GET("oauth/identity")
-    rx.Observable<UserIdentity> getUserIdentity();
 
     @GET("oauth/request_token")
     rx.Observable<ResponseBody> requestToken(@Header("Authorization") String authHeader);

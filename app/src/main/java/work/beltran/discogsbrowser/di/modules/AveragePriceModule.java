@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.business.di;
+package work.beltran.discogsbrowser.di.modules;
 
 import javax.inject.Singleton;
 
@@ -8,7 +8,6 @@ import rx.Scheduler;
 import work.beltran.discogsbrowser.api.DiscogsService;
 import work.beltran.discogsbrowser.business.AveragePrice;
 import work.beltran.discogsbrowser.currency.FixerService;
-import work.beltran.discogsbrowser.currency.di.FixerModule;
 
 /**
  * Created by Miquel Beltran on 05.05.16.
