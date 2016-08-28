@@ -15,7 +15,6 @@ import com.eyeem.recyclerviewtools.adapter.WrapAdapter;
 import javax.inject.Inject;
 
 import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.app.App;
 import work.beltran.discogsbrowser.app.common.CustomToolbar;
 
 /**
@@ -35,8 +34,6 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((App) getActivity().getApplication()).getApiComponent().inject(this);
-        ((App) getActivity().getApplication()).getApiComponent().inject(adapter);
     }
 
     @Override
