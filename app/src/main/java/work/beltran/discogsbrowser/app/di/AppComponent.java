@@ -9,6 +9,7 @@ import work.beltran.discogsbrowser.app.di.modules.NavigationBarModule;
 import work.beltran.discogsbrowser.app.di.modules.PicassoModule;
 import work.beltran.discogsbrowser.app.di.modules.SettingsModule;
 import work.beltran.discogsbrowser.app.main.MainActivity;
+import work.beltran.discogsbrowser.app.settings.Settings;
 
 /**
  * Created by Miquel Beltran on 22.04.16.
@@ -27,4 +28,5 @@ public interface AppComponent {
 
     void inject(MainActivity activity);
 
+    Settings getSettings();
 }

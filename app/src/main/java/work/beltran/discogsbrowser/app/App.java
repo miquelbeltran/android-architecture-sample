@@ -1,23 +1,25 @@
 package work.beltran.discogsbrowser.app;
 
 import android.app.Application;
+import android.support.annotation.Nullable;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.DiscogsServiceBuilder;
 import work.beltran.discogsbrowser.api.LoginServiceBuilder;
-import work.beltran.discogsbrowser.app.di.modules.ApiFrontendModule;
-import work.beltran.discogsbrowser.app.di.modules.AveragePriceModule;
-import work.beltran.discogsbrowser.app.di.modules.DiscogsModule;
-import work.beltran.discogsbrowser.app.di.modules.LoginModule;
 import work.beltran.discogsbrowser.app.di.ApiComponent;
 import work.beltran.discogsbrowser.app.di.AppComponent;
 import work.beltran.discogsbrowser.app.di.DaggerApiComponent;
 import work.beltran.discogsbrowser.app.di.DaggerAppComponent;
 import work.beltran.discogsbrowser.app.di.DaggerLoginComponent;
 import work.beltran.discogsbrowser.app.di.LoginComponent;
+import work.beltran.discogsbrowser.app.di.modules.ApiFrontendModule;
+import work.beltran.discogsbrowser.app.di.modules.AveragePriceModule;
 import work.beltran.discogsbrowser.app.di.modules.ContextModule;
+import work.beltran.discogsbrowser.app.di.modules.DiscogsModule;
+import work.beltran.discogsbrowser.app.di.modules.LoginModule;
+import work.beltran.discogsbrowser.app.settings.Settings;
 
 /**
  * Created by Miquel Beltran on 22.04.16.
@@ -25,7 +27,7 @@ import work.beltran.discogsbrowser.app.di.modules.ContextModule;
 @SuppressWarnings("ALL")
 public class App extends Application {
     private static final String TAG = App.class.getCanonicalName();
-    /* package */ ApiComponent apiComponent;
+    /* package */ @Nullable ApiComponent apiComponent;
     /* package */ AppComponent appComponent;
     /* package */ LoginComponent loginComponent;
 
@@ -44,8 +46,13 @@ public class App extends Application {
                                 new LoginServiceBuilder(
                                         BuildConfig.APPLICATION_ID+"/"+BuildConfig.VERSION_NAME)))
                 .build();
+        Settings settings = appComponent.getSettings();
+        if (!settings.getUserToken().isEmpty() && !settings.getUserSecret().isEmpty()) {
+            initApiComponent(settings.getUserToken(), settings.getUserSecret());
+        }
     }
 
+    @Nullable
     public ApiComponent getApiComponent() {
         return apiComponent;
     }
