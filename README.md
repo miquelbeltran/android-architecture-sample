@@ -1,17 +1,14 @@
-## News - 27 August 2016
+## News - 28 August 2016
 
 Some of the features of the project are currently broken and the app has been removed from the market.
 
-I am currenly working on a major refactor with the following changes:
+There has been a major refactor with the following changes:
 
 - api, business logic, ui and currency converter in separated modules.
 - Major refactor of the business logic.
-- Caching using a Realm database.
 - Major refactor of ui classes with better MVP pattern.
 - Removed Data Binding in favor of ButterKnife.
 - Removed Fragments in favor of custom views.
-
-Follow the refactors in the `refactor` branch.
 
 # My Vinyl Discogs Browser for Android
 
@@ -27,19 +24,16 @@ Source code of the Android app, using Retrofit, RxJava, Dagger and more
 - Browse your Discogs collection.
 - Check your wishlist (wantlist).
 - Search the database.
-- Get market prices.
+- ~~Get market prices.~~ currently not working
 
 ## Code Features
 
-- Clean app architecture: UI and API separated.
-- Use of RecyclerView.
-- Use of Data Binding.
+- Clean app architecture in different modules.
+- Dependency injection everywhere with Dagger 2.
 - Retrofit + GSON + RxJava.
 - Picasso for image loading.
-- Robolectric + Mockito for Unit Testing. 
+- Robolectric + Mockito for Unit Testing.
 - Beatiful material design.
-
-Public Trello board: https://trello.com/b/cpMFH9K8
 
 ## Screenshots
 
