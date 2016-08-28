@@ -11,12 +11,12 @@
     <string name="tab_2">Wantlist</string>
     <string name="tab_3">Search</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="in_collection">%s in Collection</string>
+    <string name="in_collection">%d in Collection</string>
     <string name="loading_collection">Loading collection</string>
     <string name="avatar">avatar</string>
     <string name="username">Loading user profile</string>
     <string name="user_wantlist">%s\'s Wantlist</string>
-    <string name="in_wantlist">%s in Wantlist</string>
+    <string name="in_wantlist">%d in Wantlist</string>
     <string name="loading_wantlist">Loading Wantlist</string>
     <string name="thanks_for_downloading_my_app">Thanks for downloading my App!</string>
     <string name="thank_you_letter">Thank you for downloading my application,

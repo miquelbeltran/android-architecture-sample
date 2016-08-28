@@ -9,18 +9,18 @@
         android:layout_height="56dp" />
 
     <TextView
-        android:id="@+id/textWantlist"
+        android:id="@+id/text_user"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:layout_alignTop="@+id/imageAvatar"
-        android:layout_toEndOf="@+id/imageAvatar"
-        android:layout_toRightOf="@+id/imageAvatar"
+        android:layout_alignTop="@+id/image_avatar"
+        android:layout_toEndOf="@+id/image_avatar"
+        android:layout_toRightOf="@+id/image_avatar"
         android:gravity="center"
         android:text="@string/username"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
-        android:id="@+id/imageAvatar"
+        android:id="@+id/image_avatar"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_alignParentLeft="true"
@@ -32,12 +32,12 @@
         android:src="@drawable/ic_account_circle_black_48px" />
 
     <TextView
-        android:id="@+id/textInCollection"
+        android:id="@+id/text_collection_count"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:layout_alignLeft="@+id/textWantlist"
-        android:layout_alignStart="@+id/textWantlist"
-        android:layout_below="@+id/textWantlist"
+        android:layout_alignLeft="@+id/text_user"
+        android:layout_alignStart="@+id/text_user"
+        android:layout_below="@+id/text_user"
         android:gravity="center"
         android:text="@string/loading_collection"
         android:textAppearance="?android:attr/textAppearanceSmall" />

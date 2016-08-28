@@ -12,7 +12,7 @@
         android:layout_height="28dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/loading_wantlist"
-        android:id="@+id/textWantlist"
+        android:id="@+id/text_wantlist"
         android:layout_alignTop="@+id/imageFav"
         android:gravity="center"
         android:layout_toRightOf="@+id/imageFav" />
@@ -34,9 +34,9 @@
         android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/textInWantlist"
-        android:layout_below="@+id/textWantlist"
-        android:layout_alignLeft="@+id/textWantlist"
-        android:layout_alignStart="@+id/textWantlist"
+        android:id="@+id/text_wantlist_count"
+        android:layout_below="@+id/text_wantlist"
+        android:layout_alignLeft="@+id/text_wantlist"
+        android:layout_alignStart="@+id/text_wantlist"
         android:gravity="center" />
 </RelativeLayout>
