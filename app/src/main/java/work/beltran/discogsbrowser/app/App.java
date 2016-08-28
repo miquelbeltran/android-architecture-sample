@@ -3,8 +3,6 @@ package work.beltran.discogsbrowser.app;
 import android.app.Application;
 import android.support.annotation.Nullable;
 
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.DiscogsServiceBuilder;
 import work.beltran.discogsbrowser.api.LoginServiceBuilder;
@@ -14,8 +12,6 @@ import work.beltran.discogsbrowser.app.di.DaggerApiComponent;
 import work.beltran.discogsbrowser.app.di.DaggerAppComponent;
 import work.beltran.discogsbrowser.app.di.DaggerLoginComponent;
 import work.beltran.discogsbrowser.app.di.LoginComponent;
-import work.beltran.discogsbrowser.app.di.modules.ApiFrontendModule;
-import work.beltran.discogsbrowser.app.di.modules.AveragePriceModule;
 import work.beltran.discogsbrowser.app.di.modules.ContextModule;
 import work.beltran.discogsbrowser.app.di.modules.DiscogsModule;
 import work.beltran.discogsbrowser.app.di.modules.LoginModule;
@@ -77,8 +73,6 @@ public class App extends Application {
                                         userToken,
                                         userSecret,
                                         BuildConfig.APPLICATION_ID+"/"+BuildConfig.VERSION_NAME)))
-                .apiFrontendModule(new ApiFrontendModule(Schedulers.io(), AndroidSchedulers.mainThread()))
-                .averagePriceModule(new AveragePriceModule(Schedulers.io(), AndroidSchedulers.mainThread()))
                 .build();
     }
 }

@@ -18,6 +18,7 @@ import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.app.App;
 import work.beltran.discogsbrowser.app.collection.CollectionFrameLayout;
 import work.beltran.discogsbrowser.app.di.ApiComponent;
+import work.beltran.discogsbrowser.app.search.SearchFrameLayout;
 import work.beltran.discogsbrowser.app.wantlist.WantlistFrameLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -80,7 +81,14 @@ public class MainActivity extends AppCompatActivity {
         WantlistFrameLayout wantlistFrameLayout = new WantlistFrameLayout(this);
         if (apiComponent != null)
             apiComponent.inject(wantlistFrameLayout);
-        navigationAdapter.setViews(Arrays.<View>asList(view, wantlistFrameLayout));
+        SearchFrameLayout searchFrameLayout = new SearchFrameLayout(this);
+        if (apiComponent != null)
+            apiComponent.inject(searchFrameLayout);
+        navigationAdapter.setViews(
+                Arrays.<View>asList(
+                        view,
+                        wantlistFrameLayout,
+                        searchFrameLayout));
         pager.setAdapter(navigationAdapter);
     }
 }

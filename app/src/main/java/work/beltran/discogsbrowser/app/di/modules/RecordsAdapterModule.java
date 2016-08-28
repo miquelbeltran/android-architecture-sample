@@ -11,8 +11,7 @@ import work.beltran.discogsbrowser.app.common.RecordsAdapter;
  * More on http://beltran.work
  */
 @Module(includes = {
-        PicassoModule.class,
-        ApiFrontendModule.class
+        PicassoModule.class
 })
 public class RecordsAdapterModule {
     @Provides

@@ -25,6 +25,10 @@ public class BasePresenter<V extends BaseView> {
 
     public void detachView() {
         this.view = null;
+        unsubscribeAll();
+    }
+
+    public void unsubscribeAll() {
         compositeSubscription.clear();
     }
 

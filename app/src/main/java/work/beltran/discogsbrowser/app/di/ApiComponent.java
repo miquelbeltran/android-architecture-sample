@@ -4,13 +4,13 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import work.beltran.discogsbrowser.app.collection.CollectionFrameLayout;
-import work.beltran.discogsbrowser.app.di.modules.AveragePriceModule;
 import work.beltran.discogsbrowser.app.di.modules.CollectionModule;
-import work.beltran.discogsbrowser.app.di.modules.ErrorModule;
 import work.beltran.discogsbrowser.app.di.modules.PicassoModule;
 import work.beltran.discogsbrowser.app.di.modules.RecordsAdapterModule;
+import work.beltran.discogsbrowser.app.di.modules.SearchModule;
 import work.beltran.discogsbrowser.app.di.modules.SettingsModule;
 import work.beltran.discogsbrowser.app.di.modules.WantlistModule;
+import work.beltran.discogsbrowser.app.search.SearchFrameLayout;
 import work.beltran.discogsbrowser.app.wantlist.WantlistFrameLayout;
 
 /**
@@ -21,13 +21,13 @@ import work.beltran.discogsbrowser.app.wantlist.WantlistFrameLayout;
 @Component(modules = {
         SettingsModule.class,
         PicassoModule.class,
-        ErrorModule.class,
         RecordsAdapterModule.class,
-        AveragePriceModule.class,
         CollectionModule.class,
-        WantlistModule.class
+        WantlistModule.class,
+        SearchModule.class
 })
 public interface ApiComponent {
     void inject(CollectionFrameLayout view);
     void inject(WantlistFrameLayout wantlistFrameLayout);
+    void inject(SearchFrameLayout searchFrameLayout);
 }

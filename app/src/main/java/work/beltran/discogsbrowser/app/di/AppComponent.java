@@ -4,7 +4,6 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import work.beltran.discogsbrowser.app.LauncherActivity;
-import work.beltran.discogsbrowser.app.di.modules.ErrorModule;
 import work.beltran.discogsbrowser.app.di.modules.NavigationBarModule;
 import work.beltran.discogsbrowser.app.di.modules.PicassoModule;
 import work.beltran.discogsbrowser.app.di.modules.SettingsModule;
@@ -19,7 +18,6 @@ import work.beltran.discogsbrowser.business.settings.Settings;
 @Component(modules = {
         SettingsModule.class,
         PicassoModule.class,
-        ErrorModule.class,
         NavigationBarModule.class
 })
 public interface AppComponent {

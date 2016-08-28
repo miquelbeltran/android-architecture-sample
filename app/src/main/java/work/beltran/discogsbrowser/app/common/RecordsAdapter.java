@@ -62,6 +62,11 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.RecordVi
         notifyItemRangeInserted(positionStart, records.size());
     }
 
+    public void clear() {
+        records.clear();
+        notifyDataSetChanged();
+    }
+
     public class RecordViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.text_title)
         TextView textTitle;

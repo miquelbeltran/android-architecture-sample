@@ -1,5 +1,7 @@
 package work.beltran.discogsbrowser.business;
 
+import java.util.List;
+
 import rx.Observable;
 import work.beltran.discogsbrowser.api.model.record.Record;
 
@@ -8,5 +10,5 @@ import work.beltran.discogsbrowser.api.model.record.Record;
  * More on http://beltran.work
  */
 public interface SearchInteractor {
-    Observable<Record> search(final String query, final int nextPage);
+    Observable<List<Record>> search(final String query);
 }
