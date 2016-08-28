@@ -1,14 +1,12 @@
 package work.beltran.discogsbrowser.app.collection;
 
-import android.util.Log;
-
 import rx.Observer;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.model.pagination.Pagination;
+import work.beltran.discogsbrowser.app.base.BasePresenter;
 import work.beltran.discogsbrowser.business.CollectionInteractor;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
-import work.beltran.discogsbrowser.app.base.BasePresenter;
 
 
 /**
@@ -55,7 +53,7 @@ public class CollectionPresenter extends BasePresenter<ICollectionView> {
                 }));
     }
 
-    public void loadMore() {
+    void loadMore() {
         if (loading) return;
         int page = 0;
         if (pagination != null) {
@@ -78,7 +76,6 @@ public class CollectionPresenter extends BasePresenter<ICollectionView> {
 
                     @Override
                     public void onNext(UserCollection userCollection) {
-                        Log.d(TAG, "Got: " + userCollection.getRecords().size() + " records.");
                         pagination = userCollection.getPagination();
                         if (getView() != null) {
                             getView().addRecords(userCollection.getRecords());
@@ -87,7 +84,7 @@ public class CollectionPresenter extends BasePresenter<ICollectionView> {
                 }));
     }
 
-    public void setLoading(boolean loading) {
+    private void setLoading(boolean loading) {
         this.loading = loading;
         if (getView() != null)
             getView().setLoading(loading);
