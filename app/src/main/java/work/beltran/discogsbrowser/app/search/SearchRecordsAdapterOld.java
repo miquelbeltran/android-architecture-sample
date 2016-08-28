@@ -7,7 +7,7 @@ import rx.Observer;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.business.old.SearchSubject;
 import work.beltran.discogsbrowser.app.common.RecordsAdapterOld;
-import work.beltran.discogsbrowser.app.settings.Settings;
+import work.beltran.discogsbrowser.business.settings.Settings;
 
 /**
  * Created by Miquel Beltran on 06.05.16.

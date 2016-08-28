@@ -21,7 +21,7 @@ import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.business.old.AveragePrice;
 import work.beltran.discogsbrowser.app.errors.ErrorPresenter;
-import work.beltran.discogsbrowser.app.settings.Settings;
+import work.beltran.discogsbrowser.business.settings.Settings;
 
 /**
  * Created by Miquel Beltran on 12.05.16.

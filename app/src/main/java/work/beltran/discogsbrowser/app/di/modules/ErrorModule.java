@@ -5,7 +5,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import work.beltran.discogsbrowser.app.errors.ErrorPresenter;
-import work.beltran.discogsbrowser.app.settings.Settings;
+import work.beltran.discogsbrowser.business.settings.Settings;
 
 /**
  * Created by Miquel Beltran on 03.05.16.

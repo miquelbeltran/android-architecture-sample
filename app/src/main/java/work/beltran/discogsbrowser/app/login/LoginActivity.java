@@ -3,6 +3,7 @@ package work.beltran.discogsbrowser.app.login;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +31,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ((App) getApplication()).getLoginComponent().inject(this);
-        presenter.setView(this);
+        presenter.attachView(this);
 
         Button loginButton = (Button) findViewById(R.id.loginbutton);
         if (loginButton != null) {
@@ -57,9 +58,20 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
+
+    @Override
     public void startLauncher() {
         Intent intent = new Intent(this, LauncherActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void displayError(@StringRes int messageId) {
+
     }
 }

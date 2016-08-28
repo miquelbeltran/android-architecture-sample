@@ -19,7 +19,7 @@ import work.beltran.discogsbrowser.app.di.modules.AveragePriceModule;
 import work.beltran.discogsbrowser.app.di.modules.ContextModule;
 import work.beltran.discogsbrowser.app.di.modules.DiscogsModule;
 import work.beltran.discogsbrowser.app.di.modules.LoginModule;
-import work.beltran.discogsbrowser.app.settings.Settings;
+import work.beltran.discogsbrowser.business.settings.Settings;
 
 /**
  * Created by Miquel Beltran on 22.04.16.

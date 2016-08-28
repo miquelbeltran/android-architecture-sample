@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import work.beltran.discogsbrowser.BuildConfig;
-import work.beltran.discogsbrowser.app.settings.Settings;
+import work.beltran.discogsbrowser.business.settings.Settings;
 
 /**
  * Created by Miquel Beltran on 02.05.16.
