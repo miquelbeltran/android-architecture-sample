@@ -18,7 +18,7 @@ import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.model.UserWanted;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.business.old.ApiFrontend;
-import work.beltran.discogsbrowser.ui.di.modules.ApiFrontendModule;
+import work.beltran.discogsbrowser.app.di.modules.ApiFrontendModule;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

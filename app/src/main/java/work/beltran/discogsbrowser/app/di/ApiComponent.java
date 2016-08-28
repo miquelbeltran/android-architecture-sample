@@ -1,0 +1,37 @@
+package work.beltran.discogsbrowser.app.di;
+
+import javax.inject.Singleton;
+
+import dagger.Component;
+import work.beltran.discogsbrowser.app.di.modules.AveragePriceModule;
+import work.beltran.discogsbrowser.app.di.modules.CollectionModule;
+import work.beltran.discogsbrowser.app.di.modules.ErrorModule;
+import work.beltran.discogsbrowser.app.di.modules.PicassoModule;
+import work.beltran.discogsbrowser.app.di.modules.RecordsAdapterModule;
+import work.beltran.discogsbrowser.app.di.modules.SettingsModule;
+import work.beltran.discogsbrowser.app.collection.CollectionView;
+import work.beltran.discogsbrowser.app.main.search.SearchFragment;
+import work.beltran.discogsbrowser.app.main.search.SearchRecordsAdapterOld;
+import work.beltran.discogsbrowser.app.main.wantlist.WantRecordsAdapterOld;
+import work.beltran.discogsbrowser.app.main.wantlist.WantlistFragment;
+
+/**
+ * Created by Miquel Beltran on 02.05.16.
+ * More on http://beltran.work
+ */
+@Singleton
+@Component(modules = {
+        SettingsModule.class,
+        PicassoModule.class,
+        ErrorModule.class,
+        RecordsAdapterModule.class,
+        AveragePriceModule.class,
+        CollectionModule.class
+})
+public interface ApiComponent {
+    void inject(WantlistFragment fragment);
+    void inject(SearchFragment fragment);
+    void inject(WantRecordsAdapterOld adapter);
+    void inject(SearchRecordsAdapterOld adapter);
+    void inject(CollectionView view);
+}

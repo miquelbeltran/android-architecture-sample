@@ -19,7 +19,7 @@ import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.business.old.AveragePrice;
 import work.beltran.discogsbrowser.currency.FixerService;
 import work.beltran.discogsbrowser.currency.model.Rates;
-import work.beltran.discogsbrowser.ui.settings.Settings;
+import work.beltran.discogsbrowser.app.settings.Settings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyInt;

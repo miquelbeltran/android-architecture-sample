@@ -13,7 +13,7 @@ import work.beltran.discogsbrowser.api.DiscogsServiceBuilderWithKey;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserIdentity;
 import work.beltran.discogsbrowser.api.model.record.Record;
-import work.beltran.discogsbrowser.ui.TestApp;
+import work.beltran.discogsbrowser.app.TestApp;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
