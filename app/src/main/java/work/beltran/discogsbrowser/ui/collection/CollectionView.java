@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.eyeem.recyclerviewtools.LoadMoreOnScrollListener;
@@ -40,26 +41,19 @@ public class CollectionView extends FrameLayout implements ICollectionView, Load
 
     private RecordsAdapter adapter;
     private Header header = new Header();
+    private Footer footer = new Footer();
 
     @Inject
     public Picasso picasso;
 
     @Inject
-    public void setCollectionPresenter(CollectionPresenter presenter) {
+    public void setPresenterAdapter(CollectionPresenter presenter, RecordsAdapter adapter) {
+        this.adapter = adapter;
+        createHeaderFooter(adapter);
         this.presenter = presenter;
         presenter.attachView(this);
     }
-
-    @Inject
-    public void setAdapter(RecordsAdapter adapter) {
-        this.adapter = adapter;
-        WrapAdapter wrapAdapter = new WrapAdapter(adapter);
-        recyclerView.setAdapter(wrapAdapter);
-        View header = LayoutInflater.from(getContext()).inflate(R.layout.header, recyclerView, false);
-        ButterKnife.bind(this.header, header);
-        wrapAdapter.addHeader(header);
-    }
-
+    
     public CollectionView(Context context) {
         super(context);
         init();
@@ -97,7 +91,7 @@ public class CollectionView extends FrameLayout implements ICollectionView, Load
 
     @Override
     public void onLoadMore(RecyclerView recyclerView) {
-
+        presenter.loadMore();
     }
 
     @Override
@@ -120,6 +114,22 @@ public class CollectionView extends FrameLayout implements ICollectionView, Load
                         userProfile.getNum_collection()));
     }
 
+    @Override
+    public void setLoading(boolean loading) {
+        footer.progressBar.setVisibility(loading ? VISIBLE : GONE);
+    }
+
+    private void createHeaderFooter(RecordsAdapter adapter) {
+        WrapAdapter wrapAdapter = new WrapAdapter(adapter);
+        recyclerView.setAdapter(wrapAdapter);
+        View header = LayoutInflater.from(getContext()).inflate(R.layout.header, recyclerView, false);
+        ButterKnife.bind(this.header, header);
+        wrapAdapter.addHeader(header);
+        View footer = LayoutInflater.from(getContext()).inflate(R.layout.footer, recyclerView, false);
+        ButterKnife.bind(this.footer, footer);
+        wrapAdapter.addFooter(footer);
+    }
+
     public static class Header {
         @BindView(R.id.text_user)
         TextView textUser;
@@ -127,5 +137,10 @@ public class CollectionView extends FrameLayout implements ICollectionView, Load
         ImageView imageAvatar;
         @BindView(R.id.text_collection_count)
         TextView textCollectionCount;
+    }
+
+    public static class Footer {
+        @BindView(R.id.progressbar)
+        ProgressBar progressBar;
     }
 }

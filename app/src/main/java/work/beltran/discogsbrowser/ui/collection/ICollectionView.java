@@ -14,4 +14,6 @@ public interface ICollectionView extends BaseView {
     void addRecords(List<Record> records);
 
     void display(UserProfile userProfile);
+
+    void setLoading(boolean loading);
 }

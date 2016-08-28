@@ -5,6 +5,7 @@ import android.util.Log;
 import rx.Observer;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserProfile;
+import work.beltran.discogsbrowser.api.model.pagination.Pagination;
 import work.beltran.discogsbrowser.business.CollectionInteractor;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
 import work.beltran.discogsbrowser.ui.base.BasePresenter;
@@ -19,6 +20,8 @@ public class CollectionPresenter extends BasePresenter<ICollectionView> {
 
     private CollectionInteractor interactor;
     private ProfileInteractor profileInteractor;
+    private boolean loading;
+    private Pagination pagination;
 
     public CollectionPresenter(CollectionInteractor interactor,
                                ProfileInteractor profileInteractor) {
@@ -29,26 +32,7 @@ public class CollectionPresenter extends BasePresenter<ICollectionView> {
     @Override
     public void attachView(ICollectionView view) {
         super.attachView(view);
-        addSubscription(interactor.getCollection(0)
-                .subscribe(new Observer<UserCollection>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onNext(UserCollection userCollection) {
-                        Log.d(TAG, "Got: " + userCollection.getRecords().size() + " records.");
-                        if (getView() != null) {
-                            getView().addRecords(userCollection.getRecords());
-                        }
-                    }
-                }));
+        loadMore();
         addSubscription(profileInteractor
                 .getProfile()
                 .subscribe(new Observer<UserProfile>() {
@@ -69,5 +53,43 @@ public class CollectionPresenter extends BasePresenter<ICollectionView> {
                         }
                     }
                 }));
+    }
+
+    public void loadMore() {
+        if (loading) return;
+        int page = 0;
+        if (pagination != null) {
+            if (pagination.getPage() >= pagination.getPages()) return;
+            page = pagination.getPage() + 1;
+        }
+        setLoading(true);
+        addSubscription(interactor.getCollection(page)
+                .subscribe(new Observer<UserCollection>() {
+                    @Override
+                    public void onCompleted() {
+                        setLoading(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        setLoading(true);
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(UserCollection userCollection) {
+                        Log.d(TAG, "Got: " + userCollection.getRecords().size() + " records.");
+                        pagination = userCollection.getPagination();
+                        if (getView() != null) {
+                            getView().addRecords(userCollection.getRecords());
+                        }
+                    }
+                }));
+    }
+
+    public void setLoading(boolean loading) {
+        this.loading = loading;
+        if (getView() != null)
+            getView().setLoading(loading);
     }
 }
