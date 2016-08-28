@@ -53,7 +53,7 @@ public class CollectionView extends FrameLayout implements ICollectionView, Load
         this.presenter = presenter;
         presenter.attachView(this);
     }
-    
+
     public CollectionView(Context context) {
         super(context);
         init();

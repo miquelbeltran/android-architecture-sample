@@ -8,8 +8,6 @@ import work.beltran.discogsbrowser.api.DiscogsService;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
 import work.beltran.discogsbrowser.business.RxJavaSchedulers;
 import work.beltran.discogsbrowser.business.profile.ProfileInteractorImpl;
-import work.beltran.discogsbrowser.di.modules.DiscogsModule;
-import work.beltran.discogsbrowser.di.modules.RxJavaSchedulersModule;
 
 /**
  * Created by Miquel Beltran on 8/27/16

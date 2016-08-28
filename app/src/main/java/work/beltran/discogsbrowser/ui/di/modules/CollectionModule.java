@@ -9,8 +9,6 @@ import work.beltran.discogsbrowser.business.CollectionInteractor;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
 import work.beltran.discogsbrowser.business.RxJavaSchedulers;
 import work.beltran.discogsbrowser.business.collection.CollectionInteractorImpl;
-import work.beltran.discogsbrowser.di.modules.DiscogsModule;
-import work.beltran.discogsbrowser.di.modules.RxJavaSchedulersModule;
 import work.beltran.discogsbrowser.ui.collection.CollectionPresenter;
 
 /**

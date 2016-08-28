@@ -1,10 +1,9 @@
-package work.beltran.discogsbrowser.di.modules;
+package work.beltran.discogsbrowser.ui.di.modules;
 
 import dagger.Module;
 import dagger.Provides;
 import work.beltran.discogsbrowser.api.LoginService;
 import work.beltran.discogsbrowser.business.RxJavaSchedulers;
-import work.beltran.discogsbrowser.ui.di.modules.SettingsModule;
 import work.beltran.discogsbrowser.ui.login.LoginPresenter;
 import work.beltran.discogsbrowser.ui.settings.Settings;
 
