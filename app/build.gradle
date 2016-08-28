@@ -47,9 +47,6 @@ android {
 //            proguardFile 'proguard-square-okio.pro'
         }
     }
-    dataBinding {
-        enabled = true
-    }
     lintOptions {
         lintConfig rootProject.file('app/lint.xml')
 
