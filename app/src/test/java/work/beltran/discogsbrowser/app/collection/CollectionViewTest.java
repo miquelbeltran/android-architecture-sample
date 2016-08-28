@@ -23,6 +23,7 @@ import work.beltran.discogsbrowser.app.TestApp;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -53,6 +54,7 @@ public class CollectionViewTest {
 
     @Test
     public void onAttachedToWindow() throws Exception {
+        reset(presenter);
         view.onAttachedToWindow();
         verify(presenter).attachView(view);
     }
@@ -84,7 +86,7 @@ public class CollectionViewTest {
         userProfile.setAvatar_url("url");
         view.display(userProfile);
         assertThat(view.header.textUser.getText().toString()).isEqualTo("name");
-        assertThat(view.header.textCollectionCount.getText().toString()).isEqualTo("42");
+        assertThat(view.header.textCollectionCount.getText().toString()).isEqualTo("42 in Collection");
     }
 
     @Test
