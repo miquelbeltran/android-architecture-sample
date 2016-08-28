@@ -23,7 +23,5 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    compile "com.google.dagger:dagger:2.4"
-    apt 'com.google.dagger:dagger-compiler:2.4'
     compile 'junit:junit:4.12'
 }
