@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.app.main.wantlist;
+package work.beltran.discogsbrowser.app.wantlist;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

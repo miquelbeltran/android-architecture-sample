@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.app.main.wantlist;
+package work.beltran.discogsbrowser.app.wantlist;
 
 import work.beltran.discogsbrowser.business.old.RecordsApi;
 import work.beltran.discogsbrowser.app.common.UserRecordsAdapterOld;

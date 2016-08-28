@@ -12,8 +12,8 @@ import work.beltran.discogsbrowser.app.di.modules.SettingsModule;
 import work.beltran.discogsbrowser.app.collection.CollectionView;
 import work.beltran.discogsbrowser.app.main.search.SearchFragment;
 import work.beltran.discogsbrowser.app.main.search.SearchRecordsAdapterOld;
-import work.beltran.discogsbrowser.app.main.wantlist.WantRecordsAdapterOld;
-import work.beltran.discogsbrowser.app.main.wantlist.WantlistFragment;
+import work.beltran.discogsbrowser.app.wantlist.WantRecordsAdapterOld;
+import work.beltran.discogsbrowser.app.wantlist.WantlistFragment;
 
 /**
  * Created by Miquel Beltran on 02.05.16.

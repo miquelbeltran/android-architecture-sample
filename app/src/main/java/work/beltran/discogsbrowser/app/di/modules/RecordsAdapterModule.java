@@ -7,7 +7,7 @@ import dagger.Provides;
 import work.beltran.discogsbrowser.business.old.ApiFrontend;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
 import work.beltran.discogsbrowser.app.main.search.SearchRecordsAdapterOld;
-import work.beltran.discogsbrowser.app.main.wantlist.WantRecordsAdapterOld;
+import work.beltran.discogsbrowser.app.wantlist.WantRecordsAdapterOld;
 
 /**
  * Created by Miquel Beltran on 28.04.16.
