@@ -37,25 +37,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         ((App) getApplication()).getAppComponent().inject(this);
+        initNavBar();
+    }
 
-        // Create items
+    private void initNavBar() {
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.ic_library_music_white_48px, R.color.colorPrimary);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_2, R.drawable.ic_favorite_white_48px, R.color.colorPrimary);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_3, R.drawable.ic_search_white_48px, R.color.colorPrimary);
-
-        // Add items
         navigation.addItem(item1);
         navigation.addItem(item2);
         navigation.addItem(item3);
-
         initAdapter();
-        pager.setAdapter(navigationAdapter);
-
-        // Set listener
         navigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, boolean wasSelected) {
                 pager.setCurrentItem(position);
+            }
+        });
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                navigation.setCurrentItem(position, false);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
     }
@@ -69,5 +81,6 @@ public class MainActivity extends AppCompatActivity {
         if (apiComponent != null)
             apiComponent.inject(wantlistFrameLayout);
         navigationAdapter.setViews(Arrays.<View>asList(view, wantlistFrameLayout));
+        pager.setAdapter(navigationAdapter);
     }
 }
