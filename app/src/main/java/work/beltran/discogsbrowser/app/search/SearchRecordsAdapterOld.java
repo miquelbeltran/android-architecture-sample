@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.app.main.search;
+package work.beltran.discogsbrowser.app.search;
 
 import android.util.Log;
 
