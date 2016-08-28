@@ -12,8 +12,7 @@ There has been a major refactor with the following changes:
 
 # My Vinyl Discogs Browser for Android
 
-[![Build Status](https://travis-ci.org/miquelbeltran/android-discogsbrowser.svg?branch=master)](https://travis-ci.org/miquelbeltran/android-discogsbrowser)
-[![codecov](https://codecov.io/gh/miquelbeltran/android-discogsbrowser/branch/master/graph/badge.svg)](https://codecov.io/gh/miquelbeltran/android-discogsbrowser)
+[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=5746acc88191a20100875e17&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/5746acc88191a20100875e17/build/latest)
 
 ![logo](https://raw.githubusercontent.com/miquelbeltran/android-discogsbrowser/master/art/icon2.png)
 
