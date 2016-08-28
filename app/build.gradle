@@ -19,7 +19,7 @@ android {
     defaultConfig {
         applicationId "work.beltran.discogsbrowser"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 22
         versionCode 1001
         versionName "1.1"
     }
@@ -73,7 +73,7 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'
-    testCompile("org.robolectric:robolectric:3.1-rc1") {
+    testCompile ("org.robolectric:robolectric:3.1.2") {
         exclude group: 'commons-logging', module: 'commons-logging'
         exclude group: 'org.apache.httpcomponents', module: 'httpclient'
         exclude group: 'com.android.support', module: 'appcompat'

@@ -40,8 +40,8 @@ public class CollectionView extends FrameLayout implements ICollectionView, Load
     RecyclerView recyclerView;
 
     private RecordsAdapter adapter;
-    private Header header = new Header();
-    private Footer footer = new Footer();
+    Header header = new Header();
+    Footer footer = new Footer();
 
     @Inject
     public Picasso picasso;
