@@ -8,5 +8,5 @@ import work.beltran.discogsbrowser.api.model.UserWanted;
  * More on http://beltran.work
  */
 public interface WantedInteractor {
-    Observable<UserWanted> getWanted();
+    Observable<UserWanted> getWanted(int page);
 }

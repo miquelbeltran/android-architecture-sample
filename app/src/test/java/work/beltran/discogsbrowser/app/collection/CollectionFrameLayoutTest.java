@@ -32,8 +32,8 @@ import static org.mockito.Mockito.verify;
  */
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, application = TestApp.class)
-public class CollectionViewTest {
-    CollectionView view;
+public class CollectionFrameLayoutTest {
+    CollectionFrameLayout view;
     @Mock
     private CollectionPresenter presenter;
     @Mock
@@ -41,7 +41,7 @@ public class CollectionViewTest {
 
     @Before
     public void setUp() throws Exception {
-        view = new CollectionView(RuntimeEnvironment.application);
+        view = new CollectionFrameLayout(RuntimeEnvironment.application);
         MockitoAnnotations.initMocks(this);
         view.setPresenterAdapter(presenter, adapter);
         view.picasso = Picasso.with(RuntimeEnvironment.application);

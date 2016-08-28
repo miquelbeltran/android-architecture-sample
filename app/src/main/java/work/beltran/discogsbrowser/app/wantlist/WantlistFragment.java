@@ -43,10 +43,6 @@ public class WantlistFragment extends work.beltran.discogsbrowser.app.common.Rec
 
             @Override
             public void onNext(UserProfile userProfile) {
-                TextView userWantlist = (TextView) header.findViewById(R.id.textWantlist);
-                userWantlist.setText(getResources().getString(R.string.user_wantlist, userProfile.getUsername()));
-                TextView inWantList = (TextView) header.findViewById(R.id.textInWantlist);
-                inWantList.setText(getResources().getString(R.string.in_wantlist, userProfile.getNum_wantlist()));
 
             }
         });

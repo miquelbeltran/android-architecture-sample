@@ -1,34 +1,32 @@
-package work.beltran.discogsbrowser.app.collection;
+package work.beltran.discogsbrowser.app.wantlist;
 
 import rx.Observer;
-import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserProfile;
+import work.beltran.discogsbrowser.api.model.UserWanted;
 import work.beltran.discogsbrowser.api.model.pagination.Pagination;
 import work.beltran.discogsbrowser.app.base.BasePresenter;
-import work.beltran.discogsbrowser.business.CollectionInteractor;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
-
+import work.beltran.discogsbrowser.business.WantedInteractor;
 
 /**
- * Created by Miquel Beltran on 8/27/16
+ * Created by Miquel Beltran on 8/28/16
  * More on http://beltran.work
  */
-public class CollectionPresenter extends BasePresenter<CollectionView> {
-    public static final String TAG = CollectionPresenter.class.getName();
+public class WantlistPresenter extends BasePresenter<WantlistView> {
 
-    private CollectionInteractor interactor;
+    private final WantedInteractor interactor;
     private ProfileInteractor profileInteractor;
     private boolean loading;
     private Pagination pagination;
 
-    public CollectionPresenter(CollectionInteractor interactor,
-                               ProfileInteractor profileInteractor) {
+    public WantlistPresenter(WantedInteractor interactor,
+                             ProfileInteractor profileInteractor) {
         this.interactor = interactor;
         this.profileInteractor = profileInteractor;
     }
 
     @Override
-    public void attachView(CollectionView view) {
+    public void attachView(WantlistView view) {
         super.attachView(view);
         loadMore();
         addSubscription(profileInteractor
@@ -61,8 +59,8 @@ public class CollectionPresenter extends BasePresenter<CollectionView> {
             page = pagination.getPage() + 1;
         }
         setLoading(true);
-        addSubscription(interactor.getCollection(page)
-                .subscribe(new Observer<UserCollection>() {
+        addSubscription(interactor.getWanted(page)
+                .subscribe(new Observer<UserWanted>() {
                     @Override
                     public void onCompleted() {
                         setLoading(false);
@@ -75,10 +73,10 @@ public class CollectionPresenter extends BasePresenter<CollectionView> {
                     }
 
                     @Override
-                    public void onNext(UserCollection userCollection) {
-                        pagination = userCollection.getPagination();
+                    public void onNext(UserWanted userWanted) {
+                        pagination = userWanted.getPagination();
                         if (getView() != null) {
-                            getView().addRecords(userCollection.getRecords());
+                            getView().addRecords(userWanted.getRecords());
                         }
                     }
                 }));

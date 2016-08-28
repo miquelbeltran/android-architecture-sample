@@ -16,7 +16,7 @@
     <string name="avatar">avatar</string>
     <string name="username">Loading user profile</string>
     <string name="user_wantlist">%s\'s Wantlist</string>
-    <string name="in_wantlist">%s in Wantlist</string>
+    <string name="in_wantlist">%d in Wantlist</string>
     <string name="loading_wantlist">Loading Wantlist</string>
     <string name="thanks_for_downloading_my_app">Thanks for downloading my App!</string>
     <string name="thank_you_letter">Thank you for downloading my application,

@@ -16,8 +16,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.app.App;
-import work.beltran.discogsbrowser.app.collection.CollectionView;
+import work.beltran.discogsbrowser.app.collection.CollectionFrameLayout;
 import work.beltran.discogsbrowser.app.di.ApiComponent;
+import work.beltran.discogsbrowser.app.wantlist.WantlistFrameLayout;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getCanonicalName();
@@ -60,10 +61,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initAdapter() {
-        CollectionView view = new CollectionView(this);
+        CollectionFrameLayout view = new CollectionFrameLayout(this);
         ApiComponent apiComponent = ((App) getApplication()).getApiComponent();
         if (apiComponent != null)
             apiComponent.inject(view);
-        navigationAdapter.setViews(Arrays.<View>asList(view));
+        WantlistFrameLayout wantlistFrameLayout = new WantlistFrameLayout(this);
+        if (apiComponent != null)
+            apiComponent.inject(wantlistFrameLayout);
+        navigationAdapter.setViews(Arrays.<View>asList(view, wantlistFrameLayout));
     }
 }

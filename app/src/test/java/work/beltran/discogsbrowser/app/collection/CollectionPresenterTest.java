@@ -35,7 +35,7 @@ public class CollectionPresenterTest {
     @Mock
     private ProfileInteractor profileInteractor;
     @Mock
-    private ICollectionView view;
+    private CollectionView view;
 
     @Before
     public void setUp() throws Exception {
