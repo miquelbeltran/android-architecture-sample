@@ -1,5 +1,8 @@
 package work.beltran.discogsbrowser.api.model;
 
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -11,25 +14,14 @@ import work.beltran.discogsbrowser.api.model.record.Record;
  * Created by Miquel Beltran on 04.05.16.
  * More on http://beltran.work
  */
-public class UserWanted implements RecordsWithPagination {
+@AutoValue
+public abstract class UserWanted implements RecordsWithPagination {
     @SerializedName("pagination")
-    private Pagination pagination;
+    public abstract Pagination getPagination();
     @SerializedName("wants")
-    private List<Record> records;
+    public abstract List<Record> getRecords();
 
-    public Pagination getPagination() {
-        return pagination;
-    }
-
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
-
-    public List<Record> getRecords() {
-        return records;
-    }
-
-    public void setRecords(List<Record> records) {
-        this.records = records;
+    public static TypeAdapter<UserWanted> typeAdapter(Gson gson) {
+        return new AutoValue_UserWanted.GsonTypeAdapter(gson);
     }
 }

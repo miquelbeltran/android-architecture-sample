@@ -1,44 +1,43 @@
 package work.beltran.discogsbrowser.api.model;
 
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Miquel Beltran on 04.05.16.
  * More on http://beltran.work
  */
-public class UserProfile {
-    String username;
-    int num_collection;
-    String avatar_url;
-    private int num_wantlist;
+@AutoValue
+public abstract class UserProfile {
+    @SerializedName("username")
+    public abstract String getUsername();
+    @SerializedName("num_collection")
+    public abstract int getNumCollection();
+    @SerializedName("avatar_url")
+    public abstract String getAvatarUrl();
+    @SerializedName("num_wantlist")
+    public abstract int getNumWantlist();
 
-    public String getUsername() {
-        return username;
+    public static TypeAdapter<UserProfile> typeAdapter(Gson gson) {
+        return new AutoValue_UserProfile.GsonTypeAdapter(gson);
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public static Builder builder() {
+        return new AutoValue_UserProfile.Builder();
     }
 
-    public int getNum_collection() {
-        return num_collection;
-    }
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder setUsername(String newUsername);
 
-    public void setNum_collection(int num_collection) {
-        this.num_collection = num_collection;
-    }
+        public abstract Builder setNumCollection(int newNumCollection);
 
-    public String getAvatar_url() {
-        return avatar_url;
-    }
+        public abstract Builder setAvatarUrl(String newAvatarUrl);
 
-    public void setAvatar_url(String avatar_url) {
-        this.avatar_url = avatar_url;
-    }
+        public abstract Builder setNumWantlist(int newNumWantlist);
 
-    public int getNum_wantlist() {
-        return num_wantlist;
-    }
-
-    public void setNum_wantlist(int num_wantlist) {
-        this.num_wantlist = num_wantlist;
+        public abstract UserProfile build();
     }
 }

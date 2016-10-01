@@ -85,7 +85,7 @@ public class WantlistFrameLayout extends FrameLayout implements WantlistView, Lo
         header.textWantlistcount.setText(
                 getResources().getString(
                         R.string.in_wantlist,
-                        userProfile.getNum_wantlist()));
+                        userProfile.getNumWantlist()));
     }
 
     private void createHeaderFooter(RecordsAdapter adapter) {

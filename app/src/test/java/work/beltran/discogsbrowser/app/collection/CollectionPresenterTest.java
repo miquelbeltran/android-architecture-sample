@@ -19,16 +19,17 @@ import work.beltran.discogsbrowser.business.ProfileInteractor;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static work.beltran.discogsbrowser.api.model.mocks.DiscogsModelMocks.getUserProfile;
 
 /**
  * Created by Miquel Beltran on 8/28/16
  * More on http://beltran.work
  */
 public class CollectionPresenterTest {
-    CollectionPresenter presenter;
-    UserProfile userProfile;
-    UserCollection userCollection;
-    List<Record> recordList;
+    private CollectionPresenter presenter;
+    private UserProfile userProfile;
+    private UserCollection userCollection;
+    private List<Record> recordList;
 
     @Mock
     private CollectionInteractor interactor;
@@ -41,13 +42,14 @@ public class CollectionPresenterTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         presenter = new CollectionPresenter(interactor, profileInteractor);
-        userProfile = new UserProfile();
+        userProfile = getUserProfile();
         userCollection = new UserCollection();
         recordList = new ArrayList<>();
         userCollection.setRecords(recordList);
         when(interactor.getCollection(anyInt())).thenReturn(Observable.just(userCollection));
         when(profileInteractor.getProfile()).thenReturn(Observable.just(userProfile));
     }
+
 
     @Test
     public void attachView() throws Exception {
