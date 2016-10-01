@@ -1,5 +1,8 @@
 package work.beltran.discogsbrowser.api.model;
 
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -16,44 +19,44 @@ import work.beltran.discogsbrowser.api.model.record.Record;
  * Created by Miquel Beltran on 10.05.16.
  * More on http://beltran.work
  */
-public class SearchResults implements RecordsWithPagination {
-    Pagination pagination;
+@AutoValue
+public abstract class SearchResults implements RecordsWithPagination {
+    public abstract Pagination getPagination();
     @SerializedName("results")
-    List<SearchRecord> searchRecords;
-
-    public Pagination getPagination() {
-        return pagination;
-    }
+    public abstract List<SearchRecord> getSearchRecords();
 
     @Override
     public List<Record> getRecords() {
         return rx.Observable
-                .from(searchRecords)
+                .from(getSearchRecords())
                 .map(new Func1<SearchRecord, Record>() {
             @Override
             public Record call(SearchRecord searchRecord) {
-                String artist = searchRecord.title;
+                String artist = searchRecord.getTitle();
                 String title = "";
 
-                int index = searchRecord.title.indexOf(" - ");
+                int index = searchRecord.getTitle().indexOf(" - ");
                 if (index > 0) {
-                    title = searchRecord.title.substring(index + 3);
-                    artist = searchRecord.title.substring(0, index);
+                    title = searchRecord.getTitle().substring(index + 3);
+                    artist = searchRecord.getTitle().substring(0, index);
                 }
 
                 Artist artistObject = Artist.builder().name(artist).build();
                 List<Artist> artists = new ArrayList<>();
                 artists.add(artistObject);
                 List<Format> formats = new ArrayList<>();
-                for(String formatString : searchRecord.format) {
-                    Format format = Format.builder().setName(formatString).build();
-                    formats.add(format);
+                if (searchRecord.getFormat() != null) {
+                    for (String formatString : searchRecord.getFormat()) {
+                        Format format = Format.builder().setName(formatString).build();
+                        formats.add(format);
+                    }
                 }
                 BasicInformation basicInformation = BasicInformation.builder()
                         .artists(artists)
                         .formats(formats)
                         .title(title)
-                        .thumb(searchRecord.thumb)
+                        .thumb(searchRecord.getThumb())
+                        .year(searchRecord.getYear())
                         .build();
                 return Record.builder()
                         .setInstanceId(searchRecord.getId())
@@ -63,15 +66,20 @@ public class SearchResults implements RecordsWithPagination {
         }).toList().toBlocking().single();
     }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
+    public static TypeAdapter<SearchResults> typeAdapter(Gson gson) {
+        return new AutoValue_SearchResults.GsonTypeAdapter(gson);
     }
 
-    public List<SearchRecord> getSearchRecords() {
-        return searchRecords;
+    public static Builder builder() {
+        return new AutoValue_SearchResults.Builder();
     }
 
-    public void setSearchRecords(List<SearchRecord> searchRecords) {
-        this.searchRecords = searchRecords;
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder setPagination(Pagination newPagination);
+
+        public abstract Builder setSearchRecords(List<SearchRecord> newSearchRecords);
+
+        public abstract SearchResults build();
     }
 }

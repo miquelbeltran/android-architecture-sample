@@ -18,14 +18,13 @@ import java.util.List;
 
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.api.model.mocks.DiscogsModelMocks;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
-import static work.beltran.discogsbrowser.api.model.mocks.DiscogsModelMocks.getUserProfile;
+import static work.beltran.discogsbrowser.app.collection.DiscogsModelMocks.getUserProfile;
 
 /**
  * Created by Miquel Beltran on 8/28/16
