@@ -1,27 +1,19 @@
 package work.beltran.discogsbrowser.api.model;
 
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+
 /**
  * Created by Miquel Beltran on 03.05.16.
  * More on http://beltran.work
  */
-public class UserIdentity {
-    private int id;
-    private String username;
+@AutoValue
+public abstract class UserIdentity {
+    public abstract int getId();
+    public abstract String getUsername();
 
-    public String getUsername() {
-        return username;
+    public static TypeAdapter<UserIdentity> typeAdapter(Gson gson) {
+        return new AutoValue_UserIdentity.GsonTypeAdapter(gson);
     }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
 }

@@ -1,17 +1,28 @@
 package work.beltran.discogsbrowser.api.model.record;
 
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+
 /**
  * Created by Miquel Beltran on 24.04.16.
  * More on http://beltran.work
  */
-public class Artist {
-    private String name;
+@AutoValue
+public abstract class Artist {
+    public abstract String getName();
 
-    public String getName() {
-        return name;
+    public static TypeAdapter<Artist> typeAdapter(Gson gson) {
+        return new AutoValue_Artist.GsonTypeAdapter(gson);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public static Builder builder() {
+        return new AutoValue_Artist.Builder();
+    }
+
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder name(String name);
+        public abstract Artist build();
     }
 }

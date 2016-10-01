@@ -102,7 +102,7 @@ public class CollectionFrameLayout extends FrameLayout implements CollectionView
     @Override
     public void display(UserProfile userProfile) {
         header.textUser.setText(userProfile.getUsername());
-        picasso.load(userProfile.getAvatar_url())
+        picasso.load(userProfile.getAvatarUrl())
                 .placeholder(R.drawable.ic_account_circle_black_48px)
                 .fit()
                 .centerCrop()
@@ -111,7 +111,7 @@ public class CollectionFrameLayout extends FrameLayout implements CollectionView
         header.textCollectionCount.setText(
                 getResources().getString(
                         R.string.in_collection,
-                        userProfile.getNum_collection()));
+                        userProfile.getNumCollection()));
     }
 
     @Override

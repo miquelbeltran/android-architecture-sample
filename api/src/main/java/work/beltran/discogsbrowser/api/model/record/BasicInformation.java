@@ -1,60 +1,37 @@
 package work.beltran.discogsbrowser.api.model.record;
 
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+
 import java.util.List;
 
 /**
  * Created by Miquel Beltran on 23.04.16.
  * More on http://beltran.work
  */
-public class BasicInformation {
-    private String title;
-    private String year;
-    private String thumb;
-    private List<Format> formats;
-    private List<Artist> artists;
+@AutoValue
+public abstract class BasicInformation {
+    public abstract String getTitle();
+    public abstract String getYear();
+    public abstract String getThumb();
+    public abstract List<Format> getFormats();
+    public abstract List<Artist> getArtists();
 
-    public BasicInformation() {
-
+    public static TypeAdapter<BasicInformation> typeAdapter(Gson gson) {
+        return new AutoValue_BasicInformation.GsonTypeAdapter(gson);
+    }
+    public static Builder builder() {
+        return new AutoValue_BasicInformation.Builder();
     }
 
-    public List<Artist> getArtists() {
-        return artists;
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder title(String title);
+        public abstract Builder year(String year);
+        public abstract Builder thumb(String thumb);
+        public abstract Builder formats(List<Format> formats);
+        public abstract Builder artists(List<Artist> artists);
+        public abstract BasicInformation build();
     }
-
-    public void setArtists(List<Artist> artists) {
-        this.artists = artists;
-    }
-
-    public List<Format> getFormats() {
-        return formats;
-    }
-
-    public void setFormats(List<Format> formats) {
-        this.formats = formats;
-    }
-
-    public String getThumb() {
-        return thumb;
-    }
-
-    public void setThumb(String thumb) {
-        this.thumb = thumb;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
 }

@@ -1,43 +1,34 @@
 package work.beltran.discogsbrowser.api.model.pagination;
 
 
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by miquel on 22.04.16.
+ * Created by Miquel Beltran on 22.04.16
+ * More on http://beltran.work
  */
-public class Pagination {
+@AutoValue
+public abstract class Pagination {
     @SerializedName("page")
-    private int page;
+    public abstract int getPage();
     @SerializedName("pages")
-    private int pages;
-    private int items;
+    public abstract int getPages();
 
-    public Pagination() {
-
+    public static TypeAdapter<Pagination> typeAdapter(Gson gson) {
+        return new AutoValue_Pagination.GsonTypeAdapter(gson);
     }
 
-    public int getPage() {
-        return page;
+    public static Builder builder() {
+        return new AutoValue_Pagination.Builder();
     }
 
-    public void setPage(Integer page) {
-        this.page = page;
-    }
-
-    public int getPages() {
-        return pages;
-    }
-
-    public void setPages(int pages) {
-        this.pages = pages;
-    }
-
-    public int getItems() {
-        return items;
-    }
-
-    public void setItems(int items) {
-        this.items = items;
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder page(int page);
+        public abstract Builder pages(int pages);
+        public abstract Pagination build();
     }
 }

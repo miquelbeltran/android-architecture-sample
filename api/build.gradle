@@ -4,12 +4,13 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "net.ltgt.gradle:gradle-apt-plugin:0.3"
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.9"
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'net.ltgt.apt'
+apply plugin: 'idea'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -19,9 +20,21 @@ sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
 dependencies {
+    testCompile 'org.assertj:assertj-core:3.5.2'
+
+    // Required for AutoValue
+    //apt 'com.squareup:javapoet:1.7.0'
+
     compile "io.reactivex:rxjava:1.1.9"
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'junit:junit:4.12'
+
+    // AutoValue
+    compile 'com.google.auto.value:auto-value:1.2'
+    apt 'com.ryanharter.auto.value:auto-value-gson:0.4.2'
+    compile 'com.ryanharter.auto.value:auto-value-gson:0.4.2'
+
+    compile "org.jetbrains:annotations-java5:15.0"
 }

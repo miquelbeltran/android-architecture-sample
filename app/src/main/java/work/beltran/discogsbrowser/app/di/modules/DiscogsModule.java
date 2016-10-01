@@ -1,11 +1,14 @@
 package work.beltran.discogsbrowser.app.di.modules;
 
+import com.google.gson.Gson;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import work.beltran.discogsbrowser.api.DiscogsService;
 import work.beltran.discogsbrowser.api.DiscogsServiceBuilder;
+import work.beltran.discogsbrowser.api.GsonProvider;
 
 /**
  * Created by Miquel Beltran on 22.04.16.
@@ -22,7 +25,13 @@ public class DiscogsModule {
 
     @Provides
     @Singleton
-    public DiscogsService provideDiscogsService() {
-        return builder.provideDiscogsService();
+    public Gson provideGson() {
+        return GsonProvider.provideGson();
+    }
+
+    @Provides
+    @Singleton
+    public DiscogsService provideDiscogsService(Gson gson) {
+        return builder.provideDiscogsService(gson);
     }
 }

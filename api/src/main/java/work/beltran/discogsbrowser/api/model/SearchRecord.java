@@ -1,46 +1,52 @@
 package work.beltran.discogsbrowser.api.model;
 
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 /**
  * Created by Miquel Beltran on 10.05.16.
  * More on http://beltran.work
  */
-public class SearchRecord {
-    int id;
-    String thumb;
-    String title;
-    List<String> format;
+@AutoValue
+public abstract class SearchRecord {
+    public abstract int getId();
 
-    public int getId() {
-        return id;
+    public abstract String getThumb();
+
+    public abstract String getTitle();
+
+    @Nullable
+    public abstract String getYear();
+
+    @Nullable
+    public abstract List<String> getFormat();
+
+    public static TypeAdapter<SearchRecord> typeAdapter(Gson gson) {
+        return new AutoValue_SearchRecord.GsonTypeAdapter(gson);
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public static Builder builder() {
+        return new AutoValue_SearchRecord.Builder();
     }
 
-    public String getThumb() {
-        return thumb;
-    }
+    @AutoValue.Builder
+    public abstract static class Builder {
 
-    public void setThumb(String thumb) {
-        this.thumb = thumb;
-    }
+        public abstract Builder setId(int newId);
 
-    public String getTitle() {
-        return title;
-    }
+        public abstract Builder setThumb(String newThumb);
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+        public abstract Builder setTitle(String newTitle);
 
-    public List<String> getFormat() {
-        return format;
-    }
+        public abstract Builder setYear(String newYear);
 
-    public void setFormat(List<String> format) {
-        this.format = format;
+        public abstract Builder setFormat(List<String> newFormat);
+
+        public abstract SearchRecord build();
     }
 }
