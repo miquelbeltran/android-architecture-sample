@@ -1,5 +1,7 @@
 package work.beltran.discogsbrowser.api;
 
+import com.google.gson.Gson;
+
 import org.junit.Before;
 
 /**
@@ -13,6 +15,7 @@ public class DiscogsServiceTest {
     public void setUp() throws Exception {
         String apiKey = System.getenv("DISCOGS_API_KEY");
         DiscogsServiceBuilderWithKey builder = new DiscogsServiceBuilderWithKey(apiKey, "Unit Test");
-        service = builder.provideDiscogsService();
+        Gson gson = GsonProvider.provideGson();
+        service = builder.provideDiscogsService(gson);
     }
 }

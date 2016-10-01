@@ -58,9 +58,11 @@ public class CollectionPresenterTest {
 
     @Test
     public void loadMore() throws Exception {
-        userCollection.setPagination(new Pagination());
-        userCollection.getPagination().setPage(0);
-        userCollection.getPagination().setPages(2);
+        Pagination pagination = Pagination.builder()
+                .page(0)
+                .pages(2)
+                .build();
+        userCollection.setPagination(pagination);
         presenter.attachView(view);
         presenter.loadMore();
         verify(interactor).getCollection(1);

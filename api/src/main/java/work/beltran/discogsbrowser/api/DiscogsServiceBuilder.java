@@ -1,5 +1,7 @@
 package work.beltran.discogsbrowser.api;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.Date;
 
@@ -37,11 +39,11 @@ public class DiscogsServiceBuilder {
         this.applicationId = applicationId;
     }
 
-    public DiscogsService provideDiscogsService() {
-        return provideRetrofit().create(DiscogsService.class);
+    public DiscogsService provideDiscogsService(Gson gson) {
+        return provideRetrofit(gson).create(DiscogsService.class);
     }
 
-    private Retrofit provideRetrofit() {
+    private Retrofit provideRetrofit(Gson gson) {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {
             @Override
@@ -86,7 +88,7 @@ public class DiscogsServiceBuilder {
 
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(client)
                 .build();
