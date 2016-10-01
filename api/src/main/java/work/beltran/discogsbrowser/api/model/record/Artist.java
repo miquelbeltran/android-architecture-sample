@@ -4,8 +4,6 @@ import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 
-import work.beltran.discogsbrowser.api.model.pagination.Pagination;
-
 /**
  * Created by Miquel Beltran on 24.04.16.
  * More on http://beltran.work

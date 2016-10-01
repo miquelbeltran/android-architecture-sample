@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
 import rx.functions.Func1;
 import work.beltran.discogsbrowser.api.model.pagination.Pagination;
 import work.beltran.discogsbrowser.api.model.record.Artist;
@@ -28,12 +27,13 @@ public class SearchResults implements RecordsWithPagination {
 
     @Override
     public List<Record> getRecords() {
-        return rx.Observable.from(searchRecords).flatMap(new Func1<SearchRecord, rx.Observable<Record>>() {
+        return rx.Observable
+                .from(searchRecords)
+                .map(new Func1<SearchRecord, Record>() {
             @Override
-            public rx.Observable<Record> call(SearchRecord searchRecord) {
+            public Record call(SearchRecord searchRecord) {
                 Record record = new Record();
                 record.setInstance_id(searchRecord.getId());
-                BasicInformation basicInformation = new BasicInformation();
                 String artist = searchRecord.title;
                 String title = "";
 
@@ -46,20 +46,19 @@ public class SearchResults implements RecordsWithPagination {
                 Artist artistObject = Artist.builder().name(artist).build();
                 List<Artist> artists = new ArrayList<>();
                 artists.add(artistObject);
-                basicInformation.setArtists(artists);
-
-                List<Format> formats = new ArrayList<Format>();
+                List<Format> formats = new ArrayList<>();
                 for(String formatString : searchRecord.format) {
-                    Format format = new Format();
-                    format.setName(formatString);
+                    Format format = Format.builder().setName(formatString).build();
                     formats.add(format);
                 }
-                basicInformation.setFormats(formats);
-
-                basicInformation.setTitle(title);
-                basicInformation.setThumb(searchRecord.thumb);
+                BasicInformation basicInformation = BasicInformation.builder()
+                        .artists(artists)
+                        .formats(formats)
+                        .title(title)
+                        .thumb(searchRecord.thumb)
+                        .build();
                 record.setBasicInformation(basicInformation);
-                return Observable.just(record);
+                return record;
             }
         }).toList().toBlocking().single();
     }

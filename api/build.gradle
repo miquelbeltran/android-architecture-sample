@@ -4,12 +4,13 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "net.ltgt.gradle:gradle-apt-plugin:0.3"
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.9"
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'net.ltgt.apt'
+apply plugin: 'idea'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
