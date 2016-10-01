@@ -3,15 +3,15 @@ package work.beltran.discogsbrowser.app.collection;
 import java.util.List;
 
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.app.base.BaseView;
+import work.beltran.discogsbrowser.app.common.RecordViewModel;
 
 /**
  * Created by Miquel Beltran on 8/27/16
  * More on http://beltran.work
  */
 public interface CollectionView extends BaseView {
-    void addRecords(List<Record> records);
+    void addRecords(List<RecordViewModel> records);
 
     void display(UserProfile userProfile);
 

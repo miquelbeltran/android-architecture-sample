@@ -11,7 +11,7 @@ import java.util.List;
 import rx.Observable;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.api.model.record.Record;
+import work.beltran.discogsbrowser.app.common.RecordViewModel;
 import work.beltran.discogsbrowser.business.CollectionInteractor;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
 
@@ -28,7 +28,7 @@ public class CollectionPresenterTest {
     private CollectionPresenter presenter;
     private UserProfile userProfile;
     private UserCollection userCollection;
-    private List<Record> recordList;
+    private List<RecordViewModel> recordList;
 
     @Mock
     private CollectionInteractor interactor;

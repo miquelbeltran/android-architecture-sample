@@ -18,7 +18,7 @@ import java.util.List;
 
 import work.beltran.discogsbrowser.BuildConfig;
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.api.model.record.Record;
+import work.beltran.discogsbrowser.app.common.RecordViewModel;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -73,7 +73,7 @@ public class CollectionFrameLayoutTest {
 
     @Test
     public void addRecords() throws Exception {
-        List<Record> listRecords = new ArrayList<>();
+        List<RecordViewModel> listRecords = new ArrayList<>();
         view.addRecords(listRecords);
         verify(adapter).addItems(listRecords);
     }

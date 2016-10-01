@@ -5,6 +5,7 @@ import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.model.UserWanted;
 import work.beltran.discogsbrowser.api.model.pagination.Pagination;
 import work.beltran.discogsbrowser.app.base.BasePresenter;
+import work.beltran.discogsbrowser.app.common.RecordViewModel;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
 import work.beltran.discogsbrowser.business.WantedInteractor;
 
@@ -74,9 +75,9 @@ public class WantlistPresenter extends BasePresenter<WantlistView> {
 
                     @Override
                     public void onNext(UserWanted userWanted) {
-                        pagination = userWanted.getPagination();
                         if (getView() != null) {
-                            getView().addRecords(userWanted.getRecords());
+                            getView().addRecords(RecordViewModel
+                                    .createRecordsList(userWanted.getRecords()));
                         }
                     }
                 }));

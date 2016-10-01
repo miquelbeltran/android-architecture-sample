@@ -5,6 +5,7 @@ import java.util.List;
 import rx.Observer;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.app.base.BasePresenter;
+import work.beltran.discogsbrowser.app.common.RecordViewModel;
 import work.beltran.discogsbrowser.business.SearchInteractor;
 
 /**
@@ -44,8 +45,9 @@ public class SearchPresenter extends BasePresenter<SearchView> {
 
                             @Override
                             public void onNext(List<Record> records) {
-                                if (getView() != null)
-                                    getView().display(records);
+                                if (getView() != null) {
+                                    getView().display(RecordViewModel.createRecordsList(records));
+                                }
                             }
                         }));
     }

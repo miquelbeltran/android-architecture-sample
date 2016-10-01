@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.model.record.Record;
+import work.beltran.discogsbrowser.app.common.RecordViewModel;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
 
 /**
@@ -72,7 +73,7 @@ public class WantlistFrameLayout extends FrameLayout implements WantlistView, Lo
     }
 
     @Override
-    public void addRecords(List<Record> records) {
+    public void addRecords(List<RecordViewModel> records) {
         adapter.addItems(records);
     }
 
