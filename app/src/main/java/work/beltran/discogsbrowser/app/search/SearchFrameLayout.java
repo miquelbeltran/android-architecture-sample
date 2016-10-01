@@ -19,8 +19,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.api.model.record.Record;
-import work.beltran.discogsbrowser.app.common.RecordViewModel;
+import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
 
 /**
@@ -92,7 +91,7 @@ public class SearchFrameLayout extends FrameLayout implements SearchView {
     }
 
     @Override
-    public void display(List<RecordViewModel> records) {
+    public void display(List<RecordAdapterItem> records) {
         adapter.addItems(records);
     }
 

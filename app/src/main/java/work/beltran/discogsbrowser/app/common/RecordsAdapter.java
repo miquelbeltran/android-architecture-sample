@@ -19,7 +19,7 @@ import work.beltran.discogsbrowser.R;
 public class RecordsAdapter extends RecyclerView.Adapter<RecordViewHolder> {
 
     private final Picasso picasso;
-    private List<RecordViewModel> records = new ArrayList<>();
+    private List<RecordAdapterItem> records = new ArrayList<>();
 
     public RecordsAdapter(Picasso picasso) {
         this.picasso = picasso;
@@ -43,7 +43,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordViewHolder> {
         return records.size();
     }
 
-    public void addItems(List<RecordViewModel> records) {
+    public void addItems(List<RecordAdapterItem> records) {
         int positionStart = this.records.size();
         this.records.addAll(records);
         notifyItemRangeInserted(positionStart, records.size());

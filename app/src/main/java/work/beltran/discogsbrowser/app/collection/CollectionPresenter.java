@@ -7,7 +7,7 @@ import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.model.pagination.Pagination;
 import work.beltran.discogsbrowser.app.base.BasePresenter;
-import work.beltran.discogsbrowser.app.common.RecordViewModel;
+import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.business.CollectionInteractor;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
 
@@ -80,8 +80,8 @@ public class CollectionPresenter extends BasePresenter<CollectionView> {
                     @Override
                     public void onNext(UserCollection userCollection) {
                         pagination = userCollection.getPagination();
-                        List<RecordViewModel> records
-                                = RecordViewModel.createRecordsList(userCollection.getRecords());
+                        List<RecordAdapterItem> records
+                                = RecordAdapterItem.createRecordsList(userCollection.getRecords());
                         if (getView() != null) {
                             getView().addRecords(records);
                         }

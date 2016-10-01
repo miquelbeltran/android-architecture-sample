@@ -24,9 +24,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.app.common.CircleTransform;
-import work.beltran.discogsbrowser.app.common.RecordViewModel;
+import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
 
 /**
@@ -96,7 +95,7 @@ public class CollectionFrameLayout extends FrameLayout implements CollectionView
     }
 
     @Override
-    public void addRecords(List<RecordViewModel> records) {
+    public void addRecords(List<RecordAdapterItem> records) {
         adapter.addItems(records);
     }
 

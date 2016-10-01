@@ -14,7 +14,7 @@ import work.beltran.discogsbrowser.api.model.record.Record;
  * More on http://beltran.work
  */
 @AutoValue
-public abstract class RecordViewModel {
+public abstract class RecordAdapterItem {
     public abstract CharSequence getTitle();
 
     public abstract CharSequence getArtist();
@@ -26,7 +26,7 @@ public abstract class RecordViewModel {
     public abstract String getThumb();
 
     public static Builder builder() {
-        return new AutoValue_RecordViewModel.Builder();
+        return new AutoValue_RecordAdapterItem.Builder();
     }
 
     @AutoValue.Builder
@@ -41,10 +41,10 @@ public abstract class RecordViewModel {
 
         public abstract Builder setThumb(String newThumb);
 
-        public abstract RecordViewModel build();
+        public abstract RecordAdapterItem build();
     }
 
-    public static RecordViewModel createRecordViewModel(Record record) {
+    public static RecordAdapterItem createRecordViewModel(Record record) {
         StringBuilder artistString = new StringBuilder();
         for (Artist artist : record.getBasicInformation().getArtists()) {
             if (artistString.length() > 0) {
@@ -63,7 +63,7 @@ public abstract class RecordViewModel {
         if (year.equals("0")) {
             year = "";
         }
-        return RecordViewModel.builder()
+        return RecordAdapterItem.builder()
                 .setArtist(artistString.toString())
                 .setFormat(formatString.toString())
                 .setThumb(record.getBasicInformation().getThumb())
@@ -72,10 +72,10 @@ public abstract class RecordViewModel {
                 .build();
     }
 
-    public static List<RecordViewModel> createRecordsList(List<Record> records) {
-        List<RecordViewModel> list = new ArrayList<>();
+    public static List<RecordAdapterItem> createRecordsList(List<Record> records) {
+        List<RecordAdapterItem> list = new ArrayList<>();
         for (Record record : records) {
-            list.add(RecordViewModel.createRecordViewModel(record));
+            list.add(RecordAdapterItem.createRecordViewModel(record));
         }
         return list;
     }

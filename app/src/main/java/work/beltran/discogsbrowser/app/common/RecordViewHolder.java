@@ -34,7 +34,7 @@ public class RecordViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void bind(RecordViewModel record) {
+    public void bind(RecordAdapterItem record) {
         textTitle.setText(record.getTitle());
         textArtist.setText(record.getArtist());
         textFormat.setText(record.getFormat());
