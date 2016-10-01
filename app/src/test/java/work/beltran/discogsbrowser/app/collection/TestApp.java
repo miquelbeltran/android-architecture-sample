@@ -7,5 +7,8 @@ import work.beltran.discogsbrowser.app.App;
  * More on http://beltran.work
  */
 public class TestApp extends App {
+    @Override
+    public void onCreate() {
 
+    }
 }
