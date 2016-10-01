@@ -83,9 +83,4 @@ public class LoginPresenter extends BasePresenter<LoginView> {
     public void loadStatus(Bundle bundle) {
 
     }
-
-    @Override
-    public void loadMore() {
-        
-    }
 }

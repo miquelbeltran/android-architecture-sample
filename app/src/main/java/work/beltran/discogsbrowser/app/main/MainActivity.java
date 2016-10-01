@@ -24,6 +24,8 @@ import work.beltran.discogsbrowser.app.wantlist.WantlistFrameLayout;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getCanonicalName();
+    private static final String STATE_COLLECTION = "STATE_COLLECTION";
+    private static final String STATE_WANTLIST = "STATE_WANTLIST";
 
     @Inject
     public NavigationAdapter navigationAdapter;
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         if (apiComponent != null)
             apiComponent.inject(collectionFrameLayout);
         if (savedInstanceState != null) {
-            Parcelable state = savedInstanceState.getParcelable("STATE_COLLECTION");
+            Parcelable state = savedInstanceState.getParcelable(STATE_COLLECTION);
             if (state != null) {
                 collectionFrameLayout.onRestoreInstanceState(state);
             }
@@ -92,6 +94,12 @@ public class MainActivity extends AppCompatActivity {
         wantlistFrameLayout = new WantlistFrameLayout(this, R.id.WantlistView);
         if (apiComponent != null)
             apiComponent.inject(wantlistFrameLayout);
+        if (savedInstanceState != null) {
+            Parcelable state = savedInstanceState.getParcelable(STATE_WANTLIST);
+            if (state != null) {
+                wantlistFrameLayout.onRestoreInstanceState(state);
+            }
+        }
         searchFrameLayout = new SearchFrameLayout(this, R.id.SearchView);
         if (apiComponent != null)
             apiComponent.inject(searchFrameLayout);
@@ -105,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable("STATE_COLLECTION", collectionFrameLayout.onSaveInstanceState());
+        outState.putParcelable(STATE_COLLECTION, collectionFrameLayout.onSaveInstanceState());
+        outState.putParcelable(STATE_WANTLIST, wantlistFrameLayout.onSaveInstanceState());
         super.onSaveInstanceState(outState);
     }
 }

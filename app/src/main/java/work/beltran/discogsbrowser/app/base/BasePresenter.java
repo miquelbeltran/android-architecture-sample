@@ -42,5 +42,4 @@ public abstract class BasePresenter<V extends BaseView> {
 
     public abstract void loadStatus(Bundle bundle);
 
-    public abstract void loadMore();
 }

@@ -63,9 +63,4 @@ public class SearchPresenter extends BasePresenter<SearchView> {
     public void loadStatus(Bundle bundle) {
 
     }
-
-    @Override
-    public void loadMore() {
-
-    }
 }

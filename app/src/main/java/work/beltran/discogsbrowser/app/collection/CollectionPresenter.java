@@ -1,6 +1,5 @@
 package work.beltran.discogsbrowser.app.collection;
 
-import android.os.Bundle;
 import android.util.Log;
 
 import java.util.List;
@@ -8,7 +7,7 @@ import java.util.List;
 import rx.Observer;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.app.base.BasePresenter;
+import work.beltran.discogsbrowser.app.base.BasePresenterForAdapter;
 import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.business.CollectionInteractor;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
@@ -18,16 +17,10 @@ import work.beltran.discogsbrowser.business.ProfileInteractor;
  * Created by Miquel Beltran on 8/27/16
  * More on http://beltran.work
  */
-public class CollectionPresenter extends BasePresenter<CollectionView> {
+public class CollectionPresenter extends BasePresenterForAdapter<CollectionView> {
     public static final String TAG = CollectionPresenter.class.getName();
-    private static final String PAGE = "PAGE";
-    private static final String TOTAL_PAGES = "TOTAL_PAGES";
-
     private CollectionInteractor interactor;
     private ProfileInteractor profileInteractor;
-    private boolean loading = false;
-    private int page = 1;
-    private int totalPages = 1;
 
     public CollectionPresenter(CollectionInteractor interactor,
                                ProfileInteractor profileInteractor) {
@@ -61,21 +54,6 @@ public class CollectionPresenter extends BasePresenter<CollectionView> {
                 }));
     }
 
-    @Override
-    public Bundle getStatus() {
-        Bundle bundle = new Bundle();
-        bundle.putInt(PAGE, page);
-        bundle.putInt(TOTAL_PAGES, totalPages);
-        Log.d(TAG, "Save Status: " + page + " " + totalPages);
-        return bundle;
-    }
-
-    @Override
-    public void loadStatus(Bundle bundle) {
-        page = bundle.getInt(PAGE, 1);
-        totalPages = bundle.getInt(TOTAL_PAGES, 1);
-        Log.d(TAG, "Load Status: " + page + " " + totalPages);
-    }
 
     @Override
     public void loadMore() {
@@ -109,9 +87,4 @@ public class CollectionPresenter extends BasePresenter<CollectionView> {
                 }));
     }
 
-    private void setLoading(boolean loading) {
-        this.loading = loading;
-        if (getView() != null)
-            getView().setLoading(loading);
-    }
 }

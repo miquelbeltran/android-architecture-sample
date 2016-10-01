@@ -14,14 +14,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.app.base.BasePresenter;
+import work.beltran.discogsbrowser.app.base.BasePresenterForAdapter;
 import work.beltran.discogsbrowser.app.base.BaseView;
 
 /**
  * Created by Miquel Beltran on 10/1/16
  * More on http://beltran.work
  */
-public abstract class RecordsAdapterFrameLayout<T extends BasePresenter> extends FrameLayout
+public abstract class RecordsAdapterFrameLayout<T extends BasePresenterForAdapter> extends FrameLayout
         implements BaseView, LoadMoreOnScrollListener.Listener {
     private static final String STATE_LAYOUT_MANAGER = "STATE_LAYOUT_MANAGER";
     private static final String STATE_ADAPTER = "STATE_ADAPTER";
