@@ -1,35 +1,36 @@
 package work.beltran.discogsbrowser.api.model.record;
 
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by miquel on 22.04.16.
+ * Created by Miquel Beltran on 22.04.16
+ * More on http://beltran.work
  */
-public class Record {
+@AutoValue
+public abstract class Record {
     @SerializedName("id")
-    private int instance_id;
+    public abstract int getInstanceId();
 
     @SerializedName("basic_information")
-    private BasicInformation basicInformation;
+    public abstract BasicInformation getBasicInformation();
 
-    public Record() {
-
+    public static TypeAdapter<Record> typeAdapter(Gson gson) {
+        return new AutoValue_Record.GsonTypeAdapter(gson);
     }
 
-    public BasicInformation getBasicInformation() {
-        return basicInformation;
+    public static Builder builder() {
+        return new AutoValue_Record.Builder();
     }
 
-    public void setBasicInformation(BasicInformation basicInformation) {
-        this.basicInformation = basicInformation;
-    }
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder setInstanceId(int newInstanceId);
 
-    public int getInstance_id() {
-        return instance_id;
-    }
+        public abstract Builder setBasicInformation(BasicInformation newBasicInformation);
 
-    public void setInstance_id(int instance_id) {
-        this.instance_id = instance_id;
+        public abstract Record build();
     }
-
 }

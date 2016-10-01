@@ -32,8 +32,6 @@ public class SearchResults implements RecordsWithPagination {
                 .map(new Func1<SearchRecord, Record>() {
             @Override
             public Record call(SearchRecord searchRecord) {
-                Record record = new Record();
-                record.setInstance_id(searchRecord.getId());
                 String artist = searchRecord.title;
                 String title = "";
 
@@ -57,8 +55,10 @@ public class SearchResults implements RecordsWithPagination {
                         .title(title)
                         .thumb(searchRecord.thumb)
                         .build();
-                record.setBasicInformation(basicInformation);
-                return record;
+                return Record.builder()
+                        .setInstanceId(searchRecord.getId())
+                        .setBasicInformation(basicInformation)
+                        .build();
             }
         }).toList().toBlocking().single();
     }
