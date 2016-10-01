@@ -20,6 +20,7 @@ public abstract class SearchRecord {
 
     public abstract String getTitle();
 
+    @Nullable
     public abstract String getYear();
 
     @Nullable

@@ -51,12 +51,13 @@ public abstract class SearchResults implements RecordsWithPagination {
                         formats.add(format);
                     }
                 }
+                String year = searchRecord.getYear() != null ? searchRecord.getYear() : "";
                 BasicInformation basicInformation = BasicInformation.builder()
                         .artists(artists)
                         .formats(formats)
                         .title(title)
                         .thumb(searchRecord.getThumb())
-                        .year(searchRecord.getYear())
+                        .year(year)
                         .build();
                 return Record.builder()
                         .setInstanceId(searchRecord.getId())
