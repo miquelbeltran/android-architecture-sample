@@ -1,5 +1,7 @@
 package work.beltran.discogsbrowser.app.common;
 
+import android.os.Parcelable;
+
 import com.google.auto.value.AutoValue;
 
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ import work.beltran.discogsbrowser.api.model.record.Record;
  * More on http://beltran.work
  */
 @AutoValue
-public abstract class RecordAdapterItem {
+public abstract class RecordAdapterItem implements Parcelable {
     public abstract CharSequence getTitle();
 
     public abstract CharSequence getArtist();

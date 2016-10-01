@@ -27,7 +27,7 @@ import work.beltran.discogsbrowser.app.wantlist.WantlistFrameLayout;
         SearchModule.class
 })
 public interface ApiComponent {
-    void inject(CollectionFrameLayout view);
+    void inject(CollectionFrameLayout collectionFrameLayout);
     void inject(WantlistFrameLayout wantlistFrameLayout);
     void inject(SearchFrameLayout searchFrameLayout);
 }

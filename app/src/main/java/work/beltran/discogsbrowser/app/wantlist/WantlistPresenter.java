@@ -1,5 +1,7 @@
 package work.beltran.discogsbrowser.app.wantlist;
 
+import android.os.Bundle;
+
 import rx.Observer;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.model.UserWanted;
@@ -52,7 +54,17 @@ public class WantlistPresenter extends BasePresenter<WantlistView> {
                 }));
     }
 
-    void loadMore() {
+    @Override
+    public Bundle getStatus() {
+        return null;
+    }
+
+    @Override
+    public void loadStatus(Bundle bundle) {
+
+    }
+
+    public void loadMore() {
         if (loading) return;
         int page = 0;
         if (pagination != null) {

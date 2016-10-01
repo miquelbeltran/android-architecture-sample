@@ -1,5 +1,6 @@
 package work.beltran.discogsbrowser.app.base;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import rx.Subscription;
@@ -9,7 +10,7 @@ import rx.subscriptions.CompositeSubscription;
  * Created by Miquel Beltran on 8/27/16
  * More on http://beltran.work
  */
-public class BasePresenter<V extends BaseView> {
+public abstract class BasePresenter<V extends BaseView> {
     @Nullable
     private V view;
 
@@ -36,4 +37,10 @@ public class BasePresenter<V extends BaseView> {
     public V getView() {
         return view;
     }
+
+    public abstract Bundle getStatus();
+
+    public abstract void loadStatus(Bundle bundle);
+
+    public abstract void loadMore();
 }

@@ -1,5 +1,7 @@
 package work.beltran.discogsbrowser.app.search;
 
+import android.os.Bundle;
+
 import java.util.List;
 
 import rx.Observer;
@@ -52,4 +54,18 @@ public class SearchPresenter extends BasePresenter<SearchView> {
                         }));
     }
 
+    @Override
+    public Bundle getStatus() {
+        return null;
+    }
+
+    @Override
+    public void loadStatus(Bundle bundle) {
+
+    }
+
+    @Override
+    public void loadMore() {
+
+    }
 }

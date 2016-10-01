@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import work.beltran.discogsbrowser.BuildConfig;
+import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
@@ -41,9 +42,10 @@ public class CollectionFrameLayoutTest {
 
     @Before
     public void setUp() throws Exception {
-        view = new CollectionFrameLayout(RuntimeEnvironment.application);
+        view = new CollectionFrameLayout(RuntimeEnvironment.application, R.id.CollectionView);
         MockitoAnnotations.initMocks(this);
-        view.setPresenterAdapter(presenter, adapter);
+        view.presenter = presenter;
+        view.setAdapter(adapter);
         view.picasso = Picasso.with(RuntimeEnvironment.application);
     }
 

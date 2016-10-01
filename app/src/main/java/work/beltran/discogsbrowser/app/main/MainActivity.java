@@ -1,6 +1,7 @@
 package work.beltran.discogsbrowser.app.main;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -32,23 +33,27 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.bottom_navigation)
     AHBottomNavigation navigation;
 
+    private CollectionFrameLayout collectionFrameLayout;
+    private WantlistFrameLayout wantlistFrameLayout;
+    private SearchFrameLayout searchFrameLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         ((App) getApplication()).getAppComponent().inject(this);
-        initNavBar();
+        initNavBar(savedInstanceState);
     }
 
-    private void initNavBar() {
+    private void initNavBar(Bundle savedInstanceState) {
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.ic_library_music_white_48px, R.color.colorPrimary);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_2, R.drawable.ic_favorite_white_48px, R.color.colorPrimary);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_3, R.drawable.ic_search_white_48px, R.color.colorPrimary);
         navigation.addItem(item1);
         navigation.addItem(item2);
         navigation.addItem(item3);
-        initAdapter();
+        initAdapter(savedInstanceState);
         navigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, boolean wasSelected) {
@@ -73,22 +78,34 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initAdapter() {
-        CollectionFrameLayout view = new CollectionFrameLayout(this);
+    private void initAdapter(Bundle savedInstanceState) {
+        collectionFrameLayout = new CollectionFrameLayout(this, R.id.CollectionView);
         ApiComponent apiComponent = ((App) getApplication()).getApiComponent();
         if (apiComponent != null)
-            apiComponent.inject(view);
-        WantlistFrameLayout wantlistFrameLayout = new WantlistFrameLayout(this);
+            apiComponent.inject(collectionFrameLayout);
+        if (savedInstanceState != null) {
+            Parcelable state = savedInstanceState.getParcelable("STATE_COLLECTION");
+            if (state != null) {
+                collectionFrameLayout.onRestoreInstanceState(state);
+            }
+        }
+        wantlistFrameLayout = new WantlistFrameLayout(this, R.id.WantlistView);
         if (apiComponent != null)
             apiComponent.inject(wantlistFrameLayout);
-        SearchFrameLayout searchFrameLayout = new SearchFrameLayout(this);
+        searchFrameLayout = new SearchFrameLayout(this, R.id.SearchView);
         if (apiComponent != null)
             apiComponent.inject(searchFrameLayout);
         navigationAdapter.setViews(
                 Arrays.<View>asList(
-                        view,
+                        collectionFrameLayout,
                         wantlistFrameLayout,
                         searchFrameLayout));
         pager.setAdapter(navigationAdapter);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable("STATE_COLLECTION", collectionFrameLayout.onSaveInstanceState());
+        super.onSaveInstanceState(outState);
     }
 }

@@ -20,6 +20,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordViewHolder> {
 
     private final Picasso picasso;
     private List<RecordAdapterItem> records = new ArrayList<>();
+    private List<RecordAdapterItem> items;
 
     public RecordsAdapter(Picasso picasso) {
         this.picasso = picasso;
@@ -54,4 +55,7 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordViewHolder> {
         notifyDataSetChanged();
     }
 
+    public List<RecordAdapterItem> getItems() {
+        return records;
+    }
 }

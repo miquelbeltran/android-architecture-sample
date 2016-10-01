@@ -1,20 +1,16 @@
 package work.beltran.discogsbrowser.app.wantlist;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.StringRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.eyeem.recyclerviewtools.LoadMoreOnScrollListener;
 import com.eyeem.recyclerviewtools.adapter.WrapAdapter;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -22,23 +18,25 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
+import work.beltran.discogsbrowser.app.common.RecordsAdapterFrameLayout;
 
 /**
  * Created by Miquel Beltran on 8/28/16
  * More on http://beltran.work
  */
-public class WantlistFrameLayout extends FrameLayout implements WantlistView, LoadMoreOnScrollListener.Listener {
-
-    @BindView(R.id.recycler_records)
-    RecyclerView recyclerView;
+@SuppressLint("ViewConstructor")
+public class WantlistFrameLayout extends RecordsAdapterFrameLayout<WantlistPresenter>
+        implements WantlistView {
 
     Header header = new Header();
     Footer footer = new Footer();
 
-    private RecordsAdapter adapter;
-    private WantlistPresenter presenter;
+    public WantlistFrameLayout(Context context, int id) {
+        super(context);
+        setId(id);
+        init();
+    }
 
     @Inject
     public void setPresenterAdapter(WantlistPresenter presenter, RecordsAdapter adapter) {
@@ -48,32 +46,12 @@ public class WantlistFrameLayout extends FrameLayout implements WantlistView, Lo
         presenter.attachView(this);
     }
 
-    public WantlistFrameLayout(Context context) {
-        super(context);
-        init();
-    }
-
-    public WantlistFrameLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
-    }
-
     private void init() {
         View view = inflate(getContext(), R.layout.view_collection, this);
         ButterKnife.bind(view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addOnScrollListener(new LoadMoreOnScrollListener(this));
-    }
-
-    @Override
-    public void displayError(@StringRes int messageId) {
-
-    }
-
-    @Override
-    public void addRecords(List<RecordAdapterItem> records) {
-        adapter.addItems(records);
     }
 
     @Override
@@ -105,10 +83,10 @@ public class WantlistFrameLayout extends FrameLayout implements WantlistView, Lo
         presenter.attachView(this);
     }
 
+    @Inject
     @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        presenter.detachView();
+    public void setPresenter(WantlistPresenter presenter) {
+        this.presenter = presenter;
     }
 
     @Override
