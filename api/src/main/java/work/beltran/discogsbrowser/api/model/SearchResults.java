@@ -43,8 +43,7 @@ public class SearchResults implements RecordsWithPagination {
                     artist = searchRecord.title.substring(0, index);
                 }
 
-                Artist artistObject = new Artist();
-                artistObject.setName(artist);
+                Artist artistObject = Artist.builder().name(artist).build();
                 List<Artist> artists = new ArrayList<>();
                 artists.add(artistObject);
                 basicInformation.setArtists(artists);
