@@ -63,7 +63,7 @@ public abstract class RecordsAdapterFrameLayout<T extends BasePresenterForAdapte
 
 
     @Override
-    protected void onDetachedFromWindow() {
+    public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         presenter.detachView();
     }

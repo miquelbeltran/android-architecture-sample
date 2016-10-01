@@ -44,7 +44,7 @@ public class CollectionFrameLayoutTest {
     public void setUp() throws Exception {
         view = new CollectionFrameLayout(RuntimeEnvironment.application, R.id.CollectionView);
         MockitoAnnotations.initMocks(this);
-        view.presenter = presenter;
+        view.setPresenter(presenter);
         view.setAdapter(adapter);
         view.picasso = Picasso.with(RuntimeEnvironment.application);
     }

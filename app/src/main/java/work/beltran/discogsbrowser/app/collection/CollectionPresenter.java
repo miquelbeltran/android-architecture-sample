@@ -1,7 +1,5 @@
 package work.beltran.discogsbrowser.app.collection;
 
-import android.util.Log;
-
 import java.util.List;
 
 import rx.Observer;
@@ -57,7 +55,6 @@ public class CollectionPresenter extends BasePresenterForAdapter<CollectionView>
 
     @Override
     public void loadMore() {
-        Log.d(TAG, "Load More called. Page: " + page + ", total: " + totalPages);
         if (loading) return;
         if (page > totalPages) return;
         setLoading(true);
