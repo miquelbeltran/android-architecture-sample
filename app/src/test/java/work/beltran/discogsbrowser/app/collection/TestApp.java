@@ -1,4 +1,6 @@
-package work.beltran.discogsbrowser.app;
+package work.beltran.discogsbrowser.app.collection;
+
+import work.beltran.discogsbrowser.app.App;
 
 /**
  * Created by Miquel Beltran on 8/28/16

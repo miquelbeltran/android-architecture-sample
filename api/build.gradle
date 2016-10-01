@@ -20,7 +20,7 @@ targetCompatibility = "1.7"
 
 dependencies {
     // Required for AutoValue
-    apt 'com.squareup:javapoet:1.7.0'
+    //apt 'com.squareup:javapoet:1.7.0'
 
     compile "io.reactivex:rxjava:1.1.9"
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
