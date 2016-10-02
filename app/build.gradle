@@ -102,6 +102,8 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
 
+    apt 'com.ryanharter.auto.value:auto-value-parcel:0.2.4-rc2'
+
     compile project(path: ':api')
     compile project(path: ':business')
 }

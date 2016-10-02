@@ -1,13 +1,11 @@
 package work.beltran.discogsbrowser.app.collection;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.StringRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -16,52 +14,40 @@ import com.eyeem.recyclerviewtools.LoadMoreOnScrollListener;
 import com.eyeem.recyclerviewtools.adapter.WrapAdapter;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.app.common.CircleTransform;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
+import work.beltran.discogsbrowser.app.common.RecordsAdapterFrameLayout;
 
 /**
  * Created by Miquel Beltran on 8/27/16
  * More on http://beltran.work
  */
-public class CollectionFrameLayout extends FrameLayout implements CollectionView, LoadMoreOnScrollListener.Listener {
+@SuppressLint("ViewConstructor")
+public class CollectionFrameLayout extends RecordsAdapterFrameLayout<CollectionPresenter>
+        implements CollectionView {
 
-    private CollectionPresenter presenter;
-
-    @BindView(R.id.recycler_records)
-    RecyclerView recyclerView;
-
-    private RecordsAdapter adapter;
     Header header = new Header();
     Footer footer = new Footer();
 
     @Inject
     public Picasso picasso;
 
+    public CollectionFrameLayout(Context context, int id) {
+        super(context);
+        setId(id);
+        init();
+    }
+
     @Inject
-    public void setPresenterAdapter(CollectionPresenter presenter, RecordsAdapter adapter) {
+    public void setAdapter(RecordsAdapter adapter) {
         this.adapter = adapter;
         createHeaderFooter(adapter);
-        this.presenter = presenter;
-        presenter.attachView(this);
-    }
-
-    public CollectionFrameLayout(Context context) {
-        super(context);
-        init();
-    }
-
-    public CollectionFrameLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
     }
 
     private void init() {
@@ -73,30 +59,9 @@ public class CollectionFrameLayout extends FrameLayout implements CollectionView
     }
 
     @Override
-    public void displayError(@StringRes int messageId) {
-
-    }
-
-    @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         presenter.attachView(this);
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        presenter.detachView();
-    }
-
-    @Override
-    public void onLoadMore(RecyclerView recyclerView) {
-        presenter.loadMore();
-    }
-
-    @Override
-    public void addRecords(List<Record> records) {
-        adapter.addItems(records);
     }
 
     @Override
@@ -128,6 +93,12 @@ public class CollectionFrameLayout extends FrameLayout implements CollectionView
         View footer = LayoutInflater.from(getContext()).inflate(R.layout.footer, recyclerView, false);
         ButterKnife.bind(this.footer, footer);
         wrapAdapter.addFooter(footer);
+    }
+
+    @Inject
+    @Override
+    public void setPresenter(CollectionPresenter presenter) {
+        this.presenter = presenter;
     }
 
     public static class Header {

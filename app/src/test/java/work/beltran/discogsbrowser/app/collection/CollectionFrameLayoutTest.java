@@ -17,8 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import work.beltran.discogsbrowser.BuildConfig;
+import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.api.model.record.Record;
+import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,9 +42,10 @@ public class CollectionFrameLayoutTest {
 
     @Before
     public void setUp() throws Exception {
-        view = new CollectionFrameLayout(RuntimeEnvironment.application);
+        view = new CollectionFrameLayout(RuntimeEnvironment.application, R.id.CollectionView);
         MockitoAnnotations.initMocks(this);
-        view.setPresenterAdapter(presenter, adapter);
+        view.setPresenter(presenter);
+        view.setAdapter(adapter);
         view.picasso = Picasso.with(RuntimeEnvironment.application);
     }
 
@@ -73,7 +75,7 @@ public class CollectionFrameLayoutTest {
 
     @Test
     public void addRecords() throws Exception {
-        List<Record> listRecords = new ArrayList<>();
+        List<RecordAdapterItem> listRecords = new ArrayList<>();
         view.addRecords(listRecords);
         verify(adapter).addItems(listRecords);
     }

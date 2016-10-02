@@ -1,10 +1,12 @@
 package work.beltran.discogsbrowser.app.collection;
 
+import java.util.List;
+
 import rx.Observer;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.api.model.pagination.Pagination;
-import work.beltran.discogsbrowser.app.base.BasePresenter;
+import work.beltran.discogsbrowser.app.base.BasePresenterForAdapter;
+import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.business.CollectionInteractor;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
 
@@ -13,13 +15,10 @@ import work.beltran.discogsbrowser.business.ProfileInteractor;
  * Created by Miquel Beltran on 8/27/16
  * More on http://beltran.work
  */
-public class CollectionPresenter extends BasePresenter<CollectionView> {
+public class CollectionPresenter extends BasePresenterForAdapter<CollectionView> {
     public static final String TAG = CollectionPresenter.class.getName();
-
     private CollectionInteractor interactor;
     private ProfileInteractor profileInteractor;
-    private boolean loading;
-    private Pagination pagination;
 
     public CollectionPresenter(CollectionInteractor interactor,
                                ProfileInteractor profileInteractor) {
@@ -53,18 +52,17 @@ public class CollectionPresenter extends BasePresenter<CollectionView> {
                 }));
     }
 
-    void loadMore() {
+
+    @Override
+    public void loadMore() {
         if (loading) return;
-        int page = 0;
-        if (pagination != null) {
-            if (pagination.getPage() >= pagination.getPages()) return;
-            page = pagination.getPage() + 1;
-        }
+        if (page > totalPages) return;
         setLoading(true);
         addSubscription(interactor.getCollection(page)
                 .subscribe(new Observer<UserCollection>() {
                     @Override
                     public void onCompleted() {
+                        page++;
                         setLoading(false);
                     }
 
@@ -76,17 +74,14 @@ public class CollectionPresenter extends BasePresenter<CollectionView> {
 
                     @Override
                     public void onNext(UserCollection userCollection) {
-                        pagination = userCollection.getPagination();
+                        totalPages = userCollection.getPagination().getPages();
+                        List<RecordAdapterItem> records
+                                = RecordAdapterItem.createRecordsList(userCollection.getRecords());
                         if (getView() != null) {
-                            getView().addRecords(userCollection.getRecords());
+                            getView().addRecords(records);
                         }
                     }
                 }));
     }
 
-    private void setLoading(boolean loading) {
-        this.loading = loading;
-        if (getView() != null)
-            getView().setLoading(loading);
-    }
 }

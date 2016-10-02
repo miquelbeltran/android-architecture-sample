@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -19,7 +18,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.api.model.record.Record;
+import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
 
 /**
@@ -36,13 +35,9 @@ public class SearchFrameLayout extends FrameLayout implements SearchView {
     private RecordsAdapter adapter;
     private SearchPresenter presenter;
 
-    public SearchFrameLayout(Context context) {
+    public SearchFrameLayout(Context context, int id) {
         super(context);
-        init();
-    }
-
-    public SearchFrameLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        setId(id);
         init();
     }
 
@@ -91,7 +86,7 @@ public class SearchFrameLayout extends FrameLayout implements SearchView {
     }
 
     @Override
-    public void display(List<Record> records) {
+    public void display(List<RecordAdapterItem> records) {
         adapter.addItems(records);
     }
 

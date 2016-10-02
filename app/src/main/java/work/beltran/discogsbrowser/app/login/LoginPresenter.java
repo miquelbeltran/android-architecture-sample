@@ -2,6 +2,7 @@ package work.beltran.discogsbrowser.app.login;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 
 import rx.Observer;
 import work.beltran.discogsbrowser.BuildConfig;
@@ -71,5 +72,15 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                                 }
                             }
                         }));
+    }
+
+    @Override
+    public Bundle getStatus() {
+        return null;
+    }
+
+    @Override
+    public void loadStatus(Bundle bundle) {
+
     }
 }

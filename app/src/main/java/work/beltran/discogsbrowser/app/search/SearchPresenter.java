@@ -1,10 +1,13 @@
 package work.beltran.discogsbrowser.app.search;
 
+import android.os.Bundle;
+
 import java.util.List;
 
 import rx.Observer;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.app.base.BasePresenter;
+import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.business.SearchInteractor;
 
 /**
@@ -44,10 +47,20 @@ public class SearchPresenter extends BasePresenter<SearchView> {
 
                             @Override
                             public void onNext(List<Record> records) {
-                                if (getView() != null)
-                                    getView().display(records);
+                                if (getView() != null) {
+                                    getView().display(RecordAdapterItem.createRecordsList(records));
+                                }
                             }
                         }));
     }
 
+    @Override
+    public Bundle getStatus() {
+        return null;
+    }
+
+    @Override
+    public void loadStatus(Bundle bundle) {
+
+    }
 }

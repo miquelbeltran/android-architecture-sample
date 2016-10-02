@@ -3,8 +3,8 @@ package work.beltran.discogsbrowser.app.wantlist;
 import rx.Observer;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.api.model.UserWanted;
-import work.beltran.discogsbrowser.api.model.pagination.Pagination;
-import work.beltran.discogsbrowser.app.base.BasePresenter;
+import work.beltran.discogsbrowser.app.base.BasePresenterForAdapter;
+import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
 import work.beltran.discogsbrowser.business.WantedInteractor;
 
@@ -12,12 +12,10 @@ import work.beltran.discogsbrowser.business.WantedInteractor;
  * Created by Miquel Beltran on 8/28/16
  * More on http://beltran.work
  */
-public class WantlistPresenter extends BasePresenter<WantlistView> {
+public class WantlistPresenter extends BasePresenterForAdapter<WantlistView> {
 
     private final WantedInteractor interactor;
     private ProfileInteractor profileInteractor;
-    private boolean loading;
-    private Pagination pagination;
 
     public WantlistPresenter(WantedInteractor interactor,
                              ProfileInteractor profileInteractor) {
@@ -51,18 +49,15 @@ public class WantlistPresenter extends BasePresenter<WantlistView> {
                 }));
     }
 
-    void loadMore() {
+    public void loadMore() {
         if (loading) return;
-        int page = 0;
-        if (pagination != null) {
-            if (pagination.getPage() >= pagination.getPages()) return;
-            page = pagination.getPage() + 1;
-        }
+        if (page > totalPages) return;
         setLoading(true);
         addSubscription(interactor.getWanted(page)
                 .subscribe(new Observer<UserWanted>() {
                     @Override
                     public void onCompleted() {
+                        page++;
                         setLoading(false);
                     }
 
@@ -74,17 +69,11 @@ public class WantlistPresenter extends BasePresenter<WantlistView> {
 
                     @Override
                     public void onNext(UserWanted userWanted) {
-                        pagination = userWanted.getPagination();
                         if (getView() != null) {
-                            getView().addRecords(userWanted.getRecords());
+                            getView().addRecords(RecordAdapterItem
+                                    .createRecordsList(userWanted.getRecords()));
                         }
                     }
                 }));
-    }
-
-    private void setLoading(boolean loading) {
-        this.loading = loading;
-        if (getView() != null)
-            getView().setLoading(loading);
     }
 }

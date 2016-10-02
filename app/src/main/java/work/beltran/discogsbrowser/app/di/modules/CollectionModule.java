@@ -29,7 +29,6 @@ public class CollectionModule {
         return new CollectionInteractorImpl(service, schedulers, profileInteractor);
     }
 
-    @Singleton
     @Provides
     public CollectionPresenter providesPresenter(CollectionInteractor interactor,
                                                  ProfileInteractor profileInteractor) {
