@@ -39,7 +39,7 @@ public class ReleasePresenter extends BasePresenter<ReleaseView> {
 
                     @Override
                     public void onNext(UserCollection userCollection) {
-                        setAddOrRemoveButton(!userCollection.getRecords().isEmpty());
+                        setAddOrRemoveButton(userCollection.getRecords().isEmpty());
                     }
                 }));
     }

@@ -104,7 +104,9 @@
             android:drawableLeft="@drawable/ic_favorite_magenta_48px"
             android:drawablePadding="8dp"
             android:text="@string/add_to_wantlist"
-            tools:ignore="RtlHardcoded" />
+            android:visibility="gone"
+            tools:ignore="RtlHardcoded"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/button_remove_from_wantlist"
