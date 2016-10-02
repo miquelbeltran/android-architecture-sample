@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.eyeem.recyclerviewtools.LoadMoreOnScrollListener;
 import com.eyeem.recyclerviewtools.adapter.WrapAdapter;
@@ -30,7 +29,7 @@ import work.beltran.discogsbrowser.app.common.RecordsAdapterFrameLayout;
 public class WantlistFrameLayout extends RecordsAdapterFrameLayout<WantlistPresenter>
         implements WantlistView {
 
-    Header header = new Header();
+    WantlistHeader header = new WantlistHeader();
     Footer footer = new Footer();
 
     public WantlistFrameLayout(Context context, int id) {
@@ -57,14 +56,7 @@ public class WantlistFrameLayout extends RecordsAdapterFrameLayout<WantlistPrese
 
     @Override
     public void display(UserProfile userProfile) {
-        header.textWantlist.setText(
-                getResources().getString(
-                        R.string.user_wantlist,
-                        userProfile.getUsername()));
-        header.textWantlistcount.setText(
-                getResources().getString(
-                        R.string.in_wantlist,
-                        userProfile.getNumWantlist()));
+        header.bind(userProfile, getContext());
     }
 
     private void createHeaderFooter(RecordsAdapter adapter) {
@@ -92,12 +84,12 @@ public class WantlistFrameLayout extends RecordsAdapterFrameLayout<WantlistPrese
 
     @Override
     protected Bundle getHeaderState() {
-        return null;
+        return header.getState();
     }
 
     @Override
     protected void loadHeaderState(Bundle bundle) {
-
+        header.loadState(bundle);
     }
 
     @Override
@@ -108,13 +100,6 @@ public class WantlistFrameLayout extends RecordsAdapterFrameLayout<WantlistPrese
     @Override
     public void setLoading(boolean loading) {
         footer.progressBar.setVisibility(loading ? VISIBLE : GONE);
-    }
-
-    public static class Header {
-        @BindView(R.id.text_wantlist)
-        TextView textWantlist;
-        @BindView(R.id.text_wantlist_count)
-        TextView textWantlistcount;
     }
 
     public static class Footer {
