@@ -28,7 +28,7 @@ class RecordViewHolder extends RecyclerView.ViewHolder implements View.OnClickLi
     TextView textYear;
     @BindView(R.id.text_format)
     TextView textFormat;
-    private int releaseId;
+    private RecordAdapterItem record;
 
     RecordViewHolder(View itemView, Picasso picasso) {
         super(itemView);
@@ -46,11 +46,11 @@ class RecordViewHolder extends RecyclerView.ViewHolder implements View.OnClickLi
                 .fit()
                 .centerCrop()
                 .into(iamgeThumb);
-        releaseId = record.getReleaseId();
+        this.record = record;
     }
 
     @Override
     public void onClick(View v) {
-        v.getContext().startActivity(ReleaseActivity.createReleaseActivity(v.getContext(), releaseId));
+        v.getContext().startActivity(ReleaseActivity.createReleaseActivity(v.getContext(), record));
     }
 }

@@ -36,26 +36,28 @@ public class CollectionInteractorImpl implements CollectionInteractor {
                     @Override
                     public Observable<UserCollection> call(UserIdentity userIdentity) {
                         return service.listRecords(userIdentity.getUsername(), page)
-                                .subscribeOn(schedulers.io())
-                                .observeOn(schedulers.mainThread());
+                                .subscribeOn(schedulers.io());
                     }
-                });
+                })
+                .subscribeOn(schedulers.io())
+                .observeOn(schedulers.mainThread());
     }
 
     @Override
     public Observable<UserCollection> getRecord(final int recordId) {
         return profileInteractor
                 .getIdentity()
-                .subscribeOn(schedulers.io())
                 // Obtain all the instances of a Record
                 .concatMap(new Func1<UserIdentity, Observable<UserCollection>>() {
                     @Override
                     public Observable<UserCollection> call(final UserIdentity userIdentity) {
                         return service.getRecordInCollection(
                                 userIdentity.getUsername(),
-                                recordId);
+                                recordId)
+                                .subscribeOn(schedulers.io());
                     }
                 })
+                .subscribeOn(schedulers.io())
                 .observeOn(schedulers.mainThread());
     }
 
@@ -68,7 +70,8 @@ public class CollectionInteractorImpl implements CollectionInteractor {
                     @Override
                     public Observable<Void> call(final UserIdentity userIdentity) {
                         return service.addToCollection(userIdentity.getUsername(),
-                                recordId);
+                                recordId)
+                                .subscribeOn(schedulers.io());
                     }
                 })
                 .observeOn(schedulers.mainThread());
@@ -85,7 +88,8 @@ public class CollectionInteractorImpl implements CollectionInteractor {
                     @Override
                     public Observable<UserCollection> call(final UserIdentity userIdentity) {
                         return service.getRecordInCollection(userIdentity.getUsername(),
-                                recordId);
+                                recordId)
+                                .subscribeOn(schedulers.io());
                     }
                 })
                 // emit each Record
@@ -107,7 +111,8 @@ public class CollectionInteractorImpl implements CollectionInteractor {
                                         return service.removeFromCollection(
                                                 userIdentity.getUsername(),
                                                 record.getId(),
-                                                record.getInstanceId());
+                                                record.getInstanceId())
+                                                .subscribeOn(schedulers.io());
                                     }
                                 });
                     }

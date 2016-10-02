@@ -10,6 +10,7 @@ import work.beltran.discogsbrowser.app.di.modules.RecordsAdapterModule;
 import work.beltran.discogsbrowser.app.di.modules.SearchModule;
 import work.beltran.discogsbrowser.app.di.modules.SettingsModule;
 import work.beltran.discogsbrowser.app.di.modules.WantlistModule;
+import work.beltran.discogsbrowser.app.release.ReleaseActivity;
 import work.beltran.discogsbrowser.app.search.SearchFrameLayout;
 import work.beltran.discogsbrowser.app.wantlist.WantlistFrameLayout;
 
@@ -30,4 +31,6 @@ public interface ApiComponent {
     void inject(CollectionFrameLayout collectionFrameLayout);
     void inject(WantlistFrameLayout wantlistFrameLayout);
     void inject(SearchFrameLayout searchFrameLayout);
+
+    void inject(ReleaseActivity releaseActivity);
 }
