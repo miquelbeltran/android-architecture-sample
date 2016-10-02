@@ -10,12 +10,13 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
+import work.beltran.discogsbrowser.app.release.ReleaseActivity;
 
 /**
  * Created by Miquel Beltran on 10/1/16
  * More on http://beltran.work
  */
-public class RecordViewHolder extends RecyclerView.ViewHolder {
+class RecordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private Picasso picasso;
     @BindView(R.id.text_title)
     TextView textTitle;
@@ -27,14 +28,16 @@ public class RecordViewHolder extends RecyclerView.ViewHolder {
     TextView textYear;
     @BindView(R.id.text_format)
     TextView textFormat;
+    private int releaseId;
 
-    public RecordViewHolder(View itemView, Picasso picasso) {
+    RecordViewHolder(View itemView, Picasso picasso) {
         super(itemView);
         this.picasso = picasso;
         ButterKnife.bind(this, itemView);
+        itemView.setOnClickListener(this);
     }
 
-    public void bind(RecordAdapterItem record) {
+    void bind(RecordAdapterItem record) {
         textTitle.setText(record.getTitle());
         textArtist.setText(record.getArtist());
         textFormat.setText(record.getFormat());
@@ -43,5 +46,11 @@ public class RecordViewHolder extends RecyclerView.ViewHolder {
                 .fit()
                 .centerCrop()
                 .into(iamgeThumb);
+        releaseId = record.getReleaseId();
+    }
+
+    @Override
+    public void onClick(View v) {
+        v.getContext().startActivity(ReleaseActivity.createReleaseActivity(v.getContext(), releaseId));
     }
 }

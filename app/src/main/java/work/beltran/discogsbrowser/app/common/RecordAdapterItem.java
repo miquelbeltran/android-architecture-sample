@@ -27,12 +27,15 @@ public abstract class RecordAdapterItem implements Parcelable {
 
     public abstract String getThumb();
 
+    public abstract int getReleaseId();
+
     public static Builder builder() {
         return new AutoValue_RecordAdapterItem.Builder();
     }
 
     @AutoValue.Builder
     public abstract static class Builder {
+
         public abstract Builder setTitle(CharSequence newTitle);
 
         public abstract Builder setArtist(CharSequence newArtist);
@@ -42,6 +45,8 @@ public abstract class RecordAdapterItem implements Parcelable {
         public abstract Builder setYear(CharSequence newYear);
 
         public abstract Builder setThumb(String newThumb);
+
+        public abstract Builder setReleaseId(int newReleaseId);
 
         public abstract RecordAdapterItem build();
     }
@@ -71,6 +76,7 @@ public abstract class RecordAdapterItem implements Parcelable {
                 .setThumb(record.getBasicInformation().getThumb())
                 .setTitle(record.getBasicInformation().getTitle())
                 .setYear(year)
+                .setReleaseId(record.getInstanceId())
                 .build();
     }
 

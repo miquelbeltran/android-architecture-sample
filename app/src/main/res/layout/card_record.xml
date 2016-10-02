@@ -7,6 +7,8 @@
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     card_view:cardCornerRadius="4dp"
     card_view:contentPadding="0dp">
 

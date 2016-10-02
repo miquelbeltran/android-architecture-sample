@@ -27,18 +27,22 @@
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="callback"
                     android:scheme="discogs" />
             </intent-filter>
-            </activity>
+        </activity>
         <activity
             android:name=".app.settings.SettingsActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".app.about.AboutActivity"
+        <activity
+            android:name=".app.about.AboutActivity"
             android:theme="@style/AppTheme" />
+        <activity android:name=".app.release.ReleaseActivity"></activity>
     </application>
 
 </manifest>
