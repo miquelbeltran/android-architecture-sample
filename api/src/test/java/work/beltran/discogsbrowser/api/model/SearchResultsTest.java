@@ -60,6 +60,6 @@ public class SearchResultsTest {
         assertThat(basicInformation.getFormats().size()).isEqualTo(1);
         assertThat(basicInformation.getFormats().get(0).getName()).isEqualTo(FORMAT);
         assertThat(basicInformation.getYear()).isEqualTo(YEAR);
-        assertThat(record.getInstanceId()).isEqualTo(ID);
+        assertThat(record.getId()).isEqualTo(ID);
     }
 }

@@ -25,13 +25,14 @@ public interface DiscogsService {
     rx.Observable<UserCollection> getRecordInCollection(@Path("username") String user,
                                                         @Path("release_id") int releaseId);
 
-    @POST("users/{username}/collection/folders/0/releases/{release_id}")
+    @POST("users/{username}/collection/folders/1/releases/{release_id}")
     rx.Observable<Void> addToCollection(@Path("username") String user,
                                         @Path("release_id") int releaseId);
 
-    @DELETE("users/{username}/collection/folders/0/releases/{release_id}")
+    @DELETE("users/{username}/collection/folders/1/releases/{release_id}/instances/{instance_id}")
     rx.Observable<Void> removeFromCollection(@Path("username") String user,
-                                             @Path("release_id") int releaseId);
+                                             @Path("release_id") int releaseId,
+                                             @Path("instance_id") int instanceId);
 
     @GET("users/{username}")
     rx.Observable<UserProfile> getUserProfile(@Path("username") String username);

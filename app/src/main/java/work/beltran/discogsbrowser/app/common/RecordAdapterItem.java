@@ -76,7 +76,7 @@ public abstract class RecordAdapterItem implements Parcelable {
                 .setThumb(record.getBasicInformation().getThumb())
                 .setTitle(record.getBasicInformation().getTitle())
                 .setYear(year)
-                .setReleaseId(record.getInstanceId())
+                .setReleaseId(record.getId())
                 .build();
     }
 
