@@ -42,7 +42,9 @@
         <activity
             android:name=".app.about.AboutActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".app.release.ReleaseActivity"></activity>
+        <activity
+            android:name=".app.release.ReleaseActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

@@ -24,6 +24,11 @@
         You can contact me on this email address or my website.\n~ Miquel Beltran</string>
     <string name="open_source_libraries">Open Source Libraries</string>
     <string name="version">Version: </string>
+    <string name="album_art">Album Art</string>
+    <string name="add_to_collection">Add to Collection</string>
+    <string name="remove_from_collection">Remove from Collection</string>
+    <string name="remove_from_wantlist">Remove from Wantlist</string>
+    <string name="add_to_wantlist">Add to Wantlist</string>
     <string-array name="price_type">
         <item>lowest</item>
         <item>average</item>
