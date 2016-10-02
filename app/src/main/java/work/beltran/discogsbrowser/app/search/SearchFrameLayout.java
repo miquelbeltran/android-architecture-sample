@@ -1,39 +1,33 @@
 package work.beltran.discogsbrowser.app.search;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.StringRes;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.eyeem.recyclerviewtools.adapter.WrapAdapter;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
+import work.beltran.discogsbrowser.app.common.RecordsAdapterFrameLayout;
 
 /**
  * Created by Miquel Beltran on 8/28/16
  * More on http://beltran.work
  */
-public class SearchFrameLayout extends FrameLayout implements SearchView {
-
-    @BindView(R.id.recycler_records)
-    RecyclerView recyclerView;
-
+@SuppressLint("ViewConstructor")
+public class SearchFrameLayout extends RecordsAdapterFrameLayout<SearchPresenter> implements SearchView {
+    private static final String STATE_SEARCH = "STATE_SEARCH";
     Header header = new Header();
     Footer footer = new Footer();
-    private RecordsAdapter adapter;
-    private SearchPresenter presenter;
 
     public SearchFrameLayout(Context context, int id) {
         super(context);
@@ -49,12 +43,9 @@ public class SearchFrameLayout extends FrameLayout implements SearchView {
     }
 
     @Inject
-    public void setPresenterAdapter(SearchPresenter presenter,
-                                    RecordsAdapter adapter) {
+    public void setAdapter(RecordsAdapter adapter) {
         this.adapter = adapter;
         createHeaderFooter(adapter);
-        this.presenter = presenter;
-        presenter.attachView(this);
     }
 
     private void createHeaderFooter(RecordsAdapter adapter) {
@@ -86,18 +77,8 @@ public class SearchFrameLayout extends FrameLayout implements SearchView {
     }
 
     @Override
-    public void display(List<RecordAdapterItem> records) {
-        adapter.addItems(records);
-    }
-
-    @Override
     public void clear() {
         adapter.clear();
-    }
-
-    @Override
-    public void displayError(@StringRes int messageId) {
-
     }
 
     @Override
@@ -106,10 +87,22 @@ public class SearchFrameLayout extends FrameLayout implements SearchView {
         presenter.attachView(this);
     }
 
+    @Inject
     @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        presenter.detachView();
+    public void setPresenter(SearchPresenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    protected Bundle getHeaderState() {
+        Bundle bundle = new Bundle();
+        bundle.putString(STATE_SEARCH, header.searchView.getQuery().toString());
+        return bundle;
+    }
+
+    @Override
+    protected void loadHeaderState(Bundle bundle) {
+        header.searchView.setQuery(bundle.getString(STATE_SEARCH), false);
     }
 
     public static class Header {

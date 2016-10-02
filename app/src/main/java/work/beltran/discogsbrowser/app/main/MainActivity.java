@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getCanonicalName();
     private static final String STATE_COLLECTION = "STATE_COLLECTION";
     private static final String STATE_WANTLIST = "STATE_WANTLIST";
+    private static final String STATE_SEARCH = "STATE_SEARCH";
 
     @Inject
     public NavigationAdapter navigationAdapter;
@@ -103,6 +104,12 @@ public class MainActivity extends AppCompatActivity {
         searchFrameLayout = new SearchFrameLayout(this, R.id.SearchView);
         if (apiComponent != null)
             apiComponent.inject(searchFrameLayout);
+        if (savedInstanceState != null) {
+            Parcelable state = savedInstanceState.getParcelable(STATE_SEARCH);
+            if (state != null) {
+                searchFrameLayout.onRestoreInstanceState(state);
+            }
+        }
         navigationAdapter.setViews(
                 Arrays.<View>asList(
                         collectionFrameLayout,
@@ -115,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelable(STATE_COLLECTION, collectionFrameLayout.onSaveInstanceState());
         outState.putParcelable(STATE_WANTLIST, wantlistFrameLayout.onSaveInstanceState());
+        outState.putParcelable(STATE_SEARCH, searchFrameLayout.onSaveInstanceState());
         super.onSaveInstanceState(outState);
     }
 }
