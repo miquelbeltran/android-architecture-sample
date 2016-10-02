@@ -27,6 +27,7 @@ public abstract class RecordsAdapterFrameLayout<T extends BasePresenterForAdapte
     private static final String STATE_ADAPTER = "STATE_ADAPTER";
     private static final String STATE_PRESENTER = "STATE_PRESENTER";
     private static final String STATE_SUPER = "STATE_SUPER";
+    private static final String STATE_HEADER = "STATE_HEADER";
     protected T presenter;
     protected RecordsAdapter adapter;
     @BindView(R.id.recycler_records)
@@ -45,8 +46,11 @@ public abstract class RecordsAdapterFrameLayout<T extends BasePresenterForAdapte
         bundle.putBundle(STATE_PRESENTER, presenter.getStatus());
         bundle.putParcelableArrayList(STATE_ADAPTER, (ArrayList<RecordAdapterItem>) adapter.getItems());
         bundle.putParcelable(STATE_LAYOUT_MANAGER, recyclerView.getLayoutManager().onSaveInstanceState());
+        bundle.putBundle(STATE_HEADER, getHeaderState());
         return bundle;
     }
+
+    protected abstract Bundle getHeaderState();
 
     @Override
     public void onRestoreInstanceState(Parcelable state) {
@@ -56,10 +60,13 @@ public abstract class RecordsAdapterFrameLayout<T extends BasePresenterForAdapte
             adapter.clear();
             adapter.addItems(bundle.<RecordAdapterItem>getParcelableArrayList(STATE_ADAPTER));
             recyclerView.getLayoutManager().onRestoreInstanceState(bundle.getParcelable(STATE_LAYOUT_MANAGER));
+            loadHeaderState(bundle.getBundle(STATE_HEADER));
             state = bundle.getParcelable(STATE_SUPER);
         }
         super.onRestoreInstanceState(state);
     }
+
+    protected abstract void loadHeaderState(Bundle bundle);
 
 
     @Override

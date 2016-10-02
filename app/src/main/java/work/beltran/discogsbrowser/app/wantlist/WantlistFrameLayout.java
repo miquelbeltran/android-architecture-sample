@@ -2,6 +2,7 @@ package work.beltran.discogsbrowser.app.wantlist;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -87,6 +88,16 @@ public class WantlistFrameLayout extends RecordsAdapterFrameLayout<WantlistPrese
     @Override
     public void setPresenter(WantlistPresenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    protected Bundle getHeaderState() {
+        return null;
+    }
+
+    @Override
+    protected void loadHeaderState(Bundle bundle) {
+
     }
 
     @Override

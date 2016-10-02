@@ -2,13 +2,12 @@ package work.beltran.discogsbrowser.app.collection;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.eyeem.recyclerviewtools.LoadMoreOnScrollListener;
 import com.eyeem.recyclerviewtools.adapter.WrapAdapter;
@@ -20,7 +19,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.app.common.CircleTransform;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
 import work.beltran.discogsbrowser.app.common.RecordsAdapterFrameLayout;
 
@@ -32,7 +30,7 @@ import work.beltran.discogsbrowser.app.common.RecordsAdapterFrameLayout;
 public class CollectionFrameLayout extends RecordsAdapterFrameLayout<CollectionPresenter>
         implements CollectionView {
 
-    Header header = new Header();
+    CollectionHeader header = new CollectionHeader();
     Footer footer = new Footer();
 
     @Inject
@@ -66,17 +64,7 @@ public class CollectionFrameLayout extends RecordsAdapterFrameLayout<CollectionP
 
     @Override
     public void display(UserProfile userProfile) {
-        header.textUser.setText(userProfile.getUsername());
-        picasso.load(userProfile.getAvatarUrl())
-                .placeholder(R.drawable.ic_account_circle_black_48px)
-                .fit()
-                .centerCrop()
-                .transform(new CircleTransform())
-                .into(header.imageAvatar);
-        header.textCollectionCount.setText(
-                getResources().getString(
-                        R.string.in_collection,
-                        userProfile.getNumCollection()));
+        header.bind(userProfile, picasso, getContext());
     }
 
     @Override
@@ -101,13 +89,14 @@ public class CollectionFrameLayout extends RecordsAdapterFrameLayout<CollectionP
         this.presenter = presenter;
     }
 
-    public static class Header {
-        @BindView(R.id.text_user)
-        TextView textUser;
-        @BindView(R.id.image_avatar)
-        ImageView imageAvatar;
-        @BindView(R.id.text_collection_count)
-        TextView textCollectionCount;
+    @Override
+    protected Bundle getHeaderState() {
+        return header.getState();
+    }
+
+    @Override
+    protected void loadHeaderState(Bundle bundle) {
+        header.loadState(bundle, picasso);
     }
 
     public static class Footer {
