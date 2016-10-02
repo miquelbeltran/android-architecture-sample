@@ -12,7 +12,6 @@ import work.beltran.discogsbrowser.api.model.UserCollection;
 public class UserCollectionTest extends DiscogsServiceTest {
 
     private static final int PAGE = 0;
-    private static final String USER = "mike513";
 
     @Test
     public void testListCollection() throws Exception {
