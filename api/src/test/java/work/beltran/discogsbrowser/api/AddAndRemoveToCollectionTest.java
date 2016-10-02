@@ -12,7 +12,7 @@ import work.beltran.discogsbrowser.api.model.record.Record;
  */
 public class AddAndRemoveToCollectionTest extends DiscogsServiceTest {
 
-    static int RELEASE_ID = 4855808;
+    private static int RELEASE_ID = 4855808;
 
     @Test
     public void testAddAndDelete() throws Exception {

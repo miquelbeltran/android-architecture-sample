@@ -9,4 +9,10 @@ import work.beltran.discogsbrowser.api.model.UserCollection;
  */
 public interface CollectionInteractor {
     Observable<UserCollection> getCollection(int page);
+
+    Observable<UserCollection> getRecord(int recordId);
+
+    Observable<Void> addRecord(int recordId);
+
+    Observable<Void> removeRecord(int recordId);
 }
