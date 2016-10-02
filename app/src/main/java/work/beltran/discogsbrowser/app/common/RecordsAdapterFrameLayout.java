@@ -68,7 +68,6 @@ public abstract class RecordsAdapterFrameLayout<T extends BasePresenterForAdapte
 
     protected abstract void loadHeaderState(Bundle bundle);
 
-
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
