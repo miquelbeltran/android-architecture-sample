@@ -3,11 +3,13 @@ buildscript {
         jcenter()
     }
     dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'com.dicedmelon.gradle:jacoco-android:0.1.1'
     }
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'jacoco-android'
 
 android {
@@ -20,9 +22,6 @@ android {
         targetSdkVersion 22
         versionCode 1001
         versionName "1.1"
-        jackOptions {
-            enabled true
-        }
     }
     defaultConfig {
         // For OAuth
@@ -33,6 +32,7 @@ android {
         def apikey = project.hasProperty('apikey') ? apikey : (System.getenv('API_KEY') ?: '""')
         buildConfigField "String", "API_KEY", apikey
     }
+
     buildTypes {
         release {
             // Common release options
@@ -50,10 +50,6 @@ android {
     lintOptions {
         lintConfig rootProject.file('app/lint.xml')
 
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -97,16 +93,16 @@ dependencies {
 
     // Dagger
     compile "com.google.dagger:dagger:${daggerLV}"
-    annotationProcessor "com.google.dagger:dagger-compiler:${daggerLV}"
+    apt "com.google.dagger:dagger-compiler:${daggerLV}"
 
     compile 'com.eyeem.recyclerviewtools:library:0.4.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.aurelhubert:ahbottomnavigation:1.1.8'
 
     compile 'com.jakewharton:butterknife:8.4.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 
-    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.4-rc2'
+    apt 'com.ryanharter.auto.value:auto-value-parcel:0.2.4-rc2'
 
     compile project(path: ':api')
     compile project(path: ':business')
