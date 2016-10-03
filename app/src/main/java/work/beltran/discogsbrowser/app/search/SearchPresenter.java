@@ -48,7 +48,7 @@ public class SearchPresenter extends BasePresenterForAdapter<SearchView> {
                             @Override
                             public void onNext(List<Record> records) {
                                 if (getView() != null) {
-                                    getView().addRecords(RecordAdapterItem.createRecordsList(records));
+                                    getView().addRecords(RecordAdapterItem.createRecordsList(records, false));
                                 }
                             }
                         }));

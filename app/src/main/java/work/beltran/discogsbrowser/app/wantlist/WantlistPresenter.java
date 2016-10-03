@@ -71,7 +71,7 @@ public class WantlistPresenter extends BasePresenterForAdapter<WantlistView> {
                     public void onNext(UserWanted userWanted) {
                         if (getView() != null) {
                             getView().addRecords(RecordAdapterItem
-                                    .createRecordsList(userWanted.getRecords()));
+                                    .createRecordsList(userWanted.getRecords(), false));
                         }
                     }
                 }));

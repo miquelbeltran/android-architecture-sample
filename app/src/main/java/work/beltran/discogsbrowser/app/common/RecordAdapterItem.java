@@ -29,6 +29,8 @@ public abstract class RecordAdapterItem implements Parcelable {
 
     public abstract int getReleaseId();
 
+    public abstract boolean isInCollection();
+
     public static Builder builder() {
         return new AutoValue_RecordAdapterItem.Builder();
     }
@@ -48,10 +50,12 @@ public abstract class RecordAdapterItem implements Parcelable {
 
         public abstract Builder setReleaseId(int newReleaseId);
 
+        public abstract Builder setInCollection(boolean newInCollection);
+
         public abstract RecordAdapterItem build();
     }
 
-    public static RecordAdapterItem createRecordViewModel(Record record) {
+    public static RecordAdapterItem createRecordViewModel(Record record, boolean isInCollection) {
         StringBuilder artistString = new StringBuilder();
         for (Artist artist : record.getBasicInformation().getArtists()) {
             if (artistString.length() > 0) {
@@ -77,13 +81,15 @@ public abstract class RecordAdapterItem implements Parcelable {
                 .setTitle(record.getBasicInformation().getTitle())
                 .setYear(year)
                 .setReleaseId(record.getId())
+                .setInCollection(isInCollection)
                 .build();
     }
 
-    public static List<RecordAdapterItem> createRecordsList(List<Record> records) {
+    public static List<RecordAdapterItem> createRecordsList(List<Record> records,
+                                                            boolean isInCollection) {
         List<RecordAdapterItem> list = new ArrayList<>();
         for (Record record : records) {
-            list.add(RecordAdapterItem.createRecordViewModel(record));
+            list.add(RecordAdapterItem.createRecordViewModel(record, isInCollection));
         }
         return list;
     }

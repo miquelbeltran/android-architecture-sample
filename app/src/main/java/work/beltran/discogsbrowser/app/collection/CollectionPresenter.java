@@ -75,8 +75,10 @@ public class CollectionPresenter extends BasePresenterForAdapter<CollectionView>
                     @Override
                     public void onNext(UserCollection userCollection) {
                         totalPages = userCollection.getPagination().getPages();
-                        List<RecordAdapterItem> records
-                                = RecordAdapterItem.createRecordsList(userCollection.getRecords());
+                        List<RecordAdapterItem> records = RecordAdapterItem
+                                .createRecordsList(
+                                        userCollection.getRecords(),
+                                        true);
                         if (getView() != null) {
                             getView().addRecords(records);
                         }

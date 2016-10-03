@@ -8,7 +8,6 @@ import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -57,7 +56,8 @@ public class ReleaseActivity extends AppCompatActivity implements ReleaseView {
     Button buttonRemoveFromWantlist;
 
 
-    public static Intent createReleaseActivity(Context context, RecordAdapterItem record) {
+    public static Intent createReleaseActivity(Context context,
+                                               RecordAdapterItem record) {
         Intent intent = new Intent(context, ReleaseActivity.class);
         intent.putExtra(EXTRA_RECORD, record);
         return intent;
@@ -68,17 +68,16 @@ public class ReleaseActivity extends AppCompatActivity implements ReleaseView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_release);
         ButterKnife.bind(this);
-        RecordAdapterItem recordAdapterItem = getIntent().getParcelableExtra(EXTRA_RECORD);
-        Log.d(TAG, "Record: " + recordAdapterItem.toString());
-        initActionBar(recordAdapterItem);
         ApiComponent component = ((App) getApplication()).getApiComponent();
         if (component != null) {
             component.inject(this);
         }
+        RecordAdapterItem recordAdapterItem = getIntent().getParcelableExtra(EXTRA_RECORD);
         if (presenter != null) {
             presenter.attachView(this);
             presenter.setReleaseId(recordAdapterItem.getReleaseId());
         }
+        initActionBar(recordAdapterItem);
         display(recordAdapterItem);
     }
 
@@ -92,6 +91,8 @@ public class ReleaseActivity extends AppCompatActivity implements ReleaseView {
                     .centerCrop()
                     .into(imageAlbum);
         }
+        setAddToCollectionVisible(!recordAdapterItem.isInCollection());
+        setRemoveFromCollectionVisible(recordAdapterItem.isInCollection());
     }
 
     @Override
