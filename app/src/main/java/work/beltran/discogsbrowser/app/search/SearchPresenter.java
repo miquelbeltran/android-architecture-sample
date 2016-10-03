@@ -28,8 +28,7 @@ public class SearchPresenter extends BasePresenterForAdapter<SearchView> {
             getView().clear();
             unsubscribeAll();
         }
-        addSubscription(
-                interactor
+        addSubscription(interactor
                         .search(query)
                         .subscribe(new Observer<List<Record>>() {
                             @Override
