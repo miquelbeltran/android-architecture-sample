@@ -58,4 +58,19 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordViewHolder> {
     public List<RecordAdapterItem> getItems() {
         return records;
     }
+
+    @Override
+    public long getItemId(int position) {
+        return records.get(position).getReleaseId();
+    }
+
+    public void removeItem(int releaseId) {
+        for (int i = 0; i < getItemCount(); i++) {
+            if (getItemId(i) == releaseId) {
+                records.remove(i);
+                notifyItemRemoved(i);
+                return;
+            }
+        }
+    }
 }

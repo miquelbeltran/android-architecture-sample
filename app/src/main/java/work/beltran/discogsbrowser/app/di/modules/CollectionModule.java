@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import work.beltran.discogsbrowser.api.DiscogsService;
+import work.beltran.discogsbrowser.app.release.ReleasePresenter;
 import work.beltran.discogsbrowser.business.CollectionInteractor;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
 import work.beltran.discogsbrowser.business.RxJavaSchedulers;
@@ -33,5 +34,10 @@ public class CollectionModule {
     public CollectionPresenter providesPresenter(CollectionInteractor interactor,
                                                  ProfileInteractor profileInteractor) {
         return new CollectionPresenter(interactor, profileInteractor);
+    }
+
+    @Provides
+    public ReleasePresenter providesReleasePresenger(CollectionInteractor interactor) {
+        return new ReleasePresenter(interactor);
     }
 }

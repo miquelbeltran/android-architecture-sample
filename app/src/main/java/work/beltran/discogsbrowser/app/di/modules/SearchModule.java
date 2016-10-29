@@ -27,7 +27,6 @@ public class SearchModule {
     }
 
     @Provides
-    @Singleton
     public SearchPresenter searchPresenter(SearchInteractor interactor) {
         return new SearchPresenter(interactor);
     }

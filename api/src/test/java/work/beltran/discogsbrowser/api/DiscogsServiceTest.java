@@ -10,6 +10,7 @@ import org.junit.Before;
  */
 public class DiscogsServiceTest {
     DiscogsService service;
+    static final String USER = "mike513";
 
     @Before
     public void setUp() throws Exception {

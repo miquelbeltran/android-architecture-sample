@@ -1,8 +1,10 @@
 package work.beltran.discogsbrowser.app.wantlist;
 
+import java.util.List;
+
 import rx.Observer;
 import work.beltran.discogsbrowser.api.model.UserProfile;
-import work.beltran.discogsbrowser.api.model.UserWanted;
+import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.app.base.BasePresenterForAdapter;
 import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
@@ -54,26 +56,15 @@ public class WantlistPresenter extends BasePresenterForAdapter<WantlistView> {
         if (page > totalPages) return;
         setLoading(true);
         addSubscription(interactor.getWanted(page)
-                .subscribe(new Observer<UserWanted>() {
-                    @Override
-                    public void onCompleted() {
-                        page++;
-                        setLoading(false);
-                    }
+                .doOnTerminate(() -> setLoading(false))
+                .doOnCompleted(() -> page++)
+                .subscribe(userWanted -> addRecords(userWanted.getRecords()),
+                e -> e.printStackTrace()));
+    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        setLoading(true);
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onNext(UserWanted userWanted) {
-                        if (getView() != null) {
-                            getView().addRecords(RecordAdapterItem
-                                    .createRecordsList(userWanted.getRecords()));
-                        }
-                    }
-                }));
+    private void addRecords(List<Record> records) {
+        if (getView() != null) {
+            getView().addRecords(RecordAdapterItem.createRecordsList(records, false));
+        }
     }
 }

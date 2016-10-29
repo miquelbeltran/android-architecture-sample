@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Created by Miquel Beltran on 22.04.16
  * More on http://beltran.work
@@ -12,7 +14,11 @@ import com.google.gson.annotations.SerializedName;
 @AutoValue
 public abstract class Record {
     @SerializedName("id")
-    public abstract int getInstanceId();
+    public abstract int getId();
+
+    @SerializedName("instance_id")
+    @Nullable
+    public abstract Integer getInstanceId();
 
     @SerializedName("basic_information")
     public abstract BasicInformation getBasicInformation();
@@ -27,7 +33,10 @@ public abstract class Record {
 
     @AutoValue.Builder
     public abstract static class Builder {
-        public abstract Builder setInstanceId(int newInstanceId);
+
+        public abstract Builder setId(int newId);
+
+        public abstract Builder setInstanceId(Integer newInstanceId);
 
         public abstract Builder setBasicInformation(BasicInformation newBasicInformation);
 

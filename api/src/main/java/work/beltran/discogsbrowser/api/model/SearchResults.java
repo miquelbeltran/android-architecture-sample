@@ -60,7 +60,7 @@ public abstract class SearchResults implements RecordsWithPagination {
                         .year(year)
                         .build();
                 return Record.builder()
-                        .setInstanceId(searchRecord.getId())
+                        .setId(searchRecord.getId())
                         .setBasicInformation(basicInformation)
                         .build();
             }

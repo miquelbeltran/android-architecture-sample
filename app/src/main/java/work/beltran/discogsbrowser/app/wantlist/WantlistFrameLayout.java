@@ -39,11 +39,9 @@ public class WantlistFrameLayout extends RecordsAdapterFrameLayout<WantlistPrese
     }
 
     @Inject
-    public void setPresenterAdapter(WantlistPresenter presenter, RecordsAdapter adapter) {
+    public void setAdapter(RecordsAdapter adapter) {
         this.adapter = adapter;
         createHeaderFooter(adapter);
-        this.presenter = presenter;
-        presenter.attachView(this);
     }
 
     private void init() {

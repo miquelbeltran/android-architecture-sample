@@ -29,7 +29,6 @@ public class WantlistModule {
         return new WantedInteractorImpl(service, schedulers, profileInteractor);
     }
 
-    @Singleton
     @Provides
     public WantlistPresenter providesPresenter(WantedInteractor interactor,
                                                ProfileInteractor profileInteractor) {
