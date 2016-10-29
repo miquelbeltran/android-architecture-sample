@@ -31,9 +31,9 @@ android {
     }
     defaultConfig {
         // For OAuth
-        def consumerSecret = project.hasProperty('discogsConsumerSecret') ? discogsConsumerSecret : '""'
+        def consumerSecret = project.hasProperty('discogsConsumerSecret') ? discogsConsumerSecret : (System.getenv('API_CONSUMER_SECRET') ?: '""')
         buildConfigField "String", "API_CONSUMER_SECRET", consumerSecret
-        def consumerKey = project.hasProperty('discogsConsumerKey') ? discogsConsumerKey : '""'
+        def consumerKey = project.hasProperty('discogsConsumerKey') ? discogsConsumerKey : (System.getenv('API_CONSUMER_KEY') ?: '""')
         buildConfigField "String", "API_CONSUMER_KEY", consumerKey
         def apikey = project.hasProperty('apikey') ? apikey : (System.getenv('API_KEY') ?: '""')
         buildConfigField "String", "API_KEY", apikey
