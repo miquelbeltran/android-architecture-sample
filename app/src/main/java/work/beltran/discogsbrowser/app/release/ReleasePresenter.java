@@ -70,6 +70,7 @@ public class ReleasePresenter extends BasePresenter<ReleaseView> {
         if (getView() != null) {
             getView().setRemoveFromCollectionVisible(false);
             getView().setAddToCollectionVisible(true);
+            getView().broadcastRemoveFromCollection();
         }
     }
 
@@ -83,6 +84,7 @@ public class ReleasePresenter extends BasePresenter<ReleaseView> {
         if (getView() != null) {
             getView().setRemoveFromCollectionVisible(true);
             getView().setAddToCollectionVisible(false);
+            getView().broadcastAddToCollection();
         }
     }
 }

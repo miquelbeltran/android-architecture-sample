@@ -1,5 +1,9 @@
 package work.beltran.discogsbrowser.app.main;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
@@ -10,6 +14,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import javax.inject.Inject;
 
@@ -18,6 +23,7 @@ import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.app.App;
 import work.beltran.discogsbrowser.app.collection.CollectionFrameLayout;
+import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.app.di.ApiComponent;
 import work.beltran.discogsbrowser.app.search.SearchFrameLayout;
 import work.beltran.discogsbrowser.app.wantlist.WantlistFrameLayout;
@@ -27,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String STATE_COLLECTION = "STATE_COLLECTION";
     private static final String STATE_WANTLIST = "STATE_WANTLIST";
     private static final String STATE_SEARCH = "STATE_SEARCH";
+    public static final String INTENT_FILTER_ADD_COL = "work.beltran.discogsbrowser.addtocol";
+    public static final String INTENT_FILTER_RECORD_ITEM_EXTRA = "INTENT_FILTER_RECORD_ITEM_EXTRA";
+    public static final String INTENT_FILTER_REMOVE_COL = "work.beltran.discogsbrowser.removetocol";
 
     @Inject
     public NavigationAdapter navigationAdapter;
@@ -39,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private CollectionFrameLayout collectionFrameLayout;
     private WantlistFrameLayout wantlistFrameLayout;
     private SearchFrameLayout searchFrameLayout;
+    private BroadcastReceiver addedToColReceiver;
+    private BroadcastReceiver removeFromColReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         ((App) getApplication()).getAppComponent().inject(this);
         initNavBar(savedInstanceState);
+        registerReceivers();
     }
 
     private void initNavBar(Bundle savedInstanceState) {
@@ -124,5 +136,33 @@ public class MainActivity extends AppCompatActivity {
         outState.putParcelable(STATE_WANTLIST, wantlistFrameLayout.onSaveInstanceState());
         outState.putParcelable(STATE_SEARCH, searchFrameLayout.onSaveInstanceState());
         super.onSaveInstanceState(outState);
+    }
+
+    private void registerReceivers() {
+        IntentFilter intentFilter = new IntentFilter(INTENT_FILTER_ADD_COL);
+        addedToColReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                RecordAdapterItem item = intent.getParcelableExtra(INTENT_FILTER_RECORD_ITEM_EXTRA);
+                collectionFrameLayout.addRecords(Collections.singletonList(item));
+            }
+        };
+        registerReceiver(addedToColReceiver, intentFilter);
+        intentFilter = new IntentFilter(INTENT_FILTER_REMOVE_COL);
+        removeFromColReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                RecordAdapterItem item = intent.getParcelableExtra(INTENT_FILTER_RECORD_ITEM_EXTRA);
+                collectionFrameLayout.removeRecord(item.getReleaseId());
+            }
+        };
+        registerReceiver(removeFromColReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(addedToColReceiver);
+        unregisterReceiver(removeFromColReceiver);
+        super.onDestroy();
     }
 }

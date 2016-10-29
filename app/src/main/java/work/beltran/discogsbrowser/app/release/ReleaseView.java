@@ -14,5 +14,9 @@ public interface ReleaseView extends BaseView {
     void setRemoveFromCollectionVisible(boolean b);
 
     void display(RecordAdapterItem recordAdapterItem);
+
+    void broadcastAddToCollection();
+
+    void broadcastRemoveFromCollection();
 }
 

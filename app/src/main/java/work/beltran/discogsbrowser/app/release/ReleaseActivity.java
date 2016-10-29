@@ -25,6 +25,7 @@ import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.app.App;
 import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.app.di.ApiComponent;
+import work.beltran.discogsbrowser.app.main.MainActivity;
 
 public class ReleaseActivity extends AppCompatActivity implements ReleaseView {
 
@@ -95,6 +96,22 @@ public class ReleaseActivity extends AppCompatActivity implements ReleaseView {
         }
         setAddToCollectionVisible(!recordAdapterItem.isInCollection());
         setRemoveFromCollectionVisible(recordAdapterItem.isInCollection());
+    }
+
+    @Override
+    public void broadcastAddToCollection() {
+        RecordAdapterItem recordAdapterItem = getIntent().getParcelableExtra(EXTRA_RECORD);
+        Intent intent = new Intent(MainActivity.INTENT_FILTER_ADD_COL)
+                .putExtra(MainActivity.INTENT_FILTER_RECORD_ITEM_EXTRA, recordAdapterItem);
+        sendBroadcast(intent);
+    }
+
+    @Override
+    public void broadcastRemoveFromCollection() {
+        RecordAdapterItem recordAdapterItem = getIntent().getParcelableExtra(EXTRA_RECORD);
+        Intent intent = new Intent(MainActivity.INTENT_FILTER_REMOVE_COL)
+                .putExtra(MainActivity.INTENT_FILTER_RECORD_ITEM_EXTRA, recordAdapterItem);
+        sendBroadcast(intent);
     }
 
     @Override

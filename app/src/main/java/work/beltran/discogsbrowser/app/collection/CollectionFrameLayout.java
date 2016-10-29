@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.eyeem.recyclerviewtools.LoadMoreOnScrollListener;
@@ -98,6 +97,11 @@ public class CollectionFrameLayout extends RecordsAdapterFrameLayout<CollectionP
     @Override
     protected void loadHeaderState(Bundle bundle) {
         header.loadState(bundle, picasso);
+    }
+
+    public void removeRecord(int releaseId) {
+        adapter.removeItem(releaseId);
+
     }
 
     public static class Footer {
