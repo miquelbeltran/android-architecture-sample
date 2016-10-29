@@ -7,9 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.eyeem.recyclerviewtools.adapter.WrapAdapter;
+import com.google.zxing.integration.android.IntentIntegrator;
 
 import javax.inject.Inject;
 
@@ -18,6 +20,7 @@ import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.app.common.RecordsAdapter;
 import work.beltran.discogsbrowser.app.common.RecordsAdapterFrameLayout;
+import work.beltran.discogsbrowser.app.main.MainActivity;
 
 /**
  * Created by Miquel Beltran on 8/28/16
@@ -69,6 +72,10 @@ public class SearchFrameLayout extends RecordsAdapterFrameLayout<SearchPresenter
                 return false;
             }
         });
+        this.header.scanButton.setOnClickListener(view -> {
+            IntentIntegrator intentIntegrator = new IntentIntegrator((MainActivity) getContext());
+            intentIntegrator.initiateScan();
+        });
     }
 
     @Override
@@ -91,6 +98,7 @@ public class SearchFrameLayout extends RecordsAdapterFrameLayout<SearchPresenter
     @Override
     public void setPresenter(SearchPresenter presenter) {
         this.presenter = presenter;
+        presenter.attachView(this);
     }
 
     @Override
@@ -105,9 +113,16 @@ public class SearchFrameLayout extends RecordsAdapterFrameLayout<SearchPresenter
         header.searchView.setQuery(bundle.getString(STATE_SEARCH), false);
     }
 
+    public void searchWithBarcode(String contents) {
+        header.searchView.setQuery(contents, false);
+        presenter.searchWithBarcode(contents);
+    }
+
     public static class Header {
         @BindView(R.id.search)
         android.widget.SearchView searchView;
+        @BindView(R.id.scanButton)
+        ImageButton scanButton;
     }
 
     public static class Footer {

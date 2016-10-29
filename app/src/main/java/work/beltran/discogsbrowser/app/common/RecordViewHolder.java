@@ -1,6 +1,7 @@
 package work.beltran.discogsbrowser.app.common;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,10 +43,12 @@ class RecordViewHolder extends RecyclerView.ViewHolder implements View.OnClickLi
         textArtist.setText(record.getArtist());
         textFormat.setText(record.getFormat());
         textYear.setText(record.getYear());
-        picasso.load(record.getThumb())
-                .fit()
-                .centerCrop()
-                .into(iamgeThumb);
+        if (!TextUtils.isEmpty(record.getThumb())) {
+            picasso.load(record.getThumb())
+                    .fit()
+                    .centerCrop()
+                    .into(iamgeThumb);
+        }
         this.record = record;
     }
 

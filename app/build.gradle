@@ -114,6 +114,10 @@ dependencies {
 
     apt 'com.ryanharter.auto.value:auto-value-parcel:0.2.4-rc2'
 
+    compile 'com.google.zxing:android-integration:3.3.0'
+
     compile project(path: ':api')
     compile project(path: ':business')
 }
+
+android.defaultConfig.vectorDrawables.useSupportLibrary = true

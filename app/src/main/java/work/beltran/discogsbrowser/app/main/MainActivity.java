@@ -12,6 +12,8 @@ import android.view.View;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -136,6 +138,13 @@ public class MainActivity extends AppCompatActivity {
         outState.putParcelable(STATE_WANTLIST, wantlistFrameLayout.onSaveInstanceState());
         outState.putParcelable(STATE_SEARCH, searchFrameLayout.onSaveInstanceState());
         super.onSaveInstanceState(outState);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanResult != null) {
+            searchFrameLayout.searchWithBarcode(scanResult.getContents());
+        }
     }
 
     private void registerReceivers() {
