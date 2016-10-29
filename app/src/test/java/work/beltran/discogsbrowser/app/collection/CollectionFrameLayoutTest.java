@@ -32,7 +32,7 @@ import static work.beltran.discogsbrowser.app.collection.DiscogsModelMocks.getUs
  * More on http://beltran.work
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, application = TestApp.class)
+@Config(constants = BuildConfig.class, application = TestApp.class, sdk = 22)
 public class CollectionFrameLayoutTest {
     CollectionFrameLayout view;
     @Mock

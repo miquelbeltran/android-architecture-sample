@@ -25,7 +25,7 @@ android {
     defaultConfig {
         applicationId "work.beltran.discogsbrowser"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 24
         versionCode 1001
         versionName "1.1"
     }
