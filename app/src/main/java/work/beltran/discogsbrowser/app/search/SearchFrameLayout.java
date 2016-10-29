@@ -98,6 +98,7 @@ public class SearchFrameLayout extends RecordsAdapterFrameLayout<SearchPresenter
     @Override
     public void setPresenter(SearchPresenter presenter) {
         this.presenter = presenter;
+        presenter.attachView(this);
     }
 
     @Override
@@ -113,8 +114,8 @@ public class SearchFrameLayout extends RecordsAdapterFrameLayout<SearchPresenter
     }
 
     public void searchWithBarcode(String contents) {
-        header.searchView.setQuery(contents, true);
-        presenter.search(contents);
+        header.searchView.setQuery(contents, false);
+        presenter.searchWithBarcode(contents);
     }
 
     public static class Header {

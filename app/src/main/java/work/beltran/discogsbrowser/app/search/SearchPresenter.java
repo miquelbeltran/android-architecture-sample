@@ -1,6 +1,7 @@
 package work.beltran.discogsbrowser.app.search;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import work.beltran.discogsbrowser.business.SearchInteractor;
 public class SearchPresenter extends BasePresenterForAdapter<SearchView> {
 
     SearchInteractor interactor;
+    private String barcode;
 
     public SearchPresenter(SearchInteractor interactor) {
         this.interactor = interactor;
@@ -56,16 +58,26 @@ public class SearchPresenter extends BasePresenterForAdapter<SearchView> {
 
     @Override
     public Bundle getStatus() {
-        return null;
+        Bundle bundle = new Bundle();
+        bundle.putString("BARCODE", barcode);
+        return bundle;
     }
 
     @Override
     public void loadStatus(Bundle bundle) {
-
+        String barcode = bundle.getString("BARCODE");
+        if (!TextUtils.isEmpty(barcode)) {
+            search(barcode);
+        }
     }
 
     @Override
     public void loadMore() {
 
+    }
+
+    public void searchWithBarcode(String contents) {
+        search(contents);
+        this.barcode = contents;
     }
 }
