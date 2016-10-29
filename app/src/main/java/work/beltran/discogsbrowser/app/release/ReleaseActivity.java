@@ -20,6 +20,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.app.App;
 import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
@@ -81,7 +82,8 @@ public class ReleaseActivity extends AppCompatActivity implements ReleaseView {
         display(recordAdapterItem);
     }
 
-    private void display(RecordAdapterItem recordAdapterItem) {
+    @Override
+    public void display(RecordAdapterItem recordAdapterItem) {
         textArtist.setText(recordAdapterItem.getArtist());
         textYear.setText(recordAdapterItem.getYear());
         textFormat.setText(recordAdapterItem.getFormat());
@@ -134,5 +136,33 @@ public class ReleaseActivity extends AppCompatActivity implements ReleaseView {
     @Override
     public void displayError(@StringRes int messageId) {
 
+    }
+
+    @OnClick(R.id.button_add_to_wantlist)
+    public void addToWantlist() {
+        if (presenter != null) {
+            presenter.addToWantlist();
+        }
+    }
+
+    @OnClick(R.id.button_remove_from_wantlist)
+    public void removeFromWantlist() {
+        if (presenter != null) {
+            presenter.removeFromWantlist();
+        }
+    }
+
+    @OnClick(R.id.button_remove_from_collection)
+    public void removeFromCollection() {
+        if (presenter != null) {
+            presenter.removeFromCollection();
+        }
+    }
+
+    @OnClick(R.id.floatingActionButton)
+    public void addToCollection() {
+        if (presenter != null) {
+            presenter.addToCollection();
+        }
     }
 }
