@@ -8,6 +8,7 @@ import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -88,7 +89,7 @@ public class ReleaseActivity extends AppCompatActivity implements ReleaseView {
         textArtist.setText(recordAdapterItem.getArtist());
         textYear.setText(recordAdapterItem.getYear());
         textFormat.setText(recordAdapterItem.getFormat());
-        if (picasso != null) {
+        if (picasso != null && !TextUtils.isEmpty(recordAdapterItem.getThumb())) {
             picasso.load(recordAdapterItem.getThumb())
                     .fit()
                     .centerCrop()
