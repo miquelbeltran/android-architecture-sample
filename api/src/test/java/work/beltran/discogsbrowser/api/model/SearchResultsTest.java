@@ -27,7 +27,7 @@ public class SearchResultsTest {
 
     @Before
     public void setUp() throws Exception {
-        Pagination pagination = Pagination.builder()
+        Pagination pagination = Pagination.Companion.builder()
                 .page(0)
                 .pages(1)
                 .build();

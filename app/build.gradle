@@ -35,11 +35,6 @@ android {
     }
     lintOptions {
         lintConfig rootProject.file('app/lint.xml')
-
-    }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
     }
 }
 
@@ -78,9 +73,6 @@ dependencies {
     compile 'com.eyeem.recyclerviewtools:library:0.4.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.aurelhubert:ahbottomnavigation:1.1.8'
-
-    compile 'com.jakewharton:butterknife:8.4.0'
-    kapt 'com.jakewharton:butterknife-compiler:8.4.0'
 
     compile 'com.google.zxing:android-integration:3.3.0'
 

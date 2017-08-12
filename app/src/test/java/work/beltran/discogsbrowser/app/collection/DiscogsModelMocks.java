@@ -30,7 +30,7 @@ public class DiscogsModelMocks {
     public static UserCollection getUserCollection() {
         return UserCollection.builder()
                 .setRecords(new ArrayList<Record>())
-                .setPagination(Pagination.builder()
+                .setPagination(Pagination.Companion.builder()
                         .page(0)
                         .pages(2)
                         .build())
