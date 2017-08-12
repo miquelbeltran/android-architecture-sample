@@ -1,35 +1,18 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.1'
-    }
-}
-
-// Required because retrolambda is on maven central
-repositories {
-    mavenCentral()
-}
-
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'jacoco-android'
-apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
 
     defaultConfig {
         applicationId "work.beltran.discogsbrowser"
-        minSdkVersion 15
-        targetSdkVersion 24
-        versionCode 1001
-        versionName "1.1"
-    }
-    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1002
+        versionName "1.2"
+
         // For OAuth
         def consumerSecret = project.hasProperty('discogsConsumerSecret') ? discogsConsumerSecret : (System.getenv('API_CONSUMER_SECRET') ?: '""')
         buildConfigField "String", "API_CONSUMER_SECRET", consumerSecret
@@ -48,9 +31,6 @@ android {
 
             minifyEnabled false // Disabled by the moment
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            proguardFile 'proguard-square-retrofit2.pro'
-//            proguardFile 'proguard-square-picasso.pro'
-//            proguardFile 'proguard-square-okio.pro'
         }
     }
     lintOptions {
@@ -71,7 +51,7 @@ repositories {
 }
 
 ext {
-    supportLibVersion = '24.2.0'
+    supportLibVersion = '26.0.0'
     daggerLV = '2.7'
 }
 
@@ -80,19 +60,9 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'
-    testCompile ("org.robolectric:robolectric:3.1.1") {
-        exclude group: 'commons-logging', module: 'commons-logging'
-        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
-        exclude group: 'com.android.support', module: 'appcompat'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'recyclerview-v7'
-        exclude group: 'com.android.support', module: 'cardview-v7'
-        exclude group: 'com.android.support', module: 'design'
-    }
-    testCompile "org.robolectric:shadows-support-v4:3.1.1"
     testCompile 'org.assertj:assertj-core:1.7.1'
-    // Dependency conflict
-    compile "com.google.guava:guava:19.0"
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     // Support Lib
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
@@ -103,16 +73,14 @@ dependencies {
 
     // Dagger
     compile "com.google.dagger:dagger:${daggerLV}"
-    apt "com.google.dagger:dagger-compiler:${daggerLV}"
+    kapt "com.google.dagger:dagger-compiler:${daggerLV}"
 
     compile 'com.eyeem.recyclerviewtools:library:0.4.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.aurelhubert:ahbottomnavigation:1.1.8'
 
     compile 'com.jakewharton:butterknife:8.4.0'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
-
-    apt 'com.ryanharter.auto.value:auto-value-parcel:0.2.4-rc2'
+    kapt 'com.jakewharton:butterknife-compiler:8.4.0'
 
     compile 'com.google.zxing:android-integration:3.3.0'
 
