@@ -19,7 +19,7 @@ public class DiscogsModelMocks {
     public static final int NUM_WANTLIST = 2;
 
     public static UserProfile getUserProfile() {
-        return UserProfile.builder()
+        return UserProfile.Companion.builder()
                 .setUsername(USERNAME)
                 .setAvatarUrl(AVATAR)
                 .setNumCollection(NUM_COLLECTION)
@@ -28,7 +28,7 @@ public class DiscogsModelMocks {
     }
 
     public static UserCollection getUserCollection() {
-        return UserCollection.builder()
+        return UserCollection.Companion.builder()
                 .setRecords(new ArrayList<Record>())
                 .setPagination(Pagination.Companion.builder()
                         .page(0)

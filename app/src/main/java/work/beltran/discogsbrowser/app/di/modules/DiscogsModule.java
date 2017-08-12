@@ -26,7 +26,7 @@ public class DiscogsModule {
     @Provides
     @Singleton
     public Gson provideGson() {
-        return GsonProvider.provideGson();
+        return GsonProvider.INSTANCE.provideGson();
     }
 
     @Provides
