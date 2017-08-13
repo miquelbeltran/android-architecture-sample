@@ -1,5 +1,6 @@
 package work.beltran.discogsbrowser.api.model
 
+import com.squareup.moshi.Json
 import work.beltran.discogsbrowser.api.model.pagination.Pagination
 import work.beltran.discogsbrowser.api.model.record.Record
 
@@ -9,5 +10,6 @@ import work.beltran.discogsbrowser.api.model.record.Record
  */
 data class UserCollection(
         override val pagination: Pagination,
+        @Json(name = "releases")
         override val records: List<Record>
 ) : RecordsWithPagination
