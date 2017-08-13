@@ -8,11 +8,5 @@ class RequestHeader(consumerKey: String,
                     consumerSecret: String)
     : LoginHeader(consumerKey, consumerSecret + "&") {
 
-    override fun getHeader(): String {
-        return super.header + ", oauth_callback=\"$CALLBACK\""
-    }
-
-    companion object {
-        private const val CALLBACK = "discogs://callback"
-    }
+    override val header = super.header + ", oauth_callback=\"discogs://callback\""
 }

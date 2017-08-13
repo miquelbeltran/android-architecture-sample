@@ -22,6 +22,6 @@ class SearchInteractorImpl(private val service: DiscogsService,
     }
 
     companion object {
-        private const val SEARCH_TYPE = "release"
+        const val SEARCH_TYPE = "release"
     }
 }
