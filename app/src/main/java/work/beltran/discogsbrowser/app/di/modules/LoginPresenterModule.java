@@ -9,7 +9,7 @@ import work.beltran.discogsbrowser.app.login.LoginPresenter;
 import work.beltran.discogsbrowser.business.LoginInteractor;
 import work.beltran.discogsbrowser.business.RxJavaSchedulers;
 import work.beltran.discogsbrowser.business.login.LoginInteractorImpl;
-import work.beltran.discogsbrowser.business.settings.Settings;
+import work.beltran.discogsbrowser.app.settings.Settings;
 
 /**
  * Created by miquel on 8/27/16.

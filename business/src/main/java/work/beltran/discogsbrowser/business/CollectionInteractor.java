@@ -1,6 +1,7 @@
 package work.beltran.discogsbrowser.business;
 
-import rx.Observable;
+import io.reactivex.Completable;
+import io.reactivex.Single;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 
 /**
@@ -8,11 +9,8 @@ import work.beltran.discogsbrowser.api.model.UserCollection;
  * More on http://beltran.work
  */
 public interface CollectionInteractor {
-    Observable<UserCollection> getCollection(int page);
-
-    Observable<UserCollection> getRecord(int recordId);
-
-    Observable<Void> addRecord(int recordId);
-
-    Observable<Void> removeRecord(int recordId);
+    Single<UserCollection> getCollection(int page);
+    Single<UserCollection> getRecord(int recordId);
+    Completable addRecord(int recordId);
+    Completable removeRecord(int recordId);
 }

@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import work.beltran.discogsbrowser.app.login.LoginActivity;
 import work.beltran.discogsbrowser.app.main.MainActivity;
-import work.beltran.discogsbrowser.business.settings.Settings;
+import work.beltran.discogsbrowser.app.settings.Settings;
 
 public class LauncherActivity extends Activity {
 

@@ -1,4 +1,4 @@
-package work.beltran.discogsbrowser.business.settings;
+package work.beltran.discogsbrowser.app.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
