@@ -1,21 +1,14 @@
 apply plugin: 'kotlin'
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-}
+    testCompile "org.assertj:assertj-core:$assertj_version"
+    testCompile "junit:junit:$junit_version"
 
-dependencies {
-    testCompile 'org.assertj:assertj-core:3.5.2'
-    testCompile 'junit:junit:4.12'
-
-    compile "io.reactivex.rxjava2:rxjava:2.1.2"
-    compile "com.squareup.retrofit2:retrofit:2.3.0"
-    compile "com.squareup.retrofit2:converter-moshi:2.3.0"
-    compile "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
-
-    compile 'com.squareup.moshi:moshi-kotlin:1.5.0'
-
-    compile "org.jetbrains:annotations-java5:15.0"
+    compile "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    compile "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    compile "com.squareup.moshi:moshi-kotlin:$moshi_version"
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }

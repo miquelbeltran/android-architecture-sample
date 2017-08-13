@@ -1,5 +1,6 @@
 package work.beltran.discogsbrowser.api.model
 
+import com.squareup.moshi.Json
 import work.beltran.discogsbrowser.api.model.pagination.Pagination
 import work.beltran.discogsbrowser.api.model.record.Artist
 import work.beltran.discogsbrowser.api.model.record.BasicInformation
@@ -12,6 +13,7 @@ import work.beltran.discogsbrowser.api.model.record.Record
  */
 data class SearchResults(
         override val pagination: Pagination,
+        @Json(name = "results")
         val searchRecords: List<SearchRecord>
 ) : RecordsWithPagination {
     override val records: List<Record>

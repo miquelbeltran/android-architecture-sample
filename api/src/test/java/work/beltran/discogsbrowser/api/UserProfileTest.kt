@@ -11,7 +11,7 @@ import org.assertj.core.api.Assertions.assertThat
 class UserProfileTest : DiscogsServiceTest() {
 
     @Test
-    fun testGetUserProfile() {
+    fun `get user profile`() {
         val tester = service.getUserProfile(USER).test()
         tester.assertNoErrors()
         tester.assertComplete()

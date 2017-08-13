@@ -44,10 +44,10 @@ interface DiscogsService {
                       @Query("page") page: Int): Single<UserWanted>
 
     @GET("database/search")
-    fun search(@Query("q") query: String,
-               @Query("type") type: String,
-               @Query("format") format: String,
-               @Query("barcode") barcode: String): Single<SearchResults>
+    fun search(@Query("q") query: String?,
+               @Query("type") type: String?,
+               @Query("format") format: String?,
+               @Query("barcode") barcode: String?): Single<SearchResults>
 
     @get:GET("oauth/identity")
     val userIdentity: Single<UserIdentity>

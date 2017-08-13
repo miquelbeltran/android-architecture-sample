@@ -1,3 +1,6 @@
+**Update** This repo is going through a big refactor on the `kotlin` branch.
+For and old version of the app check the `java` branch.
+
 # My Vinyl Discogs Browser for Android
 
 [![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=5746acc88191a20100875e17&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/5746acc88191a20100875e17/build/latest)
@@ -9,22 +12,23 @@ Source code of the Android app, using Retrofit, RxJava, Dagger and more
 ## App Features
 
 - Browse your Discogs collection.
-- Check your wishlist (wantlist).
+- Check your wish list (wantlist).
 - Search the database.
 - Search with Barcode Scanner.
 - Add and remove records from collection.
 
 ## Code Features
 
+- Kotlin.
 - Clean app architecture in different modules.
 - Dependency injection everywhere with Dagger 2.
-- Retrofit + GSON + RxJava.
+- Retrofit + Moshi + RxJava.
 - Picasso for image loading.
-- Robolectric + Mockito for Unit Testing.
+- Mockito for Unit Testing.
 - Beatiful material design.
+- Barcode scanner library integration.
 
 ## Screenshots
-
 
 ![Collection](https://raw.githubusercontent.com/miquelbeltran/android-discogsbrowser/master/art/screenshots/collection_640.png)
 
