@@ -14,6 +14,7 @@ import work.beltran.discogsbrowser.test.TestSchedulers
 import work.beltran.discogsbrowser.api.DiscogsService
 import work.beltran.discogsbrowser.api.model.UserWanted
 import work.beltran.discogsbrowser.api.model.pagination.Pagination
+import work.beltran.discogsbrowser.business.SettingsRepository
 import work.beltran.discogsbrowser.business.WantedInteractor
 
 @RunWith(MockitoJUnitRunner::class)
@@ -23,10 +24,12 @@ class WantedInteractorImplTest {
 
     @Mock
     lateinit var service: DiscogsService
+    @Mock
+    lateinit var settings: SettingsRepository
 
     @Before
     fun setUp() {
-        wantedInteractor = WantedInteractorImpl(service, TestSchedulers, USERNAME)
+        wantedInteractor = WantedInteractorImpl(service, TestSchedulers, settings)
     }
 
     @Test

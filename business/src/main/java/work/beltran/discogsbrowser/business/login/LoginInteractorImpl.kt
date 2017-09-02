@@ -30,7 +30,7 @@ class LoginInteractorImpl(private val service: LoginService,
                 .observeOn(schedulers.mainThread())
     }
 
-    override fun requisterAccessToken(redirectUrl: Url, apiConsumerKey: String, apiConsumerSecret: String): Completable {
+    override fun registerAccessToken(redirectUrl: Url, apiConsumerKey: String, apiConsumerSecret: String): Completable {
         if (redirectUrl.startsWith(REDIRECT_URI)) {
             val token = redirectUrl.getQueryParameter("oauth_token")
             val verifier = redirectUrl.getQueryParameter("oauth_verifier")

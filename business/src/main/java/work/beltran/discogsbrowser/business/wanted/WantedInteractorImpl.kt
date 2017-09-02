@@ -4,6 +4,7 @@ import io.reactivex.Single
 import work.beltran.discogsbrowser.api.DiscogsService
 import work.beltran.discogsbrowser.api.model.UserWanted
 import work.beltran.discogsbrowser.business.RxJavaSchedulers
+import work.beltran.discogsbrowser.business.SettingsRepository
 import work.beltran.discogsbrowser.business.WantedInteractor
 
 /**
@@ -12,11 +13,11 @@ import work.beltran.discogsbrowser.business.WantedInteractor
  */
 class WantedInteractorImpl(private val service: DiscogsService,
                            private val schedulers: RxJavaSchedulers,
-                           private val username: String)
+                           private val settingsRepository: SettingsRepository)
     : WantedInteractor {
 
     override fun getWanted(page: Int): Single<UserWanted> {
-        return service.getWantedList(username, page)
+        return service.getWantedList(settingsRepository.getUsername(), page)
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.mainThread())
     }

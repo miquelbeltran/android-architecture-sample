@@ -5,4 +5,6 @@ interface SettingsRepository {
     fun storeUserSecret(userSecret: String)
     fun getUserSecret(): String
     fun getUserToken(): String
+    fun setUsername(username: String)
+    fun getUsername(): String
 }

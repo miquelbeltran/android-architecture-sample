@@ -11,5 +11,5 @@ typealias Url = String
 
 interface LoginInteractor {
     fun requestTokens(apiConsumerKey: String, apiConsumerSecret: String): Single<Url>
-    fun requisterAccessToken(redirectUrl: Url, apiConsumerKey: String, apiConsumerSecret: String): Completable
+    fun registerAccessToken(redirectUrl: Url, apiConsumerKey: String, apiConsumerSecret: String): Completable
 }

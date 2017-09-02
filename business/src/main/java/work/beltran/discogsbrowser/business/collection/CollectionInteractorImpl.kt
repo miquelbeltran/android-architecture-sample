@@ -7,6 +7,7 @@ import work.beltran.discogsbrowser.api.DiscogsService
 import work.beltran.discogsbrowser.api.model.UserCollection
 import work.beltran.discogsbrowser.business.CollectionInteractor
 import work.beltran.discogsbrowser.business.RxJavaSchedulers
+import work.beltran.discogsbrowser.business.SettingsRepository
 
 /**
  * Created by Miquel Beltran on 8/27/16
@@ -14,38 +15,35 @@ import work.beltran.discogsbrowser.business.RxJavaSchedulers
  */
 class CollectionInteractorImpl(private val service: DiscogsService,
                                private val schedulers: RxJavaSchedulers,
-                               private val username: String)
+                               private val settingsRepository: SettingsRepository)
     : CollectionInteractor {
 
     override fun getCollection(page: Int): Single<UserCollection> {
-        return service.listRecords(username, page)
+        return service.listRecords(settingsRepository.getUsername(), page)
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.mainThread())
     }
 
     override fun getRecord(recordId: Int): Single<UserCollection> {
-        return service.getRecordInCollection(username, recordId)
+        return service.getRecordInCollection(settingsRepository.getUsername(), recordId)
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.mainThread())
     }
 
     override fun addRecord(recordId: Int): Completable {
-        return service.addToCollection(username, recordId)
+        return service.addToCollection(settingsRepository.getUsername(), recordId)
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.mainThread())
     }
 
     override fun removeRecord(recordId: Int): Completable {
-        // Obtain the profile user name
-        return service.getRecordInCollection(username, recordId)
-                // emit each Record
+        return service.getRecordInCollection(settingsRepository.getUsername(), recordId)
                 .map { it.records }
-                // delete each record
                 .flatMapCompletable {
                     Observable.fromIterable(it)
                             .flatMapCompletable {
                                 service.removeFromCollection(
-                                        username,
+                                        settingsRepository.getUsername(),
                                         it.id,
                                         it.instanceId!!)
                             }
