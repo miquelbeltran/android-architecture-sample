@@ -6,6 +6,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 import work.beltran.discogsbrowser.test.RECORD
@@ -30,6 +31,7 @@ class WantedInteractorImplTest {
     @Before
     fun setUp() {
         wantedInteractor = WantedInteractorImpl(service, TestSchedulers, settings)
+        Mockito.`when`(settings.getUsername()).thenReturn(USERNAME)
     }
 
     @Test

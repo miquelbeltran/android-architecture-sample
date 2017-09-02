@@ -5,8 +5,10 @@ import org.junit.Before
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.junit.MockitoJUnitRunner
 import work.beltran.discogsbrowser.api.DiscogsService
 import work.beltran.discogsbrowser.api.model.UserIdentity
 import work.beltran.discogsbrowser.api.model.UserProfile
@@ -14,6 +16,7 @@ import work.beltran.discogsbrowser.business.ProfileInteractor
 import work.beltran.discogsbrowser.business.SettingsRepository
 import work.beltran.discogsbrowser.test.TestSchedulers
 
+@RunWith(MockitoJUnitRunner::class)
 class ProfileInteractorImplTest {
 
     lateinit var profileInteractor: ProfileInteractor

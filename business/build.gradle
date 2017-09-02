@@ -1,8 +1,8 @@
 apply plugin: 'kotlin'
 
 dependencies {
+    compile project(':api')
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(path: ':api')
 
     testCompile "junit:junit:$junit_version"
     testCompile "org.mockito:mockito-core:$mockito_version"
