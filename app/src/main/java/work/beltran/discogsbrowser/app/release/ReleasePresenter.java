@@ -6,7 +6,7 @@ import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.record.Record;
 import work.beltran.discogsbrowser.app.base.BasePresenter;
 import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
-import work.beltran.discogsbrowser.business.CollectionInteractor;
+import work.beltran.discogsbrowser.business.CollectionRepository;
 
 /**
  * Created by Miquel Beltran on 10/2/16
@@ -15,10 +15,10 @@ import work.beltran.discogsbrowser.business.CollectionInteractor;
 public class ReleasePresenter extends BasePresenter<ReleaseView> {
 
     private static final String TAG = "ReleasePresenter";
-    private CollectionInteractor interactor;
+    private CollectionRepository interactor;
     private int releaseId;
 
-    public ReleasePresenter(CollectionInteractor interactor) {
+    public ReleasePresenter(CollectionRepository interactor) {
         this.interactor = interactor;
     }
 

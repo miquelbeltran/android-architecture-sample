@@ -12,7 +12,7 @@ import rx.Observable;
 import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
-import work.beltran.discogsbrowser.business.CollectionInteractor;
+import work.beltran.discogsbrowser.business.CollectionRepository;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
 
 import static org.mockito.Matchers.anyInt;
@@ -31,7 +31,7 @@ public class CollectionPresenterTest {
     private List<RecordAdapterItem> recordList;
 
     @Mock
-    private CollectionInteractor interactor;
+    private CollectionRepository interactor;
     @Mock
     private ProfileInteractor profileInteractor;
     @Mock

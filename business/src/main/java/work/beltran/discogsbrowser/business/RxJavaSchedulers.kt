@@ -9,4 +9,5 @@ import io.reactivex.Scheduler
 interface RxJavaSchedulers {
     fun io(): Scheduler
     fun mainThread(): Scheduler
+    fun computation(): Scheduler
 }

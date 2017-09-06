@@ -7,7 +7,7 @@ import work.beltran.discogsbrowser.api.model.UserCollection;
 import work.beltran.discogsbrowser.api.model.UserProfile;
 import work.beltran.discogsbrowser.app.base.BasePresenterForAdapter;
 import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
-import work.beltran.discogsbrowser.business.CollectionInteractor;
+import work.beltran.discogsbrowser.business.CollectionRepository;
 import work.beltran.discogsbrowser.business.ProfileInteractor;
 
 
@@ -17,10 +17,10 @@ import work.beltran.discogsbrowser.business.ProfileInteractor;
  */
 public class CollectionPresenter extends BasePresenterForAdapter<CollectionView> {
     public static final String TAG = CollectionPresenter.class.getName();
-    private CollectionInteractor interactor;
+    private CollectionRepository interactor;
     private ProfileInteractor profileInteractor;
 
-    public CollectionPresenter(CollectionInteractor interactor,
+    public CollectionPresenter(CollectionRepository interactor,
                                ProfileInteractor profileInteractor) {
         this.interactor = interactor;
         this.profileInteractor = profileInteractor;
