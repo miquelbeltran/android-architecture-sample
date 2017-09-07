@@ -14,6 +14,9 @@ interface RecordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun replace(list: List<RecordRoom>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun replace(value: RecordRoom)
+
     @Delete
     fun remove(value: RecordRoom)
 }

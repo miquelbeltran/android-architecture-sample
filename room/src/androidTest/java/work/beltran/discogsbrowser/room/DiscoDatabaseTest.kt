@@ -1,30 +1,34 @@
 package work.beltran.discogsbrowser.room
 
+import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import org.junit.After
 import org.junit.Before
 
 import org.junit.Assert.*
+import org.junit.Rule
 import org.junit.Test
 
-class RoomReactiveStoreTest {
+class DiscoDatabaseTest {
 
-    lateinit var store: RoomReactiveStore
+    @get:Rule var instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    private lateinit var database: DiscoDatabase
 
     @Before
     fun setUp() {
-        val database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(),
+        database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(),
                 DiscoDatabase::class.java)
                 .allowMainThreadQueries()
                 .build()
-        store = RoomReactiveStore(database)
     }
 
     @Test
     fun add_record_while_subscribed() {
-        val subscription = store.getAll().test()
-        subscription.assertEmpty()
+        val tester = database.recordDao().getAll().test()
+        // Initially the database is empty
+        tester.assertValue { it.isEmpty() }
         // Add a single record
         val record = RecordRoom(
                 id = 1,
@@ -32,16 +36,13 @@ class RoomReactiveStoreTest {
                 thumb = "Url",
                 year = "2012"
         )
-        store.replace(listOf(record))
-        // subscription now has values and should be a list with the record
-        subscription.assertValueCount(1)
-        val value = subscription.values()[0]
-        assertEquals(record, value[0])
+        database.recordDao().replace(record)
+        // Now the received value contains our record
+        tester.assertValueAt(1) { it.contains(record) }
     }
 
     @After
     fun tearDown() {
-
+        database.close()
     }
-
 }

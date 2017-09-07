@@ -6,6 +6,10 @@ import work.beltran.discogsbrowser.business.ReactiveStore
 class RoomReactiveStore(private val database: DiscoDatabase) : ReactiveStore<Int, RecordRoom> {
     override fun getAll(): Flowable<List<RecordRoom>> = database.recordDao().getAll()
 
+    override fun replace(value: RecordRoom) {
+        database.recordDao().replace(value)
+    }
+
     override fun replace(list: List<RecordRoom>) {
         database.recordDao().replace(list)
     }
