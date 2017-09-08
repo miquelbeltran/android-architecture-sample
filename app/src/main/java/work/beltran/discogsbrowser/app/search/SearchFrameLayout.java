@@ -27,7 +27,7 @@ import work.beltran.discogsbrowser.app.main.MainActivity;
  * More on http://beltran.work
  */
 @SuppressLint("ViewConstructor")
-public class SearchFrameLayout extends RecordsAdapterFrameLayout<SearchPresenter> implements SearchView {
+public class SearchFrameLayout extends RecordsAdapterFrameLayout {
     private static final String STATE_SEARCH = "STATE_SEARCH";
     Header header = new Header();
     Footer footer = new Footer();
@@ -63,7 +63,6 @@ public class SearchFrameLayout extends RecordsAdapterFrameLayout<SearchPresenter
         this.header.searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                presenter.search(query);
                 return true;
             }
 
@@ -72,18 +71,16 @@ public class SearchFrameLayout extends RecordsAdapterFrameLayout<SearchPresenter
                 return false;
             }
         });
-        this.header.scanButton.setOnClickListener(view -> {
-            IntentIntegrator intentIntegrator = new IntentIntegrator((MainActivity) getContext());
-            intentIntegrator.initiateScan();
-        });
+//        this.header.scanButton.setOnClickListener(view -> {
+//            IntentIntegrator intentIntegrator = new IntentIntegrator((MainActivity) getContext());
+//            intentIntegrator.initiateScan();
+//        });
     }
 
-    @Override
     public void setLoading(boolean loading) {
         footer.progressBar.setVisibility(loading ? VISIBLE : GONE);
     }
 
-    @Override
     public void clear() {
         adapter.clear();
     }
@@ -91,14 +88,6 @@ public class SearchFrameLayout extends RecordsAdapterFrameLayout<SearchPresenter
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        presenter.attachView(this);
-    }
-
-    @Inject
-    @Override
-    public void setPresenter(SearchPresenter presenter) {
-        this.presenter = presenter;
-        presenter.attachView(this);
     }
 
     @Override
@@ -115,7 +104,6 @@ public class SearchFrameLayout extends RecordsAdapterFrameLayout<SearchPresenter
 
     public void searchWithBarcode(String contents) {
         header.searchView.setQuery(contents, false);
-        presenter.searchWithBarcode(contents);
     }
 
     public static class Header {

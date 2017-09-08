@@ -14,21 +14,18 @@ import java.util.List;
 
 import butterknife.BindView;
 import work.beltran.discogsbrowser.R;
-import work.beltran.discogsbrowser.app.base.BasePresenterForAdapter;
-import work.beltran.discogsbrowser.app.base.BaseView;
 
 /**
  * Created by Miquel Beltran on 10/1/16
  * More on http://beltran.work
  */
-public abstract class RecordsAdapterFrameLayout<T extends BasePresenterForAdapter> extends FrameLayout
-        implements BaseView, LoadMoreOnScrollListener.Listener {
+public abstract class RecordsAdapterFrameLayout extends FrameLayout
+        implements LoadMoreOnScrollListener.Listener {
     private static final String STATE_LAYOUT_MANAGER = "STATE_LAYOUT_MANAGER";
     private static final String STATE_ADAPTER = "STATE_ADAPTER";
     private static final String STATE_PRESENTER = "STATE_PRESENTER";
     private static final String STATE_SUPER = "STATE_SUPER";
     private static final String STATE_HEADER = "STATE_HEADER";
-    protected T presenter;
     protected RecordsAdapter adapter;
     @BindView(R.id.recycler_records)
     public RecyclerView recyclerView;
@@ -37,14 +34,12 @@ public abstract class RecordsAdapterFrameLayout<T extends BasePresenterForAdapte
         super(context);
     }
 
-    public abstract void setPresenter(T presenter);
 
     @Override
     public Parcelable onSaveInstanceState() {
         Bundle bundle = new Bundle();
         bundle.putParcelable(STATE_SUPER, super.onSaveInstanceState());
-        bundle.putBundle(STATE_PRESENTER, presenter.getStatus());
-        bundle.putParcelableArrayList(STATE_ADAPTER, (ArrayList<RecordAdapterItem>) adapter.getItems());
+//        bundle.putParcelableArrayList(STATE_ADAPTER, (ArrayList<RecordListItem>) adapter.getItems());
         bundle.putParcelable(STATE_LAYOUT_MANAGER, recyclerView.getLayoutManager().onSaveInstanceState());
         bundle.putBundle(STATE_HEADER, getHeaderState());
         return bundle;
@@ -56,9 +51,8 @@ public abstract class RecordsAdapterFrameLayout<T extends BasePresenterForAdapte
     public void onRestoreInstanceState(Parcelable state) {
         if (state instanceof Bundle) {
             Bundle bundle = (Bundle) state;
-            presenter.loadStatus(bundle.getBundle(STATE_PRESENTER));
             adapter.clear();
-            adapter.addItems(bundle.<RecordAdapterItem>getParcelableArrayList(STATE_ADAPTER));
+//            adapter.addItems(bundle.<RecordAdapterItem>getParcelableArrayList(STATE_ADAPTER));
             recyclerView.getLayoutManager().onRestoreInstanceState(bundle.getParcelable(STATE_LAYOUT_MANAGER));
             loadHeaderState(bundle.getBundle(STATE_HEADER));
             state = bundle.getParcelable(STATE_SUPER);
@@ -71,18 +65,14 @@ public abstract class RecordsAdapterFrameLayout<T extends BasePresenterForAdapte
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        presenter.detachView();
     }
 
     public void onLoadMore(RecyclerView recyclerView) {
-        presenter.loadMore();
     }
 
-    public void addRecords(List<RecordAdapterItem> records) {
-        adapter.addItems(records);
+    public void addRecords(List<RecordListItem> records) {
     }
 
-    @Override
     public void displayError(@StringRes int messageId) {
 
     }

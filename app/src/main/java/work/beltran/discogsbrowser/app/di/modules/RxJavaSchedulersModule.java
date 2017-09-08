@@ -1,12 +1,13 @@
 package work.beltran.discogsbrowser.app.di.modules;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import rx.Scheduler;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Scheduler;
+import io.reactivex.schedulers.Schedulers;
 import work.beltran.discogsbrowser.business.RxJavaSchedulers;
 
 /**
@@ -19,6 +20,12 @@ public class RxJavaSchedulersModule {
     @Singleton
     public RxJavaSchedulers provideSchedulers() {
         return new RxJavaSchedulers() {
+            @NotNull
+            @Override
+            public Scheduler computation() {
+                return null;
+            }
+
             @Override
             public Scheduler io() {
                 return Schedulers.io();
@@ -26,7 +33,8 @@ public class RxJavaSchedulersModule {
 
             @Override
             public Scheduler mainThread() {
-                return AndroidSchedulers.mainThread();
+                return null;
+//                return Schedulers.mainThread();
             }
         };
     }

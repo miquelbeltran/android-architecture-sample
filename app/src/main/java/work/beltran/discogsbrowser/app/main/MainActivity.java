@@ -25,7 +25,6 @@ import butterknife.ButterKnife;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.app.App;
 import work.beltran.discogsbrowser.app.collection.CollectionFrameLayout;
-import work.beltran.discogsbrowser.app.common.RecordAdapterItem;
 import work.beltran.discogsbrowser.app.di.ApiComponent;
 import work.beltran.discogsbrowser.app.search.SearchFrameLayout;
 import work.beltran.discogsbrowser.app.wantlist.WantlistFrameLayout;
@@ -50,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private CollectionFrameLayout collectionFrameLayout;
     private WantlistFrameLayout wantlistFrameLayout;
     private SearchFrameLayout searchFrameLayout;
-    private BroadcastReceiver addedToColReceiver;
-    private BroadcastReceiver removeFromColReceiver;
+//    private BroadcastReceiver addedToColReceiver;
+//    private BroadcastReceiver removeFromColReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         ((App) getApplication()).getAppComponent().inject(this);
         initNavBar(savedInstanceState);
-        registerReceivers();
+//        registerReceivers();
     }
 
     private void initNavBar(Bundle savedInstanceState) {
@@ -147,31 +146,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void registerReceivers() {
-        IntentFilter intentFilter = new IntentFilter(INTENT_FILTER_ADD_COL);
-        addedToColReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                RecordAdapterItem item = intent.getParcelableExtra(INTENT_FILTER_RECORD_ITEM_EXTRA);
-                collectionFrameLayout.addRecords(Collections.singletonList(item));
-            }
-        };
-        registerReceiver(addedToColReceiver, intentFilter);
-        intentFilter = new IntentFilter(INTENT_FILTER_REMOVE_COL);
-        removeFromColReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                RecordAdapterItem item = intent.getParcelableExtra(INTENT_FILTER_RECORD_ITEM_EXTRA);
-                collectionFrameLayout.removeRecord(item.getReleaseId());
-            }
-        };
-        registerReceiver(removeFromColReceiver, intentFilter);
-    }
+//    private void registerReceivers() {
+//        IntentFilter intentFilter = new IntentFilter(INTENT_FILTER_ADD_COL);
+//        addedToColReceiver = new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                RecordAdapterItem item = intent.getParcelableExtra(INTENT_FILTER_RECORD_ITEM_EXTRA);
+//                collectionFrameLayout.addRecords(Collections.singletonList(item));
+//            }
+//        };
+//        registerReceiver(addedToColReceiver, intentFilter);
+//        intentFilter = new IntentFilter(INTENT_FILTER_REMOVE_COL);
+//        removeFromColReceiver = new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                RecordAdapterItem item = intent.getParcelableExtra(INTENT_FILTER_RECORD_ITEM_EXTRA);
+//                collectionFrameLayout.removeRecord(item.getReleaseId());
+//            }
+//        };
+//        registerReceiver(removeFromColReceiver, intentFilter);
+//    }
 
     @Override
     protected void onDestroy() {
-        unregisterReceiver(addedToColReceiver);
-        unregisterReceiver(removeFromColReceiver);
+//        unregisterReceiver(addedToColReceiver);
+//        unregisterReceiver(removeFromColReceiver);
         super.onDestroy();
     }
 }

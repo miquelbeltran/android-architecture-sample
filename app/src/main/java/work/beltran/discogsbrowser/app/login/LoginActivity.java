@@ -18,7 +18,7 @@ import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.app.App;
 import work.beltran.discogsbrowser.app.LauncherActivity;
 
-public class LoginActivity extends AppCompatActivity implements LoginView {
+public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.loginBackground)
     ImageView imageBackground;
@@ -26,8 +26,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Inject
     public Picasso picasso;
 
-    @Inject
-    public LoginPresenter presenter;
+//    @Inject
+//    public LoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,40 +35,39 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         ((App) getApplication()).getLoginComponent().inject(this);
-        presenter.attachView(this);
+//        presenter.attachView(this);
         picasso.load(R.drawable.login_background)
                 .fit()
                 .centerCrop()
                 .into(imageBackground);
     }
 
-    @OnClick(R.id.loginbutton)
-    public void onClick() {
-        presenter.loginOnClick();
-    }
+//    @OnClick(R.id.loginbutton)
+//    public void onClick() {
+//        presenter.loginOnClick();
+//    }
 
     @Override
     protected void onResume() {
         super.onResume();
         Uri uri = getIntent().getData();
-        presenter.registerAccessToken(uri);
+//        presenter.registerAccessToken(uri);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        presenter.detachView();
+//        presenter.detachView();
     }
 
-    @Override
     public void startLauncher() {
         Intent intent = new Intent(this, LauncherActivity.class);
         startActivity(intent);
         finish();
     }
 
-    @Override
-    public void displayError(@StringRes int messageId) {
-
-    }
+//    @Override
+//    public void displayError(@StringRes int messageId) {
+//
+//    }
 }

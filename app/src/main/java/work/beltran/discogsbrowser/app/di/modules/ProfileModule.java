@@ -18,10 +18,5 @@ import work.beltran.discogsbrowser.business.profile.ProfileInteractorImpl;
         RxJavaSchedulersModule.class
 })
 public class ProfileModule {
-    @Singleton
-    @Provides
-    public ProfileInteractor providesInteractor(DiscogsService service,
-                                                RxJavaSchedulers schedulers) {
-        return new ProfileInteractorImpl(service, schedulers);
-    }
+
 }

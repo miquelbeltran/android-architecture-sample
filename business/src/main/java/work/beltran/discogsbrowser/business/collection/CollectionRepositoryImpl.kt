@@ -34,6 +34,7 @@ class CollectionRepositoryImpl(private val service: DiscogsService,
 
     override fun addRecord(recordId: Int): Completable =
             service.addToCollection(username, recordId)
+                    .andThen(fetchRecord(recordId))
                     .subscribeOn(schedulers.io())
 
     override fun removeRecord(recordId: Int): Completable =

@@ -26,8 +26,7 @@ import work.beltran.discogsbrowser.app.common.RecordsAdapterFrameLayout;
  * More on http://beltran.work
  */
 @SuppressLint("ViewConstructor")
-public class WantlistFrameLayout extends RecordsAdapterFrameLayout<WantlistPresenter>
-        implements WantlistView {
+public class WantlistFrameLayout extends RecordsAdapterFrameLayout {
 
     WantlistHeader header = new WantlistHeader();
     Footer footer = new Footer();
@@ -52,7 +51,6 @@ public class WantlistFrameLayout extends RecordsAdapterFrameLayout<WantlistPrese
         recyclerView.addOnScrollListener(new LoadMoreOnScrollListener(this));
     }
 
-    @Override
     public void display(UserProfile userProfile) {
         header.bind(userProfile, getContext());
     }
@@ -71,13 +69,6 @@ public class WantlistFrameLayout extends RecordsAdapterFrameLayout<WantlistPrese
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        presenter.attachView(this);
-    }
-
-    @Inject
-    @Override
-    public void setPresenter(WantlistPresenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override
@@ -92,10 +83,9 @@ public class WantlistFrameLayout extends RecordsAdapterFrameLayout<WantlistPrese
 
     @Override
     public void onLoadMore(RecyclerView recyclerView) {
-        presenter.loadMore();
+
     }
 
-    @Override
     public void setLoading(boolean loading) {
         footer.progressBar.setVisibility(loading ? VISIBLE : GONE);
     }

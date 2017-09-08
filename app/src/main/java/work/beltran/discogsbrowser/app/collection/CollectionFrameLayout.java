@@ -27,8 +27,7 @@ import work.beltran.discogsbrowser.app.common.RecordsAdapterFrameLayout;
  * More on http://beltran.work
  */
 @SuppressLint("ViewConstructor")
-public class CollectionFrameLayout extends RecordsAdapterFrameLayout<CollectionPresenter>
-        implements CollectionView {
+public class CollectionFrameLayout extends RecordsAdapterFrameLayout {
 
     CollectionHeader header = new CollectionHeader();
     Footer footer = new Footer();
@@ -59,18 +58,17 @@ public class CollectionFrameLayout extends RecordsAdapterFrameLayout<CollectionP
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        presenter.attachView(this);
     }
 
-    @Override
-    public void display(UserProfile userProfile) {
-        header.bind(userProfile, picasso, getContext());
-    }
-
-    @Override
-    public void setLoading(boolean loading) {
-        footer.progressBar.setVisibility(loading ? VISIBLE : GONE);
-    }
+//    @Override
+//    public void display(UserProfile userProfile) {
+//        header.bind(userProfile, picasso, getContext());
+//    }
+//
+//    @Override
+//    public void setLoading(boolean loading) {
+//        footer.progressBar.setVisibility(loading ? VISIBLE : GONE);
+//    }
 
     private void createHeaderFooter(RecordsAdapter adapter) {
         WrapAdapter wrapAdapter = new WrapAdapter(adapter);
@@ -81,12 +79,6 @@ public class CollectionFrameLayout extends RecordsAdapterFrameLayout<CollectionP
         View footer = LayoutInflater.from(getContext()).inflate(R.layout.footer, recyclerView, false);
         ButterKnife.bind(this.footer, footer);
         wrapAdapter.addFooter(footer);
-    }
-
-    @Inject
-    @Override
-    public void setPresenter(CollectionPresenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override

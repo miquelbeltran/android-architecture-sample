@@ -17,7 +17,7 @@ import work.beltran.discogsbrowser.app.release.ReleaseActivity;
  * Created by Miquel Beltran on 10/1/16
  * More on http://beltran.work
  */
-class RecordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class RecordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private Picasso picasso;
     @BindView(R.id.text_title)
     TextView textTitle;
@@ -29,7 +29,7 @@ class RecordViewHolder extends RecyclerView.ViewHolder implements View.OnClickLi
     TextView textYear;
     @BindView(R.id.text_format)
     TextView textFormat;
-    private RecordAdapterItem record;
+    private RecordListItem record;
 
     RecordViewHolder(View itemView, Picasso picasso) {
         super(itemView);
@@ -38,7 +38,7 @@ class RecordViewHolder extends RecyclerView.ViewHolder implements View.OnClickLi
         itemView.setOnClickListener(this);
     }
 
-    void bind(RecordAdapterItem record) {
+    void bind(RecordListItem record) {
         textTitle.setText(record.getTitle());
         textArtist.setText(record.getArtist());
         textFormat.setText(record.getFormat());
