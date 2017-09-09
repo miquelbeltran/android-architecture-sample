@@ -3,6 +3,7 @@ package work.beltran.discogsbrowser.app
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import work.beltran.discogsbrowser.BuildConfig
 
 import javax.inject.Inject
 
@@ -18,13 +19,13 @@ class LauncherActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (application as App).appComponent.inject(this)
-        if (settings.userToken.isEmpty() || settings.userSecret.isEmpty()) {
-            val intent = Intent(this, LoginActivity::class.java)
+        if (settings.userToken.isNotEmpty() || settings.userSecret.isNotEmpty() || BuildConfig.API_KEY.isNotEmpty()) {
+            (application as App).initApiComponent(settings.userToken, settings.userSecret)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         } else {
-            (application as App).initApiComponent(settings.userToken, settings.userSecret)
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }

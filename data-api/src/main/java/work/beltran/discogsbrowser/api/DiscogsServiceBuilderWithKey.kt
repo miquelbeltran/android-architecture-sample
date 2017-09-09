@@ -12,10 +12,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
  * More on http://beltran.work
  */
 class DiscogsServiceBuilderWithKey(private val apiKey: String,
-                                   private val applicationId: String) {
+                                   private val applicationId: String): DiscogsServiceBuilder {
 
 
-    fun provideDiscogsService(moshi: Moshi): DiscogsService {
+    override fun provideDiscogsService(moshi: Moshi): DiscogsService {
         return provideRetrofit(moshi).create(DiscogsService::class.java)
     }
 

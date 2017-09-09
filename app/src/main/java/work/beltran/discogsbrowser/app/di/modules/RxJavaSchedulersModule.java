@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import work.beltran.discogsbrowser.business.RxJavaSchedulers;
 
@@ -23,7 +24,7 @@ public class RxJavaSchedulersModule {
             @NotNull
             @Override
             public Scheduler computation() {
-                return null;
+                return Schedulers.computation();
             }
 
             @Override
@@ -33,8 +34,7 @@ public class RxJavaSchedulersModule {
 
             @Override
             public Scheduler mainThread() {
-                return null;
-//                return Schedulers.mainThread();
+                return AndroidSchedulers.mainThread();
             }
         };
     }

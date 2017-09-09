@@ -3,7 +3,8 @@ package work.beltran.discogsbrowser.app
 import android.app.Application
 
 import work.beltran.discogsbrowser.BuildConfig
-import work.beltran.discogsbrowser.api.DiscogsServiceBuilder
+import work.beltran.discogsbrowser.api.DiscogsServiceBuilderWithKey
+import work.beltran.discogsbrowser.api.DiscogsServiceBuilderWithLogin
 import work.beltran.discogsbrowser.api.LoginServiceBuilder
 import work.beltran.discogsbrowser.app.di.ApiComponent
 import work.beltran.discogsbrowser.app.di.AppComponent
@@ -14,7 +15,6 @@ import work.beltran.discogsbrowser.app.di.LoginComponent
 import work.beltran.discogsbrowser.app.di.modules.ContextModule
 import work.beltran.discogsbrowser.app.di.modules.DiscogsModule
 import work.beltran.discogsbrowser.app.di.modules.LoginModule
-import work.beltran.discogsbrowser.app.settings.Settings
 
 class App : Application() {
     lateinit var apiComponent: ApiComponent
@@ -36,9 +36,22 @@ class App : Application() {
                                         BuildConfig.APPLICATION_ID + "/" + BuildConfig.VERSION_NAME)))
                 .build()
         val settings = appComponent.settings
-        if (!settings.userToken.isEmpty() && !settings.userSecret.isEmpty()) {
+        if (BuildConfig.API_KEY.isNotEmpty()) {
+            initApiComponentWithApiKey()
+        } else if (!settings.userToken.isEmpty() && !settings.userSecret.isEmpty()) {
             initApiComponent(settings.userToken, settings.userSecret)
         }
+    }
+
+    private fun initApiComponentWithApiKey() {
+        apiComponent = DaggerApiComponent
+                .builder()
+                .contextModule(ContextModule(this))
+                .discogsModule(
+                        DiscogsModule(
+                                DiscogsServiceBuilderWithKey(BuildConfig.API_KEY,
+                                        BuildConfig.APPLICATION_ID + "/" + BuildConfig.VERSION_NAME)))
+                .build()
     }
 
     fun initApiComponent(userToken: String, userSecret: String) {
@@ -47,7 +60,7 @@ class App : Application() {
                 .contextModule(ContextModule(this))
                 .discogsModule(
                         DiscogsModule(
-                                DiscogsServiceBuilder(
+                                DiscogsServiceBuilderWithLogin(
                                         BuildConfig.API_CONSUMER_KEY,
                                         BuildConfig.API_CONSUMER_SECRET,
                                         userToken,
