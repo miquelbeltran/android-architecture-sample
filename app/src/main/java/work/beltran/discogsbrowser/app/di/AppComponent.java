@@ -1,5 +1,9 @@
 package work.beltran.discogsbrowser.app.di;
 
+import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -27,4 +31,7 @@ public interface AppComponent {
     void inject(MainActivity activity);
 
     Settings getSettings();
+
+    @NotNull
+    Picasso picasso();
 }

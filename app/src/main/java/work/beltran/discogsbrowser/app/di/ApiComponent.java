@@ -6,7 +6,6 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import work.beltran.discogsbrowser.app.collection.CollectionController;
-import work.beltran.discogsbrowser.app.collection.CollectionFrameLayout;
 import work.beltran.discogsbrowser.app.collection.CollectionViewModel;
 import work.beltran.discogsbrowser.app.di.modules.CollectionModule;
 import work.beltran.discogsbrowser.app.di.modules.PicassoModule;

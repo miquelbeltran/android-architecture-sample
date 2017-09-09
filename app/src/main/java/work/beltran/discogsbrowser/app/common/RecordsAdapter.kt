@@ -1,11 +1,14 @@
 package work.beltran.discogsbrowser.app.common
 
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import work.beltran.discogsbrowser.R
 import java.util.*
+
+
 
 /**
  * Created by Miquel Beltran on 8/27/16
@@ -50,4 +53,12 @@ class RecordsAdapter(private val picasso: Picasso) : RecyclerView.Adapter<Record
             }
         }
     }
+
+    fun updateItems(collection: List<RecordListItem>) {
+        val diffResult = DiffUtil.calculateDiff(DiffUtilRecordItems(records, collection))
+        records.clear()
+        records.addAll(collection)
+        diffResult.dispatchUpdatesTo(this)
+    }
 }
+

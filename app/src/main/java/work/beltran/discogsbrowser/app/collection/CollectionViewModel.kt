@@ -6,6 +6,7 @@ import com.example.work.beltran.discogsbrowser.domain.RecordCollectionUseCasePar
 import io.reactivex.Flowable
 import io.reactivex.FlowableSubscriber
 import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
 import io.reactivex.subjects.BehaviorSubject
