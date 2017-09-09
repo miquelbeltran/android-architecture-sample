@@ -8,6 +8,8 @@ import io.reactivex.FlowableSubscriber
 import io.reactivex.Observer
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
+import io.reactivex.subjects.BehaviorSubject
+import work.beltran.discogsbrowser.app.base.BaseViewModel
 import work.beltran.discogsbrowser.app.common.RecordListItem
 import work.beltran.discogsbrowser.business.CollectionRepository
 import work.beltran.discogsbrowser.business.mappers.Mapper
@@ -16,27 +18,25 @@ import javax.inject.Inject
 
 class CollectionViewModel
 @Inject constructor(private val recordCollectionUseCase: RecordCollectionUseCase,
-                    private val mapper: Mapper<Record, RecordListItem>) {
-
-    private val disposables = CompositeDisposable()
+                    private val mapper: Mapper<Record, RecordListItem>):
+        BaseViewModel<CollectionView>() {
 
     init {
-        Log.d(TAG, "init")
-    }
-
-    fun dispose() {
-        disposables.clear()
-    }
-
-    fun screenData(subscriber: Consumer<CollectionView>) {
+        Log.d(TAG, "init ViewModel")
         fetchRecords()
-        disposables.add(recordCollectionUseCase
-                .getStream()
+        subscribeToData()
+    }
+
+    private fun subscribeToData() {
+        Log.d(TAG, "Subscribed to use case")
+        disposables.add(recordCollectionUseCase.getStream()
                 .map(this::recordListToView)
-                .subscribe(subscriber))
+                .doOnNext { data.onNext(it) }
+                .subscribe())
     }
 
     private fun fetchRecords() {
+        Log.d(TAG, "Ask use case to fetch records")
         disposables.add(recordCollectionUseCase.fetch(RecordCollectionUseCaseParams()).subscribe())
     }
 
