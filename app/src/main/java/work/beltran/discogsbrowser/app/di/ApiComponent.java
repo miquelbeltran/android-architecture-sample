@@ -1,9 +1,13 @@
 package work.beltran.discogsbrowser.app.di;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
+import work.beltran.discogsbrowser.app.collection.CollectionController;
 import work.beltran.discogsbrowser.app.collection.CollectionFrameLayout;
+import work.beltran.discogsbrowser.app.collection.CollectionViewModel;
 import work.beltran.discogsbrowser.app.di.modules.CollectionModule;
 import work.beltran.discogsbrowser.app.di.modules.PicassoModule;
 import work.beltran.discogsbrowser.app.di.modules.RecordsAdapterModule;
@@ -33,4 +37,9 @@ public interface ApiComponent {
     void inject(SearchFrameLayout searchFrameLayout);
 
     void inject(ReleaseActivity releaseActivity);
+
+    void inject(@NotNull CollectionController collectionController);
+
+    @NotNull
+    CollectionViewModel collectionViewModel();
 }

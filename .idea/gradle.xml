@@ -8,10 +8,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/api" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/business" />
-            <option value="$PROJECT_DIR$/room" />
+            <option value="$PROJECT_DIR$/data-api" />
+            <option value="$PROJECT_DIR$/data-repository" />
+            <option value="$PROJECT_DIR$/data-room" />
+            <option value="$PROJECT_DIR$/domain" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

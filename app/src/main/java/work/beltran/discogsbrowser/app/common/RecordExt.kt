@@ -1,8 +1,8 @@
 package work.beltran.discogsbrowser.app.common
 
-import work.beltran.discogsbrowser.api.model.record.Record
+import work.beltran.discogsbrowser.api.model.record.RecordApi
 
-fun Record.toListItem(inCollection: Boolean): RecordListItem =
+fun RecordApi.toListItem(inCollection: Boolean): RecordListItem =
         RecordListItem(
                 artist = basicInformation.artists.joinToString(),
                 format = basicInformation.formats.joinToString(),
@@ -16,5 +16,5 @@ fun Record.toListItem(inCollection: Boolean): RecordListItem =
                 }
         )
 
-fun List<Record>.toListItem(inCollection: Boolean): List<RecordListItem> =
+fun List<RecordApi>.toListItem(inCollection: Boolean): List<RecordListItem> =
         map { it.toListItem(inCollection) }

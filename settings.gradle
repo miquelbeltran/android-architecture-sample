@@ -1,1 +1,1 @@
-include ':app', ':api', ':business', ':room'
+include ':app', ':data-api', ':data-repository', ':data-room', ':domain'

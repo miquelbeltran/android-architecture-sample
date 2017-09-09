@@ -1,0 +1,16 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    testCompile "org.assertj:assertj-core:$assertj_version"
+    testCompile "junit:junit:$junit_version"
+
+    compile "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    compile "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    compile "com.squareup.moshi:moshi-kotlin:$moshi_version"
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}

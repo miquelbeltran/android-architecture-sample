@@ -1,0 +1,12 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    compile project(':data-repository')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    testCompile "junit:junit:$junit_version"
+    testCompile "org.mockito:mockito-core:$mockito_version"
+    testCompile "org.assertj:assertj-core:$assertj_version"
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}

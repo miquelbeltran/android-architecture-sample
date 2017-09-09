@@ -3,10 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android-discogsbrowser.iml" filepath="$PROJECT_DIR$/android-discogsbrowser.iml" />
-      <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/business/business.iml" filepath="$PROJECT_DIR$/business/business.iml" />
-      <module fileurl="file://$PROJECT_DIR$/room/room.iml" filepath="$PROJECT_DIR$/room/room.iml" />
+      <module fileurl="file://$PROJECT_DIR$/data-api/data-api.iml" filepath="$PROJECT_DIR$/data-api/data-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/data-repository/data-repository.iml" filepath="$PROJECT_DIR$/data-repository/data-repository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/data-room/data-room.iml" filepath="$PROJECT_DIR$/data-room/data-room.iml" />
+      <module fileurl="file://$PROJECT_DIR$/domain/domain.iml" filepath="$PROJECT_DIR$/domain/domain.iml" />
     </modules>
   </component>
 </project>
