@@ -5,6 +5,7 @@ import work.beltran.discogsbrowser.api.model.record.Artist
 import work.beltran.discogsbrowser.api.model.record.BasicInformation
 import work.beltran.discogsbrowser.api.model.record.Format
 import work.beltran.discogsbrowser.api.model.record.RecordApi
+import work.beltran.discogsbrowser.business.model.Record
 
 val RECORD_ID = 1
 val INSTANCE_ID = 2
@@ -26,7 +27,7 @@ val BASICINFO = BasicInformation(
         thumb = THUMB,
         formats = FORMATS,
         artists = ARTISTS)
-val RECORD = RecordApi(
+val RECORD_API = RecordApi(
         id = RECORD_ID,
         instanceId = INSTANCE_ID,
         basicInformation = BASICINFO)
@@ -36,5 +37,10 @@ val SEARCH_RECORD = SearchRecord(
         title = ARTIST_1_NAME + " - " + TITLE,
         year = YEAR,
         format = listOf(FORMAT_1_NAME, FORMAT_2_NAME)
+)
+val RECORD = Record(
+        id = RECORD_ID,
+        title = TITLE,
+        thumb = THUMB
 )
 

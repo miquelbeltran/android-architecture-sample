@@ -9,7 +9,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
-import work.beltran.discogsbrowser.test.RECORD
+import work.beltran.discogsbrowser.test.RECORD_API
 import work.beltran.discogsbrowser.test.RECORD_ID
 import work.beltran.discogsbrowser.test.TestSchedulers
 import work.beltran.discogsbrowser.api.DiscogsService
@@ -38,7 +38,7 @@ class WantedInteractorImplTest {
     fun `load wanted records from user account`() {
         `when`(service.getWantedList(USERNAME, PAGE)).thenReturn(Single.just(UserWanted(
                 pagination = Pagination(PAGE, 1),
-                records = listOf(RECORD))))
+                records = listOf(RECORD_API))))
         val tester = wantedInteractor.getWanted(PAGE).test()
         tester.assertNoErrors()
         tester.assertComplete()
