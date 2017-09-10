@@ -1,13 +1,13 @@
-package com.example.work.beltran.discogsbrowser.domain
+package com.example.work.beltran.discogsbrowser.domain.recordcollection
 
+import com.example.work.beltran.discogsbrowser.domain.UseCase
 import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import work.beltran.discogsbrowser.business.CollectionRepository
 import work.beltran.discogsbrowser.business.model.Record
 
-class RecordCollectionUseCase(private val collectionRepository: CollectionRepository)
-    : UseCase<List<Record>, RecordCollectionUseCaseParams>() {
+class RecordCollectionUseCaseImpl(private val collectionRepository: CollectionRepository)
+    : UseCase<List<Record>, RecordCollectionUseCaseParams>(), RecordCollectionUseCase {
 
     override fun fetch(params: RecordCollectionUseCaseParams): Completable =
             collectionRepository.fetchRecords(params.page)
@@ -15,9 +15,3 @@ class RecordCollectionUseCase(private val collectionRepository: CollectionReposi
     override fun getStream(): Flowable<List<Record>> =
             collectionRepository.getAllRecords()
 }
-
-data class RecordCollectionUseCaseParams(
-        val page: Int = 0,
-        val flush: Boolean = false
-)
-

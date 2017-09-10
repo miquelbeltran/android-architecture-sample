@@ -1,8 +1,8 @@
 package work.beltran.discogsbrowser.app.collection
 
 import android.util.Log
-import com.example.work.beltran.discogsbrowser.domain.RecordCollectionUseCase
-import com.example.work.beltran.discogsbrowser.domain.RecordCollectionUseCaseParams
+import com.example.work.beltran.discogsbrowser.domain.recordcollection.RecordCollectionUseCase
+import com.example.work.beltran.discogsbrowser.domain.recordcollection.RecordCollectionUseCaseParams
 import work.beltran.discogsbrowser.app.base.BaseViewModel
 import work.beltran.discogsbrowser.app.common.RecordItem
 import work.beltran.discogsbrowser.business.mappers.Mapper

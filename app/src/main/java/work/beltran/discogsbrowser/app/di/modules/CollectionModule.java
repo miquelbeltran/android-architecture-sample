@@ -1,6 +1,7 @@
 package work.beltran.discogsbrowser.app.di.modules;
 
-import com.example.work.beltran.discogsbrowser.domain.RecordCollectionUseCase;
+import com.example.work.beltran.discogsbrowser.domain.recordcollection.RecordCollectionUseCase;
+import com.example.work.beltran.discogsbrowser.domain.recordcollection.RecordCollectionUseCaseImpl;
 
 import javax.inject.Named;
 
@@ -42,7 +43,7 @@ public class CollectionModule {
     @Reusable
     @Provides
     public RecordCollectionUseCase providesRecordCollectionUseCase(CollectionRepository collectionRepository) {
-        return new RecordCollectionUseCase(collectionRepository);
+        return new RecordCollectionUseCaseImpl(collectionRepository);
     }
 
     @Provides
