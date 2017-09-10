@@ -9,14 +9,15 @@ class RecordToRecordRoomMapper: Mapper<Record, RecordRoom> {
                 id = typeOne.id,
                 title = typeOne.title,
                 year = "",
-                thumb = ""
+                thumb = typeOne.thumb
         )
     }
 
     override fun mapFrom(typeTwo: RecordRoom): Record {
         return Record(
                 id = typeTwo.id,
-                title = typeTwo.title
+                title = typeTwo.title,
+                thumb = typeTwo.thumb
         )
     }
 }

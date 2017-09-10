@@ -1,6 +1,6 @@
 package work.beltran.discogsbrowser.app.common
 
-data class RecordListItem(
+data class RecordItem(
         val title: CharSequence = "",
         val artist: CharSequence = "",
         val format: CharSequence = "",

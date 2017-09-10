@@ -4,13 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,12 +18,10 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import work.beltran.discogsbrowser.R;
 import work.beltran.discogsbrowser.app.App;
-import work.beltran.discogsbrowser.app.common.RecordListItem;
+import work.beltran.discogsbrowser.app.common.RecordItem;
 import work.beltran.discogsbrowser.app.di.ApiComponent;
-import work.beltran.discogsbrowser.app.main.MainActivity;
 
 public class ReleaseActivity extends AppCompatActivity  {
 
@@ -57,7 +52,7 @@ public class ReleaseActivity extends AppCompatActivity  {
 
 
     public static Intent createReleaseActivity(Context context,
-                                               RecordListItem record) {
+                                               RecordItem record) {
         Intent intent = new Intent(context, ReleaseActivity.class);
 //        intent.putExtra(EXTRA_RECORD, record);
         return intent;
@@ -79,7 +74,7 @@ public class ReleaseActivity extends AppCompatActivity  {
 //        display(recordAdapterItem);
     }
 
-    public void display(RecordListItem recordAdapterItem) {
+    public void display(RecordItem recordAdapterItem) {
         textArtist.setText(recordAdapterItem.getArtist());
         textYear.setText(recordAdapterItem.getYear());
         textFormat.setText(recordAdapterItem.getFormat());

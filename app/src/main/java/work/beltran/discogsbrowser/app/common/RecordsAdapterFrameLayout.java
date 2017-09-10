@@ -9,7 +9,6 @@ import android.widget.FrameLayout;
 
 import com.eyeem.recyclerviewtools.LoadMoreOnScrollListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,7 +38,7 @@ public abstract class RecordsAdapterFrameLayout extends FrameLayout
     public Parcelable onSaveInstanceState() {
         Bundle bundle = new Bundle();
         bundle.putParcelable(STATE_SUPER, super.onSaveInstanceState());
-//        bundle.putParcelableArrayList(STATE_ADAPTER, (ArrayList<RecordListItem>) adapter.getItems());
+//        bundle.putParcelableArrayList(STATE_ADAPTER, (ArrayList<RecordItem>) adapter.getItems());
         bundle.putParcelable(STATE_LAYOUT_MANAGER, recyclerView.getLayoutManager().onSaveInstanceState());
         bundle.putBundle(STATE_HEADER, getHeaderState());
         return bundle;
@@ -70,7 +69,7 @@ public abstract class RecordsAdapterFrameLayout extends FrameLayout
     public void onLoadMore(RecyclerView recyclerView) {
     }
 
-    public void addRecords(List<RecordListItem> records) {
+    public void addRecords(List<RecordItem> records) {
     }
 
     public void displayError(@StringRes int messageId) {

@@ -7,7 +7,8 @@ class RecordApiToRecordMapper : Mapper<RecordApi, Record> {
     override fun mapTo(typeOne: RecordApi): Record {
         return Record(
                 id = typeOne.id,
-                title = typeOne.basicInformation.title
+                title = typeOne.basicInformation.title,
+                thumb = typeOne.basicInformation.thumb
         )
     }
 

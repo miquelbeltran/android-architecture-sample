@@ -7,20 +7,20 @@ import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import work.beltran.discogsbrowser.R
 import java.util.*
-
+import javax.inject.Inject
 
 
 /**
  * Created by Miquel Beltran on 8/27/16
  * More on http://beltran.work
  */
-class RecordsAdapter(private val picasso: Picasso) : RecyclerView.Adapter<RecordViewHolder>() {
-    private val records = ArrayList<RecordListItem>()
+class RecordsAdapter @Inject constructor() : RecyclerView.Adapter<RecordViewHolder>() {
+    private val records = ArrayList<RecordItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.card_record, parent, false)
-        return RecordViewHolder(view, picasso)
+        return RecordViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RecordViewHolder, position: Int) {
@@ -29,7 +29,7 @@ class RecordsAdapter(private val picasso: Picasso) : RecyclerView.Adapter<Record
 
     override fun getItemCount(): Int = records.size
 
-    fun addItems(records: List<RecordListItem>) {
+    fun addItems(records: List<RecordItem>) {
         val positionStart = this.records.size
         this.records.addAll(records)
         notifyItemRangeInserted(positionStart, records.size)
@@ -40,7 +40,7 @@ class RecordsAdapter(private val picasso: Picasso) : RecyclerView.Adapter<Record
         notifyDataSetChanged()
     }
 
-    fun getItems(): List<RecordListItem> = records
+    fun getItems(): List<RecordItem> = records
 
     override fun getItemId(position: Int): Long = records[position].releaseId.toLong()
 
@@ -54,7 +54,7 @@ class RecordsAdapter(private val picasso: Picasso) : RecyclerView.Adapter<Record
         }
     }
 
-    fun updateItems(collection: List<RecordListItem>) {
+    fun updateItems(collection: List<RecordItem>) {
         val diffResult = DiffUtil.calculateDiff(DiffUtilRecordItems(records, collection))
         records.clear()
         records.addAll(collection)

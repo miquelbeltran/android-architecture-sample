@@ -20,8 +20,7 @@ class CollectionController : Controller() {
         Log.d(TAG, "ViewModel injected")
         app().apiComponent.collectionViewModel()
     }
-    private val picasso: Picasso by lazy { app().appComponent.picasso() }
-    private val recordsAdapter: RecordsAdapter by lazy { RecordsAdapter(picasso) }
+    private val recordsAdapter: RecordsAdapter by lazy { RecordsAdapter() }
 
     private lateinit var dataDisposable: Disposable
 
