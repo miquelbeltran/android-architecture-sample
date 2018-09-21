@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <item name="CollectionView" type="id"/>
-    <item name="SearchView" type="id"/>
-    <item name="WantlistView" type="id"/>
-</resources>
