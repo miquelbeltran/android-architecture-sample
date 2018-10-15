@@ -8,7 +8,9 @@ import androidx.paging.PagedList
 
 class CollectionViewModel : ViewModel() {
 
-    val liveData = LivePagedListBuilder(CollectionDataSourceFactory(), PagedList.Config.Builder().build()).build()
+    val liveData = LivePagedListBuilder(CollectionDataSourceFactory(), PagedList.Config.Builder()
+        .setPageSize(1)
+        .build()).build()
 
     fun load() {
 
@@ -26,14 +28,21 @@ class CollectionDataSourceFactory: DataSource.Factory<Int, Album>() {
 class CollectionDataSource : PageKeyedDataSource<Int, Album>() {
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Album>) {
 
+        callback.onResult(
+            listOf(
+                Album("1", "Album 1"),
+                Album("2", "Album 2")
+            ),0,4, null, 1
+        )
+
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Album>) {
 
         callback.onResult(
             listOf(
-                Album("1", "Album 1"),
-                Album("2", "Album 2")
+                Album("3", "Album 3"),
+                Album("4", "Album 4")
             ),
             null
         )
