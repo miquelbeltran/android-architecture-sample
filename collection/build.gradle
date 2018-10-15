@@ -36,6 +36,9 @@ dependencies {
     implementation Libs.supportAppcompatV7
     implementation Libs.constraintLayout
     implementation Libs.paging
+    implementation Libs.koinAndroid
+    implementation Libs.koinViewModel
+
     implementation 'com.android.support:support-v4:28.0.0'
     implementation "com.android.support:recyclerview-v7:28.0.0"
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'

@@ -13,4 +13,6 @@ object Libs {
     val navigationUi = "android.arch.navigation:navigation-ui:${Versions.navigation}"
     val paging = "android.arch.paging:runtime:${Versions.paging}"
     val supportAppcompatV7 = "com.android.support:appcompat-v7:${Versions.supportLib}"
+    val koinAndroid = "org.koin:koin-android:1.0.1"
+    val koinViewModel = "org.koin:koin-android-viewmodel:1.0.1"
 }

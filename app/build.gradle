@@ -29,6 +29,8 @@ dependencies {
     implementation Libs.constraintLayout
     implementation Libs.navigationFragment
     implementation Libs.navigationUi
+    implementation Libs.koinAndroid
+    implementation Libs.koinViewModel
 
     implementation 'com.android.support:support-v4:28.0.0'
     testImplementation 'junit:junit:4.12'
