@@ -1,0 +1,14 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Libs.kotlin
+
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+
+    implementation 'com.squareup.retrofit2:converter-moshi:2.4.0'
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
