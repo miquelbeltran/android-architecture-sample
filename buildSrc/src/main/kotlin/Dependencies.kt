@@ -2,6 +2,7 @@ object Versions {
     val kotlin = "1.2.71"
     val supportLib = "28.0.0"
     val constraint = "1.1.3"
+    val navigation = "1.0.0-alpha06"
 //    val retrofit = "2.3.0"
 //    val rxjava = "2.1.9"
 }
@@ -11,6 +12,11 @@ object Libs {
 //    val support_annotations = "com.android.support:support-annotations:${Versions.support_lib}"
     val supportAppcompatV7 = "com.android.support:appcompat-v7:${Versions.supportLib}"
     val constraintLayout = "com.android.support.constraint:constraint-layout:${Versions.constraint}"
+    val navigationFragment = "android.arch.navigation:navigation-fragment-ktx:${Versions.navigation}"
+    val navigationUi = "android.arch.navigation:navigation-ui:${Versions.navigation}"
+
+
+
 //    val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
 //    val retrofit_rxjava_adapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
 //    val rxjava = "io.reactivex.rxjava2:rxjava:${Versions.rxjava}"

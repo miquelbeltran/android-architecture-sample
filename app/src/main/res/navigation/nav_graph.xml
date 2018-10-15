@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/collectionFragment">
+
+    <fragment android:id="@+id/collectionFragment"
+              android:name="work.beltran.discogsbrowser.collection.CollectionFragment"
+              android:label="CollectionFragment"
+              tools:layout="@layout/fragment_collection"/>
+</navigation>
