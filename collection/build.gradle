@@ -31,7 +31,9 @@ dependencies {
     implementation Libs.kotlin
     implementation Libs.supportAppcompatV7
     implementation Libs.constraintLayout
+    implementation Libs.paging
     implementation 'com.android.support:support-v4:28.0.0'
+    implementation "com.android.support:recyclerview-v7:28.0.0"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
