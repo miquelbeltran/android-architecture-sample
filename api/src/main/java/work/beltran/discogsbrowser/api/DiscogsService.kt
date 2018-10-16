@@ -1,8 +1,11 @@
 package work.beltran.discogsbrowser.api
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.experimental.Deferred
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -17,7 +20,7 @@ interface DiscogsService {
         @Path("folder_id") folderId: String,
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
-    ) : Call<CollectionItemsByFolderResponse>
+    ) : Deferred<Response<CollectionItemsByFolderResponse>>
 }
 
 fun provideService(): DiscogsService {
@@ -30,6 +33,7 @@ fun provideService(): DiscogsService {
         .Builder()
         .baseUrl("https://api.discogs.com")
         .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
         .create(DiscogsService::class.java)
 }

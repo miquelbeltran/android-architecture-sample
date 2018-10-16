@@ -1,8 +1,9 @@
 package work.beltran.discogsbrowser.api
 
-fun main(args: Array<String>) {
-    val response = provideService().getCollectionItemsByFolder("mike513", "0",1, 2).execute()
+import kotlinx.coroutines.experimental.runBlocking
 
-    print(response.body())
+fun main(args: Array<String>) = runBlocking {
+    val response = provideService().getCollectionItemsByFolder("mike513", "0",1, 2)
+    print(response.await().body())
 }
 

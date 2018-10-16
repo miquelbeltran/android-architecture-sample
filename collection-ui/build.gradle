@@ -42,8 +42,19 @@ dependencies {
     implementation Libs.retrofit
     implementation Libs.supportAppcompatV7
     implementation Libs.supportV4
+    def arrow_version = "0.7.3"
+    implementation "io.arrow-kt:arrow-data:$arrow_version"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.30.2"
 
     testImplementation Libs.junit
     androidTestImplementation Libs.testEspresso
     androidTestImplementation Libs.testRunner
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
 }

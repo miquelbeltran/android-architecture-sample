@@ -1,6 +1,10 @@
 package work.beltran.discogsbrowser.collection.paging
 
+import android.util.Log
 import androidx.paging.PageKeyedDataSource
+import arrow.core.Either
+import arrow.core.left
+import kotlinx.coroutines.experimental.*
 import work.beltran.discogsbrowser.collection.data.GetCollectionUseCase
 import work.beltran.discogsbrowser.common.domain.Album
 
@@ -9,74 +13,36 @@ class CollectionDataSource(
 ) : PageKeyedDataSource<Int, Album>() {
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Album>) {
-
-        val result = collectionUseCase.getCollectionPage("0", 1)
-
-        callback.onResult(
-            result.data,
-            0,
-            result.totalItems,
-            null,
-            result.nextPage
-        )
-
-//        service.getCollectionItemsByFolder(
-//            username = "mike513",
-//            folderId = "0",
-//            page = 1,
-//            perPage = 20
-//        ).enqueue(object : Callback<CollectionItemsByFolderResponse> {
-//            override fun onFailure(call: Call<CollectionItemsByFolderResponse>, t: Throwable) {
-//                error(t)
-//            }
-//
-//            override fun onResponse(
-//                call: Call<CollectionItemsByFolderResponse>,
-//                response: Response<CollectionItemsByFolderResponse>
-//            ) {
-//
-//                response.body()?.let { body ->
-//                    val albums = body.releases.toAlbums()
-//                    val nextPage = if (body.pagination.page < body.pagination.pages) body.pagination.page + 1 else null
-//                    callback.onResult(
-//                        albums, 0, body.pagination.items, null, nextPage
-//                    )
-//                }
-//            }
-//
-//        })
-
-
+        launch(Dispatchers.IO) {
+            val result = collectionUseCase.getCollectionPage("0", 1)
+            when (result) {
+                is Either.Left -> Log.e("CollectionDataSource", result.a)
+                is Either.Right -> {
+                    callback.onResult(
+                        result.b.data,
+                        0,
+                        result.b.totalItems,
+                        null,
+                        result.b.nextPage
+                    )
+                }
+            }
+        }
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Album>) {
-
-//        service.getCollectionItemsByFolder(
-//            username = "mike513",
-//            folderId = "0",
-//            page = params.key,
-//            perPage = 20
-//        ).enqueue(object : Callback<CollectionItemsByFolderResponse> {
-//            override fun onFailure(call: Call<CollectionItemsByFolderResponse>, t: Throwable) {
-//                error(t)
-//            }
-//
-//            override fun onResponse(
-//                call: Call<CollectionItemsByFolderResponse>,
-//                response: Response<CollectionItemsByFolderResponse>
-//            ) {
-//
-//                response.body()?.let { body ->
-//                    val albums = body.releases.toAlbums()
-//                    val nextPage = if (body.pagination.page < body.pagination.pages) body.pagination.page + 1 else null
-//                    callback.onResult(
-//                        albums, nextPage
-//                    )
-//                }
-//            }
-//
-//        })
-
+        launch(Dispatchers.IO) {
+            val result = collectionUseCase.getCollectionPage("0", params.key)
+            when (result) {
+                is Either.Left -> Log.e("CollectionDataSource", result.a)
+                is Either.Right -> {
+                    callback.onResult(
+                        result.b.data,
+                        result.b.nextPage
+                    )
+                }
+            }
+        }
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Album>) {

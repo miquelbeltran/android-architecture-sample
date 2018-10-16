@@ -9,7 +9,14 @@ dependencies {
     implementation Libs.retrofit
     def arrow_version = "0.7.3"
     implementation "io.arrow-kt:arrow-data:$arrow_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2"
 }
 
 sourceCompatibility = "7"
 targetCompatibility = "7"
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}

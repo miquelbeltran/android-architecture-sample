@@ -1,6 +1,7 @@
 package work.beltran.discogsbrowser.collection.paging
 
 import androidx.paging.DataSource
+import kotlinx.coroutines.experimental.CoroutineScope
 import work.beltran.discogsbrowser.collection.data.GetCollectionUseCase
 import work.beltran.discogsbrowser.common.domain.Album
 
