@@ -6,6 +6,7 @@ dependencies {
     implementation Libs.kotlin
     implementation Libs.retrofit
     implementation Libs.converterMoshi
+    implementation 'com.squareup.moshi:moshi-kotlin:1.7.0'
 }
 
 sourceCompatibility = "7"

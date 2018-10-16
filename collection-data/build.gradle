@@ -35,6 +35,9 @@ dependencies {
     implementation Libs.paging
     implementation Libs.retrofit
 
+    def arrow_version = "0.7.3"
+    implementation "io.arrow-kt:arrow-data:$arrow_version"
+
     testImplementation Libs.junit
     androidTestImplementation Libs.testEspresso
     androidTestImplementation Libs.testRunner

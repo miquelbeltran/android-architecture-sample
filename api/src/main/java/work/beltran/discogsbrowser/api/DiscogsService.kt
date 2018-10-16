@@ -1,5 +1,7 @@
 package work.beltran.discogsbrowser.api
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -19,10 +21,15 @@ interface DiscogsService {
 }
 
 fun provideService(): DiscogsService {
+
+    val moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
+
     return Retrofit
         .Builder()
         .baseUrl("https://api.discogs.com")
-        .addConverterFactory(MoshiConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
         .create(DiscogsService::class.java)
 }

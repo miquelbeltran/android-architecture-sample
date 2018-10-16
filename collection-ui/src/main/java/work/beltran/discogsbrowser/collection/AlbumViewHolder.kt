@@ -11,7 +11,7 @@ import work.beltran.discogsbrowser.common.domain.Album
 class AlbumViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     fun bind(album: Album) {
-        itemView.nameTextView.text = album.name
+        itemView.nameTextView.text = album.title
     }
 
     companion object {

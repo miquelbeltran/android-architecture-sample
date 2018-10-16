@@ -4,6 +4,8 @@ apply plugin: 'kotlin'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Libs.kotlin
+    def arrow_version = "0.7.3"
+    implementation "io.arrow-kt:arrow-data:$arrow_version"
 }
 
 sourceCompatibility = "7"

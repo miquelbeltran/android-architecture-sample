@@ -8,7 +8,19 @@ data class CollectionItemsByFolderResponse(
 )
 
 data class Release(
-    val id: String
+    val id: String,
+    @Json(name = "basic_information") val basicInfo: BasicInfo
+)
+
+data class BasicInfo(
+    val title: String,
+    val thumb: String,
+    val artists: List<Artist>
+)
+
+data class Artist(
+    val id: String,
+    val name: String
 )
 
 data class Pagination(

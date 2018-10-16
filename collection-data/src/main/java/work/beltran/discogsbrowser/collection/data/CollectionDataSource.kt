@@ -28,9 +28,7 @@ class CollectionDataSource(private val service: DiscogsService) : PageKeyedDataS
             ) {
 
                 response.body()?.let { body ->
-                    val albums = body.releases.map {
-                        Album(it.id, it.id)
-                    }
+                    val albums = body.releases.toAlbums()
                     val nextPage = if (body.pagination.page < body.pagination.pages) body.pagination.page + 1 else null
                     callback.onResult(
                         albums, 0, body.pagination.items, null, nextPage
@@ -61,9 +59,7 @@ class CollectionDataSource(private val service: DiscogsService) : PageKeyedDataS
             ) {
 
                 response.body()?.let { body ->
-                    val albums = body.releases.map {
-                        Album(it.id, it.id)
-                    }
+                    val albums = body.releases.toAlbums()
                     val nextPage = if (body.pagination.page < body.pagination.pages) body.pagination.page + 1 else null
                     callback.onResult(
                         albums, nextPage
