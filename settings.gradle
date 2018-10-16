@@ -1,1 +1,1 @@
-include ':app', ':collection', ':api'
+include ':app', ':collection-ui', ':api', ':collection-data', ':common-domain'

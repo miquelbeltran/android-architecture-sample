@@ -11,7 +11,9 @@
             <option value="$PROJECT_DIR$/api" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/collection" />
+            <option value="$PROJECT_DIR$/collection-data" />
+            <option value="$PROJECT_DIR$/collection-ui" />
+            <option value="$PROJECT_DIR$/common-domain" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
