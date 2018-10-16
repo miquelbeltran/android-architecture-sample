@@ -32,18 +32,17 @@ androidExtensions {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':common-domain')
-    implementation Libs.kotlin
-    implementation Libs.supportAppcompatV7
     implementation Libs.constraintLayout
-    implementation Libs.paging
     implementation Libs.koinAndroid
     implementation Libs.koinViewModel
+    implementation Libs.kotlin
+    implementation Libs.paging
+    implementation Libs.recycler
+    implementation Libs.retrofit
+    implementation Libs.supportAppcompatV7
+    implementation Libs.supportV4
 
-    implementation 'com.android.support:support-v4:28.0.0'
-    implementation "com.android.support:recyclerview-v7:28.0.0"
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation Libs.junit
+    androidTestImplementation Libs.testEspresso
+    androidTestImplementation Libs.testRunner
 }

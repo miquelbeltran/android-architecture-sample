@@ -29,13 +29,13 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':api')
     implementation project(':common-domain')
+    implementation Libs.appCompat
+    implementation Libs.koinAndroid
     implementation Libs.kotlin
     implementation Libs.paging
-    implementation Libs.koinAndroid
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation Libs.retrofit
 
-    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+    testImplementation Libs.junit
+    androidTestImplementation Libs.testEspresso
+    androidTestImplementation Libs.testRunner
 }
