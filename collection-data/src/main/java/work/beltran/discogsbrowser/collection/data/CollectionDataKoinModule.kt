@@ -6,7 +6,6 @@ import work.beltran.discogsbrowser.api.provideService
 import work.beltran.discogsbrowser.common.domain.Album
 
 val collectionDataKoinModule = module {
-    single { provideService() }
-    single { CollectionDataSourceFactory(get()) as DataSource.Factory<Int, Album> }
+    single { CollectionDataSourceFactory(provideService()) as DataSource.Factory<Int, Album> }
 }
 
