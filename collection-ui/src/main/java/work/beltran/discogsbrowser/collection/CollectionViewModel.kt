@@ -1,33 +1,28 @@
 package work.beltran.discogsbrowser.collection
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.paging.DataSource
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
 import arrow.core.Either
 import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.cancel
 import kotlinx.coroutines.experimental.launch
 import work.beltran.discogsbrowser.collection.data.GetCollectionUseCase
 import work.beltran.discogsbrowser.common.domain.Album
-import work.beltran.discogsbrowser.common.domain.Pagination
 import kotlin.coroutines.experimental.CoroutineContext
 
 class CollectionViewModel(
     private val collectionUseCase: GetCollectionUseCase
 ) : ViewModel(), CoroutineScope {
 
-    private val job = Job()
+    private val contextJob = Job()
+    private var loadingJob: Job? = null
     private var nextPage: Int? = null
     // Store the different network results in a map
     private val pages = HashMap<Int, List<Album>>()
 
     override val coroutineContext: CoroutineContext
-        get() = job
+        get() = contextJob
 
     val liveData = MutableLiveData<List<Album>>()
 
@@ -38,11 +33,12 @@ class CollectionViewModel(
     private fun launchGetCollectionPage(
         page: Int
     ) {
-        launch {
+        loadingJob = launch {
             Log.d("CollectionViewModel", "Loading page: $page")
             val result = collectionUseCase.getCollectionPage("0", page)
             when (result) {
-                is Either.Left -> Log.e("CollectionDataSource", result.a)
+                // TODO Show loading errors on UI
+                is Either.Left -> Log.e("CollectionViewModel", result.a)
                 is Either.Right -> {
                     pages[page] = result.b.data
                     nextPage = result.b.nextPage
@@ -55,11 +51,12 @@ class CollectionViewModel(
     }
 
     fun loadMore() {
+        if (loadingJob?.isActive == true) return
         nextPage?.let { launchGetCollectionPage(it) }
     }
 
     override fun onCleared() {
-        job.cancel()
+        contextJob.cancel()
     }
 }
 
