@@ -1,5 +1,4 @@
-**Update** This repo is going through a big refactor on the `kotlin` branch.
-For and old version of the app check the `java` branch.
+**Update** This repo is going through a big refactor.
 
 # My Vinyl Discogs Browser for Android
 
@@ -7,7 +6,7 @@ Sample Android App to access Discogs API
 
 ## TODO
 
-- [ ] Browse your Discogs collection.
+- [X] Browse your Discogs collection.
 - [ ] Check your wish list (wantlist).
 - [ ] Search the database.
 - [ ] Search with Barcode Scanner.
@@ -16,6 +15,7 @@ Sample Android App to access Discogs API
 ## Code Features
 
 - Kotlin.
+- Coroutines.
 - Dependency injection with Koin.
 - Retrofit + Moshi.
 - Architecture Components.
