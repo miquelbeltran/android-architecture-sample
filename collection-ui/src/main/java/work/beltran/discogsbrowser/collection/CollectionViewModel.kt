@@ -7,6 +7,7 @@ import arrow.core.Either
 import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.launch
+import work.beltran.discogsbrowser.collection.adapter.CollectionItem
 import work.beltran.discogsbrowser.collection.data.GetCollectionUseCase
 import work.beltran.discogsbrowser.common.domain.Album
 import kotlin.coroutines.experimental.CoroutineContext
@@ -18,13 +19,14 @@ class CollectionViewModel(
     private val contextJob = Job()
     private var loadingJob: Job? = null
     private var nextPage: Int? = null
-    // Store the different network results in a map
+    // Store the different network pages in a map
     private val pages = HashMap<Int, List<Album>>()
 
     override val coroutineContext: CoroutineContext
         get() = contextJob
 
-    val liveData = MutableLiveData<List<Album>>()
+    // Represents the data to be displayed in the RecyclerView
+    val liveData = MutableLiveData<List<CollectionItem>>()
 
     init {
         launchGetCollectionPage(1)
@@ -34,7 +36,10 @@ class CollectionViewModel(
         page: Int
     ) {
         loadingJob = launch {
+
             Log.d("CollectionViewModel", "Loading page: $page")
+            updateCollectionScreenState(loading = true)
+
             val result = collectionUseCase.getCollectionPage("0", page)
             when (result) {
                 // TODO Show loading errors on UI
@@ -47,10 +52,20 @@ class CollectionViewModel(
                     nextPage = result.b.nextPage
                 }
             }
-            // FlatMap into a single list to display results
-            liveData.postValue(pages.flatMap { it.value })
+
             Log.d("CollectionViewModel", "Loaded! page: $page")
+            updateCollectionScreenState(loading = false)
         }
+    }
+
+    private fun updateCollectionScreenState(loading: Boolean) {
+        val albums = pages.flatMap { it.value }.map { CollectionItem.AlbumItem(it) as CollectionItem }
+        val list = if (loading) {
+            albums + CollectionItem.LoadingItem
+        } else {
+            albums
+        }
+        liveData.postValue(list)
     }
 
     fun loadMore() {

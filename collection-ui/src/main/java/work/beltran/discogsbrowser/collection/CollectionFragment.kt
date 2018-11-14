@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_collection.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import work.beltran.discogsbrowser.common.domain.Album
+import work.beltran.discogsbrowser.collection.adapter.CollectionAdapter
+import work.beltran.discogsbrowser.collection.adapter.CollectionItem
 
 private const val THRESHOLD = 5
 
@@ -22,7 +23,9 @@ class CollectionFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_collection, container, false)
         val adapter = CollectionAdapter()
         configureRecyclerView(view, adapter)
-        viewModel.liveData.observe(viewLifecycleOwner, Observer<List<Album>> { adapter.submitList(it) })
+        viewModel.liveData.observe(viewLifecycleOwner, Observer<List<CollectionItem>> {
+            adapter.submitList(it)
+        })
         return view
     }
 

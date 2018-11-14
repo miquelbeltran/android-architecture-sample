@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Collection</string>
+    <string name="album_art">Album art</string>
 </resources>
