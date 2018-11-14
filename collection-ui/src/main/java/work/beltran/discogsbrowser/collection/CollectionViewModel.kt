@@ -40,7 +40,10 @@ class CollectionViewModel(
                 // TODO Show loading errors on UI
                 is Either.Left -> Log.e("CollectionViewModel", result.a)
                 is Either.Right -> {
+                    // Update page in the pages map
                     pages[page] = result.b.data
+                    // Update nextPage, it can be null
+                    // this means we are at the final page
                     nextPage = result.b.nextPage
                 }
             }
@@ -51,11 +54,14 @@ class CollectionViewModel(
     }
 
     fun loadMore() {
+        // current loading job is active, then do not load more
         if (loadingJob?.isActive == true) return
+        // load if next page is not null
         nextPage?.let { launchGetCollectionPage(it) }
     }
 
     override fun onCleared() {
+        // Cancel any running job
         contextJob.cancel()
     }
 }

@@ -25,8 +25,10 @@ class GetCollectionUseCase(
         return Try {
             requestItems(folder, page)
         }.fold({
+            // e.g. Networking errors
             processException(it)
         }, { result ->
+            // Results from service
             processResult(result, page)
         })
     }
@@ -49,21 +51,27 @@ class GetCollectionUseCase(
         result: Response<CollectionItemsByFolderResponse>,
         page: Int
     ): Either<String, Pagination<List<Album>>> {
-        return if (result.isSuccessful && result.body() != null) {
-            val albums = result.body()!!.releases.toAlbums()
-            val pagination = result.body()!!.pagination
-            val nextPage = if (pagination.page < pagination.pages) {
-                pagination.page + 1
-            } else {
-                null
-            }
+        val body = result.body()
+        return if (result.isSuccessful && body != null) {
+            val albums = body.releases.toAlbums()
+            val pagination = body.pagination
+            val nextPage = pagination.getNextPage()
             Either.right(Pagination(albums, page, nextPage, pagination.items))
         } else {
-            Either.left(result.errorBody()!!.string())
+            // Errors from service (e.g. too many requests)
+            Either.left(result.errorBody()?.string() ?: "Unknown Error")
         }
     }
+
+    private fun work.beltran.discogsbrowser.api.Pagination.getNextPage(): Int? =
+        if (page < pages) {
+            page + 1
+        } else {
+            null
+        }
 
     companion object {
         private const val PAGE_SIZE = 20
     }
 }
+
