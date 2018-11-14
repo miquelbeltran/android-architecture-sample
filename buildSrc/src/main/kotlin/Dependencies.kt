@@ -4,7 +4,7 @@ object Versions {
     val appCompat = "1.0.0-alpha1"
     val constraint = "1.1.3"
     val koin = "1.0.1"
-    val kotlin = "1.2.71"
+    val kotlin = "1.3.0"
     val navigation = "1.0.0-alpha06"
     val paging = "1.0.0"
     val retrofit = "2.4.0"
@@ -12,7 +12,7 @@ object Versions {
     val testEspresso = "3.0.2"
     val testRunner = "1.0.2"
     val arrow = "0.7.3"
-    val coroutines = "0.30.2"
+    val coroutines = "1.0.1"
 }
 
 object Libs {

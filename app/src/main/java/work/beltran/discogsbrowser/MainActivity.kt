@@ -3,7 +3,6 @@ package work.beltran.discogsbrowser
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import org.koin.android.ext.android.startKoin
-import work.beltran.discogsbrowser.collection.collectionKoinModule
 
 class MainActivity : AppCompatActivity() {
 

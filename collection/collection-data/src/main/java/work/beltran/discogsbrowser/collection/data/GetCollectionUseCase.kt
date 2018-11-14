@@ -7,17 +7,18 @@ import work.beltran.discogsbrowser.api.CollectionItemsByFolderResponse
 import work.beltran.discogsbrowser.api.DiscogsService
 import work.beltran.discogsbrowser.api.provideService
 import work.beltran.discogsbrowser.common.domain.Album
+import work.beltran.discogsbrowser.common.domain.GetCollectionUseCase
 import work.beltran.discogsbrowser.common.domain.Pagination
 
 fun provideGetCollectionUseCase(): GetCollectionUseCase {
-    return GetCollectionUseCase(provideService())
+    return GetCollectionUseCaseImpl(provideService())
 }
 
-class GetCollectionUseCase(
+class GetCollectionUseCaseImpl(
     private val discogsService: DiscogsService
-) {
+) : GetCollectionUseCase {
 
-    suspend fun getCollectionPage(
+    override suspend fun getCollectionPage(
         folder: String,
         page: Int
     ): Either<String, Pagination<List<Album>>> {

@@ -4,13 +4,13 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import arrow.core.Either
-import kotlinx.coroutines.experimental.CoroutineScope
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import work.beltran.discogsbrowser.collection.adapter.CollectionItem
-import work.beltran.discogsbrowser.collection.data.GetCollectionUseCase
 import work.beltran.discogsbrowser.common.domain.Album
-import kotlin.coroutines.experimental.CoroutineContext
+import work.beltran.discogsbrowser.common.domain.GetCollectionUseCase
+import kotlin.coroutines.CoroutineContext
 
 class CollectionViewModel(
     private val collectionUseCase: GetCollectionUseCase

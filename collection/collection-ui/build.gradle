@@ -32,7 +32,6 @@ androidExtensions {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':common-domain')
-    implementation project(':collection-data')
     implementation Libs.constraintLayout
     implementation Libs.koinAndroid
     implementation Libs.koinViewModel
@@ -49,10 +48,4 @@ dependencies {
     testImplementation Libs.junit
     androidTestImplementation Libs.testEspresso
     androidTestImplementation Libs.testRunner
-}
-
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
 }

@@ -6,8 +6,9 @@
       <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />
-      <module fileurl="file://$PROJECT_DIR$/collection-data/collection-data.iml" filepath="$PROJECT_DIR$/collection-data/collection-data.iml" />
-      <module fileurl="file://$PROJECT_DIR$/collection-ui/collection-ui.iml" filepath="$PROJECT_DIR$/collection-ui/collection-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/collection/collection.iml" filepath="$PROJECT_DIR$/collection/collection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/collection/collection-data/collection-data.iml" filepath="$PROJECT_DIR$/collection/collection-data/collection-data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/collection/collection-ui/collection-ui.iml" filepath="$PROJECT_DIR$/collection/collection-ui/collection-ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/common-domain/common-domain.iml" filepath="$PROJECT_DIR$/common-domain/common-domain.iml" />
     </modules>
   </component>

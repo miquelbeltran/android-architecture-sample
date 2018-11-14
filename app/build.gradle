@@ -22,7 +22,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':collection-ui')
+    implementation project(':common-domain')
+    implementation project(':collection:collection-ui')
+    implementation project(':collection:collection-data')
 
     implementation Libs.constraintLayout
     implementation Libs.koinAndroid
