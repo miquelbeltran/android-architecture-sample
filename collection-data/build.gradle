@@ -5,11 +5,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':api')
     implementation project(':common-domain')
+    implementation Libs.arrow
+    implementation Libs.coroutines
     implementation Libs.kotlin
     implementation Libs.retrofit
-    def arrow_version = "0.7.3"
-    implementation "io.arrow-kt:arrow-data:$arrow_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2"
 }
 
 sourceCompatibility = "7"

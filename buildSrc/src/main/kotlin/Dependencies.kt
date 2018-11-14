@@ -11,6 +11,8 @@ object Versions {
     val supportLib = "28.0.0"
     val testEspresso = "3.0.2"
     val testRunner = "1.0.2"
+    val arrow = "0.7.3"
+    val coroutines = "0.30.2"
 }
 
 object Libs {
@@ -30,4 +32,7 @@ object Libs {
     val supportV4 = "com.android.support:support-v4:${Versions.supportLib}"
     val testEspresso = "com.android.support.test.espresso:espresso-core:${Versions.testEspresso}"
     val testRunner = "com.android.support.test:runner:${Versions.testRunner}"
+    val arrow = "io.arrow-kt:arrow-data:${Versions.arrow}"
+    val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+    val corroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 }
