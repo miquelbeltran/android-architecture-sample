@@ -4,6 +4,7 @@ object Versions {
     val appCompat = "1.0.0-alpha1"
     val arrow = "0.7.3"
     val constraint = "1.1.3"
+    val coreTesting = "1.1.1"
     val coroutines = "1.0.1"
     val koin = "1.0.1"
     val kotlin = "1.3.0"
@@ -21,6 +22,7 @@ object Libs {
     val arrow = "io.arrow-kt:arrow-data:${Versions.arrow}"
     val constraintLayout = "com.android.support.constraint:constraint-layout:${Versions.constraint}"
     val converterMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+    val coreTesting = "android.arch.core:core-testing:${Versions.coreTesting}"
     val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     val corroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
     val junit = "junit:junit:4.12"
@@ -37,4 +39,5 @@ object Libs {
     val supportV4 = "com.android.support:support-v4:${Versions.supportLib}"
     val testEspresso = "com.android.support.test.espresso:espresso-core:${Versions.testEspresso}"
     val testRunner = "com.android.support.test:runner:${Versions.testRunner}"
+
 }

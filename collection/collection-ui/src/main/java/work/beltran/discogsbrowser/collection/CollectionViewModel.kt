@@ -4,16 +4,15 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import arrow.core.Either
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import work.beltran.discogsbrowser.collection.adapter.CollectionItem
 import work.beltran.discogsbrowser.common.domain.Album
 import work.beltran.discogsbrowser.common.domain.GetCollectionUseCase
 import kotlin.coroutines.CoroutineContext
 
 class CollectionViewModel(
-    private val collectionUseCase: GetCollectionUseCase
+    private val collectionUseCase: GetCollectionUseCase,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel(), CoroutineScope {
 
     private val contextJob = Job()
@@ -23,7 +22,7 @@ class CollectionViewModel(
     private val pages = HashMap<Int, List<Album>>()
 
     override val coroutineContext: CoroutineContext
-        get() = contextJob
+        get() = Dispatchers.Main + contextJob
 
     // Represents the data to be displayed in the RecyclerView
     val liveData = MutableLiveData<List<CollectionItem>>()
@@ -35,7 +34,7 @@ class CollectionViewModel(
     private fun launchGetCollectionPage(
         page: Int
     ) {
-        loadingJob = launch {
+        loadingJob = launch(dispatcher) {
 
             Log.d("CollectionViewModel", "Loading page: $page")
             updateCollectionScreenState(loading = true)

@@ -5,8 +5,6 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
 
-
-
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 28
@@ -15,6 +13,10 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 
     buildTypes {
@@ -47,6 +49,8 @@ dependencies {
 
     testImplementation Libs.junit
     testImplementation Libs.mockk
+    testImplementation Libs.coreTesting
+
     androidTestImplementation Libs.testEspresso
     androidTestImplementation Libs.testRunner
 }
