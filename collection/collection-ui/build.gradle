@@ -46,6 +46,7 @@ dependencies {
     implementation Libs.corroutinesAndroid
 
     testImplementation Libs.junit
+    testImplementation Libs.mockk
     androidTestImplementation Libs.testEspresso
     androidTestImplementation Libs.testRunner
 }

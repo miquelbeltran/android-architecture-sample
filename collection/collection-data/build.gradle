@@ -9,6 +9,9 @@ dependencies {
     implementation Libs.coroutines
     implementation Libs.kotlin
     implementation Libs.retrofit
+
+    testImplementation Libs.junit
+    testImplementation Libs.mockk
 }
 
 sourceCompatibility = "7"
