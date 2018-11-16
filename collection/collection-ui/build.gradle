@@ -47,16 +47,16 @@ dependencies {
     implementation Libs.coroutines
     implementation Libs.corroutinesAndroid
 
+    testImplementation Libs.coreTesting
     testImplementation Libs.junit
     testImplementation Libs.mockk
-    testImplementation Libs.coreTesting
 
+    androidTestImplementation Libs.fragmentTestRule
     androidTestImplementation Libs.mockk
+    androidTestImplementation Libs.mockkAndroid
     androidTestImplementation Libs.testEspresso
     androidTestImplementation Libs.testRunner
+    androidTestImplementation Libs.testRunner
 
-    androidTestImplementation "io.mockk:mockk-android:1.8.13.kotlin13"
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
-    androidTestImplementation 'com.21buttons:fragment-test-rule:1.1.0'
-    debugImplementation 'com.21buttons:fragment-test-rule-extras:1.1.0'
+    debugImplementation Libs.fragmentTestRuleExtras
 }

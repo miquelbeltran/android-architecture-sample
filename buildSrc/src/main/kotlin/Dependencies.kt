@@ -15,6 +15,7 @@ object Versions {
     val supportLib = "28.0.0"
     val testEspresso = "3.0.2"
     val testRunner = "1.0.2"
+    val fragmentTestRule = "1.1.0"
 }
 
 object Libs {
@@ -39,5 +40,8 @@ object Libs {
     val supportV4 = "com.android.support:support-v4:${Versions.supportLib}"
     val testEspresso = "com.android.support.test.espresso:espresso-core:${Versions.testEspresso}"
     val testRunner = "com.android.support.test:runner:${Versions.testRunner}"
-
+    val mockkAndroid = "io.mockk:mockk-android:${Versions.mockk}"
+    val testRules = "com.android.support.test:rules:${Versions.testRunner}"
+    val fragmentTestRule = "com.21buttons:fragment-test-rule:${Versions.fragmentTestRule}"
+    val fragmentTestRuleExtras = "com.21buttons:fragment-test-rule-extras:${Versions.fragmentTestRule}"
 }
