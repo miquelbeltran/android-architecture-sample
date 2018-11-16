@@ -17,6 +17,19 @@ patterns.
 - Unit Testing.
 - Instrumentation Testing with Espresso.
 
+## App Modules
+
+```
+- app                  (App and MainActivity)
+- api                  (Retrofit Service)
+- common-domain
+- collection           (Feature)
+  | - collection-ui    (Fragment and ViewModel)
+  | - collection-data  (Use case)
+```
+
+![graph](https://raw.githubusercontent.com/miquelbeltran/android-architecture-sample/master/project.dot.png)
+
 ## Cool Examples
 
 #### Dependency Injection with Koin
@@ -138,17 +151,6 @@ fun load_single_item_page() {
     // Assert Album title is displayed in the list
     onView(withText("title")).check(matches(isDisplayed()))
 }
-```
-
-## App Modules
-
-```
-- app                  (App and MainActivity)
-- api                  (Retrofit Service)
-- common-domain
-- collection           (Feature)
-  | - collection-ui    (Fragment and ViewModel)
-  | - collection-data  (Use case)
 ```
 
 ## License
