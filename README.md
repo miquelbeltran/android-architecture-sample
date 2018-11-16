@@ -1,4 +1,4 @@
-# Sample App for Android
+# Android Architecture Sample
 
 Sample Android App to access Discogs API.
 
