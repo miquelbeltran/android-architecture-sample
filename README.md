@@ -20,12 +20,12 @@ patterns.
 ## App Modules
 
 ```
-- app                  (App and MainActivity)
-- api                  (Retrofit Service)
-- common-domain
-- collection           (Feature)
-  | - collection-ui    (Fragment and ViewModel)
-  | - collection-data  (Use case)
+- app                  (App and MainActivity; Android)
+- api                  (Retrofit Service; Kotlin)
+- common-domain        (Kotlin)
+- collection           
+  | - collection-ui    (Fragment and ViewModel; Android)
+  | - collection-data  (Use case; Kotlin)
 ```
 
 ![graph](https://raw.githubusercontent.com/miquelbeltran/android-architecture-sample/master/project.dot.png)
