@@ -1,8 +1,8 @@
-# Sample Discogs Browser for Android
+# Sample App for Android
 
 Sample Android App to access Discogs API.
 
-This app performs basic REST call to obtain a public list of records, 
+This app performs basic REST call to obtain a public list of records from Discogs API, 
 with the idea to test and showcase some Android architecture and coding
 patterns.
 
