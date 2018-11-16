@@ -10,7 +10,6 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -34,8 +33,4 @@ dependencies {
     implementation Libs.navigationUi
     implementation Libs.supportAppcompatV7
     implementation Libs.supportV4
-
-    testImplementation Libs.junit
-    androidTestImplementation Libs.testEspresso
-    androidTestImplementation Libs.testRunner
 }

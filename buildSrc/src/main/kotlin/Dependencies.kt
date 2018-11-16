@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "MayBeConstant")
 
 object Versions {
     val appCompat = "1.0.0-alpha1"
