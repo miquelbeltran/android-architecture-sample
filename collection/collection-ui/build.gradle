@@ -11,7 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -51,6 +51,12 @@ dependencies {
     testImplementation Libs.mockk
     testImplementation Libs.coreTesting
 
+    androidTestImplementation Libs.mockk
     androidTestImplementation Libs.testEspresso
     androidTestImplementation Libs.testRunner
+
+    androidTestImplementation "io.mockk:mockk-android:1.8.13.kotlin13"
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.21buttons:fragment-test-rule:1.1.0'
+    debugImplementation 'com.21buttons:fragment-test-rule-extras:1.1.0'
 }
