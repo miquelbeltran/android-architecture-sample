@@ -110,11 +110,35 @@ val viewModel = CollectionViewModel(
     collectionUseCase = useCase,
     dispatcher = Dispatchers.Unconfined
 )
+
+val data = viewModel.liveData.value!!
+assertEquals(1, data.size)
+
+val item = data[0] as CollectionItem.AlbumItem
+assertEquals(album, item.album)
 ```
 
 #### Fragment Instrumentation Test with Espresso
 
 https://github.com/miquelbeltran/android-discogsbrowser/blob/master/collection/collection-ui/src/androidTest/java/work/beltran/discogsbrowser/collection/CollectionFragmentTest.kt
+
+```kotlin
+@Test
+fun load_single_item_page() {
+
+    // Mock the use case to return a single item
+    val collectionUseCase = mockUseCaseForSingleItem()
+
+    // Configure dependency injection to provide ViewModel with Use Case
+    configureKoin(collectionUseCase)
+
+    // Launch Fragment in a Test Activity
+    launchFragment()
+
+    // Assert Album title is displayed in the list
+    onView(withText("title")).check(matches(isDisplayed()))
+}
+```
 
 ## App Modules
 
