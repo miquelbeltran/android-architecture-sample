@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_collection.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.ParameterDefinition
+import org.koin.core.parameter.ParameterList
+import org.koin.core.parameter.parametersOf
 import work.beltran.discogsbrowser.collection.adapter.CollectionAdapter
 import work.beltran.discogsbrowser.collection.adapter.CollectionItem
 
