@@ -8,12 +8,12 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/albumdomain" />
+            <option value="$PROJECT_DIR$/album-domain" />
             <option value="$PROJECT_DIR$/api" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/collection" />
-            <option value="$PROJECT_DIR$/collection/collection-data" />
+            <option value="$PROJECT_DIR$/collection/collection-domain" />
             <option value="$PROJECT_DIR$/collection/collection-ui" />
             <option value="$PROJECT_DIR$/common-domain" />
           </set>

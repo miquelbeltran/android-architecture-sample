@@ -3,9 +3,14 @@ apply plugin: 'kotlin'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Libs.kotlin
+    api project(':common-domain')
     implementation Libs.arrow
-    api project(path: ':api')
+    implementation Libs.coroutines
+    implementation Libs.kotlin
+    implementation Libs.retrofit
+
+    testImplementation Libs.junit
+    testImplementation Libs.mockk
 }
 
 sourceCompatibility = "7"

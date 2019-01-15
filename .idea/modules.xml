@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/albumdomain/albumdomain.iml" filepath="$PROJECT_DIR$/albumdomain/albumdomain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/album-domain/album-domain.iml" filepath="$PROJECT_DIR$/album-domain/album-domain.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-architecture-sample.iml" filepath="$PROJECT_DIR$/android-architecture-sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/collection/collection.iml" filepath="$PROJECT_DIR$/collection/collection.iml" />
-      <module fileurl="file://$PROJECT_DIR$/collection/collection-data/collection-data.iml" filepath="$PROJECT_DIR$/collection/collection-data/collection-data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/collection/collection-domain/collection-domain.iml" filepath="$PROJECT_DIR$/collection/collection-domain/collection-domain.iml" />
       <module fileurl="file://$PROJECT_DIR$/collection/collection-ui/collection-ui.iml" filepath="$PROJECT_DIR$/collection/collection-ui/collection-ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/common-domain/common-domain.iml" filepath="$PROJECT_DIR$/common-domain/common-domain.iml" />
     </modules>

@@ -3,8 +3,7 @@ apply plugin: 'kotlin'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':api')
-    implementation project(':common-domain')
+    api project(':common-domain')
     implementation Libs.arrow
     implementation Libs.coroutines
     implementation Libs.kotlin
