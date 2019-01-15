@@ -9,6 +9,7 @@ import work.beltran.discogsbrowser.api.provideService
 import work.beltran.discogsbrowser.common.domain.Album
 import work.beltran.discogsbrowser.common.domain.GetCollectionUseCase
 import work.beltran.discogsbrowser.common.domain.Pagination
+import work.beltran.discogsbrowser.common.domain.toAlbums
 
 fun provideGetCollectionUseCase(): GetCollectionUseCase {
     return GetCollectionUseCaseImpl(provideService())

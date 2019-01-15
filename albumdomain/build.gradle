@@ -1,10 +1,8 @@
 apply plugin: 'java-library'
-apply plugin: 'kotlin'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Libs.kotlin
-    implementation Libs.arrow
+    compile project(path: ':common-domain')
     compile project(path: ':api')
 }
 

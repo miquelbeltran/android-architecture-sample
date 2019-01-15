@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/albumdomain/albumdomain.iml" filepath="$PROJECT_DIR$/albumdomain/albumdomain.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-architecture-sample.iml" filepath="$PROJECT_DIR$/android-architecture-sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />

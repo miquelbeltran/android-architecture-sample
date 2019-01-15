@@ -20,6 +20,11 @@ interface DiscogsService {
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
     ) : Deferred<Response<CollectionItemsByFolderResponse>>
+
+    @GET("releases/{release_id}")
+    fun getRelease(
+        @Path("release_id") releaseId: String
+    ) : Deferred<Response<ReleaseDetails>>
 }
 
 fun provideService(): DiscogsService {

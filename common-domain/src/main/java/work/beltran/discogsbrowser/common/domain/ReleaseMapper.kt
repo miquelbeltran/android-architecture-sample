@@ -1,9 +1,8 @@
-package work.beltran.discogsbrowser.collection.data
+package work.beltran.discogsbrowser.common.domain
 
 import arrow.data.NonEmptyList
 import work.beltran.discogsbrowser.api.Release
-import work.beltran.discogsbrowser.common.domain.Album
-import work.beltran.discogsbrowser.common.domain.Artist
+import work.beltran.discogsbrowser.api.ReleaseDetails
 
 fun List<Release>.toAlbums(): List<Album> {
     return map {release ->
@@ -25,5 +24,14 @@ fun List<ArtistApi>.toDomain(): NonEmptyList<Artist> {
             name = artist.name
         )
     })
+}
+
+fun ReleaseDetails.toAlbum(): Album {
+    return Album (
+        id = id,
+        title = title,
+        thumb = thumb,
+        artist = artists.toDomain()
+    )
 }
 

@@ -22,7 +22,7 @@ class GetCollectionUseCaseImplTest {
                     title = "title",
                     thumb = "thumb",
                     artists = listOf(
-                        ArtistApi(
+                        work.beltran.discogsbrowser.common.domain.ArtistApi(
                             id = "id",
                             name = "name"
                         )
