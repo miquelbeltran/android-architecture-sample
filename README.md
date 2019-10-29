@@ -1,3 +1,13 @@
+**NOTICE**
+
+This project has been archived due to the lack of activity.
+
+Feel free to fork and do any changes or continue supporting it by yourself, but please keep the license and copyright notices.
+
+Miguel, author of the project.
+
+---
+
 # Android Architecture Sample
 
 Sample Android App to access Discogs API.
